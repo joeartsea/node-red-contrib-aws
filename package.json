@@ -1,0 +1,38 @@
+{
+  "name": "node-red-contrib-aws",
+  "version": "0.0.1",
+  "description": "A collection of Node-RED nodes for AWS.",
+  "dependencies"  : {
+    "aws-sdk": "^2.0.15",
+    "minimatch": "2.0.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/joeartsea/node-red-contrib-aws"
+  },
+  "license": "Apache",
+  "keywords": [
+    "node-red",
+    "aws",
+    "ec2",
+    "kinesis",
+    "lamdba"
+  ],
+  "node-red": {
+    "nodes": {
+      "amazon ec2": "ec2.js",
+      "amazon kinesis": "kinesis.js",
+      "amazon lamdba": "lamdba.js"
+    }
+  },
+  "author": {
+    "name": "Atsushi Kojo",
+    "email": "artsnet111@gmail.com"
+  },
+  "maintainers": [
+    {
+      "name": "joeartsea",
+      "email": "artsnet111@gmail.com"
+    }
+  ]
+}
