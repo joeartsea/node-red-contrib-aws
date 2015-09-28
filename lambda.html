@@ -96,9 +96,17 @@
     }
 
     function pollLambdaFunction() {
-        if(lambdaNode.aws){
+        var configid = $("#node-input-aws option:selected").val();
+        var awsconfig = RED.nodes.node(configid);
+
+        var param = "";
+        if(lambdaNode.aws || configid ||
+            ( awsconfig.credentials && awsconfig.credentials.accesskeyid && awsconfig.credentials.secretaccesskey ) ){
+          if (awsconfig.credentials) {
+            param = '&accesskeyid='+awsconfig.credentials.accesskeyid+'&secretaccesskey='+awsconfig.credentials.secretaccesskey;
+          }
           var region = $("#node-input-region option:selected").val();
-          $.getJSON('amazon-lambda/listfunctions?id='+lambdaNode.id+'&region='+region,
+          $.getJSON('amazon-lambda/listfunctions?id='+lambdaNode.id+'&region='+region+param,
             function(data) {
               if (data) {
                 updateLambdaFunctionList(data);

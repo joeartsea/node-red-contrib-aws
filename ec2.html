@@ -23,6 +23,8 @@
         <label for="node-input-operation"><i class="fa fa-wrench"></i> Operation</label>
         <select type="text" id="node-input-operation">
           <option value="reboot">Reboot</option>
+          <option value="start">Start</option>
+          <option value="stop">Stop</option>
         </select>
     </div>
     <div class="form-row">
@@ -63,7 +65,7 @@
             operation: { value: 'reboot' },
             region: { value: '' },
             instanceid: { value: '' },
-            name: {value:""},
+            name: {value:""}
         },
         inputs:1,
         outputs:1,
@@ -107,9 +109,17 @@
     }
 
     function pollEC2Instances() {
-        if(ec2Node.aws){
+        var configid = $("#node-input-aws option:selected").val();
+        var awsconfig = RED.nodes.node(configid);
+
+        var param = "";
+        if(ec2Node.aws || configid ||
+            ( awsconfig.credentials && awsconfig.credentials.accesskeyid && awsconfig.credentials.secretaccesskey ) ){
+          if (awsconfig.credentials) {
+            param = '&accesskeyid='+awsconfig.credentials.accesskeyid+'&secretaccesskey='+awsconfig.credentials.secretaccesskey;
+          }
           var region = $("#node-input-region option:selected").val();
-          $.getJSON('amazon-ec2/describeinstances?id='+ec2Node.id+'&region='+region,
+          $.getJSON('amazon-ec2/describeinstances?id='+ec2Node.id+'&region='+region+param,
             function(data) {
               if (data) {
                 updateEC2InstanceList(data);

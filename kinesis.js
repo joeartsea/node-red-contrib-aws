@@ -99,7 +99,19 @@ module.exports = function(RED) {
     RED.httpAdmin.get('/amazon-kinesis/liststreams', function(req, res) {
       var kinesisNode = RED.nodes.getNode(req.query.id);
       var kinesisRegion = req.query.region;
-      var AWS = kinesisNode.awsConfig ? kinesisNode.awsConfig.AWS : null;
+
+      var AWS = null;
+//      var AWS = kinesisNode.awsConfig ? kinesisNode.awsConfig.AWS : null;
+      if (kinesisNode) {
+        AWS = kinesisNode.awsConfig ? kinesisNode.awsConfig.AWS : null;
+      } else {
+        AWS = require("aws-sdk");
+        AWS.config.update({
+                accessKeyId: req.query.accesskeyid,
+                secretAccessKey: req.query.secretaccesskey,
+            });
+      }
+
       if (!AWS) {
         return node.send('{"error": "Missing AWS credentials"}');
       }
@@ -120,7 +132,19 @@ module.exports = function(RED) {
       var kinesisNode = RED.nodes.getNode(req.query.id);
       var kinesisRegion = req.query.region;
       var streamName = req.query.streamname;
-      var AWS = kinesisNode.awsConfig ? kinesisNode.awsConfig.AWS : null;
+
+      var AWS = null;
+//      var AWS = kinesisNode.awsConfig ? kinesisNode.awsConfig.AWS : null;
+      if (kinesisNode) {
+        AWS = kinesisNode.awsConfig ? kinesisNode.awsConfig.AWS : null;
+      } else {
+        AWS = require("aws-sdk");
+        AWS.config.update({
+                accessKeyId: req.query.accesskeyid,
+                secretAccessKey: req.query.secretaccesskey,
+            });
+      }
+
       if (!AWS) {
         return node.send('{"error": "Missing AWS credentials"}');
       }

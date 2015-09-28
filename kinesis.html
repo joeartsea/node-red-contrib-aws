@@ -209,9 +209,17 @@
     }
 
     function pollKinesisStream() {
-        if(kinesisNode.aws){
+        var configid = $("#node-input-aws option:selected").val();
+        var awsconfig = RED.nodes.node(configid);
+
+        var param = "";
+        if(kinesisNode.aws || configid 
+            || ( awsconfig.credentials && awsconfig.credentials.accesskeyid && awsconfig.credentials.secretaccesskey ) ){
+          if (awsconfig.credentials) {
+            param = '&accesskeyid='+awsconfig.credentials.accesskeyid+'&secretaccesskey='+awsconfig.credentials.secretaccesskey;
+          }
           var region = $("#node-input-region option:selected").val();
-          $.getJSON('amazon-kinesis/liststreams?id='+kinesisNode.id+'&region='+region,
+          $.getJSON('amazon-kinesis/liststreams?id='+kinesisNode.id+'&region='+region+param,
             function(data) {
               if (data) {
                 updateKinesisStreamList(data);
@@ -239,10 +247,18 @@
     }
 
     function pollKinesisDescribeStream() {
-        if(kinesisNode.aws){
+        var configid = $("#node-input-aws option:selected").val();
+        var awsconfig = RED.nodes.node(configid);
+
+        var param = "";
+        if(kinesisNode.aws || configid ||
+            ( awsconfig.credentials && awsconfig.credentials.accesskeyid && awsconfig.credentials.secretaccesskey ) ){
+          if (awsconfig.credentials) {
+            param = '&accesskeyid='+awsconfig.credentials.accesskeyid+'&secretaccesskey='+awsconfig.credentials.secretaccesskey;
+          }
           var region = $("#node-input-region option:selected").val();
           var stream = $("#node-input-streamname option:selected").val();
-          $.getJSON('amazon-kinesis/describestream?id='+kinesisNode.id+'&region='+region+'&streamname='+stream,
+          $.getJSON('amazon-kinesis/describestream?id='+kinesisNode.id+'&region='+region+'&streamname='+stream+param,
             function(data) {
               if (data) {
                 updateKinesisShardList(data);
