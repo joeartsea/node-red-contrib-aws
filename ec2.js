@@ -34,6 +34,18 @@ module.exports = function(RED) {
         var ec2 = new AWS.EC2( { 'region': node.region } );
 
         node.on("input", function(msg) {
+            node.sendMsg = function (err, data) {
+              if (err) {
+                node.status({fill:"red",shape:"ring",text:"error"});
+                node.error("failed: " + err.toString(),msg);
+                return;
+              } else {
+                msg.payload = data;
+                node.status({});
+              }
+              node.send(msg);
+            };
+
             var instanceid = node.instanceid || msg.instanceid;
             if (instanceid === "") {
                 node.error("No InstanceId specified",msg);
@@ -50,16 +62,30 @@ module.exports = function(RED) {
                       DryRun: false
                     };
 
-                ec2.rebootInstances(params, function(err, data) {
-                    if (err) {
-                      node.error("Reboot failed: " + err.toString(),msg);
-                      return;
-                    } else {
-                      msg.payload = data;
-                    }
-                    node.status({});
-                    node.send(msg);
-                });
+                ec2.rebootInstances(params, node.sendMsg);
+                break;
+              case 'start':
+                node.status({fill:"blue",shape:"dot",text:"starting"});
+                var params = {
+                      InstanceIds: [
+                        instanceid
+                      ],
+                      DryRun: false
+                    };
+
+                ec2.startInstances(params, node.sendMsg);
+                break;
+              case 'stop':
+                node.status({fill:"blue",shape:"dot",text:"starting"});
+                var params = {
+                      InstanceIds: [
+                        instanceid
+                      ],
+                      Force: false,
+                      DryRun: false
+                    };
+
+                ec2.stopInstances(params, node.sendMsg);
                 break;
             }
         });
@@ -70,7 +96,18 @@ module.exports = function(RED) {
     RED.httpAdmin.get('/amazon-ec2/describeinstances', function(req, res) {
       var ec2Node = RED.nodes.getNode(req.query.id);
       var ec2Region = req.query.region;
-      var AWS = ec2Node.awsConfig ? ec2Node.awsConfig.AWS : null;
+
+      var AWS = null;
+//      var AWS = ec2Node.awsConfig ? ec2Node.awsConfig.AWS : null;
+      if (ec2Node) {
+        AWS = ec2Node.awsConfig ? ec2Node.awsConfig.AWS : null;
+      } else {
+        AWS = require("aws-sdk");
+        AWS.config.update({
+                accessKeyId: req.query.accesskeyid,
+                secretAccessKey: req.query.secretaccesskey,
+            });
+      }
       if (!AWS) {
         return node.send('{"error": "Missing AWS credentials"}');
       }

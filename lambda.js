@@ -75,7 +75,19 @@ module.exports = function(RED) {
     RED.httpAdmin.get('/amazon-lambda/listfunctions', function(req, res) {
       var lambdaNode = RED.nodes.getNode(req.query.id);
       var lambdaRegion = req.query.region;
-      var AWS = lambdaNode.awsConfig ? lambdaNode.awsConfig.AWS : null;
+
+      var AWS = null;
+//      var AWS = lambdaNode.awsConfig ? lambdaNode.awsConfig.AWS : null;
+      if (lambdaNode) {
+        AWS = lambdaNode.awsConfig ? lambdaNode.awsConfig.AWS : null;
+      } else {
+        AWS = require("aws-sdk");
+        AWS.config.update({
+                accessKeyId: req.query.accesskeyid,
+                secretAccessKey: req.query.secretaccesskey,
+            });
+      }
+
       if (!AWS) {
         return node.send('{"error": "Missing AWS credentials"}');
       }
