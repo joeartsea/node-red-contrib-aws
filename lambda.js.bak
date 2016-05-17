@@ -20,26 +20,27 @@ module.exports = function(RED) {
     function AmazonLambdaQueryNode(n) {
         RED.nodes.createNode(this,n);
         this.awsConfig = RED.nodes.getNode(n.aws);
-        this.region = this.awsConfig.region;
-        this.accessKey = this.awsConfig.accessKey;
-        this.secretKey = this.awsConfig.secretKey;
+        this.region = n.region;
         this.operation = n.operation;
         this.functionname = n.functionname;
 
         var node = this;
-node.warn(this.region);
+        var AWS = this.awsConfig ? this.awsConfig.AWS : null;
+        if (!AWS) {
+            node.warn("Missing AWS credentials");
+            return;
+        }
 
-	var AWS = require("aws-sdk");
-        AWS.config.update({
-                accessKeyId: this.accessKey,
-                secretAccessKey: this.secretKey,
-		region: this.region
-            });
-        var lambda = new AWS.Lambda();
+//        var lambda = new AWS.Lambda();
+        var lambda = new AWS.Lambda( { 'region': node.region } );
 
         node.on("input", function(msg) {
             node.convType = function (payload) {
-              payload = JSON.stringify(payload);
+              if (typeof payload === 'object') {
+                payload = JSON.stringify(payload);
+              } else {
+                payload = payload;
+              }
               return payload;
             };
             node.sendMsg = function (err, data) {
@@ -70,5 +71,37 @@ node.warn(this.region);
     }
     RED.nodes.registerType("amazon lambda", AmazonLambdaQueryNode);
 
+
+    RED.httpAdmin.get('/amazon-lambda/listfunctions', function(req, res) {
+      var lambdaNode = RED.nodes.getNode(req.query.id);
+      var lambdaRegion = req.query.region;
+
+      var AWS = null;
+//      var AWS = lambdaNode.awsConfig ? lambdaNode.awsConfig.AWS : null;
+      if (lambdaNode) {
+        AWS = lambdaNode.awsConfig ? lambdaNode.awsConfig.AWS : null;
+      } else {
+        AWS = require("aws-sdk");
+        AWS.config.update({
+                accessKeyId: req.query.accesskeyid,
+                secretAccessKey: req.query.secretaccesskey,
+            });
+      }
+
+      if (!AWS) {
+        return node.send('{"error": "Missing AWS credentials"}');
+      }
+
+//        var lambda = new AWS.Lambda();
+      var lambda = new AWS.Lambda( { 'region': lambdaRegion } );
+
+      var params = {};
+      lambda.listFunctions(params, function(err, data) {
+          if (err) {
+            return res.send('{"error": "error:' + err.toString() + '"}');
+          }
+          res.send(data);
+      });
+    });
 
 };

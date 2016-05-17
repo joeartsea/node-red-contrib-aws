@@ -22,7 +22,8 @@
     "nodes": {
       "amazon ec2": "ec2.js",
       "amazon kinesis": "kinesis.js",
-      "amazon lambda": "lambda.js"
+      "amazon lambda": "lambda.js",
+      "amazon config": "aws-config.js"
     }
   },
   "author": {
