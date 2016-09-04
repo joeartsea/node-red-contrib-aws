@@ -16,13 +16,15 @@
     "aws",
     "ec2",
     "kinesis",
-    "lamdba"
+    "lamdba",
+    "s3"
   ],
   "node-red": {
     "nodes": {
       "amazon ec2": "ec2.js",
       "amazon kinesis": "kinesis.js",
       "amazon lambda": "lambda.js",
+      "amazon s3": "s3.js",
       "amazon config": "aws-config.js"
     }
   },
