@@ -44,13 +44,13 @@
     </div>
     <div class="form-row input-streamname-row hidden">
         <label for="node-input-streamname"><i class="fa fa-table"></i> Stream Name</label>
-        <select id="node-input-streamname" >
-        </select>
+        <input type="text" id="node-input-streamname" placeholder="Stream Name">
+        </input>
     </div>
     <div class="form-row input-shardid-row hidden">
         <label for="node-input-shardid"><i class="fa fa-tag"></i> Shard Id</label>
-        <select id="node-input-shardid" >
-        </select>
+        <input type="text" id="node-input-shardid" placeholder="Shard ID" >
+        </input>
     </div>
     <div class="form-row input-iteratortype-row hidden">
         <label for="node-input-iteratortype"><i class="fa fa-tag"></i> Shard Iterator Type</label>
@@ -112,7 +112,7 @@
         },
         oneditprepare: function () {
             kinesisNode = RED.nodes.node(this.id);
-            $("#node-input-region").change(function () {
+            /*$("#node-input-region").change(function () {
                 var id = $("#node-input-region option:selected").val();
                 var opr = $("#node-input-operation option:selected").val();
                 if(id != kinesisNode.region){
@@ -147,6 +147,7 @@
                 if(kinesisNode.sequenceNumber) $("#node-input-sequencenumber").val(kinesisNode.sequenceNumber[id]);
 
             });
+            */
 
             var stnameel = $(".input-streamname-row"),
                 shardidel = $(".input-shardid-row"),
@@ -213,7 +214,7 @@
         var awsconfig = RED.nodes.node(configid);
 
         var param = "";
-        if(kinesisNode.aws || configid 
+        if(kinesisNode.aws || configid
             || ( awsconfig.credentials && awsconfig.credentials.accesskeyid && awsconfig.credentials.secretaccesskey ) ){
           if (awsconfig.credentials) {
             param = '&accesskeyid='+awsconfig.credentials.accesskeyid+'&secretaccesskey='+awsconfig.credentials.secretaccesskey;

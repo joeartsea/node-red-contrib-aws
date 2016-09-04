@@ -29,10 +29,16 @@ module.exports = function(RED) {
         this.explicithashkey = n.explicithashkey;
         this.sequencenumber = n.sequencenumber;
         this.limit = n.limit;
+        this.accessKey = this.awsConfig.accessKey;
+        this.secretKey = this.awsConfig.secretKey;
 
         var node = this;
-        var AWS = this.awsConfig ? this.awsConfig.AWS : null;
-        if (!AWS) {
+        var AWS = require("aws-sdk");
+          AWS.config.update({
+            accessKeyId: this.accessKey,
+            secretAccessKey: this.secretKey,
+            region: this.region
+          });        if (!AWS) {
             node.warn("Missing AWS credentials");
             return;
         }
