@@ -1,6 +1,6 @@
 {
   "name": "node-red-contrib-aws",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A collection of Node-RED nodes for AWS.",
   "dependencies"  : {
     "aws-sdk": "^2.0.15",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/joeartsea/node-red-contrib-aws"
+    "url": "https://github.com/daniel-t/node-red-contrib-aws"
   },
   "license": "Apache",
   "keywords": [
