@@ -25,6 +25,7 @@
           <option value="reboot">Reboot</option>
           <option value="start">Start</option>
           <option value="stop">Stop</option>
+          <option value="describe">Describe</option>
         </select>
     </div>
     <div class="form-row">
@@ -44,8 +45,8 @@
     </div>
     <div class="form-row">
         <label for="node-input-instanceid"><i class="fa fa-tag"></i> Instance ID</label>
-        <select id="node-input-instanceid">
-        </select>
+        <input type="text" id="node-input-instanceid" placeholder="Instance ID">
+        </input>
     </div>
     <div class="form-row">
         <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
@@ -64,7 +65,7 @@
             aws: {type:"aws-config",required:true},
             operation: { value: 'reboot' },
             region: { value: '' },
-            instanceid: { value: '' },
+            instanceid: { value: "" },
             name: {value:""}
         },
         inputs:1,
@@ -76,7 +77,7 @@
         },
         oneditprepare: function () {
             ec2Node = RED.nodes.node(this.id);
-            $("#node-input-region").change(function () {
+            /*$("#node-input-region").change(function () {
                 var id = $("#node-input-region option:selected").val();
                 if(id != ec2Node.instanceid){
                     $("#node-input-instanceid").val("");
@@ -84,7 +85,7 @@
                 if(id){
                     window.ec2NodeIntervalId = window.setTimeout(pollEC2Instances,2000);
                 }
-            });
+            });*/
         }
     });
 

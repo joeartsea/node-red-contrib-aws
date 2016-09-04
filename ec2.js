@@ -24,8 +24,17 @@ module.exports = function(RED) {
         this.operation = n.operation;
         this.region = n.region;
         this.instanceid = n.instanceid;
+        this.accessKey = this.awsConfig.accessKey;
+        this.secretKey = this.awsConfig.secretKey;
+        this.functionname = n.functionname;
+
         var node = this;
-        var AWS = this.awsConfig ? this.awsConfig.AWS : null;
+        var AWS = require("aws-sdk");
+          AWS.config.update({
+            accessKeyId: this.accessKey,
+            secretAccessKey: this.secretKey,
+            region: this.region
+          });
         if (!AWS) {
             node.warn("Missing AWS credentials");
             return;
@@ -75,8 +84,18 @@ module.exports = function(RED) {
 
                 ec2.startInstances(params, node.sendMsg);
                 break;
+              case 'describe':
+                node.status({fill:"blue",shape:"dot",text:"describe"});
+                var params = {
+                      InstanceIds: [
+                        instanceid
+                      ],
+                    };
+
+                ec2.describeInstances(params, node.sendMsg);
+                break;
               case 'stop':
-                node.status({fill:"blue",shape:"dot",text:"starting"});
+                node.status({fill:"blue",shape:"dot",text:"stopping"});
                 var params = {
                       InstanceIds: [
                         instanceid

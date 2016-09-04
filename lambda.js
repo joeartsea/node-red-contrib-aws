@@ -45,7 +45,7 @@ node.warn(this.region);
             node.sendMsg = function (err, data) {
               if (err) {
                 node.status({fill:"red",shape:"ring",text:"error"});
-                node.error("failed: " + err.toString(),msg);
+                node.error("failed: " + err.toString() ,msg);
                 return;
               } else {
                 node.status({});
