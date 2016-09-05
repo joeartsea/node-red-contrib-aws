@@ -27,7 +27,6 @@ module.exports = function(RED) {
         this.functionname = n.functionname;
 
         var node = this;
-node.warn(this.region);
 
 	var AWS = require("aws-sdk");
         AWS.config.update({

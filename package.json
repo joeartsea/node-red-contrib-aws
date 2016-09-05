@@ -25,6 +25,8 @@
       "amazon kinesis": "kinesis.js",
       "amazon lambda": "lambda.js",
       "amazon s3": "s3.js",
+      "amazon dynamodb": "dynamodb.js",
+      "amason sns": "sns.js",
       "amazon config": "aws-config.js"
     }
   },
