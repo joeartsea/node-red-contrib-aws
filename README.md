@@ -38,10 +38,13 @@ Nodes & Functions
 * AWS config
   * Common config for all nodes above, looks after the credentials.
 
-Payload returned from the AWS SDK is encoded in a BUFFER.  To parse this to a string pass the output into a function with msg.payload=Buffer.from(msg.payload.Body).toString("utf-8") or similar to decode strings.
+Payload returned from the AWS SDK is encoded in a BUFFER.  To parse this to a string pass the output into a function with msg.payload=Buffer.from(msg.payload.Body).toString("utf-8") or similar.
 
 Make sure that the AWS IAM User you are using has sufficient permisisons for the function you are using.  If you dont you will get an error message.
 
+Feature Requests
+----------------
+Always happy to consider adding new functions, submit a bug.
 
 
 Acknowledgements
