@@ -35,16 +35,20 @@ Nodes & Functions
   * Scan
     * msg.payload (if not blank) is used as a FilterExpression
   * Msg.tablename will override the configured tablename
+* SQS (alpha release)
+  * Send Message
+  * Receive Message
+  * Delete Message
+  * Purge Queue
+  * msg.queue will override the configured Queue URL.
 * AWS config
-  * Common config for all nodes above, looks after the credentials.
+  * Common config for all nodes above, looks after the credentials
+  * .
 
-Payload returned from the AWS SDK is encoded in a BUFFER.  To parse this to a string pass the output into a function with msg.payload=Buffer.from(msg.payload.Body).toString("utf-8") or similar.
+Payload returned from the AWS SDK is encoded in a BUFFER.  To parse this to a string pass the output into a function with msg.payload=Buffer.from(msg.payload.Body).toString("utf-8") or similar to decode strings.
 
 Make sure that the AWS IAM User you are using has sufficient permisisons for the function you are using.  If you dont you will get an error message.
 
-Feature Requests
-----------------
-Always happy to consider adding new functions, submit a bug.
 
 
 Acknowledgements
