@@ -2,10 +2,12 @@
     RED.nodes.registerType('aws-config',{
         category: 'config',
         defaults: {
-		name: {value:"AWS"},
+		        name: {value:"AWS"},
             region: {value:"us-east-1",required:true},
-            accessKey: {value:"",required:true},
-            secretKey: {value:"",required:true}
+        },
+        credentials: {
+            accessKey: {type:"text"},
+            secretKey: {type:"text"}
         },
         label: function() {
             return this.name;
@@ -15,11 +17,11 @@
 
 <script type="text/x-red" data-template-name="aws-config">
     <div class="form-row">
-        <label for="node-config-input-name"><i class="fa fa-tag"></i> Name</label> 
+        <label for="node-config-input-name"><i class="fa fa-tag"></i> Name</label>
 	<input type="text" id="node-config-input-name">
     </div>
     <div class="form-row">
-        <label for="node-config-input-region"><i class="fa fa-wrench"></i> Region</label> 
+        <label for="node-config-input-region"><i class="fa fa-wrench"></i> Region</label>
 	<input type="text" id="node-config-input-region">
     </div>
 <div class="form-row">

@@ -3,8 +3,11 @@ module.exports = function(RED) {
         RED.nodes.createNode(this,n);
         this.accessKey = n.accessKey;
         this.secretKey = n.secretKey;
-	this.region = n.region;
-	this.name = n.name;
+	      this.region = n.region;
+	      this.name = n.name;
     }
-    RED.nodes.registerType("aws-config",RemoteServerNode);
+    RED.nodes.registerType("aws-config",RemoteServerNode,{credentials: {
+         accessKey: {type:"text"},
+         secretKey: {type:"text"}
+     }});
 }
