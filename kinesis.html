@@ -84,6 +84,39 @@
 </script>
 
 <script type="text/x-red" data-help-name="amazon kinesis">
+<p>
+AWS Kinesis functions to Get and Put into Kinesis Streams.
+</p>
+<p>
+<b>Put</b>
+  Puts msg.payload into the specified stream.
+  <br/>
+  Optionally: <br/>
+  <ul>
+  <li>
+  msg.partitionkey
+  </li>
+  <li>
+  msg.explicithashkey
+  </li>
+  <li>
+  msg.sequencenumber
+  </li>
+  </ul>
+  are used to override stream default values, see AWS javascript SDK documentation.
+</p>
+<p>
+<b>getShardIterator</b>
+  Gets an iterator for the specified stream, to be passed into a AWS Kinesis 'Get' node.
+</p>
+<p>
+<b>Get</b>
+  Takes the output of a 'getShardIterator' node and retreives 'msg.limit' (default: 1) records.
+</p>
+<p>
+NOTE: the configured stram can be overridden by msg.streamname for all functions.
+</p>
+
 </script>
 
 <script type="text/javascript">
@@ -100,7 +133,7 @@
             partitionkey: { value: '' },
             explicithashkey: { value: '' },
             sequencenumber: { value: '' },
-            limit: { value: '' },
+            limit: { value: 1 },
             name: {value:""},
         },
         inputs:1,

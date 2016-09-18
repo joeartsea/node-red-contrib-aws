@@ -74,7 +74,6 @@ module.exports = function(RED) {
                   };
                   if (msg.messageAttributes) params.MessageAttributes=msg.messageAttributes;
                   if (msg.delaySeconds) params.DelaySeconds=msg.delaySeconds;
-                  node.warn(params);
                   sqs.sendMessage(params, node.sendMsg);
                 break;
               case 'purge':
@@ -90,7 +89,6 @@ module.exports = function(RED) {
                   QueueUrl: msg.queue || this.queuename,
                   ReceiptHandle: msg.payload,
                 };
-                node.warn(params);
                 sqs.deleteMessage(params, node.sendMsg);
               break;
             }

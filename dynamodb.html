@@ -39,6 +39,35 @@
 </script>
 
 <script type="text/x-red" data-help-name="amazon dynamodb">
+<p>
+AWS DynamoDB functions to Put, Get and Scan DynamoDB records.
+</p>
+<p>
+<b>Put</b>
+  Puts msg.payload (must be a string) into TableName. <br/>
+  Optionally: <br/>
+  <ul>
+  <li>
+  msg.returnValues (default: "ALL")
+  </li>
+  msg.conditionExpression (default: NULL)
+  </ul>
+  </br/>
+</p>
+<p>
+  <b>Get</b>
+  Gets the record which has a key equivilent to msg.payload<br/>
+</p>
+<p>
+<b>Scan</b>
+  Returns all records of the configured table<br/>
+  Optionally if msg.payload is a string it wil be used as the FilterExpression.
+  </br/>
+</p>
+<p>
+For all functions the configured Table Name can be overwritten with msg.tablename
+</p>
+
 </script>
 
 <script type="text/javascript">

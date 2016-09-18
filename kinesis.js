@@ -79,7 +79,7 @@ module.exports = function(RED) {
                 node.status({fill:"blue",shape:"dot",text:"gets data records"});
                 var params = {
                       ShardIterator: msg.sharditerator,
-                      Limit: node.limit || 1
+                      Limit: msg.limit || node.limit || 1
                     };
                 kinesis.getRecords(params, node.sendMsg);
                 break;
@@ -92,7 +92,7 @@ module.exports = function(RED) {
                       ShardIteratorType: itrType
                     };
                 if( itrType == "AT_SEQUENCE_NUMBER" || itrType == "AFTER_SEQUENCE_NUMBER" ) {
-                    params.StartingSequenceNumber = node.sequencenumber || msg.sequencenumber;
+                    params.StartingSequenceNumber =  msg.sequencenumber || node.sequencenumber;
                 }
                 kinesis.getShardIterator(params, node.sendMsg);
                 break;

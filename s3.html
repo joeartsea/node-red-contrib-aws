@@ -43,6 +43,30 @@
 </script>
 
 <script type="text/x-red" data-help-name="amazon s3">
+<p>
+AWS S3 Get and Put functions
+</p>
+<p>
+<b>Get</b> retrieves the specified file from s3://buckey/key
+</p>
+<p>
+<b>Put</b> stringifies msg.payload and stores it in s3://buckey/key
+</p>
+<p>
+Optionally for both functions:
+<ul>
+<li>
+msg.bucket overrides the configured bucket
+</li>
+<li>
+msg.key overrides the configured key
+</li>
+</ul>
+</p>
+
+<p>
+Note the returned value is in a BUFFER and may need to be decoded with 'msg.payload=Buffer.from(msg.payload.Body).toString("utf-8")' or similar depending on the use case.
+</p>
 </script>
 
 <script type="text/javascript">

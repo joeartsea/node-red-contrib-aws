@@ -38,6 +38,52 @@
 </script>
 
 <script type="text/x-red" data-help-name="amazon sqs">
+<p>
+Nodes to Send, Receive, Delete & Purge AWS SQS entries.
+</p>
+<p>
+<b>Send</b>
+  Puts msg.payload onto the configured SQS Queue. <br/>
+  Optionally: <br/>
+  <ul>
+<li>
+  msg.messageAttributes
+</li>  <li>
+  msg.delaySeconds
+  </li>
+  </ul>
+  </br/>
+</p>
+<p>
+  <b>Receive</b>
+  the next record from the queue<br/>
+  Optionally
+  <ul>
+  <li>
+  msg.attributeNames defaults to ["ALL"]
+  </li>
+  <li>
+  msg.visibilityTimeout
+  </li>
+<li>
+msg.maxNumberOfMessages
+</li>
+<li>
+msg.waitTimeSeconds
+  </li>
+  </ul>
+</p>
+<p>
+<b>Delete</b>
+  Deletes the record with ReceiptHandle equivilent to msg.payload.
+</p>
+<p>
+<b>Purge</b>
+  Delete all entries from the queue (visible or otherwise)
+</p>
+<p>
+For all functions the configured Queue can be overwritten with msg.queuename
+</p>
 </script>
 
 <script type="text/javascript">

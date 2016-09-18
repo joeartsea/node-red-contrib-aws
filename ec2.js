@@ -55,7 +55,7 @@ module.exports = function(RED) {
               node.send(msg);
             };
 
-            var instanceid = node.instanceid || msg.instanceid;
+            var instanceid = msg.instanceid || node.instanceid;
             if (instanceid === "") {
                 node.error("No InstanceId specified",msg);
                 return;

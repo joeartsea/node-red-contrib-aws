@@ -38,6 +38,22 @@
 </script>
 
 <script type="text/x-red" data-help-name="amazon sns">
+<p>
+Send messages to the AWS Simple Notification Service for distribution.
+</p>
+<p>
+<b>Publish to Topic</b> and <b>Publish to Target</b> both send msg.payload to the specified SNS queue.
+</p>
+<p>
+Optioanlly:
+<ul>
+<li> msg.arn overrides the configured destination
+</li>
+<li>
+if msg.messageStructure = "json" the AWS API will treat msg.payload as a JSON message (see AWS Javascript SDK documentation)
+</li>
+</ul>
+</p>
 </script>
 
 <script type="text/javascript">
