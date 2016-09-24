@@ -22,7 +22,7 @@ module.exports = function(RED) {
         this.awsConfig = RED.nodes.getNode(n.aws);
         this.region = this.awsConfig.region;
         this.accessKey = this.awsConfig.accessKey;
-        this.secretKey = this.awsConfig.secr:etKey;
+        this.secretKey = this.awsConfig.secretKey;
         this.operation = n.operation;
         this.arn = n.arn;
 
@@ -58,7 +58,7 @@ module.exports = function(RED) {
                 node.status({fill:"blue",shape:"dot",text:"Sending to Topic"});
                 var params = {
                   TopicArn: msg.arn || this.arn,
-                  Message: msg.payload,
+                  Message: msg.payload
                 };
                 if (msg.messageStructure=="json"){
                   params.MessageStructure="json"
