@@ -22,18 +22,18 @@ module.exports = function(RED) {
         this.awsConfig = RED.nodes.getNode(n.aws);
         this.region = this.awsConfig.region;
         this.accessKey = this.awsConfig.accessKey;
-        this.secretKey = this.awsConfig.secretKey;
+        this.secretKey = this.awsConfig.secr:etKey;
         this.operation = n.operation;
         this.arn = n.arn;
 
         var node = this;
-
 	      var AWS = require("aws-sdk");
         AWS.config.update({
                 accessKeyId: this.accessKey,
                 secretAccessKey: this.secretKey,
 		            region: this.region
             });
+
         var sns = new AWS.SNS();
 
         node.on("input", function(msg) {
