@@ -1,0 +1,90 @@
+<!--
+  Copyright 2014 IBM Corp.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+<script type="text/x-red" data-template-name="amazon iot">
+    <div class="form-row">
+        <label for="node-input-aws"><i class="fa fa-user"></i> AWS</label>
+        <input type="text" id="node-input-aws">
+    </div>
+    <div class="form-row">
+        <label for="node-input-operation"><i class="fa fa-wrench"></i> Operation</label>
+        <select type="text" id="node-input-operation">
+          <option value="update">Update</option>
+          <option value="describe">Describe a Thing</option>
+          <option value="list">List Things</option>
+        </select>
+    </div>
+    <div class="form-row">
+        <label for="node-input-thingName"><i class="fa fa-tag"></i>Thing Name</label>
+        <input type="text" id="node-input-thingName" placeholder="Thing">
+        </input>
+    </div>
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i>Name</label>
+        <input type="text" id="node-input-name" placeholder="">
+        </input>
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="amazon ec2">
+<p>
+AWS IOT functions to Update, Describe & List things.
+</p>
+<p>
+<b>Update</b>
+  Update the attributes of the thing specified in either the node configuration or msg.thingName with msg.payload
+  Attributes are merged if msg.merge is true.
+  The 'ThingType' is removed if msg.removeThingType is true
+  msg.thingTypeName specifies a "thing type"
+  msg.expectedVersion sets the version to operate on (update fails if the version is specified but differs from the record)
+</p>
+<p>
+<b>Describe</b>
+  Get the attributes of the thing specified in either the node configuration or msg.thingName
+</p>
+<p>
+<b>List</b>
+  Lists things, optionally passes msg.query or msg.payload as parameters to allow for searching.
+</p>
+<p>
+<p>
+NOTE: Parameters specified in the msg override the node configuration.
+</p>
+
+</script>
+
+<script type="text/javascript">
+    RED.nodes.registerType('amazon iot',{
+        category: 'AWS',
+        color:"#C0DEED",
+        defaults: {
+            aws: {type:"aws-config",required:true},
+            operation: { value: 'describe' },
+            thingName: { value: "" },
+            name: {value:""}
+        },
+        inputs:1,
+        outputs:1,
+        icon: "amazon.png",
+        align: "right",
+        label: function() {
+            return this.name || "iot " + this.operation;
+        },
+        oneditprepare: function () {
+
+        }
+    });
+</script>
