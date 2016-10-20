@@ -35,6 +35,12 @@
         <input type="text" id="node-input-queuename" >
         </input>
     </div>
+
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+
 </script>
 
 <script type="text/x-red" data-help-name="amazon sqs">
@@ -94,8 +100,9 @@ For all functions the configured Queue can be overwritten with msg.queuename
             aws: {type:"aws-config",required:true},
             region: { value: '' },
             operation: { value: 'receive' },
-            queuename: { value: '' }
-        },
+            queuename: { value: '' },
+            name: {value:""}
+        }, 
         inputs:1,
         outputs:1,
         icon: "amazon.png",
