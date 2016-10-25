@@ -1,0 +1,69 @@
+NOTE: This is provided as an example only,  it must be customised for the specific AWS account
+
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "Stmt1477087948000",
+            "Effect": "Allow",
+            "Action": [
+                "sqs:SendMessage"
+            ],
+            "Resource": [
+                "arn:aws:sqs:us-east-1:485867510643:highValueTransaction"
+            ]
+        },
+        {
+            "Sid": "Stmt1477087994000",
+            "Effect": "Allow",
+            "Action": [
+                "sqs:DeleteMessage",
+                "sqs:ReceiveMessage",
+                "sqs:SendMessage"
+            ],
+            "Resource": [
+                "arn:aws:sqs:us-east-1:485867510643:incomingTransaction"
+            ]
+        },
+        {
+            "Sid": "Stmt1477088410000",
+            "Effect": "Allow",
+            "Action": [
+                "s3:PutObject"
+            ],
+            "Resource": [
+                "arn:aws:s3:::orderbucket/*"
+            ]
+        },
+        {
+            "Sid": "Stmt1477088579000",
+            "Effect": "Allow",
+            "Action": [
+                "dynamodb:PutItem"
+            ],
+            "Resource": [
+                "arn:aws:dynamodb:us-east-1:485867510643:table/orders"
+            ]
+        },
+        {
+            "Sid": "Stmt1477088815000",
+            "Effect": "Allow",
+            "Action": [
+                "sns:Publish"
+            ],
+            "Resource": [
+                "arn:aws:sns:us-east-1:485867510643:orderAlerts"
+            ]
+        },
+        {
+            "Sid": "Stmt1477115449000",
+            "Effect": "Allow",
+            "Action": [
+                "lambda:InvokeFunction"
+            ],
+            "Resource": [
+                "arn:aws:lambda:us-east-1:485867510643:function:addTax"
+            ]
+        }
+    ]
+}
