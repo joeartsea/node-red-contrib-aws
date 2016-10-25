@@ -1,0 +1,50 @@
+
+Node Red is a flow based rapid prototyping solution for javascript originally developed by IBM b at non has a large of contributing community.
+
+In simple terms 'nodes' (blocks) are wired together to enable messages to pass between them. The functionality of the nodes is where the power of Node Red comes into play. The blocks in side simple value setting and condition checking up to integrations with external services such as sending tweets via the twitter api or posting to slack for example. The ability for users to create their own nodes and distribute them through the NPM system further expands the capabilities to interacting with pretty much anything that has an API.
+
+'Node-Red-Contrib-AWS' is one such package (partially developed by yours truly) which is a collection of nodes with the sole purpose of simplifying the interaction with various AWS services (like SNS, SQS, etc).
+
+For example,  suppose a (fairly contrived) design calls for an order processing job with these requirements:
+Watch a SQS Queue for new orders
+Save the order to an S3 Bucket
+Calculate the taxes required (with an existing Lambda function)
+If the order total is greater than $1000,
+place the order in a second SQS Queue
+Send a "High Value transaction alert" via SNS
+Otherwise save the order to dynamodb
+Either way remove the record from the original queue
+
+Here's how such a setup might look when crafted in NodeRed.
+
+
+
+This gives a highly visual method of seeing what is intended, for convenience of numbered each of the nodes to help with the explanation.
+
+Before going into the individual nodes, it is necessary to think about the IAM setup required.   The AWS nodes use the javascript API and thus need a 'User' with rights to access the various services.  For this activity the user needs access to SQS, SNS, Lambda & DynamoDB.   I'll leave the formulation of the IAM policy as an exercise for the reader.   Once the user's API keys are configured into NodeRed then the nodes will function on behalf of that user.   Note, the AWS nodes can share account configuration information (including region), so there is no need to create separate accounts for each service (although you could if you really wanted).
+
+Now that that's out of the way, lets get onto whats going on in the nodes .
+'Every 5 seconds'
+As simple as it gets,  inject a message into the flow every 5 seconds
+Check the SQS queue for any pending transactions
+'Check Results' checks to see if any messages were returned and if not routes the flow to the top exit point, effectively terminating this iteration
+Save Original to S3
+'Setup Variables' maps a few variabls such as s3 key name which will be used later
+Saves the order to the configured S3 Bucket
+Lambda - Add Taxes
+Passes the order to a Lambda function to add tax
+As the response from Lambda is JSON encoded, 'Update Object' expands the object out into a message variable
+Check if the value is > $1000 and branch accordingly
+High value transaction: Send "High Value" transaction alert via SNS
+High value transaction: Push the order on to the High Value SQS Queue for manual processing
+Low value transaction: Save the transaction to dynamodb
+Delete the transaction from SQS, if you don’t do this it will resurface shortly
+
+You can also see a couple of "Change" nodes in the overall flow, these simply set the message value to something that can be used by the next node, so I haven't explicitly called them out in the descriptions above.
+
+We also need a way to inject test transactions to ensure everything is working properly, the follow allows for easy injection of 3 test cases, specified in JSON and pushed into the incoming transaction queue.
+
+
+I hope this shows how easy it can be to rapidly build a functioning prototype taking advantage of multiple AWS services.   While I wouldn't use this for a production system it allows for everything to be laid out clearly, trying out various workflows and then refactoring into a production ready solution.
+
+For anyone interested, the node red flow pictured above, and other resources can be found here <URL> and pasted into your own environment.
