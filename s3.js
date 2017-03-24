@@ -72,6 +72,21 @@ module.exports = function(RED) {
                 };
                 s3.putObject(params, node.sendMsg);
                 break;
+              case 'delete':
+                node.status({fill:"blue",shape:"dot",text:"Deleting Object"});
+                var params = {
+                  Bucket: msg.bucket || this.bucketname,
+                  Key: msg.key || this.keyname
+                };
+                s3.deleteObject(params, node.sendMsg);
+                break;
+              case 'list':
+                node.status({fill:"blue",shape:"dot",text:"Listing Object"});
+                var params = {
+                  Bucket: msg.bucket || this.bucketname
+                };
+                s3.listObjects(params, node.sendMsg);
+                break;
             }
         });
     }
