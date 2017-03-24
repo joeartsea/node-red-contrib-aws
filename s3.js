@@ -81,7 +81,7 @@ module.exports = function(RED) {
                 s3.deleteObject(params, node.sendMsg);
                 break;
               case 'list':
-                node.status({fill:"blue",shape:"dot",text:"Listing Object"});
+                node.status({fill:"blue",shape:"dot",text:"Listing Objects"});
                 var params = {
                   Bucket: msg.bucket || this.bucketname
                 };
