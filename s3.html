@@ -24,6 +24,8 @@
         <select id="node-input-operation">
           <option value="get">Get</option>
           <option value="put">Put</option>
+          <option value="delete">Delete</option>
+          <option value="list">List objects</option>
         </select>
     </div>
     <div class="form-row input-bucket-row">
@@ -51,6 +53,12 @@ AWS S3 Get and Put functions
 </p>
 <p>
 <b>Put</b> stringifies msg.payload and stores it in s3://buckey/key
+</p>
+<p>
+<b>Delete</b> stringifies msg.payload and delete it in s3://buckey/key
+</p>
+<p>
+<b>List</b> stringifies msg.payload and list it in s3://buckey/key
 </p>
 <p>
 Optionally for both functions:

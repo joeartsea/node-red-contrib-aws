@@ -19,6 +19,8 @@ Nodes & Functions
 * S3
   * Put
   * Get
+  * Delete
+  * List Objects
 * SNS
   * Publish
 * DynamoDB
