@@ -44,10 +44,9 @@ Feature requests are welcome, submit an issue at https://github.com/daniel-t/nod
 Acknowledgements
 ----------------
 
-The node-red-contrib-force uses the following open source software:
+The node-red-contrib-aws uses the following open source software:
 
 - [AWS SDK for JavaScript] (https://github.com/aws/aws-sdk-js): AWS SDK for JavaScript in the browser and Node.js.
-- [minimatch] (https://github.com/isaacs/minimatch): A minimal matching utility.
 
 License
 -------
