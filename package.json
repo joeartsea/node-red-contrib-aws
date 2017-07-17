@@ -1,10 +1,9 @@
 {
   "name": "node-red-contrib-aws",
-  "version": "0.1.3",
-  "description": "A collection of Node-RED nodes for AWS.  Includes nodes for DynamoDB, EC2, Kinesis, Lambda, SNS, SQS and S3",
+  "version": "0.1.4",
+  "description": "A collection of Node-RED nodes for AWS.  Includes nodes for DynamoDB, EC2, IoT, Kinesis, Lambda, SNS, SQS and S3",
   "dependencies": {
-    "aws-sdk": "^2.0.15",
-    "minimatch": "2.0.4"
+    "aws-sdk": "^2.0.15"
   },
   "repository": {
     "type": "git",
@@ -20,7 +19,8 @@
     "s3",
     "sqs",
     "sns",
-    "dynamodb"
+    "dynamodb",
+    "iot"
   ],
   "node-red": {
     "nodes": {
@@ -31,12 +31,13 @@
       "amazon dynamodb": "dynamodb.js",
       "amazon sns": "sns.js",
       "amazon sqs": "sqs.js",
-      "amazon config": "aws-config.js"
+      "amazon config": "aws-config.js",
+	    "amazon iot": "iot.js"
     }
   },
   "author": {
-    "name": "Atsushi Kojo",
-    "email": "artsnet111@gmail.com"
+    "name": "daniel-t",
+    "email": "daniel@networklighthouse.com"
   },
   "maintainers": [
     {
