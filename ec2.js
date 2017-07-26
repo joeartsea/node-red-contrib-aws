@@ -56,13 +56,14 @@ module.exports = function(RED) {
             };
 
             var instanceid = msg.instanceid || node.instanceid;
-            if (instanceid === "") {
-                node.error("No InstanceId specified",msg);
-                return;
-            }
             msg.instanceid = instanceid;
             switch (node.operation) {
               case 'reboot':
+              if (instanceid === "") {
+                  node.error("No InstanceId specified",msg);
+                  return;
+              }
+
                 node.status({fill:"blue",shape:"dot",text:"rebooting"});
                 var params = {
                       InstanceIds: [
@@ -74,6 +75,11 @@ module.exports = function(RED) {
                 ec2.rebootInstances(params, node.sendMsg);
                 break;
               case 'start':
+              if (instanceid === "") {
+                  node.error("No InstanceId specified",msg);
+                  return;
+              }
+
                 node.status({fill:"blue",shape:"dot",text:"starting"});
                 var params = {
                       InstanceIds: [
@@ -86,15 +92,23 @@ module.exports = function(RED) {
                 break;
               case 'describe':
                 node.status({fill:"blue",shape:"dot",text:"describe"});
-                var params = {
-                      InstanceIds: [
-                        instanceid
-                      ],
-                    };
+                var params = {}
+                if (instanceid != "") {
+                  var params = {
+                        InstanceIds: [
+                          instanceid
+                        ],
+                      };
+                }
+
 
                 ec2.describeInstances(params, node.sendMsg);
                 break;
               case 'stop':
+                if (instanceid === "") {
+                    node.error("No InstanceId specified",msg);
+                    return;
+                }
                 node.status({fill:"blue",shape:"dot",text:"stopping"});
                 var params = {
                       InstanceIds: [
