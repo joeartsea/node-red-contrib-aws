@@ -23,6 +23,7 @@ module.exports = function(RED) {
         this.region = n.region;
         this.operation = n.operation;
         this.thingName = n.thingName;
+        this.endPoint= n.endPoint;
         this.region = this.awsConfig.region;
         this.accessKey = this.awsConfig.accessKey;
         this.secretKey = this.awsConfig.secretKey;
@@ -94,7 +95,36 @@ module.exports = function(RED) {
                 var params = msg.query || msg.payload || {};
                 iot.listThings(params, node.sendMsg);
                 break;
-              }
+              case 'getThingShadow':
+                node.status( {fill:"blue",shape:"dot",text:"Getting Shadow"});
+                var iotd=new AWS.IotData({endpoint: node.endPoint});
+                var params = { thingName: thingName};
+                iotd.getThingShadow(params,node.sendMsg);
+              break;
+              case 'updateThingShadow':
+                node.status({fill:"blue",shape:"dot",text:"Updating Shadow"});
+                var iotd=new AWS.IotData({endpoint: node.endPoint});
+                var params = { thingName: thingName, payload: JSON.stringify(msg.payload)};
+                iotd.updateThingShadow(params,node.sendMsg);
+              break;
+              case 'deleteThingShadow':
+                node.status({fill:"blue",shape:"dot",text:"Deleting Shadow"});
+                var iotd=new AWS.IotData({endpoint: node.endPoint});
+                var params = { thingName: thingName};
+                iotd.deleteThingShadow(params,node.sendMsg);
+              break;
+              case 'publish':
+                node.status({fill:"blue",shape:"dot",text:"Publishing"});
+                var iotd=new AWS.IotData({endpoint: node.endPoint});
+                var params = { topic: msg.topic || "" ,
+                              qos: msg.qos || 0,
+                              payload:JSON.stringify(msg.payload)
+                            };
+                iotd.publish(params,node.sendMsg);
+              break;
+            };
+
+
         });
     }
     RED.nodes.registerType("amazon iot", AmazonIOTQueryNode);

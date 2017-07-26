@@ -25,6 +25,10 @@
           <option value="update">Update</option>
           <option value="describe">Describe a Thing</option>
           <option value="list">List Things</option>
+          <option value="getThingShadow">Get Thing Shadow *</option>
+          <option value="updateThingShadow">Update Thing Shadow *</option>
+          <option value="deleteThingShadow">Delete Thing Shadow *</option>
+          <option value="publish">Publish *</option>
         </select>
     </div>
     <div class="form-row">
@@ -35,6 +39,11 @@
     <div class="form-row">
         <label for="node-input-name"><i class="fa fa-tag"></i>Name</label>
         <input type="text" id="node-input-name" placeholder="">
+        </input>
+    </div>
+    <div class="form-row">
+        <label for="node-input-endPoint"><i class="fa fa-tag"></i>Endpoint (*)</label>
+        <input type="text" id="node-input-endPoint" placeholder="">
         </input>
     </div>
 </script>
@@ -74,7 +83,8 @@ NOTE: Parameters specified in the msg override the node configuration.
             aws: {type:"aws-config",required:true},
             operation: { value: 'describe' },
             thingName: { value: "" },
-            name: {value:""}
+            name: {value:""},
+            endPoint: {value:""}
         },
         inputs:1,
         outputs:1,
