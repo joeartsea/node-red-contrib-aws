@@ -12,6 +12,7 @@ Nodes & Functions
 * DynamoDB - Put, Get, Scan
 * SQS (alpha release) - Send Message, Receive Message, Delete Message, Purge Queue
 * IoT - Describe, Update, List, Get/Update/Delete Shadow & Publish
+* RDS - Describe, Start, Stop, Reboot, Modify RDS Instances
 * AWS config - Common config for all nodes above, looks after the credentials
 
 Payload returned from the AWS SDK is sometimes (particularly S3.Get) encoded in a BUFFER.  To parse this to a string pass the output into a function with msg.payload=Buffer.from(msg.payload.Body).toString("utf-8") or similar to decode strings.
