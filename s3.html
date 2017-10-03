@@ -49,16 +49,16 @@
 AWS S3 Get and Put functions
 </p>
 <p>
-<b>Get</b> retrieves the specified file from s3://buckey/key
+<b>Get</b> retrieves the specified file from s3://bucket/key
 </p>
 <p>
-<b>Put</b> stringifies msg.payload and stores it in s3://buckey/key
+<b>Put</b> stores payload in s3://bucket/key
 </p>
 <p>
-<b>Delete</b> stringifies msg.payload and delete it in s3://buckey/key
+<b>Delete</b> stringifies msg.payload and delete it in s3://bucket/key
 </p>
 <p>
-<b>List</b> stringifies msg.payload and list it in s3://buckey/key
+<b>List</b> stringifies msg.payload and list it in s3://bucket/key
 </p>
 <p>
 Optionally for both functions:
@@ -82,7 +82,7 @@ Note the returned value is in a BUFFER and may need to be decoded with 'msg.payl
         category: 'AWS',
         color:"#C0DEED",
         defaults: {
-            aws: {type:"aws-config",required:true},
+            aws: {type:"amazon config",required:true},
             region: { value: '' },
             operation: { value: 'get' },
             bucketname: { value: '' },
