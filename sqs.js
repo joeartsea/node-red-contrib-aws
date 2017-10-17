@@ -74,6 +74,8 @@ module.exports = function(RED) {
                   };
                   if (msg.messageAttributes) params.MessageAttributes=msg.messageAttributes;
                   if (msg.delaySeconds) params.DelaySeconds=msg.delaySeconds;
+                  if (msg.messageDeduplicationId) params.MessageDeduplicationId=msg.messageDeduplicationId;
+                  if (msg.messageGroupId) params.MessageGroupId=msg.messageGroupId;			    
                   sqs.sendMessage(params, node.sendMsg);
                 break;
               case 'purge':
