@@ -31,17 +31,13 @@ module.exports = function(RED) {
 
 	var AWS = require("aws-sdk");
         AWS.config.update({
-                accessKeyId: this.accessKey,
-                secretAccessKey: this.secretKey,
-		region: this.region
-            });
+            accessKeyId: this.accessKey,
+            secretAccessKey: this.secretKey,
+            region: this.region
+        });
         var s3 = new AWS.S3();
 
         node.on("input", function(msg) {
-            node.convType = function (payload) {
-              payload = JSON.stringify(payload);
-              return payload;
-            };
             node.sendMsg = function (err, data) {
               if (err) {
                 node.status({fill:"red",shape:"ring",text:"error"});
@@ -68,7 +64,7 @@ module.exports = function(RED) {
                 var params = {
                   Bucket: msg.bucket || this.bucketname,
                   Key: msg.key || this.keyname,
-                  Body: node.convType(msg.payload)
+                  Body: msg.payload
                 };
                 s3.putObject(params, node.sendMsg);
                 break;
@@ -91,6 +87,4 @@ module.exports = function(RED) {
         });
     }
     RED.nodes.registerType("amazon s3", AmazonS3QueryNode);
-
-
 };
