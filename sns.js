@@ -39,7 +39,7 @@ module.exports = function(RED) {
         var copyArg=function(src,arg,out,outArg){
           outArg = (typeof outArg !== 'undefined') ? outArg : arg;
           if (typeof src[arg] !== 'undefined'){
-            out[outArg]=src[inArg];
+            out[outArg]=src[arg];
           }
         }
 
