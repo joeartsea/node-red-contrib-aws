@@ -36,6 +36,13 @@ module.exports = function(RED) {
 
         var sns = new AWS.SNS();
 
+        var copyArg=function(src,arg,out,outArg){
+          outArg = (typeof outArg !== 'undefined') ? outArg : arg;
+          if (typeof src[arg] !== 'undefined'){
+            out[outArg]=src[inArg];
+          }
+        }
+
         node.on("input", function(msg) {
             node.convType = function (payload) {
               payload = JSON.stringify(payload);
@@ -60,6 +67,7 @@ module.exports = function(RED) {
                   TopicArn: msg.arn || this.arn,
                   Message: msg.payload
                 };
+		copyArg(msg,"Subject",params);
                 if (msg.messageStructure=="json"){
                   params.MessageStructure="json"
                 }
