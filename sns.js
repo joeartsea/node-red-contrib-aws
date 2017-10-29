@@ -72,18 +72,19 @@ module.exports = function(RED) {
                   params.MessageStructure="json"
                 }
                 sns.publish(params, node.sendMsg);
-                break;
-                case 'publishTarget':
+              break;
+              case 'publishTarget':
                   node.status({fill:"blue",shape:"dot",text:"Sending to Target"});
                   var params = {
                     TargetArn: msg.arn || this.arn,
                     Message: msg.payload,
                   };
+		  copyArg(msg,"Subject",params);
                   if (msg.messageStructure=="json"){
                     params.MessageStructure="json"
                   }
                   sns.publish(params, node.sendMsg);
-                  break;            }
+                break;            }
         });
     }
     RED.nodes.registerType("amazon sns", AmazonSNSNode);
