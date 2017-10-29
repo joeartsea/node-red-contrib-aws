@@ -52,11 +52,18 @@ Nodes to Send, Receive, Delete & Purge AWS SQS entries.
   Puts msg.payload onto the configured SQS Queue. <br/>
   Optionally: <br/>
   <ul>
-<li>
-  msg.messageAttributes
-</li>  <li>
-  msg.delaySeconds
-  </li>
+    <li>
+      msg.messageAttributes
+    </li>  
+    <li>
+      msg.delaySeconds
+    </li>
+    <li>
+      msg.messageGroupId
+    </li>
+    <li>
+      msg.messageDeduplicationId
+    </li>
   </ul>
   </br/>
 </p>
