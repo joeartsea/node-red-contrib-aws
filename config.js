@@ -8,6 +8,6 @@ module.exports = function(RED) {
     }
     RED.nodes.registerType("amazon config",RemoteServerNode,{credentials: {
          accessKey: {type:"text"},
-         secretKey: {type:"text"}
+         secretKey: {type:"password"}
      }});
 }
