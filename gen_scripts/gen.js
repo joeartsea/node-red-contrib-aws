@@ -1,4 +1,5 @@
-var filename='../node_modules/aws-sdk/apis/s3-2006-03-01.min.json';
+module.exports={
+buildService: function(filename){
 var fs= require('fs');
 var serviceDef=JSON.parse(fs.readFileSync(filename,'utf8'));
 console.log(serviceDef.metadata);
@@ -212,3 +213,5 @@ fs.writeFileSync(`build/${serviceDef.metadata.serviceName}.html`,htmlFile);
 fs.writeFileSync(`build/${serviceDef.metadata.serviceName}.js`,jsFile);
 
 console.log(`${serviceDef.metadata.serviceName} written to build dir`);
+}
+};
