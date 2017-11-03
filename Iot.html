@@ -1,0 +1,184 @@
+
+<!--
+  Copyright 2017 Daniel Thomas.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+<script type="text/x-red" data-template-name="AWS Iot">
+    <div class="form-row">
+        <label for="node-input-aws"><i class="fa fa-user"></i> AWS</label>
+        <input type="text" id="node-input-aws">
+    </div>
+    <div class="form-row">
+        <label for="node-input-operation"><i class="fa fa-wrench"></i> Operation</label>
+        <select type="text" id="node-input-operation">
+		
+			<option value="AcceptCertificateTransfer">AcceptCertificateTransfer</option>
+		
+			<option value="AttachPrincipalPolicy">AttachPrincipalPolicy</option>
+		
+			<option value="AttachThingPrincipal">AttachThingPrincipal</option>
+		
+			<option value="CancelCertificateTransfer">CancelCertificateTransfer</option>
+		
+			<option value="CreateCertificateFromCsr">CreateCertificateFromCsr</option>
+		
+			<option value="CreateKeysAndCertificate">CreateKeysAndCertificate</option>
+		
+			<option value="CreatePolicy">CreatePolicy</option>
+		
+			<option value="CreatePolicyVersion">CreatePolicyVersion</option>
+		
+			<option value="CreateThing">CreateThing</option>
+		
+			<option value="CreateThingType">CreateThingType</option>
+		
+			<option value="CreateTopicRule">CreateTopicRule</option>
+		
+			<option value="DeleteCACertificate">DeleteCACertificate</option>
+		
+			<option value="DeleteCertificate">DeleteCertificate</option>
+		
+			<option value="DeletePolicy">DeletePolicy</option>
+		
+			<option value="DeletePolicyVersion">DeletePolicyVersion</option>
+		
+			<option value="DeleteRegistrationCode">DeleteRegistrationCode</option>
+		
+			<option value="DeleteThing">DeleteThing</option>
+		
+			<option value="DeleteThingType">DeleteThingType</option>
+		
+			<option value="DeleteTopicRule">DeleteTopicRule</option>
+		
+			<option value="DeprecateThingType">DeprecateThingType</option>
+		
+			<option value="DescribeCACertificate">DescribeCACertificate</option>
+		
+			<option value="DescribeCertificate">DescribeCertificate</option>
+		
+			<option value="DescribeEndpoint">DescribeEndpoint</option>
+		
+			<option value="DescribeThing">DescribeThing</option>
+		
+			<option value="DescribeThingType">DescribeThingType</option>
+		
+			<option value="DetachPrincipalPolicy">DetachPrincipalPolicy</option>
+		
+			<option value="DetachThingPrincipal">DetachThingPrincipal</option>
+		
+			<option value="DisableTopicRule">DisableTopicRule</option>
+		
+			<option value="EnableTopicRule">EnableTopicRule</option>
+		
+			<option value="GetLoggingOptions">GetLoggingOptions</option>
+		
+			<option value="GetPolicy">GetPolicy</option>
+		
+			<option value="GetPolicyVersion">GetPolicyVersion</option>
+		
+			<option value="GetRegistrationCode">GetRegistrationCode</option>
+		
+			<option value="GetTopicRule">GetTopicRule</option>
+		
+			<option value="ListCACertificates">ListCACertificates</option>
+		
+			<option value="ListCertificates">ListCertificates</option>
+		
+			<option value="ListCertificatesByCA">ListCertificatesByCA</option>
+		
+			<option value="ListOutgoingCertificates">ListOutgoingCertificates</option>
+		
+			<option value="ListPolicies">ListPolicies</option>
+		
+			<option value="ListPolicyPrincipals">ListPolicyPrincipals</option>
+		
+			<option value="ListPolicyVersions">ListPolicyVersions</option>
+		
+			<option value="ListPrincipalPolicies">ListPrincipalPolicies</option>
+		
+			<option value="ListPrincipalThings">ListPrincipalThings</option>
+		
+			<option value="ListThingPrincipals">ListThingPrincipals</option>
+		
+			<option value="ListThingTypes">ListThingTypes</option>
+		
+			<option value="ListThings">ListThings</option>
+		
+			<option value="ListTopicRules">ListTopicRules</option>
+		
+			<option value="RegisterCACertificate">RegisterCACertificate</option>
+		
+			<option value="RegisterCertificate">RegisterCertificate</option>
+		
+			<option value="RejectCertificateTransfer">RejectCertificateTransfer</option>
+		
+			<option value="ReplaceTopicRule">ReplaceTopicRule</option>
+		
+			<option value="SetDefaultPolicyVersion">SetDefaultPolicyVersion</option>
+		
+			<option value="SetLoggingOptions">SetLoggingOptions</option>
+		
+			<option value="TransferCertificate">TransferCertificate</option>
+		
+			<option value="UpdateCACertificate">UpdateCACertificate</option>
+		
+			<option value="UpdateCertificate">UpdateCertificate</option>
+		
+			<option value="UpdateThing">UpdateThing</option>
+		;
+        </select>
+    </div>
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i>Name</label>
+	<input type="text" id="node-input-name" placeholder="Name"></input>
+    </div>
+
+</script>
+
+<script type="text/x-red" data-help-name="amazon Iot">
+<p>
+AWS AWS IoT
+</p>
+<p>
+<b>Descriptions to be added</b<
+</p>
+<p>
+NOTE: Parameters must be specified in the message, using the case specified in the AWS API documentation (normally UpperCaseLeading)..
+</p>
+
+</script>
+
+<script type="text/javascript">
+    RED.nodes.registerType('AWS Iot',{
+        category: 'AWS',
+        color:"#C0DEED",
+        defaults: {
+            aws: {type:"amazon config",required:true},
+            operation: { value: 'AcceptCertificateTransfer' },
+            name: { value: "" }
+        },
+        inputs:1,
+        outputs:1,
+        icon: "aws.png",
+        align: "right",
+        label: function() {
+            return this.name || "Iot " + this.operation;
+        },
+        oneditprepare: function () {
+
+        }
+    });
+</script>
+

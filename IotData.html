@@ -1,5 +1,6 @@
+
 <!--
-  Copyright 2014 IBM Corp.
+  Copyright 2017 Daniel Thomas.
 
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -14,7 +15,7 @@
   limitations under the License.
 -->
 
-<script type="text/x-red" data-template-name="amazon rds">
+<script type="text/x-red" data-template-name="AWS IotData">
     <div class="form-row">
         <label for="node-input-aws"><i class="fa fa-user"></i> AWS</label>
         <input type="text" id="node-input-aws">
@@ -22,46 +23,49 @@
     <div class="form-row">
         <label for="node-input-operation"><i class="fa fa-wrench"></i> Operation</label>
         <select type="text" id="node-input-operation">
-          <option value="describeDBInstances">Describe DB Instances</option>
-          <option value="describeDBParameterGroups">Describe DB Parameter Groups</option>
-          <option value="describeDBParameters">Describe DB Parameters</option>
-          <option value="describeDBSecurityGroups">Describe DB Security Groups</option>
-          <option value="applyPendingMaintenanceAction">Apply Pending Maintenanc eAction</option>
-          <option value="modifyDBInstance">Modify DB Instance</option>
-          <option value="rebootDBInstance">Reboot DB Instance</option>
-          <option value="startDBInstance">Start DB Instance</option>
-          <option value="stopDBInstance">Stop DB Instance</option>
-          <option value="describeDBEngineVersions">Describe DB Engine Versions</option>
+		
+			<option value="DeleteThingShadow">DeleteThingShadow</option>
+		
+			<option value="GetThingShadow">GetThingShadow</option>
+		
+			<option value="Publish">Publish</option>
+		
+			<option value="UpdateThingShadow">UpdateThingShadow</option>
         </select>
     </div>
     <div class="form-row">
         <label for="node-input-name"><i class="fa fa-tag"></i>Name</label>
-        <input type="text" id="node-input-name" placeholder="DB Instance/Group Name">
+	<input type="text" id="node-input-name" placeholder="Name"></input>
+  <div class="form-row">
+        <label for="node-input-endPoint"><i class="fa fa-tag"></i>Endpoint</label>
+        <input type="text" id="node-input-endPoint" placeholder="">
         </input>
+    </div>
     </div>
 
 </script>
 
-<script type="text/x-red" data-help-name="amazon rds">
+<script type="text/x-red" data-help-name="amazon IotData">
 <p>
-AWS RDS functions to manage RDS instances.
+AWS AWS IoT Data Plane
 </p>
 <p>
 <b>Descriptions to be added</b<
 </p>
 <p>
-NOTE: Parameters specified in the msg override the node configuration.
+NOTE: Parameters must be specified in the message, using the case specified in the AWS API documentation (normally UpperCaseLeading)..
 </p>
 
 </script>
 
 <script type="text/javascript">
-    RED.nodes.registerType('amazon rds',{
+    RED.nodes.registerType('AWS IotData',{
         category: 'AWS',
         color:"#C0DEED",
         defaults: {
             aws: {type:"amazon config",required:true},
-            operation: { value: 'describe' },
+            operation: { value: 'DeleteThingShadow' },
+            endPoint: { value: "" },
             name: { value: "" }
         },
         inputs:1,
@@ -69,10 +73,11 @@ NOTE: Parameters specified in the msg override the node configuration.
         icon: "aws.png",
         align: "right",
         label: function() {
-            return this.name || "rds " + this.operation;
+            return this.name || "IotData " + this.operation;
         },
         oneditprepare: function () {
 
         }
     });
 </script>
+

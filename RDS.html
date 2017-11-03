@@ -1,0 +1,250 @@
+
+<!--
+  Copyright 2017 Daniel Thomas.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+<script type="text/x-red" data-template-name="AWS RDS">
+    <div class="form-row">
+        <label for="node-input-aws"><i class="fa fa-user"></i> AWS</label>
+        <input type="text" id="node-input-aws">
+    </div>
+    <div class="form-row">
+        <label for="node-input-operation"><i class="fa fa-wrench"></i> Operation</label>
+        <select type="text" id="node-input-operation">
+		
+			<option value="AddRoleToDBCluster">AddRoleToDBCluster</option>
+		
+			<option value="AddSourceIdentifierToSubscription">AddSourceIdentifierToSubscription</option>
+		
+			<option value="AddTagsToResource">AddTagsToResource</option>
+		
+			<option value="ApplyPendingMaintenanceAction">ApplyPendingMaintenanceAction</option>
+		
+			<option value="AuthorizeDBSecurityGroupIngress">AuthorizeDBSecurityGroupIngress</option>
+		
+			<option value="CopyDBClusterParameterGroup">CopyDBClusterParameterGroup</option>
+		
+			<option value="CopyDBClusterSnapshot">CopyDBClusterSnapshot</option>
+		
+			<option value="CopyDBParameterGroup">CopyDBParameterGroup</option>
+		
+			<option value="CopyDBSnapshot">CopyDBSnapshot</option>
+		
+			<option value="CopyOptionGroup">CopyOptionGroup</option>
+		
+			<option value="CreateDBCluster">CreateDBCluster</option>
+		
+			<option value="CreateDBClusterParameterGroup">CreateDBClusterParameterGroup</option>
+		
+			<option value="CreateDBClusterSnapshot">CreateDBClusterSnapshot</option>
+		
+			<option value="CreateDBInstance">CreateDBInstance</option>
+		
+			<option value="CreateDBInstanceReadReplica">CreateDBInstanceReadReplica</option>
+		
+			<option value="CreateDBParameterGroup">CreateDBParameterGroup</option>
+		
+			<option value="CreateDBSecurityGroup">CreateDBSecurityGroup</option>
+		
+			<option value="CreateDBSnapshot">CreateDBSnapshot</option>
+		
+			<option value="CreateDBSubnetGroup">CreateDBSubnetGroup</option>
+		
+			<option value="CreateEventSubscription">CreateEventSubscription</option>
+		
+			<option value="CreateOptionGroup">CreateOptionGroup</option>
+		
+			<option value="DeleteDBCluster">DeleteDBCluster</option>
+		
+			<option value="DeleteDBClusterParameterGroup">DeleteDBClusterParameterGroup</option>
+		
+			<option value="DeleteDBClusterSnapshot">DeleteDBClusterSnapshot</option>
+		
+			<option value="DeleteDBInstance">DeleteDBInstance</option>
+		
+			<option value="DeleteDBParameterGroup">DeleteDBParameterGroup</option>
+		
+			<option value="DeleteDBSecurityGroup">DeleteDBSecurityGroup</option>
+		
+			<option value="DeleteDBSnapshot">DeleteDBSnapshot</option>
+		
+			<option value="DeleteDBSubnetGroup">DeleteDBSubnetGroup</option>
+		
+			<option value="DeleteEventSubscription">DeleteEventSubscription</option>
+		
+			<option value="DeleteOptionGroup">DeleteOptionGroup</option>
+		
+			<option value="DescribeAccountAttributes">DescribeAccountAttributes</option>
+		
+			<option value="DescribeCertificates">DescribeCertificates</option>
+		
+			<option value="DescribeDBClusterParameterGroups">DescribeDBClusterParameterGroups</option>
+		
+			<option value="DescribeDBClusterParameters">DescribeDBClusterParameters</option>
+		
+			<option value="DescribeDBClusterSnapshotAttributes">DescribeDBClusterSnapshotAttributes</option>
+		
+			<option value="DescribeDBClusterSnapshots">DescribeDBClusterSnapshots</option>
+		
+			<option value="DescribeDBClusters">DescribeDBClusters</option>
+		
+			<option value="DescribeDBEngineVersions">DescribeDBEngineVersions</option>
+		
+			<option value="DescribeDBInstances">DescribeDBInstances</option>
+		
+			<option value="DescribeDBLogFiles">DescribeDBLogFiles</option>
+		
+			<option value="DescribeDBParameterGroups">DescribeDBParameterGroups</option>
+		
+			<option value="DescribeDBParameters">DescribeDBParameters</option>
+		
+			<option value="DescribeDBSecurityGroups">DescribeDBSecurityGroups</option>
+		
+			<option value="DescribeDBSnapshotAttributes">DescribeDBSnapshotAttributes</option>
+		
+			<option value="DescribeDBSnapshots">DescribeDBSnapshots</option>
+		
+			<option value="DescribeDBSubnetGroups">DescribeDBSubnetGroups</option>
+		
+			<option value="DescribeEngineDefaultClusterParameters">DescribeEngineDefaultClusterParameters</option>
+		
+			<option value="DescribeEngineDefaultParameters">DescribeEngineDefaultParameters</option>
+		
+			<option value="DescribeEventCategories">DescribeEventCategories</option>
+		
+			<option value="DescribeEventSubscriptions">DescribeEventSubscriptions</option>
+		
+			<option value="DescribeEvents">DescribeEvents</option>
+		
+			<option value="DescribeOptionGroupOptions">DescribeOptionGroupOptions</option>
+		
+			<option value="DescribeOptionGroups">DescribeOptionGroups</option>
+		
+			<option value="DescribeOrderableDBInstanceOptions">DescribeOrderableDBInstanceOptions</option>
+		
+			<option value="DescribePendingMaintenanceActions">DescribePendingMaintenanceActions</option>
+		
+			<option value="DescribeReservedDBInstances">DescribeReservedDBInstances</option>
+		
+			<option value="DescribeReservedDBInstancesOfferings">DescribeReservedDBInstancesOfferings</option>
+		
+			<option value="DescribeSourceRegions">DescribeSourceRegions</option>
+		
+			<option value="DescribeValidDBInstanceModifications">DescribeValidDBInstanceModifications</option>
+		
+			<option value="DownloadDBLogFilePortion">DownloadDBLogFilePortion</option>
+		
+			<option value="FailoverDBCluster">FailoverDBCluster</option>
+		
+			<option value="ListTagsForResource">ListTagsForResource</option>
+		
+			<option value="ModifyDBCluster">ModifyDBCluster</option>
+		
+			<option value="ModifyDBClusterParameterGroup">ModifyDBClusterParameterGroup</option>
+		
+			<option value="ModifyDBClusterSnapshotAttribute">ModifyDBClusterSnapshotAttribute</option>
+		
+			<option value="ModifyDBInstance">ModifyDBInstance</option>
+		
+			<option value="ModifyDBParameterGroup">ModifyDBParameterGroup</option>
+		
+			<option value="ModifyDBSnapshot">ModifyDBSnapshot</option>
+		
+			<option value="ModifyDBSnapshotAttribute">ModifyDBSnapshotAttribute</option>
+		
+			<option value="ModifyDBSubnetGroup">ModifyDBSubnetGroup</option>
+		
+			<option value="ModifyEventSubscription">ModifyEventSubscription</option>
+		
+			<option value="ModifyOptionGroup">ModifyOptionGroup</option>
+		
+			<option value="PromoteReadReplica">PromoteReadReplica</option>
+		
+			<option value="PromoteReadReplicaDBCluster">PromoteReadReplicaDBCluster</option>
+		
+			<option value="PurchaseReservedDBInstancesOffering">PurchaseReservedDBInstancesOffering</option>
+		
+			<option value="RebootDBInstance">RebootDBInstance</option>
+		
+			<option value="RemoveRoleFromDBCluster">RemoveRoleFromDBCluster</option>
+		
+			<option value="RemoveSourceIdentifierFromSubscription">RemoveSourceIdentifierFromSubscription</option>
+		
+			<option value="RemoveTagsFromResource">RemoveTagsFromResource</option>
+		
+			<option value="ResetDBClusterParameterGroup">ResetDBClusterParameterGroup</option>
+		
+			<option value="ResetDBParameterGroup">ResetDBParameterGroup</option>
+		
+			<option value="RestoreDBClusterFromS3">RestoreDBClusterFromS3</option>
+		
+			<option value="RestoreDBClusterFromSnapshot">RestoreDBClusterFromSnapshot</option>
+		
+			<option value="RestoreDBClusterToPointInTime">RestoreDBClusterToPointInTime</option>
+		
+			<option value="RestoreDBInstanceFromDBSnapshot">RestoreDBInstanceFromDBSnapshot</option>
+		
+			<option value="RestoreDBInstanceToPointInTime">RestoreDBInstanceToPointInTime</option>
+		
+			<option value="RevokeDBSecurityGroupIngress">RevokeDBSecurityGroupIngress</option>
+		
+			<option value="StartDBInstance">StartDBInstance</option>
+		
+			<option value="StopDBInstance">StopDBInstance</option>
+		;
+        </select>
+    </div>
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i>Name</label>
+	<input type="text" id="node-input-name" placeholder="Name"></input>
+    </div>
+
+</script>
+
+<script type="text/x-red" data-help-name="amazon RDS">
+<p>
+AWS Amazon Relational Database Service
+</p>
+<p>
+<b>Descriptions to be added</b<
+</p>
+<p>
+NOTE: Parameters must be specified in the message, using the case specified in the AWS API documentation (normally UpperCaseLeading)..
+</p>
+
+</script>
+
+<script type="text/javascript">
+    RED.nodes.registerType('AWS RDS',{
+        category: 'AWS',
+        color:"#C0DEED",
+        defaults: {
+            aws: {type:"amazon config",required:true},
+            operation: { value: 'AddRoleToDBCluster' },
+            name: { value: "" }
+        },
+        inputs:1,
+        outputs:1,
+        icon: "aws.png",
+        align: "right",
+        label: function() {
+            return this.name || "RDS " + this.operation;
+        },
+        oneditprepare: function () {
+
+        }
+    });
+</script>
+

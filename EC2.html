@@ -1,0 +1,554 @@
+
+<!--
+  Copyright 2017 Daniel Thomas.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+<script type="text/x-red" data-template-name="AWS EC2">
+    <div class="form-row">
+        <label for="node-input-aws"><i class="fa fa-user"></i> AWS</label>
+        <input type="text" id="node-input-aws">
+    </div>
+    <div class="form-row">
+        <label for="node-input-operation"><i class="fa fa-wrench"></i> Operation</label>
+        <select type="text" id="node-input-operation">
+		
+			<option value="AcceptReservedInstancesExchangeQuote">AcceptReservedInstancesExchangeQuote</option>
+		
+			<option value="AcceptVpcPeeringConnection">AcceptVpcPeeringConnection</option>
+		
+			<option value="AllocateAddress">AllocateAddress</option>
+		
+			<option value="AllocateHosts">AllocateHosts</option>
+		
+			<option value="AssignIpv6Addresses">AssignIpv6Addresses</option>
+		
+			<option value="AssignPrivateIpAddresses">AssignPrivateIpAddresses</option>
+		
+			<option value="AssociateAddress">AssociateAddress</option>
+		
+			<option value="AssociateDhcpOptions">AssociateDhcpOptions</option>
+		
+			<option value="AssociateIamInstanceProfile">AssociateIamInstanceProfile</option>
+		
+			<option value="AssociateRouteTable">AssociateRouteTable</option>
+		
+			<option value="AssociateSubnetCidrBlock">AssociateSubnetCidrBlock</option>
+		
+			<option value="AssociateVpcCidrBlock">AssociateVpcCidrBlock</option>
+		
+			<option value="AttachClassicLinkVpc">AttachClassicLinkVpc</option>
+		
+			<option value="AttachInternetGateway">AttachInternetGateway</option>
+		
+			<option value="AttachNetworkInterface">AttachNetworkInterface</option>
+		
+			<option value="AttachVolume">AttachVolume</option>
+		
+			<option value="AttachVpnGateway">AttachVpnGateway</option>
+		
+			<option value="AuthorizeSecurityGroupEgress">AuthorizeSecurityGroupEgress</option>
+		
+			<option value="AuthorizeSecurityGroupIngress">AuthorizeSecurityGroupIngress</option>
+		
+			<option value="BundleInstance">BundleInstance</option>
+		
+			<option value="CancelBundleTask">CancelBundleTask</option>
+		
+			<option value="CancelConversionTask">CancelConversionTask</option>
+		
+			<option value="CancelExportTask">CancelExportTask</option>
+		
+			<option value="CancelImportTask">CancelImportTask</option>
+		
+			<option value="CancelReservedInstancesListing">CancelReservedInstancesListing</option>
+		
+			<option value="CancelSpotFleetRequests">CancelSpotFleetRequests</option>
+		
+			<option value="CancelSpotInstanceRequests">CancelSpotInstanceRequests</option>
+		
+			<option value="ConfirmProductInstance">ConfirmProductInstance</option>
+		
+			<option value="CopyFpgaImage">CopyFpgaImage</option>
+		
+			<option value="CopyImage">CopyImage</option>
+		
+			<option value="CopySnapshot">CopySnapshot</option>
+		
+			<option value="CreateCustomerGateway">CreateCustomerGateway</option>
+		
+			<option value="CreateDefaultVpc">CreateDefaultVpc</option>
+		
+			<option value="CreateDhcpOptions">CreateDhcpOptions</option>
+		
+			<option value="CreateEgressOnlyInternetGateway">CreateEgressOnlyInternetGateway</option>
+		
+			<option value="CreateFlowLogs">CreateFlowLogs</option>
+		
+			<option value="CreateFpgaImage">CreateFpgaImage</option>
+		
+			<option value="CreateImage">CreateImage</option>
+		
+			<option value="CreateInstanceExportTask">CreateInstanceExportTask</option>
+		
+			<option value="CreateInternetGateway">CreateInternetGateway</option>
+		
+			<option value="CreateKeyPair">CreateKeyPair</option>
+		
+			<option value="CreateNatGateway">CreateNatGateway</option>
+		
+			<option value="CreateNetworkAcl">CreateNetworkAcl</option>
+		
+			<option value="CreateNetworkAclEntry">CreateNetworkAclEntry</option>
+		
+			<option value="CreateNetworkInterface">CreateNetworkInterface</option>
+		
+			<option value="CreateNetworkInterfacePermission">CreateNetworkInterfacePermission</option>
+		
+			<option value="CreatePlacementGroup">CreatePlacementGroup</option>
+		
+			<option value="CreateReservedInstancesListing">CreateReservedInstancesListing</option>
+		
+			<option value="CreateRoute">CreateRoute</option>
+		
+			<option value="CreateRouteTable">CreateRouteTable</option>
+		
+			<option value="CreateSecurityGroup">CreateSecurityGroup</option>
+		
+			<option value="CreateSnapshot">CreateSnapshot</option>
+		
+			<option value="CreateSpotDatafeedSubscription">CreateSpotDatafeedSubscription</option>
+		
+			<option value="CreateSubnet">CreateSubnet</option>
+		
+			<option value="CreateTags">CreateTags</option>
+		
+			<option value="CreateVolume">CreateVolume</option>
+		
+			<option value="CreateVpc">CreateVpc</option>
+		
+			<option value="CreateVpcEndpoint">CreateVpcEndpoint</option>
+		
+			<option value="CreateVpcPeeringConnection">CreateVpcPeeringConnection</option>
+		
+			<option value="CreateVpnConnection">CreateVpnConnection</option>
+		
+			<option value="CreateVpnConnectionRoute">CreateVpnConnectionRoute</option>
+		
+			<option value="CreateVpnGateway">CreateVpnGateway</option>
+		
+			<option value="DeleteCustomerGateway">DeleteCustomerGateway</option>
+		
+			<option value="DeleteDhcpOptions">DeleteDhcpOptions</option>
+		
+			<option value="DeleteEgressOnlyInternetGateway">DeleteEgressOnlyInternetGateway</option>
+		
+			<option value="DeleteFlowLogs">DeleteFlowLogs</option>
+		
+			<option value="DeleteFpgaImage">DeleteFpgaImage</option>
+		
+			<option value="DeleteInternetGateway">DeleteInternetGateway</option>
+		
+			<option value="DeleteKeyPair">DeleteKeyPair</option>
+		
+			<option value="DeleteNatGateway">DeleteNatGateway</option>
+		
+			<option value="DeleteNetworkAcl">DeleteNetworkAcl</option>
+		
+			<option value="DeleteNetworkAclEntry">DeleteNetworkAclEntry</option>
+		
+			<option value="DeleteNetworkInterface">DeleteNetworkInterface</option>
+		
+			<option value="DeleteNetworkInterfacePermission">DeleteNetworkInterfacePermission</option>
+		
+			<option value="DeletePlacementGroup">DeletePlacementGroup</option>
+		
+			<option value="DeleteRoute">DeleteRoute</option>
+		
+			<option value="DeleteRouteTable">DeleteRouteTable</option>
+		
+			<option value="DeleteSecurityGroup">DeleteSecurityGroup</option>
+		
+			<option value="DeleteSnapshot">DeleteSnapshot</option>
+		
+			<option value="DeleteSpotDatafeedSubscription">DeleteSpotDatafeedSubscription</option>
+		
+			<option value="DeleteSubnet">DeleteSubnet</option>
+		
+			<option value="DeleteTags">DeleteTags</option>
+		
+			<option value="DeleteVolume">DeleteVolume</option>
+		
+			<option value="DeleteVpc">DeleteVpc</option>
+		
+			<option value="DeleteVpcEndpoints">DeleteVpcEndpoints</option>
+		
+			<option value="DeleteVpcPeeringConnection">DeleteVpcPeeringConnection</option>
+		
+			<option value="DeleteVpnConnection">DeleteVpnConnection</option>
+		
+			<option value="DeleteVpnConnectionRoute">DeleteVpnConnectionRoute</option>
+		
+			<option value="DeleteVpnGateway">DeleteVpnGateway</option>
+		
+			<option value="DeregisterImage">DeregisterImage</option>
+		
+			<option value="DescribeAccountAttributes">DescribeAccountAttributes</option>
+		
+			<option value="DescribeAddresses">DescribeAddresses</option>
+		
+			<option value="DescribeAvailabilityZones">DescribeAvailabilityZones</option>
+		
+			<option value="DescribeBundleTasks">DescribeBundleTasks</option>
+		
+			<option value="DescribeClassicLinkInstances">DescribeClassicLinkInstances</option>
+		
+			<option value="DescribeConversionTasks">DescribeConversionTasks</option>
+		
+			<option value="DescribeCustomerGateways">DescribeCustomerGateways</option>
+		
+			<option value="DescribeDhcpOptions">DescribeDhcpOptions</option>
+		
+			<option value="DescribeEgressOnlyInternetGateways">DescribeEgressOnlyInternetGateways</option>
+		
+			<option value="DescribeElasticGpus">DescribeElasticGpus</option>
+		
+			<option value="DescribeExportTasks">DescribeExportTasks</option>
+		
+			<option value="DescribeFlowLogs">DescribeFlowLogs</option>
+		
+			<option value="DescribeFpgaImageAttribute">DescribeFpgaImageAttribute</option>
+		
+			<option value="DescribeFpgaImages">DescribeFpgaImages</option>
+		
+			<option value="DescribeHostReservationOfferings">DescribeHostReservationOfferings</option>
+		
+			<option value="DescribeHostReservations">DescribeHostReservations</option>
+		
+			<option value="DescribeHosts">DescribeHosts</option>
+		
+			<option value="DescribeIamInstanceProfileAssociations">DescribeIamInstanceProfileAssociations</option>
+		
+			<option value="DescribeIdFormat">DescribeIdFormat</option>
+		
+			<option value="DescribeIdentityIdFormat">DescribeIdentityIdFormat</option>
+		
+			<option value="DescribeImageAttribute">DescribeImageAttribute</option>
+		
+			<option value="DescribeImages">DescribeImages</option>
+		
+			<option value="DescribeImportImageTasks">DescribeImportImageTasks</option>
+		
+			<option value="DescribeImportSnapshotTasks">DescribeImportSnapshotTasks</option>
+		
+			<option value="DescribeInstanceAttribute">DescribeInstanceAttribute</option>
+		
+			<option value="DescribeInstanceStatus">DescribeInstanceStatus</option>
+		
+			<option value="DescribeInstances">DescribeInstances</option>
+		
+			<option value="DescribeInternetGateways">DescribeInternetGateways</option>
+		
+			<option value="DescribeKeyPairs">DescribeKeyPairs</option>
+		
+			<option value="DescribeMovingAddresses">DescribeMovingAddresses</option>
+		
+			<option value="DescribeNatGateways">DescribeNatGateways</option>
+		
+			<option value="DescribeNetworkAcls">DescribeNetworkAcls</option>
+		
+			<option value="DescribeNetworkInterfaceAttribute">DescribeNetworkInterfaceAttribute</option>
+		
+			<option value="DescribeNetworkInterfacePermissions">DescribeNetworkInterfacePermissions</option>
+		
+			<option value="DescribeNetworkInterfaces">DescribeNetworkInterfaces</option>
+		
+			<option value="DescribePlacementGroups">DescribePlacementGroups</option>
+		
+			<option value="DescribePrefixLists">DescribePrefixLists</option>
+		
+			<option value="DescribeRegions">DescribeRegions</option>
+		
+			<option value="DescribeReservedInstances">DescribeReservedInstances</option>
+		
+			<option value="DescribeReservedInstancesListings">DescribeReservedInstancesListings</option>
+		
+			<option value="DescribeReservedInstancesModifications">DescribeReservedInstancesModifications</option>
+		
+			<option value="DescribeReservedInstancesOfferings">DescribeReservedInstancesOfferings</option>
+		
+			<option value="DescribeRouteTables">DescribeRouteTables</option>
+		
+			<option value="DescribeScheduledInstanceAvailability">DescribeScheduledInstanceAvailability</option>
+		
+			<option value="DescribeScheduledInstances">DescribeScheduledInstances</option>
+		
+			<option value="DescribeSecurityGroupReferences">DescribeSecurityGroupReferences</option>
+		
+			<option value="DescribeSecurityGroups">DescribeSecurityGroups</option>
+		
+			<option value="DescribeSnapshotAttribute">DescribeSnapshotAttribute</option>
+		
+			<option value="DescribeSnapshots">DescribeSnapshots</option>
+		
+			<option value="DescribeSpotDatafeedSubscription">DescribeSpotDatafeedSubscription</option>
+		
+			<option value="DescribeSpotFleetInstances">DescribeSpotFleetInstances</option>
+		
+			<option value="DescribeSpotFleetRequestHistory">DescribeSpotFleetRequestHistory</option>
+		
+			<option value="DescribeSpotFleetRequests">DescribeSpotFleetRequests</option>
+		
+			<option value="DescribeSpotInstanceRequests">DescribeSpotInstanceRequests</option>
+		
+			<option value="DescribeSpotPriceHistory">DescribeSpotPriceHistory</option>
+		
+			<option value="DescribeStaleSecurityGroups">DescribeStaleSecurityGroups</option>
+		
+			<option value="DescribeSubnets">DescribeSubnets</option>
+		
+			<option value="DescribeTags">DescribeTags</option>
+		
+			<option value="DescribeVolumeAttribute">DescribeVolumeAttribute</option>
+		
+			<option value="DescribeVolumeStatus">DescribeVolumeStatus</option>
+		
+			<option value="DescribeVolumes">DescribeVolumes</option>
+		
+			<option value="DescribeVolumesModifications">DescribeVolumesModifications</option>
+		
+			<option value="DescribeVpcAttribute">DescribeVpcAttribute</option>
+		
+			<option value="DescribeVpcClassicLink">DescribeVpcClassicLink</option>
+		
+			<option value="DescribeVpcClassicLinkDnsSupport">DescribeVpcClassicLinkDnsSupport</option>
+		
+			<option value="DescribeVpcEndpointServices">DescribeVpcEndpointServices</option>
+		
+			<option value="DescribeVpcEndpoints">DescribeVpcEndpoints</option>
+		
+			<option value="DescribeVpcPeeringConnections">DescribeVpcPeeringConnections</option>
+		
+			<option value="DescribeVpcs">DescribeVpcs</option>
+		
+			<option value="DescribeVpnConnections">DescribeVpnConnections</option>
+		
+			<option value="DescribeVpnGateways">DescribeVpnGateways</option>
+		
+			<option value="DetachClassicLinkVpc">DetachClassicLinkVpc</option>
+		
+			<option value="DetachInternetGateway">DetachInternetGateway</option>
+		
+			<option value="DetachNetworkInterface">DetachNetworkInterface</option>
+		
+			<option value="DetachVolume">DetachVolume</option>
+		
+			<option value="DetachVpnGateway">DetachVpnGateway</option>
+		
+			<option value="DisableVgwRoutePropagation">DisableVgwRoutePropagation</option>
+		
+			<option value="DisableVpcClassicLink">DisableVpcClassicLink</option>
+		
+			<option value="DisableVpcClassicLinkDnsSupport">DisableVpcClassicLinkDnsSupport</option>
+		
+			<option value="DisassociateAddress">DisassociateAddress</option>
+		
+			<option value="DisassociateIamInstanceProfile">DisassociateIamInstanceProfile</option>
+		
+			<option value="DisassociateRouteTable">DisassociateRouteTable</option>
+		
+			<option value="DisassociateSubnetCidrBlock">DisassociateSubnetCidrBlock</option>
+		
+			<option value="DisassociateVpcCidrBlock">DisassociateVpcCidrBlock</option>
+		
+			<option value="EnableVgwRoutePropagation">EnableVgwRoutePropagation</option>
+		
+			<option value="EnableVolumeIO">EnableVolumeIO</option>
+		
+			<option value="EnableVpcClassicLink">EnableVpcClassicLink</option>
+		
+			<option value="EnableVpcClassicLinkDnsSupport">EnableVpcClassicLinkDnsSupport</option>
+		
+			<option value="GetConsoleOutput">GetConsoleOutput</option>
+		
+			<option value="GetConsoleScreenshot">GetConsoleScreenshot</option>
+		
+			<option value="GetHostReservationPurchasePreview">GetHostReservationPurchasePreview</option>
+		
+			<option value="GetPasswordData">GetPasswordData</option>
+		
+			<option value="GetReservedInstancesExchangeQuote">GetReservedInstancesExchangeQuote</option>
+		
+			<option value="ImportImage">ImportImage</option>
+		
+			<option value="ImportInstance">ImportInstance</option>
+		
+			<option value="ImportKeyPair">ImportKeyPair</option>
+		
+			<option value="ImportSnapshot">ImportSnapshot</option>
+		
+			<option value="ImportVolume">ImportVolume</option>
+		
+			<option value="ModifyFpgaImageAttribute">ModifyFpgaImageAttribute</option>
+		
+			<option value="ModifyHosts">ModifyHosts</option>
+		
+			<option value="ModifyIdFormat">ModifyIdFormat</option>
+		
+			<option value="ModifyIdentityIdFormat">ModifyIdentityIdFormat</option>
+		
+			<option value="ModifyImageAttribute">ModifyImageAttribute</option>
+		
+			<option value="ModifyInstanceAttribute">ModifyInstanceAttribute</option>
+		
+			<option value="ModifyInstancePlacement">ModifyInstancePlacement</option>
+		
+			<option value="ModifyNetworkInterfaceAttribute">ModifyNetworkInterfaceAttribute</option>
+		
+			<option value="ModifyReservedInstances">ModifyReservedInstances</option>
+		
+			<option value="ModifySnapshotAttribute">ModifySnapshotAttribute</option>
+		
+			<option value="ModifySpotFleetRequest">ModifySpotFleetRequest</option>
+		
+			<option value="ModifySubnetAttribute">ModifySubnetAttribute</option>
+		
+			<option value="ModifyVolume">ModifyVolume</option>
+		
+			<option value="ModifyVolumeAttribute">ModifyVolumeAttribute</option>
+		
+			<option value="ModifyVpcAttribute">ModifyVpcAttribute</option>
+		
+			<option value="ModifyVpcEndpoint">ModifyVpcEndpoint</option>
+		
+			<option value="ModifyVpcPeeringConnectionOptions">ModifyVpcPeeringConnectionOptions</option>
+		
+			<option value="ModifyVpcTenancy">ModifyVpcTenancy</option>
+		
+			<option value="MonitorInstances">MonitorInstances</option>
+		
+			<option value="MoveAddressToVpc">MoveAddressToVpc</option>
+		
+			<option value="PurchaseHostReservation">PurchaseHostReservation</option>
+		
+			<option value="PurchaseReservedInstancesOffering">PurchaseReservedInstancesOffering</option>
+		
+			<option value="PurchaseScheduledInstances">PurchaseScheduledInstances</option>
+		
+			<option value="RebootInstances">RebootInstances</option>
+		
+			<option value="RegisterImage">RegisterImage</option>
+		
+			<option value="RejectVpcPeeringConnection">RejectVpcPeeringConnection</option>
+		
+			<option value="ReleaseAddress">ReleaseAddress</option>
+		
+			<option value="ReleaseHosts">ReleaseHosts</option>
+		
+			<option value="ReplaceIamInstanceProfileAssociation">ReplaceIamInstanceProfileAssociation</option>
+		
+			<option value="ReplaceNetworkAclAssociation">ReplaceNetworkAclAssociation</option>
+		
+			<option value="ReplaceNetworkAclEntry">ReplaceNetworkAclEntry</option>
+		
+			<option value="ReplaceRoute">ReplaceRoute</option>
+		
+			<option value="ReplaceRouteTableAssociation">ReplaceRouteTableAssociation</option>
+		
+			<option value="ReportInstanceStatus">ReportInstanceStatus</option>
+		
+			<option value="RequestSpotFleet">RequestSpotFleet</option>
+		
+			<option value="RequestSpotInstances">RequestSpotInstances</option>
+		
+			<option value="ResetFpgaImageAttribute">ResetFpgaImageAttribute</option>
+		
+			<option value="ResetImageAttribute">ResetImageAttribute</option>
+		
+			<option value="ResetInstanceAttribute">ResetInstanceAttribute</option>
+		
+			<option value="ResetNetworkInterfaceAttribute">ResetNetworkInterfaceAttribute</option>
+		
+			<option value="ResetSnapshotAttribute">ResetSnapshotAttribute</option>
+		
+			<option value="RestoreAddressToClassic">RestoreAddressToClassic</option>
+		
+			<option value="RevokeSecurityGroupEgress">RevokeSecurityGroupEgress</option>
+		
+			<option value="RevokeSecurityGroupIngress">RevokeSecurityGroupIngress</option>
+		
+			<option value="RunInstances">RunInstances</option>
+		
+			<option value="RunScheduledInstances">RunScheduledInstances</option>
+		
+			<option value="StartInstances">StartInstances</option>
+		
+			<option value="StopInstances">StopInstances</option>
+		
+			<option value="TerminateInstances">TerminateInstances</option>
+		
+			<option value="UnassignIpv6Addresses">UnassignIpv6Addresses</option>
+		
+			<option value="UnassignPrivateIpAddresses">UnassignPrivateIpAddresses</option>
+		
+			<option value="UnmonitorInstances">UnmonitorInstances</option>
+		
+			<option value="UpdateSecurityGroupRuleDescriptionsEgress">UpdateSecurityGroupRuleDescriptionsEgress</option>
+		
+			<option value="UpdateSecurityGroupRuleDescriptionsIngress">UpdateSecurityGroupRuleDescriptionsIngress</option>
+		;
+        </select>
+    </div>
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i>Name</label>
+	<input type="text" id="node-input-name" placeholder="Name"></input>
+    </div>
+
+</script>
+
+<script type="text/x-red" data-help-name="amazon EC2">
+<p>
+AWS Amazon Elastic Compute Cloud
+</p>
+<p>
+<b>Descriptions to be added</b<
+</p>
+<p>
+NOTE: Parameters must be specified in the message, using the case specified in the AWS API documentation (normally UpperCaseLeading)..
+</p>
+
+</script>
+
+<script type="text/javascript">
+    RED.nodes.registerType('AWS EC2',{
+        category: 'AWS',
+        color:"#C0DEED",
+        defaults: {
+            aws: {type:"amazon config",required:true},
+            operation: { value: 'AcceptReservedInstancesExchangeQuote' },
+            name: { value: "" }
+        },
+        inputs:1,
+        outputs:1,
+        icon: "aws.png",
+        align: "right",
+        label: function() {
+            return this.name || "EC2 " + this.operation;
+        },
+        oneditprepare: function () {
+
+        }
+    });
+</script>
+

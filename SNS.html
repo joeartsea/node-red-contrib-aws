@@ -1,0 +1,130 @@
+
+<!--
+  Copyright 2017 Daniel Thomas.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+<script type="text/x-red" data-template-name="AWS SNS">
+    <div class="form-row">
+        <label for="node-input-aws"><i class="fa fa-user"></i> AWS</label>
+        <input type="text" id="node-input-aws">
+    </div>
+    <div class="form-row">
+        <label for="node-input-operation"><i class="fa fa-wrench"></i> Operation</label>
+        <select type="text" id="node-input-operation">
+		
+			<option value="AddPermission">AddPermission</option>
+		
+			<option value="CheckIfPhoneNumberIsOptedOut">CheckIfPhoneNumberIsOptedOut</option>
+		
+			<option value="ConfirmSubscription">ConfirmSubscription</option>
+		
+			<option value="CreatePlatformApplication">CreatePlatformApplication</option>
+		
+			<option value="CreatePlatformEndpoint">CreatePlatformEndpoint</option>
+		
+			<option value="CreateTopic">CreateTopic</option>
+		
+			<option value="DeleteEndpoint">DeleteEndpoint</option>
+		
+			<option value="DeletePlatformApplication">DeletePlatformApplication</option>
+		
+			<option value="DeleteTopic">DeleteTopic</option>
+		
+			<option value="GetEndpointAttributes">GetEndpointAttributes</option>
+		
+			<option value="GetPlatformApplicationAttributes">GetPlatformApplicationAttributes</option>
+		
+			<option value="GetSMSAttributes">GetSMSAttributes</option>
+		
+			<option value="GetSubscriptionAttributes">GetSubscriptionAttributes</option>
+		
+			<option value="GetTopicAttributes">GetTopicAttributes</option>
+		
+			<option value="ListEndpointsByPlatformApplication">ListEndpointsByPlatformApplication</option>
+		
+			<option value="ListPhoneNumbersOptedOut">ListPhoneNumbersOptedOut</option>
+		
+			<option value="ListPlatformApplications">ListPlatformApplications</option>
+		
+			<option value="ListSubscriptions">ListSubscriptions</option>
+		
+			<option value="ListSubscriptionsByTopic">ListSubscriptionsByTopic</option>
+		
+			<option value="ListTopics">ListTopics</option>
+		
+			<option value="OptInPhoneNumber">OptInPhoneNumber</option>
+		
+			<option value="Publish">Publish</option>
+		
+			<option value="RemovePermission">RemovePermission</option>
+		
+			<option value="SetEndpointAttributes">SetEndpointAttributes</option>
+		
+			<option value="SetPlatformApplicationAttributes">SetPlatformApplicationAttributes</option>
+		
+			<option value="SetSMSAttributes">SetSMSAttributes</option>
+		
+			<option value="SetSubscriptionAttributes">SetSubscriptionAttributes</option>
+		
+			<option value="SetTopicAttributes">SetTopicAttributes</option>
+		
+			<option value="Subscribe">Subscribe</option>
+		
+			<option value="Unsubscribe">Unsubscribe</option>
+		;
+        </select>
+    </div>
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i>Name</label>
+	<input type="text" id="node-input-name" placeholder="Name"></input>
+    </div>
+
+</script>
+
+<script type="text/x-red" data-help-name="amazon SNS">
+<p>
+AWS Amazon Simple Notification Service
+</p>
+<p>
+<b>Descriptions to be added</b<
+</p>
+<p>
+NOTE: Parameters must be specified in the message, using the case specified in the AWS API documentation (normally UpperCaseLeading)..
+</p>
+
+</script>
+
+<script type="text/javascript">
+    RED.nodes.registerType('AWS SNS',{
+        category: 'AWS',
+        color:"#C0DEED",
+        defaults: {
+            aws: {type:"amazon config",required:true},
+            operation: { value: 'AddPermission' },
+            name: { value: "" }
+        },
+        inputs:1,
+        outputs:1,
+        icon: "aws.png",
+        align: "right",
+        label: function() {
+            return this.name || "SNS " + this.operation;
+        },
+        oneditprepare: function () {
+
+        }
+    });
+</script>
+

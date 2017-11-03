@@ -25,16 +25,17 @@
   ],
   "node-red": {
     "nodes": {
-      "amazon ec2": "ec2.js",
-      "amazon kinesis": "kinesis.js",
-      "amazon lambda": "lambda.js",
-      "amazon s3": "s3.js",
-      "amazon dynamodb": "dynamodb.js",
-      "amazon sns": "sns.js",
-      "amazon sqs": "sqs.js",
-      "amazon config": "config.js",
-      "amazon iot": "iot.js",
-      "amazon rds": "rds.js"
+      "AWS EC2": "EC2.js",
+      "AWS Kinesis": "Kinesis.js",
+      "AWS Lambda": "Lambda.js",
+      "AWS S3": "S3.js",
+      "AWS DynamoDB": "DynamoDB.js",
+      "AWS SNS": "SNS.js",
+      "AWS SQS": "SQS.js",
+      "AWS RDS": "RDS.js",
+      "AWS Iot": "Iot.js",
+      "AWS IotData": "IotData.js",
+      "amazon config": "config.js"
     }
   },
   "author": {
@@ -45,10 +46,6 @@
     {
       "name": "daniel-t",
       "email": "daniel@networklighthouse.com"
-    },
-    {
-      "name": "joeartsea",
-      "email": "artsnet111@gmail.com"
     }
   ]
 }

@@ -1,0 +1,8 @@
+39a40,44
+>   <div class="form-row">
+>         <label for="node-input-endPoint"><i class="fa fa-tag"></i>Endpoint (*)</label>
+>         <input type="text" id="node-input-endPoint" placeholder="">
+>         </input>
+>     </div>
+63a69
+>             endPoint: { value: "" }

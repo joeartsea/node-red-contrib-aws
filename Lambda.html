@@ -1,0 +1,126 @@
+
+<!--
+  Copyright 2017 Daniel Thomas.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+<script type="text/x-red" data-template-name="AWS Lambda">
+    <div class="form-row">
+        <label for="node-input-aws"><i class="fa fa-user"></i> AWS</label>
+        <input type="text" id="node-input-aws">
+    </div>
+    <div class="form-row">
+        <label for="node-input-operation"><i class="fa fa-wrench"></i> Operation</label>
+        <select type="text" id="node-input-operation">
+		
+			<option value="AddPermission">AddPermission</option>
+		
+			<option value="CreateAlias">CreateAlias</option>
+		
+			<option value="CreateEventSourceMapping">CreateEventSourceMapping</option>
+		
+			<option value="CreateFunction">CreateFunction</option>
+		
+			<option value="DeleteAlias">DeleteAlias</option>
+		
+			<option value="DeleteEventSourceMapping">DeleteEventSourceMapping</option>
+		
+			<option value="DeleteFunction">DeleteFunction</option>
+		
+			<option value="GetAccountSettings">GetAccountSettings</option>
+		
+			<option value="GetAlias">GetAlias</option>
+		
+			<option value="GetEventSourceMapping">GetEventSourceMapping</option>
+		
+			<option value="GetFunction">GetFunction</option>
+		
+			<option value="GetFunctionConfiguration">GetFunctionConfiguration</option>
+		
+			<option value="GetPolicy">GetPolicy</option>
+		
+			<option value="Invoke">Invoke</option>
+		
+			<option value="InvokeAsync">InvokeAsync</option>
+		
+			<option value="ListAliases">ListAliases</option>
+		
+			<option value="ListEventSourceMappings">ListEventSourceMappings</option>
+		
+			<option value="ListFunctions">ListFunctions</option>
+		
+			<option value="ListTags">ListTags</option>
+		
+			<option value="ListVersionsByFunction">ListVersionsByFunction</option>
+		
+			<option value="PublishVersion">PublishVersion</option>
+		
+			<option value="RemovePermission">RemovePermission</option>
+		
+			<option value="TagResource">TagResource</option>
+		
+			<option value="UntagResource">UntagResource</option>
+		
+			<option value="UpdateAlias">UpdateAlias</option>
+		
+			<option value="UpdateEventSourceMapping">UpdateEventSourceMapping</option>
+		
+			<option value="UpdateFunctionCode">UpdateFunctionCode</option>
+		
+			<option value="UpdateFunctionConfiguration">UpdateFunctionConfiguration</option>
+		;
+        </select>
+    </div>
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i>Name</label>
+ 	<input type="text" id="node-input-name" placeholder="Name">    
+    </div>
+
+</script>
+
+<script type="text/x-red" data-help-name="amazon Lambda">
+<p>
+AWS AWS Lambda
+</p>
+<p>
+<b>Descriptions to be added</b<
+</p>
+<p>
+NOTE: Parameters must be specified in the message, using the case specified in the AWS API documentation (normally UpperCaseLeading)..
+</p>
+
+</script>
+
+<script type="text/javascript">
+    RED.nodes.registerType('AWS Lambda',{
+        category: 'AWS',
+        color:"#C0DEED",
+        defaults: {
+            aws: {type:"amazon config",required:true},
+            operation: { value: 'AddPermission' },
+            name: { value: "" }
+        },
+        inputs:1,
+        outputs:1,
+        icon: "aws.png",
+        align: "right",
+        label: function() {
+            return this.name || "Lambda " + this.operation;
+        },
+        oneditprepare: function () {
+
+        }
+    });
+</script>
+

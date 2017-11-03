@@ -1,0 +1,6 @@
+26a27
+> 		this.endPoint = n.endPoint;
+43c44
+< 		var awsService = new AWS.IotData( { 'region': node.region } );
+---
+> 		var awsService = new AWS.IotData( { 'region': node.region, 'endpoint':node.endPoint } );

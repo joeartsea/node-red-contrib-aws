@@ -13,8 +13,16 @@ Object.keys(serviceDef.operations).forEach(function(key){
 function serviceNameMapper(name){
 	name=firstLetterUppercase(name);
 	var map={
-		Sts:'STS'
-	}
+		Sts:'STS',
+		Sns:'SNS',
+		Sqs:'SQS',
+		Rds:'RDS',
+		DynamoDB:'DynamoDB',
+		Ec2:'EC2'
+	};
+	//really special cases
+	map['Data.iot']='IotData';
+
 	return map[name] || name;
 		
 };
@@ -68,6 +76,7 @@ var htmlFile=`
     </div>
     <div class="form-row">
         <label for="node-input-name"><i class="fa fa-tag"></i>Name</label>
+	<input type="text" id="node-input-name" placeholder="Name"></input>
     </div>
 
 </script>

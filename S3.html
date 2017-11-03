@@ -1,0 +1,218 @@
+
+<!--
+  Copyright 2017 Daniel Thomas.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+<script type="text/x-red" data-template-name="AWS S3">
+    <div class="form-row">
+        <label for="node-input-aws"><i class="fa fa-user"></i> AWS</label>
+        <input type="text" id="node-input-aws">
+    </div>
+    <div class="form-row">
+        <label for="node-input-operation"><i class="fa fa-wrench"></i> Operation</label>
+        <select type="text" id="node-input-operation">
+		
+			<option value="AbortMultipartUpload">AbortMultipartUpload</option>
+		
+			<option value="CompleteMultipartUpload">CompleteMultipartUpload</option>
+		
+			<option value="CopyObject">CopyObject</option>
+		
+			<option value="CreateBucket">CreateBucket</option>
+		
+			<option value="CreateMultipartUpload">CreateMultipartUpload</option>
+		
+			<option value="DeleteBucket">DeleteBucket</option>
+		
+			<option value="DeleteBucketAnalyticsConfiguration">DeleteBucketAnalyticsConfiguration</option>
+		
+			<option value="DeleteBucketCors">DeleteBucketCors</option>
+		
+			<option value="DeleteBucketInventoryConfiguration">DeleteBucketInventoryConfiguration</option>
+		
+			<option value="DeleteBucketLifecycle">DeleteBucketLifecycle</option>
+		
+			<option value="DeleteBucketMetricsConfiguration">DeleteBucketMetricsConfiguration</option>
+		
+			<option value="DeleteBucketPolicy">DeleteBucketPolicy</option>
+		
+			<option value="DeleteBucketReplication">DeleteBucketReplication</option>
+		
+			<option value="DeleteBucketTagging">DeleteBucketTagging</option>
+		
+			<option value="DeleteBucketWebsite">DeleteBucketWebsite</option>
+		
+			<option value="DeleteObject">DeleteObject</option>
+		
+			<option value="DeleteObjectTagging">DeleteObjectTagging</option>
+		
+			<option value="DeleteObjects">DeleteObjects</option>
+		
+			<option value="GetBucketAccelerateConfiguration">GetBucketAccelerateConfiguration</option>
+		
+			<option value="GetBucketAcl">GetBucketAcl</option>
+		
+			<option value="GetBucketAnalyticsConfiguration">GetBucketAnalyticsConfiguration</option>
+		
+			<option value="GetBucketCors">GetBucketCors</option>
+		
+			<option value="GetBucketInventoryConfiguration">GetBucketInventoryConfiguration</option>
+		
+			<option value="GetBucketLifecycle">GetBucketLifecycle</option>
+		
+			<option value="GetBucketLifecycleConfiguration">GetBucketLifecycleConfiguration</option>
+		
+			<option value="GetBucketLocation">GetBucketLocation</option>
+		
+			<option value="GetBucketLogging">GetBucketLogging</option>
+		
+			<option value="GetBucketMetricsConfiguration">GetBucketMetricsConfiguration</option>
+		
+			<option value="GetBucketNotification">GetBucketNotification</option>
+		
+			<option value="GetBucketNotificationConfiguration">GetBucketNotificationConfiguration</option>
+		
+			<option value="GetBucketPolicy">GetBucketPolicy</option>
+		
+			<option value="GetBucketReplication">GetBucketReplication</option>
+		
+			<option value="GetBucketRequestPayment">GetBucketRequestPayment</option>
+		
+			<option value="GetBucketTagging">GetBucketTagging</option>
+		
+			<option value="GetBucketVersioning">GetBucketVersioning</option>
+		
+			<option value="GetBucketWebsite">GetBucketWebsite</option>
+		
+			<option value="GetObject">GetObject</option>
+		
+			<option value="GetObjectAcl">GetObjectAcl</option>
+		
+			<option value="GetObjectTagging">GetObjectTagging</option>
+		
+			<option value="GetObjectTorrent">GetObjectTorrent</option>
+		
+			<option value="HeadBucket">HeadBucket</option>
+		
+			<option value="HeadObject">HeadObject</option>
+		
+			<option value="ListBucketAnalyticsConfigurations">ListBucketAnalyticsConfigurations</option>
+		
+			<option value="ListBucketInventoryConfigurations">ListBucketInventoryConfigurations</option>
+		
+			<option value="ListBucketMetricsConfigurations">ListBucketMetricsConfigurations</option>
+		
+			<option value="ListBuckets">ListBuckets</option>
+		
+			<option value="ListMultipartUploads">ListMultipartUploads</option>
+		
+			<option value="ListObjectVersions">ListObjectVersions</option>
+		
+			<option value="ListObjects">ListObjects</option>
+		
+			<option value="ListObjectsV2">ListObjectsV2</option>
+		
+			<option value="ListParts">ListParts</option>
+		
+			<option value="PutBucketAccelerateConfiguration">PutBucketAccelerateConfiguration</option>
+		
+			<option value="PutBucketAcl">PutBucketAcl</option>
+		
+			<option value="PutBucketAnalyticsConfiguration">PutBucketAnalyticsConfiguration</option>
+		
+			<option value="PutBucketCors">PutBucketCors</option>
+		
+			<option value="PutBucketInventoryConfiguration">PutBucketInventoryConfiguration</option>
+		
+			<option value="PutBucketLifecycle">PutBucketLifecycle</option>
+		
+			<option value="PutBucketLifecycleConfiguration">PutBucketLifecycleConfiguration</option>
+		
+			<option value="PutBucketLogging">PutBucketLogging</option>
+		
+			<option value="PutBucketMetricsConfiguration">PutBucketMetricsConfiguration</option>
+		
+			<option value="PutBucketNotification">PutBucketNotification</option>
+		
+			<option value="PutBucketNotificationConfiguration">PutBucketNotificationConfiguration</option>
+		
+			<option value="PutBucketPolicy">PutBucketPolicy</option>
+		
+			<option value="PutBucketReplication">PutBucketReplication</option>
+		
+			<option value="PutBucketRequestPayment">PutBucketRequestPayment</option>
+		
+			<option value="PutBucketTagging">PutBucketTagging</option>
+		
+			<option value="PutBucketVersioning">PutBucketVersioning</option>
+		
+			<option value="PutBucketWebsite">PutBucketWebsite</option>
+		
+			<option value="PutObject">PutObject</option>
+		
+			<option value="PutObjectAcl">PutObjectAcl</option>
+		
+			<option value="PutObjectTagging">PutObjectTagging</option>
+		
+			<option value="RestoreObject">RestoreObject</option>
+		
+			<option value="UploadPart">UploadPart</option>
+		
+			<option value="UploadPartCopy">UploadPartCopy</option>
+		;
+        </select>
+    </div>
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i>Name</label>
+	<input type="text" id="node-input-name" placeholder="Name"></input>
+    </div>
+
+</script>
+
+<script type="text/x-red" data-help-name="amazon S3">
+<p>
+AWS Amazon Simple Storage Service
+</p>
+<p>
+<b>Descriptions to be added</b<
+</p>
+<p>
+NOTE: Parameters must be specified in the message, using the case specified in the AWS API documentation (normally UpperCaseLeading)..
+</p>
+
+</script>
+
+<script type="text/javascript">
+    RED.nodes.registerType('AWS S3',{
+        category: 'AWS',
+        color:"#C0DEED",
+        defaults: {
+            aws: {type:"amazon config",required:true},
+            operation: { value: 'AbortMultipartUpload' },
+            name: { value: "" }
+        },
+        inputs:1,
+        outputs:1,
+        icon: "aws.png",
+        align: "right",
+        label: function() {
+            return this.name || "S3 " + this.operation;
+        },
+        oneditprepare: function () {
+
+        }
+    });
+</script>
+
