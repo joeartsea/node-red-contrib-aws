@@ -81,9 +81,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"certificateId",params); 
 			
 			copyArg(msg,"certificateId",params); 
-			
 			copyArg(msg,"setAsActive",params); 
 			
 
@@ -95,9 +95,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"policyName",params); 
+			copyArg(n,"principal",params); 
 			
 			copyArg(msg,"policyName",params); 
-			
 			copyArg(msg,"principal",params); 
 			
 
@@ -109,9 +110,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"thingName",params); 
+			copyArg(n,"principal",params); 
 			
 			copyArg(msg,"thingName",params); 
-			
 			copyArg(msg,"principal",params); 
 			
 
@@ -123,6 +125,7 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"certificateId",params); 
 			
 			copyArg(msg,"certificateId",params); 
 			
@@ -135,9 +138,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"certificateSigningRequest",params); 
 			
 			copyArg(msg,"certificateSigningRequest",params); 
-			
 			copyArg(msg,"setAsActive",params); 
 			
 
@@ -161,9 +164,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"policyName",params); 
+			copyArg(n,"policyDocument",params); 
 			
 			copyArg(msg,"policyName",params); 
-			
 			copyArg(msg,"policyDocument",params); 
 			
 
@@ -175,11 +179,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"policyName",params); 
+			copyArg(n,"policyDocument",params); 
 			
 			copyArg(msg,"policyName",params); 
-			
 			copyArg(msg,"policyDocument",params); 
-			
 			copyArg(msg,"setAsDefault",params); 
 			
 
@@ -191,11 +195,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"thingName",params); 
 			
 			copyArg(msg,"thingName",params); 
-			
 			copyArg(msg,"thingTypeName",params); 
-			
 			copyArg(msg,"attributePayload",params); 
 			
 
@@ -207,9 +210,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"thingTypeName",params); 
 			
 			copyArg(msg,"thingTypeName",params); 
-			
 			copyArg(msg,"thingTypeProperties",params); 
 			
 
@@ -221,9 +224,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"ruleName",params); 
+			copyArg(n,"topicRulePayload",params); 
 			
 			copyArg(msg,"ruleName",params); 
-			
 			copyArg(msg,"topicRulePayload",params); 
 			
 
@@ -235,6 +239,7 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"certificateId",params); 
 			
 			copyArg(msg,"certificateId",params); 
 			
@@ -247,6 +252,7 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"certificateId",params); 
 			
 			copyArg(msg,"certificateId",params); 
 			
@@ -259,6 +265,7 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"policyName",params); 
 			
 			copyArg(msg,"policyName",params); 
 			
@@ -271,9 +278,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"policyName",params); 
+			copyArg(n,"policyVersionId",params); 
 			
 			copyArg(msg,"policyName",params); 
-			
 			copyArg(msg,"policyVersionId",params); 
 			
 
@@ -286,6 +294,7 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
+			
 
 			svc.deleteRegistrationCode(params,cb);
 		}
@@ -295,9 +304,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"thingName",params); 
 			
 			copyArg(msg,"thingName",params); 
-			
 			copyArg(msg,"expectedVersion",params); 
 			
 
@@ -309,6 +318,7 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"thingTypeName",params); 
 			
 			copyArg(msg,"thingTypeName",params); 
 			
@@ -321,6 +331,7 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"ruleName",params); 
 			
 			copyArg(msg,"ruleName",params); 
 			
@@ -333,9 +344,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"thingTypeName",params); 
 			
 			copyArg(msg,"thingTypeName",params); 
-			
 			copyArg(msg,"undoDeprecate",params); 
 			
 
@@ -347,6 +358,7 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"certificateId",params); 
 			
 			copyArg(msg,"certificateId",params); 
 			
@@ -359,6 +371,7 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"certificateId",params); 
 			
 			copyArg(msg,"certificateId",params); 
 			
@@ -372,6 +385,7 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
+			
 
 			svc.describeEndpoint(params,cb);
 		}
@@ -381,6 +395,7 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"thingName",params); 
 			
 			copyArg(msg,"thingName",params); 
 			
@@ -393,6 +408,7 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"thingTypeName",params); 
 			
 			copyArg(msg,"thingTypeName",params); 
 			
@@ -405,9 +421,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"policyName",params); 
+			copyArg(n,"principal",params); 
 			
 			copyArg(msg,"policyName",params); 
-			
 			copyArg(msg,"principal",params); 
 			
 
@@ -419,9 +436,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"thingName",params); 
+			copyArg(n,"principal",params); 
 			
 			copyArg(msg,"thingName",params); 
-			
 			copyArg(msg,"principal",params); 
 			
 
@@ -433,6 +451,7 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"ruleName",params); 
 			
 			copyArg(msg,"ruleName",params); 
 			
@@ -445,6 +464,7 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"ruleName",params); 
 			
 			copyArg(msg,"ruleName",params); 
 			
@@ -458,6 +478,7 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
+			
 
 			svc.getLoggingOptions(params,cb);
 		}
@@ -467,6 +488,7 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"policyName",params); 
 			
 			copyArg(msg,"policyName",params); 
 			
@@ -479,9 +501,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"policyName",params); 
+			copyArg(n,"policyVersionId",params); 
 			
 			copyArg(msg,"policyName",params); 
-			
 			copyArg(msg,"policyVersionId",params); 
 			
 
@@ -494,6 +517,7 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
+			
 
 			svc.getRegistrationCode(params,cb);
 		}
@@ -503,6 +527,7 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"ruleName",params); 
 			
 			copyArg(msg,"ruleName",params); 
 			
@@ -517,9 +542,7 @@ module.exports = function(RED) {
 			
 			
 			copyArg(msg,"pageSize",params); 
-			
 			copyArg(msg,"marker",params); 
-			
 			copyArg(msg,"ascendingOrder",params); 
 			
 
@@ -533,9 +556,7 @@ module.exports = function(RED) {
 			
 			
 			copyArg(msg,"pageSize",params); 
-			
 			copyArg(msg,"marker",params); 
-			
 			copyArg(msg,"ascendingOrder",params); 
 			
 
@@ -547,13 +568,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"caCertificateId",params); 
 			
 			copyArg(msg,"caCertificateId",params); 
-			
 			copyArg(msg,"pageSize",params); 
-			
 			copyArg(msg,"marker",params); 
-			
 			copyArg(msg,"ascendingOrder",params); 
 			
 
@@ -567,9 +586,7 @@ module.exports = function(RED) {
 			
 			
 			copyArg(msg,"pageSize",params); 
-			
 			copyArg(msg,"marker",params); 
-			
 			copyArg(msg,"ascendingOrder",params); 
 			
 
@@ -583,9 +600,7 @@ module.exports = function(RED) {
 			
 			
 			copyArg(msg,"marker",params); 
-			
 			copyArg(msg,"pageSize",params); 
-			
 			copyArg(msg,"ascendingOrder",params); 
 			
 
@@ -597,13 +612,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"policyName",params); 
 			
 			copyArg(msg,"policyName",params); 
-			
 			copyArg(msg,"marker",params); 
-			
 			copyArg(msg,"pageSize",params); 
-			
 			copyArg(msg,"ascendingOrder",params); 
 			
 
@@ -615,6 +628,7 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"policyName",params); 
 			
 			copyArg(msg,"policyName",params); 
 			
@@ -627,13 +641,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"principal",params); 
 			
 			copyArg(msg,"principal",params); 
-			
 			copyArg(msg,"marker",params); 
-			
 			copyArg(msg,"pageSize",params); 
-			
 			copyArg(msg,"ascendingOrder",params); 
 			
 
@@ -645,11 +657,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"principal",params); 
 			
 			copyArg(msg,"nextToken",params); 
-			
 			copyArg(msg,"maxResults",params); 
-			
 			copyArg(msg,"principal",params); 
 			
 
@@ -661,6 +672,7 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"thingName",params); 
 			
 			copyArg(msg,"thingName",params); 
 			
@@ -675,9 +687,7 @@ module.exports = function(RED) {
 			
 			
 			copyArg(msg,"nextToken",params); 
-			
 			copyArg(msg,"maxResults",params); 
-			
 			copyArg(msg,"thingTypeName",params); 
 			
 
@@ -691,13 +701,9 @@ module.exports = function(RED) {
 			
 			
 			copyArg(msg,"nextToken",params); 
-			
 			copyArg(msg,"maxResults",params); 
-			
 			copyArg(msg,"attributeName",params); 
-			
 			copyArg(msg,"attributeValue",params); 
-			
 			copyArg(msg,"thingTypeName",params); 
 			
 
@@ -711,11 +717,8 @@ module.exports = function(RED) {
 			
 			
 			copyArg(msg,"topic",params); 
-			
 			copyArg(msg,"maxResults",params); 
-			
 			copyArg(msg,"nextToken",params); 
-			
 			copyArg(msg,"ruleDisabled",params); 
 			
 
@@ -727,13 +730,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"caCertificate",params); 
+			copyArg(n,"verificationCertificate",params); 
 			
 			copyArg(msg,"caCertificate",params); 
-			
 			copyArg(msg,"verificationCertificate",params); 
-			
 			copyArg(msg,"setAsActive",params); 
-			
 			copyArg(msg,"allowAutoRegistration",params); 
 			
 
@@ -745,13 +747,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"certificatePem",params); 
 			
 			copyArg(msg,"certificatePem",params); 
-			
 			copyArg(msg,"caCertificatePem",params); 
-			
 			copyArg(msg,"setAsActive",params); 
-			
 			copyArg(msg,"status",params); 
 			
 
@@ -763,9 +763,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"certificateId",params); 
 			
 			copyArg(msg,"certificateId",params); 
-			
 			copyArg(msg,"rejectReason",params); 
 			
 
@@ -777,9 +777,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"ruleName",params); 
+			copyArg(n,"topicRulePayload",params); 
 			
 			copyArg(msg,"ruleName",params); 
-			
 			copyArg(msg,"topicRulePayload",params); 
 			
 
@@ -791,9 +792,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"policyName",params); 
+			copyArg(n,"policyVersionId",params); 
 			
 			copyArg(msg,"policyName",params); 
-			
 			copyArg(msg,"policyVersionId",params); 
 			
 
@@ -805,6 +807,7 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"loggingOptionsPayload",params); 
 			
 			copyArg(msg,"loggingOptionsPayload",params); 
 			
@@ -817,11 +820,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"certificateId",params); 
+			copyArg(n,"targetAwsAccount",params); 
 			
 			copyArg(msg,"certificateId",params); 
-			
 			copyArg(msg,"targetAwsAccount",params); 
-			
 			copyArg(msg,"transferMessage",params); 
 			
 
@@ -833,11 +836,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"certificateId",params); 
 			
 			copyArg(msg,"certificateId",params); 
-			
 			copyArg(msg,"newStatus",params); 
-			
 			copyArg(msg,"newAutoRegistrationStatus",params); 
 			
 
@@ -849,9 +851,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"certificateId",params); 
+			copyArg(n,"newStatus",params); 
 			
 			copyArg(msg,"certificateId",params); 
-			
 			copyArg(msg,"newStatus",params); 
 			
 
@@ -863,15 +866,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"thingName",params); 
 			
 			copyArg(msg,"thingName",params); 
-			
 			copyArg(msg,"thingTypeName",params); 
-			
 			copyArg(msg,"attributePayload",params); 
-			
 			copyArg(msg,"expectedVersion",params); 
-			
 			copyArg(msg,"removeThingType",params); 
 			
 

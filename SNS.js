@@ -81,13 +81,14 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"TopicArn",params); 
+			copyArg(n,"Label",params); 
+			copyArg(n,"AWSAccountId",params); 
+			copyArg(n,"ActionName",params); 
 			
 			copyArg(msg,"TopicArn",params); 
-			
 			copyArg(msg,"Label",params); 
-			
 			copyArg(msg,"AWSAccountId",params); 
-			
 			copyArg(msg,"ActionName",params); 
 			
 
@@ -99,6 +100,7 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"phoneNumber",params); 
 			
 			copyArg(msg,"phoneNumber",params); 
 			
@@ -111,11 +113,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"TopicArn",params); 
+			copyArg(n,"Token",params); 
 			
 			copyArg(msg,"TopicArn",params); 
-			
 			copyArg(msg,"Token",params); 
-			
 			copyArg(msg,"AuthenticateOnUnsubscribe",params); 
 			
 
@@ -127,11 +129,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"Name",params); 
+			copyArg(n,"Platform",params); 
+			copyArg(n,"Attributes",params); 
 			
 			copyArg(msg,"Name",params); 
-			
 			copyArg(msg,"Platform",params); 
-			
 			copyArg(msg,"Attributes",params); 
 			
 
@@ -143,13 +146,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"PlatformApplicationArn",params); 
+			copyArg(n,"Token",params); 
 			
 			copyArg(msg,"PlatformApplicationArn",params); 
-			
 			copyArg(msg,"Token",params); 
-			
 			copyArg(msg,"CustomUserData",params); 
-			
 			copyArg(msg,"Attributes",params); 
 			
 
@@ -161,6 +163,7 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"Name",params); 
 			
 			copyArg(msg,"Name",params); 
 			
@@ -173,6 +176,7 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"EndpointArn",params); 
 			
 			copyArg(msg,"EndpointArn",params); 
 			
@@ -185,6 +189,7 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"PlatformApplicationArn",params); 
 			
 			copyArg(msg,"PlatformApplicationArn",params); 
 			
@@ -197,6 +202,7 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"TopicArn",params); 
 			
 			copyArg(msg,"TopicArn",params); 
 			
@@ -209,6 +215,7 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"EndpointArn",params); 
 			
 			copyArg(msg,"EndpointArn",params); 
 			
@@ -221,6 +228,7 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"PlatformApplicationArn",params); 
 			
 			copyArg(msg,"PlatformApplicationArn",params); 
 			
@@ -245,6 +253,7 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"SubscriptionArn",params); 
 			
 			copyArg(msg,"SubscriptionArn",params); 
 			
@@ -257,6 +266,7 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"TopicArn",params); 
 			
 			copyArg(msg,"TopicArn",params); 
 			
@@ -269,9 +279,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"PlatformApplicationArn",params); 
 			
 			copyArg(msg,"PlatformApplicationArn",params); 
-			
 			copyArg(msg,"NextToken",params); 
 			
 
@@ -319,9 +329,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"TopicArn",params); 
 			
 			copyArg(msg,"TopicArn",params); 
-			
 			copyArg(msg,"NextToken",params); 
 			
 
@@ -345,6 +355,7 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"phoneNumber",params); 
 			
 			copyArg(msg,"phoneNumber",params); 
 			
@@ -357,19 +368,14 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"Message",params); 
 			
 			copyArg(msg,"TopicArn",params); 
-			
 			copyArg(msg,"TargetArn",params); 
-			
 			copyArg(msg,"PhoneNumber",params); 
-			
 			copyArg(msg,"Message",params); 
-			
 			copyArg(msg,"Subject",params); 
-			
 			copyArg(msg,"MessageStructure",params); 
-			
 			copyArg(msg,"MessageAttributes",params); 
 			
 
@@ -381,9 +387,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"TopicArn",params); 
+			copyArg(n,"Label",params); 
 			
 			copyArg(msg,"TopicArn",params); 
-			
 			copyArg(msg,"Label",params); 
 			
 
@@ -395,9 +402,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"EndpointArn",params); 
+			copyArg(n,"Attributes",params); 
 			
 			copyArg(msg,"EndpointArn",params); 
-			
 			copyArg(msg,"Attributes",params); 
 			
 
@@ -409,9 +417,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"PlatformApplicationArn",params); 
+			copyArg(n,"Attributes",params); 
 			
 			copyArg(msg,"PlatformApplicationArn",params); 
-			
 			copyArg(msg,"Attributes",params); 
 			
 
@@ -423,6 +432,7 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"attributes",params); 
 			
 			copyArg(msg,"attributes",params); 
 			
@@ -435,11 +445,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"SubscriptionArn",params); 
+			copyArg(n,"AttributeName",params); 
 			
 			copyArg(msg,"SubscriptionArn",params); 
-			
 			copyArg(msg,"AttributeName",params); 
-			
 			copyArg(msg,"AttributeValue",params); 
 			
 
@@ -451,11 +461,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"TopicArn",params); 
+			copyArg(n,"AttributeName",params); 
 			
 			copyArg(msg,"TopicArn",params); 
-			
 			copyArg(msg,"AttributeName",params); 
-			
 			copyArg(msg,"AttributeValue",params); 
 			
 
@@ -467,11 +477,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"TopicArn",params); 
+			copyArg(n,"Protocol",params); 
 			
 			copyArg(msg,"TopicArn",params); 
-			
 			copyArg(msg,"Protocol",params); 
-			
 			copyArg(msg,"Endpoint",params); 
 			
 
@@ -483,6 +493,7 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"SubscriptionArn",params); 
 			
 			copyArg(msg,"SubscriptionArn",params); 
 			

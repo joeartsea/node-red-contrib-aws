@@ -16,13 +16,17 @@
 -->
 
 <script type="text/x-red" data-template-name="AWS Dynamodb">
-    <div class="form-row">
-        <label for="node-input-aws"><i class="fa fa-user"></i> AWS</label>
-        <input type="text" id="node-input-aws">
-    </div>
-    <div class="form-row">
-        <label for="node-input-operation"><i class="fa fa-wrench"></i> Operation</label>
-        <select type="text" id="node-input-operation">
+		<style scoped>
+				.hiddenAttrs {display:none;}
+				.visibleAttrs {display:block;}
+		</style>
+	<div class="form-row">
+		<label for="node-input-aws"><i class="fa fa-user"></i> AWS</label>
+		<input type="text" id="node-input-aws">
+	</div>
+	<div class="form-row">
+		<label for="node-input-operation"><i class="fa fa-wrench"></i> Operation</label>
+		<select type="text" id="node-input-operation">
 		
 			<option value="BatchGetItem">BatchGetItem</option>
 		
@@ -62,12 +66,128 @@
 		
 			<option value="UpdateTimeToLive">UpdateTimeToLive</option>
 		;
-        </select>
-    </div>
-    <div class="form-row">
-        <label for="node-input-name"><i class="fa fa-tag"></i>Name</label>
-	<input type="text" id="node-input-name" placeholder="Name"></input>
-    </div>
+		</select>
+	</div>
+	<div class="form-row">
+		<label for="node-input-name"><i class="fa fa-tag"></i>Name</label>
+		<input type="text" id="node-input-name" placeholder="Name"></input>
+	</div>
+	<hr/>	
+	<div id="AttrHolder">
+	      
+	<div class="form-row" id='RequestItemsAttr' class='hiddenAttrs'>
+		<label for="node-input-RequestItems"><i class="fa fa-tag"></i>RequestItems</label>
+		<input type="text" id="node-input-RequestItems" placeholder="RequestItems"></input>
+	</div> 
+	<div class="form-row" id='AttributeDefinitionsAttr' class='hiddenAttrs'>
+		<label for="node-input-AttributeDefinitions"><i class="fa fa-tag"></i>AttributeDefinitions</label>
+		<input type="text" id="node-input-AttributeDefinitions" placeholder="AttributeDefinitions"></input>
+	</div> 
+	<div class="form-row" id='TableNameAttr' class='hiddenAttrs'>
+		<label for="node-input-TableName"><i class="fa fa-tag"></i>TableName</label>
+		<input type="text" id="node-input-TableName" placeholder="TableName"></input>
+	</div> 
+	<div class="form-row" id='KeySchemaAttr' class='hiddenAttrs'>
+		<label for="node-input-KeySchema"><i class="fa fa-tag"></i>KeySchema</label>
+		<input type="text" id="node-input-KeySchema" placeholder="KeySchema"></input>
+	</div> 
+	<div class="form-row" id='ProvisionedThroughputAttr' class='hiddenAttrs'>
+		<label for="node-input-ProvisionedThroughput"><i class="fa fa-tag"></i>ProvisionedThroughput</label>
+		<input type="text" id="node-input-ProvisionedThroughput" placeholder="ProvisionedThroughput"></input>
+	</div> 
+	<div class="form-row" id='KeyAttr' class='hiddenAttrs'>
+		<label for="node-input-Key"><i class="fa fa-tag"></i>Key</label>
+		<input type="text" id="node-input-Key" placeholder="Key"></input>
+	</div> 
+	<div class="form-row" id='ResourceArnAttr' class='hiddenAttrs'>
+		<label for="node-input-ResourceArn"><i class="fa fa-tag"></i>ResourceArn</label>
+		<input type="text" id="node-input-ResourceArn" placeholder="ResourceArn"></input>
+	</div> 
+	<div class="form-row" id='ItemAttr' class='hiddenAttrs'>
+		<label for="node-input-Item"><i class="fa fa-tag"></i>Item</label>
+		<input type="text" id="node-input-Item" placeholder="Item"></input>
+	</div> 
+	<div class="form-row" id='TagsAttr' class='hiddenAttrs'>
+		<label for="node-input-Tags"><i class="fa fa-tag"></i>Tags</label>
+		<input type="text" id="node-input-Tags" placeholder="Tags"></input>
+	</div> 
+	<div class="form-row" id='TagKeysAttr' class='hiddenAttrs'>
+		<label for="node-input-TagKeys"><i class="fa fa-tag"></i>TagKeys</label>
+		<input type="text" id="node-input-TagKeys" placeholder="TagKeys"></input>
+	</div> 
+	<div class="form-row" id='TimeToLiveSpecificationAttr' class='hiddenAttrs'>
+		<label for="node-input-TimeToLiveSpecification"><i class="fa fa-tag"></i>TimeToLiveSpecification</label>
+		<input type="text" id="node-input-TimeToLiveSpecification" placeholder="TimeToLiveSpecification"></input>
+	</div> 
+	</div>
+
+ <script>
+	  var nodeOps={
+			
+				BatchGetItem:[
+					'#RequestItemsAttr'
+					],
+				BatchWriteItem:[
+					'#RequestItemsAttr'
+					],
+				CreateTable:[
+					'#AttributeDefinitionsAttr','#TableNameAttr','#KeySchemaAttr','#ProvisionedThroughputAttr'
+					],
+				DeleteItem:[
+					'#TableNameAttr','#KeyAttr'
+					],
+				DeleteTable:[
+					'#TableNameAttr'
+					],
+				DescribeLimits:[
+					
+					],
+				DescribeTable:[
+					'#TableNameAttr'
+					],
+				DescribeTimeToLive:[
+					'#TableNameAttr'
+					],
+				GetItem:[
+					'#TableNameAttr','#KeyAttr'
+					],
+				ListTables:[
+					
+					],
+				ListTagsOfResource:[
+					'#ResourceArnAttr'
+					],
+				PutItem:[
+					'#TableNameAttr','#ItemAttr'
+					],
+				Query:[
+					'#TableNameAttr'
+					],
+				Scan:[
+					'#TableNameAttr'
+					],
+				TagResource:[
+					'#ResourceArnAttr','#TagsAttr'
+					],
+				UntagResource:[
+					'#ResourceArnAttr','#TagKeysAttr'
+					],
+				UpdateItem:[
+					'#TableNameAttr','#KeyAttr'
+					],
+				UpdateTable:[
+					'#TableNameAttr'
+					],
+				UpdateTimeToLive:[
+					'#TableNameAttr','#TimeToLiveSpecificationAttr'
+					]
+		};
+		$('#node-input-operation').on('change',function(){
+			$('#AttrHolder').children().addClass('hiddenAttrs').removeClass('visibleAttrs');
+				if (nodeOps[this.value])
+					$(nodeOps[this.value].join()).addClass('visibleAttrs').removeClass('hiddenAttrs');
+		 });
+ </script>
 
 </script>
 
@@ -85,24 +205,36 @@ NOTE: Parameters must be specified in the message, using the case specified in t
 </script>
 
 <script type="text/javascript">
-    RED.nodes.registerType('AWS Dynamodb',{
-        category: 'AWS',
-        color:"#C0DEED",
-        defaults: {
-            aws: {type:"amazon config",required:true},
-            operation: { value: 'BatchGetItem' },
-            name: { value: "" }
-        },
-        inputs:1,
-        outputs:1,
-        icon: "aws.png",
-        align: "right",
-        label: function() {
-            return this.name || "Dynamodb " + this.operation;
-        },
-        oneditprepare: function () {
+	RED.nodes.registerType('AWS Dynamodb',{
+		category: 'AWS',
+		color:"#C0DEED",
+		defaults: {
+			aws: {type:"amazon config",required:true},
+			operation: { value: 'BatchGetItem' },
+			
+				RequestItems: { value: ""} ,
+				AttributeDefinitions: { value: ""} ,
+				TableName: { value: ""} ,
+				KeySchema: { value: ""} ,
+				ProvisionedThroughput: { value: ""} ,
+				Key: { value: ""} ,
+				ResourceArn: { value: ""} ,
+				Item: { value: ""} ,
+				Tags: { value: ""} ,
+				TagKeys: { value: ""} ,
+				TimeToLiveSpecification: { value: ""} ,
+			name: { value: "" }
+		},
+		inputs:1,
+		outputs:1,
+		icon: "aws.png",
+		align: "right",
+		label: function() {
+			return this.name || "Dynamodb " + this.operation;
+		},
+		oneditprepare: function () {
 
-        }
-    });
+		}
+	});
 </script>
 

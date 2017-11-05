@@ -28,20 +28,35 @@ function serviceNameMapper(name){
 };
 
 function firstLetterUppercase(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
+	return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
 function firstLetterLowercase(string) {
-    return string.charAt(0).toLowerCase() + string.slice(1);
+	return string.charAt(0).toLowerCase() + string.slice(1);
 }
 
-function mapKeys(obj,fn){
+function mapKeys(obj,fn,sep){
+	if (typeof sep == 'undefined') sep= '';
 	if (typeof obj == 'undefined') {
 		return '';
 	} else {
-		return Object.keys(obj).map(fn).join('');
+		return Object.keys(obj).map(fn).join(sep);
 	}
 }
+
+function getReqs(serviceDef){
+	reqs={};
+	Object.keys(serviceDef.operations).map(op=>
+		{ if (serviceDef.operations[op].input && serviceDef.operations[op].input.required){
+			return (serviceDef.operations[op].input.required)
+		 } else {
+			return [];
+		 }
+		}).forEach(reqA=>{reqA.forEach(req=>{reqs[req]=1})});
+	console.log(JSON.stringify(reqs));
+	return (Object.keys(reqs)); 
+	} 
+
 
 serviceDef.metadata.serviceName=serviceNameMapper(serviceDef.metadata.endpointPrefix);
 var htmlFile=`
@@ -62,22 +77,49 @@ var htmlFile=`
 -->
 
 <script type="text/x-red" data-template-name="AWS ${serviceDef.metadata.serviceName}">
-    <div class="form-row">
-        <label for="node-input-aws"><i class="fa fa-user"></i> AWS</label>
-        <input type="text" id="node-input-aws">
-    </div>
-    <div class="form-row">
-        <label for="node-input-operation"><i class="fa fa-wrench"></i> Operation</label>
-        <select type="text" id="node-input-operation">
+		<style scoped>
+				.hiddenAttrs {display:none;}
+				.visibleAttrs {display:block;}
+		</style>
+	<div class="form-row">
+		<label for="node-input-aws"><i class="fa fa-user"></i> AWS</label>
+		<input type="text" id="node-input-aws">
+	</div>
+	<div class="form-row">
+		<label for="node-input-operation"><i class="fa fa-wrench"></i> Operation</label>
+		<select type="text" id="node-input-operation">
 		${Object.keys(serviceDef.operations).map(key => 	`
 			<option value="${key}">${key}</option>
 		`).join('')};
-        </select>
-    </div>
-    <div class="form-row">
-        <label for="node-input-name"><i class="fa fa-tag"></i>Name</label>
-	<input type="text" id="node-input-name" placeholder="Name"></input>
-    </div>
+		</select>
+	</div>
+	<div class="form-row">
+		<label for="node-input-name"><i class="fa fa-tag"></i>Name</label>
+		<input type="text" id="node-input-name" placeholder="Name"></input>
+	</div>
+	<hr/>	
+	<div id="AttrHolder">
+	      ${getReqs(serviceDef).map(r=>`
+	<div class="form-row" id='${r}Attr' class='hiddenAttrs'>
+		<label for="node-input-${r}"><i class="fa fa-tag"></i>${r}</label>
+		<input type="text" id="node-input-${r}" placeholder="${r}"></input>
+	</div> `
+	).join('')}
+	</div>
+
+ <script>
+	  var nodeOps={
+			${mapKeys(serviceDef.operations,op=>`
+				${op}:[
+					${(serviceDef.operations[op].input)?mapKeys(serviceDef.operations[op].input.required,reqIdx=>`'#${serviceDef.operations[op].input.required[reqIdx]}Attr'`,','):''}
+					]`,',')}
+		};
+		$('#node-input-operation').on('change',function(){
+			$('#AttrHolder').children().addClass('hiddenAttrs').removeClass('visibleAttrs');
+				if (nodeOps[this.value])
+					$(nodeOps[this.value].join()).addClass('visibleAttrs').removeClass('hiddenAttrs');
+		 });
+ </script>
 
 </script>
 
@@ -95,25 +137,27 @@ NOTE: Parameters must be specified in the message, using the case specified in t
 </script>
 
 <script type="text/javascript">
-    RED.nodes.registerType('AWS ${serviceDef.metadata.serviceName}',{
-        category: 'AWS',
-        color:"#C0DEED",
-        defaults: {
-            aws: {type:"amazon config",required:true},
-            operation: { value: '${Object.keys(serviceDef.operations)[0]}' },
-            name: { value: "" }
-        },
-        inputs:1,
-        outputs:1,
-        icon: "aws.png",
-        align: "right",
-        label: function() {
-            return this.name || "${serviceDef.metadata.serviceName} " + this.operation;
-        },
-        oneditprepare: function () {
+	RED.nodes.registerType('AWS ${serviceDef.metadata.serviceName}',{
+		category: 'AWS',
+		color:"#C0DEED",
+		defaults: {
+			aws: {type:"amazon config",required:true},
+			operation: { value: '${Object.keys(serviceDef.operations)[0]}' },
+			${getReqs(serviceDef).map(req=>`
+				${req}: { value: ""} ,`).join('')}
+			name: { value: "" }
+		},
+		inputs:1,
+		outputs:1,
+		icon: "aws.png",
+		align: "right",
+		label: function() {
+			return this.name || "${serviceDef.metadata.serviceName} " + this.operation;
+		},
+		oneditprepare: function () {
 
-        }
-    });
+		}
+	});
 </script>
 
 `;
@@ -201,8 +245,9 @@ module.exports = function(RED) {
 		service.${op}=function(svc,msg,cb){
 			var params={};
 			//copyArgs
+			${(serviceDef.operations[op].input && serviceDef.operations[op].input.required)? mapKeys(serviceDef.operations[op].input.required, input => `
+			copyArg(n,"${serviceDef.operations[op].input.required[input]}",params); `): ''}
 			${(serviceDef.operations[op].input && serviceDef.operations[op].input.members)? mapKeys(serviceDef.operations[op].input.members, input => `
-			
 			copyArg(msg,"${input}",params); `): ''}
 			${(serviceDef.operations[op].input && serviceDef.operations[op].input.shape)? mapKeys(serviceDef.shapes[serviceDef.operations[op].input.shape].members, input => `
 			copyArg(msg,"${input}",params); `): ''}

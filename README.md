@@ -2,19 +2,20 @@ node-red-contrib-aws
 ========================
 A collection of <a href="http://nodered.org" target="_new">Node-RED</a> nodes for <a href="http://aws.amazon.com/" target="_new">AWS</a>.
 
-Nodes & Functions
+Nodes (All AWS API functions are available)
 -----------------
 
-* Lambda - Invoke
-* EC2 - Stop, Start, Reboot, Describe
-* Kinesis, Put, Get Shard Iterator, Get
-* S3 - Put, Get, Delete, List Objects
-* SNS - Publish
-* DynamoDB - Put, Get, Scan
-* SQS (alpha release) - Send Message, Receive Message, Delete Message, Purge Queue
-* IoT - Describe, Update, List, Get/Update/Delete Shadow & Publish
-* RDS - Describe, Start, Stop, Reboot, Modify RDS Instances
-* AWS config - Common config for all nodes above, looks after the credentials
+* Lamba
+* EC2
+* Kinesis
+* S3
+* SNS
+* DynamoDB
+* SQS (alpha release)
+* IoT
+* IotData
+* RDS
+* AWS config
 
 Payload returned from the AWS SDK is sometimes (particularly S3.Get) encoded in a BUFFER.  To parse this to a string pass the output into a function with msg.payload=Buffer.from(msg.payload.Body).toString("utf-8") or similar to decode strings.
 

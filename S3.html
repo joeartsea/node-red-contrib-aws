@@ -16,13 +16,17 @@
 -->
 
 <script type="text/x-red" data-template-name="AWS S3">
-    <div class="form-row">
-        <label for="node-input-aws"><i class="fa fa-user"></i> AWS</label>
-        <input type="text" id="node-input-aws">
-    </div>
-    <div class="form-row">
-        <label for="node-input-operation"><i class="fa fa-wrench"></i> Operation</label>
-        <select type="text" id="node-input-operation">
+		<style scoped>
+				.hiddenAttrs {display:none;}
+				.visibleAttrs {display:block;}
+		</style>
+	<div class="form-row">
+		<label for="node-input-aws"><i class="fa fa-user"></i> AWS</label>
+		<input type="text" id="node-input-aws">
+	</div>
+	<div class="form-row">
+		<label for="node-input-operation"><i class="fa fa-wrench"></i> Operation</label>
+		<select type="text" id="node-input-operation">
 		
 			<option value="AbortMultipartUpload">AbortMultipartUpload</option>
 		
@@ -172,12 +176,329 @@
 		
 			<option value="UploadPartCopy">UploadPartCopy</option>
 		;
-        </select>
-    </div>
-    <div class="form-row">
-        <label for="node-input-name"><i class="fa fa-tag"></i>Name</label>
-	<input type="text" id="node-input-name" placeholder="Name"></input>
-    </div>
+		</select>
+	</div>
+	<div class="form-row">
+		<label for="node-input-name"><i class="fa fa-tag"></i>Name</label>
+		<input type="text" id="node-input-name" placeholder="Name"></input>
+	</div>
+	<hr/>	
+	<div id="AttrHolder">
+	      
+	<div class="form-row" id='BucketAttr' class='hiddenAttrs'>
+		<label for="node-input-Bucket"><i class="fa fa-tag"></i>Bucket</label>
+		<input type="text" id="node-input-Bucket" placeholder="Bucket"></input>
+	</div> 
+	<div class="form-row" id='KeyAttr' class='hiddenAttrs'>
+		<label for="node-input-Key"><i class="fa fa-tag"></i>Key</label>
+		<input type="text" id="node-input-Key" placeholder="Key"></input>
+	</div> 
+	<div class="form-row" id='UploadIdAttr' class='hiddenAttrs'>
+		<label for="node-input-UploadId"><i class="fa fa-tag"></i>UploadId</label>
+		<input type="text" id="node-input-UploadId" placeholder="UploadId"></input>
+	</div> 
+	<div class="form-row" id='CopySourceAttr' class='hiddenAttrs'>
+		<label for="node-input-CopySource"><i class="fa fa-tag"></i>CopySource</label>
+		<input type="text" id="node-input-CopySource" placeholder="CopySource"></input>
+	</div> 
+	<div class="form-row" id='IdAttr' class='hiddenAttrs'>
+		<label for="node-input-Id"><i class="fa fa-tag"></i>Id</label>
+		<input type="text" id="node-input-Id" placeholder="Id"></input>
+	</div> 
+	<div class="form-row" id='DeleteAttr' class='hiddenAttrs'>
+		<label for="node-input-Delete"><i class="fa fa-tag"></i>Delete</label>
+		<input type="text" id="node-input-Delete" placeholder="Delete"></input>
+	</div> 
+	<div class="form-row" id='AccelerateConfigurationAttr' class='hiddenAttrs'>
+		<label for="node-input-AccelerateConfiguration"><i class="fa fa-tag"></i>AccelerateConfiguration</label>
+		<input type="text" id="node-input-AccelerateConfiguration" placeholder="AccelerateConfiguration"></input>
+	</div> 
+	<div class="form-row" id='AnalyticsConfigurationAttr' class='hiddenAttrs'>
+		<label for="node-input-AnalyticsConfiguration"><i class="fa fa-tag"></i>AnalyticsConfiguration</label>
+		<input type="text" id="node-input-AnalyticsConfiguration" placeholder="AnalyticsConfiguration"></input>
+	</div> 
+	<div class="form-row" id='CORSConfigurationAttr' class='hiddenAttrs'>
+		<label for="node-input-CORSConfiguration"><i class="fa fa-tag"></i>CORSConfiguration</label>
+		<input type="text" id="node-input-CORSConfiguration" placeholder="CORSConfiguration"></input>
+	</div> 
+	<div class="form-row" id='InventoryConfigurationAttr' class='hiddenAttrs'>
+		<label for="node-input-InventoryConfiguration"><i class="fa fa-tag"></i>InventoryConfiguration</label>
+		<input type="text" id="node-input-InventoryConfiguration" placeholder="InventoryConfiguration"></input>
+	</div> 
+	<div class="form-row" id='BucketLoggingStatusAttr' class='hiddenAttrs'>
+		<label for="node-input-BucketLoggingStatus"><i class="fa fa-tag"></i>BucketLoggingStatus</label>
+		<input type="text" id="node-input-BucketLoggingStatus" placeholder="BucketLoggingStatus"></input>
+	</div> 
+	<div class="form-row" id='MetricsConfigurationAttr' class='hiddenAttrs'>
+		<label for="node-input-MetricsConfiguration"><i class="fa fa-tag"></i>MetricsConfiguration</label>
+		<input type="text" id="node-input-MetricsConfiguration" placeholder="MetricsConfiguration"></input>
+	</div> 
+	<div class="form-row" id='NotificationConfigurationAttr' class='hiddenAttrs'>
+		<label for="node-input-NotificationConfiguration"><i class="fa fa-tag"></i>NotificationConfiguration</label>
+		<input type="text" id="node-input-NotificationConfiguration" placeholder="NotificationConfiguration"></input>
+	</div> 
+	<div class="form-row" id='PolicyAttr' class='hiddenAttrs'>
+		<label for="node-input-Policy"><i class="fa fa-tag"></i>Policy</label>
+		<input type="text" id="node-input-Policy" placeholder="Policy"></input>
+	</div> 
+	<div class="form-row" id='ReplicationConfigurationAttr' class='hiddenAttrs'>
+		<label for="node-input-ReplicationConfiguration"><i class="fa fa-tag"></i>ReplicationConfiguration</label>
+		<input type="text" id="node-input-ReplicationConfiguration" placeholder="ReplicationConfiguration"></input>
+	</div> 
+	<div class="form-row" id='RequestPaymentConfigurationAttr' class='hiddenAttrs'>
+		<label for="node-input-RequestPaymentConfiguration"><i class="fa fa-tag"></i>RequestPaymentConfiguration</label>
+		<input type="text" id="node-input-RequestPaymentConfiguration" placeholder="RequestPaymentConfiguration"></input>
+	</div> 
+	<div class="form-row" id='TaggingAttr' class='hiddenAttrs'>
+		<label for="node-input-Tagging"><i class="fa fa-tag"></i>Tagging</label>
+		<input type="text" id="node-input-Tagging" placeholder="Tagging"></input>
+	</div> 
+	<div class="form-row" id='VersioningConfigurationAttr' class='hiddenAttrs'>
+		<label for="node-input-VersioningConfiguration"><i class="fa fa-tag"></i>VersioningConfiguration</label>
+		<input type="text" id="node-input-VersioningConfiguration" placeholder="VersioningConfiguration"></input>
+	</div> 
+	<div class="form-row" id='WebsiteConfigurationAttr' class='hiddenAttrs'>
+		<label for="node-input-WebsiteConfiguration"><i class="fa fa-tag"></i>WebsiteConfiguration</label>
+		<input type="text" id="node-input-WebsiteConfiguration" placeholder="WebsiteConfiguration"></input>
+	</div> 
+	<div class="form-row" id='PartNumberAttr' class='hiddenAttrs'>
+		<label for="node-input-PartNumber"><i class="fa fa-tag"></i>PartNumber</label>
+		<input type="text" id="node-input-PartNumber" placeholder="PartNumber"></input>
+	</div> 
+	</div>
+
+ <script>
+	  var nodeOps={
+			
+				AbortMultipartUpload:[
+					'#BucketAttr','#KeyAttr','#UploadIdAttr'
+					],
+				CompleteMultipartUpload:[
+					'#BucketAttr','#KeyAttr','#UploadIdAttr'
+					],
+				CopyObject:[
+					'#BucketAttr','#CopySourceAttr','#KeyAttr'
+					],
+				CreateBucket:[
+					'#BucketAttr'
+					],
+				CreateMultipartUpload:[
+					'#BucketAttr','#KeyAttr'
+					],
+				DeleteBucket:[
+					'#BucketAttr'
+					],
+				DeleteBucketAnalyticsConfiguration:[
+					'#BucketAttr','#IdAttr'
+					],
+				DeleteBucketCors:[
+					'#BucketAttr'
+					],
+				DeleteBucketInventoryConfiguration:[
+					'#BucketAttr','#IdAttr'
+					],
+				DeleteBucketLifecycle:[
+					'#BucketAttr'
+					],
+				DeleteBucketMetricsConfiguration:[
+					'#BucketAttr','#IdAttr'
+					],
+				DeleteBucketPolicy:[
+					'#BucketAttr'
+					],
+				DeleteBucketReplication:[
+					'#BucketAttr'
+					],
+				DeleteBucketTagging:[
+					'#BucketAttr'
+					],
+				DeleteBucketWebsite:[
+					'#BucketAttr'
+					],
+				DeleteObject:[
+					'#BucketAttr','#KeyAttr'
+					],
+				DeleteObjectTagging:[
+					'#BucketAttr','#KeyAttr'
+					],
+				DeleteObjects:[
+					'#BucketAttr','#DeleteAttr'
+					],
+				GetBucketAccelerateConfiguration:[
+					'#BucketAttr'
+					],
+				GetBucketAcl:[
+					'#BucketAttr'
+					],
+				GetBucketAnalyticsConfiguration:[
+					'#BucketAttr','#IdAttr'
+					],
+				GetBucketCors:[
+					'#BucketAttr'
+					],
+				GetBucketInventoryConfiguration:[
+					'#BucketAttr','#IdAttr'
+					],
+				GetBucketLifecycle:[
+					'#BucketAttr'
+					],
+				GetBucketLifecycleConfiguration:[
+					'#BucketAttr'
+					],
+				GetBucketLocation:[
+					'#BucketAttr'
+					],
+				GetBucketLogging:[
+					'#BucketAttr'
+					],
+				GetBucketMetricsConfiguration:[
+					'#BucketAttr','#IdAttr'
+					],
+				GetBucketNotification:[
+					
+					],
+				GetBucketNotificationConfiguration:[
+					
+					],
+				GetBucketPolicy:[
+					'#BucketAttr'
+					],
+				GetBucketReplication:[
+					'#BucketAttr'
+					],
+				GetBucketRequestPayment:[
+					'#BucketAttr'
+					],
+				GetBucketTagging:[
+					'#BucketAttr'
+					],
+				GetBucketVersioning:[
+					'#BucketAttr'
+					],
+				GetBucketWebsite:[
+					'#BucketAttr'
+					],
+				GetObject:[
+					'#BucketAttr','#KeyAttr'
+					],
+				GetObjectAcl:[
+					'#BucketAttr','#KeyAttr'
+					],
+				GetObjectTagging:[
+					'#BucketAttr','#KeyAttr'
+					],
+				GetObjectTorrent:[
+					'#BucketAttr','#KeyAttr'
+					],
+				HeadBucket:[
+					'#BucketAttr'
+					],
+				HeadObject:[
+					'#BucketAttr','#KeyAttr'
+					],
+				ListBucketAnalyticsConfigurations:[
+					'#BucketAttr'
+					],
+				ListBucketInventoryConfigurations:[
+					'#BucketAttr'
+					],
+				ListBucketMetricsConfigurations:[
+					'#BucketAttr'
+					],
+				ListBuckets:[
+					
+					],
+				ListMultipartUploads:[
+					'#BucketAttr'
+					],
+				ListObjectVersions:[
+					'#BucketAttr'
+					],
+				ListObjects:[
+					'#BucketAttr'
+					],
+				ListObjectsV2:[
+					'#BucketAttr'
+					],
+				ListParts:[
+					'#BucketAttr','#KeyAttr','#UploadIdAttr'
+					],
+				PutBucketAccelerateConfiguration:[
+					'#BucketAttr','#AccelerateConfigurationAttr'
+					],
+				PutBucketAcl:[
+					'#BucketAttr'
+					],
+				PutBucketAnalyticsConfiguration:[
+					'#BucketAttr','#IdAttr','#AnalyticsConfigurationAttr'
+					],
+				PutBucketCors:[
+					'#BucketAttr','#CORSConfigurationAttr'
+					],
+				PutBucketInventoryConfiguration:[
+					'#BucketAttr','#IdAttr','#InventoryConfigurationAttr'
+					],
+				PutBucketLifecycle:[
+					'#BucketAttr'
+					],
+				PutBucketLifecycleConfiguration:[
+					'#BucketAttr'
+					],
+				PutBucketLogging:[
+					'#BucketAttr','#BucketLoggingStatusAttr'
+					],
+				PutBucketMetricsConfiguration:[
+					'#BucketAttr','#IdAttr','#MetricsConfigurationAttr'
+					],
+				PutBucketNotification:[
+					'#BucketAttr','#NotificationConfigurationAttr'
+					],
+				PutBucketNotificationConfiguration:[
+					'#BucketAttr','#NotificationConfigurationAttr'
+					],
+				PutBucketPolicy:[
+					'#BucketAttr','#PolicyAttr'
+					],
+				PutBucketReplication:[
+					'#BucketAttr','#ReplicationConfigurationAttr'
+					],
+				PutBucketRequestPayment:[
+					'#BucketAttr','#RequestPaymentConfigurationAttr'
+					],
+				PutBucketTagging:[
+					'#BucketAttr','#TaggingAttr'
+					],
+				PutBucketVersioning:[
+					'#BucketAttr','#VersioningConfigurationAttr'
+					],
+				PutBucketWebsite:[
+					'#BucketAttr','#WebsiteConfigurationAttr'
+					],
+				PutObject:[
+					'#BucketAttr','#KeyAttr'
+					],
+				PutObjectAcl:[
+					'#BucketAttr','#KeyAttr'
+					],
+				PutObjectTagging:[
+					'#BucketAttr','#KeyAttr','#TaggingAttr'
+					],
+				RestoreObject:[
+					'#BucketAttr','#KeyAttr'
+					],
+				UploadPart:[
+					'#BucketAttr','#KeyAttr','#PartNumberAttr','#UploadIdAttr'
+					],
+				UploadPartCopy:[
+					'#BucketAttr','#CopySourceAttr','#KeyAttr','#PartNumberAttr','#UploadIdAttr'
+					]
+		};
+		$('#node-input-operation').on('change',function(){
+			$('#AttrHolder').children().addClass('hiddenAttrs').removeClass('visibleAttrs');
+				if (nodeOps[this.value])
+					$(nodeOps[this.value].join()).addClass('visibleAttrs').removeClass('hiddenAttrs');
+		 });
+ </script>
 
 </script>
 
@@ -195,24 +516,45 @@ NOTE: Parameters must be specified in the message, using the case specified in t
 </script>
 
 <script type="text/javascript">
-    RED.nodes.registerType('AWS S3',{
-        category: 'AWS',
-        color:"#C0DEED",
-        defaults: {
-            aws: {type:"amazon config",required:true},
-            operation: { value: 'AbortMultipartUpload' },
-            name: { value: "" }
-        },
-        inputs:1,
-        outputs:1,
-        icon: "aws.png",
-        align: "right",
-        label: function() {
-            return this.name || "S3 " + this.operation;
-        },
-        oneditprepare: function () {
+	RED.nodes.registerType('AWS S3',{
+		category: 'AWS',
+		color:"#C0DEED",
+		defaults: {
+			aws: {type:"amazon config",required:true},
+			operation: { value: 'AbortMultipartUpload' },
+			
+				Bucket: { value: ""} ,
+				Key: { value: ""} ,
+				UploadId: { value: ""} ,
+				CopySource: { value: ""} ,
+				Id: { value: ""} ,
+				Delete: { value: ""} ,
+				AccelerateConfiguration: { value: ""} ,
+				AnalyticsConfiguration: { value: ""} ,
+				CORSConfiguration: { value: ""} ,
+				InventoryConfiguration: { value: ""} ,
+				BucketLoggingStatus: { value: ""} ,
+				MetricsConfiguration: { value: ""} ,
+				NotificationConfiguration: { value: ""} ,
+				Policy: { value: ""} ,
+				ReplicationConfiguration: { value: ""} ,
+				RequestPaymentConfiguration: { value: ""} ,
+				Tagging: { value: ""} ,
+				VersioningConfiguration: { value: ""} ,
+				WebsiteConfiguration: { value: ""} ,
+				PartNumber: { value: ""} ,
+			name: { value: "" }
+		},
+		inputs:1,
+		outputs:1,
+		icon: "aws.png",
+		align: "right",
+		label: function() {
+			return this.name || "S3 " + this.operation;
+		},
+		oneditprepare: function () {
 
-        }
-    });
+		}
+	});
 </script>
 

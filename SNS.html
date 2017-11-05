@@ -16,13 +16,17 @@
 -->
 
 <script type="text/x-red" data-template-name="AWS SNS">
-    <div class="form-row">
-        <label for="node-input-aws"><i class="fa fa-user"></i> AWS</label>
-        <input type="text" id="node-input-aws">
-    </div>
-    <div class="form-row">
-        <label for="node-input-operation"><i class="fa fa-wrench"></i> Operation</label>
-        <select type="text" id="node-input-operation">
+		<style scoped>
+				.hiddenAttrs {display:none;}
+				.visibleAttrs {display:block;}
+		</style>
+	<div class="form-row">
+		<label for="node-input-aws"><i class="fa fa-user"></i> AWS</label>
+		<input type="text" id="node-input-aws">
+	</div>
+	<div class="form-row">
+		<label for="node-input-operation"><i class="fa fa-wrench"></i> Operation</label>
+		<select type="text" id="node-input-operation">
 		
 			<option value="AddPermission">AddPermission</option>
 		
@@ -84,12 +88,181 @@
 		
 			<option value="Unsubscribe">Unsubscribe</option>
 		;
-        </select>
-    </div>
-    <div class="form-row">
-        <label for="node-input-name"><i class="fa fa-tag"></i>Name</label>
-	<input type="text" id="node-input-name" placeholder="Name"></input>
-    </div>
+		</select>
+	</div>
+	<div class="form-row">
+		<label for="node-input-name"><i class="fa fa-tag"></i>Name</label>
+		<input type="text" id="node-input-name" placeholder="Name"></input>
+	</div>
+	<hr/>	
+	<div id="AttrHolder">
+	      
+	<div class="form-row" id='TopicArnAttr' class='hiddenAttrs'>
+		<label for="node-input-TopicArn"><i class="fa fa-tag"></i>TopicArn</label>
+		<input type="text" id="node-input-TopicArn" placeholder="TopicArn"></input>
+	</div> 
+	<div class="form-row" id='LabelAttr' class='hiddenAttrs'>
+		<label for="node-input-Label"><i class="fa fa-tag"></i>Label</label>
+		<input type="text" id="node-input-Label" placeholder="Label"></input>
+	</div> 
+	<div class="form-row" id='AWSAccountIdAttr' class='hiddenAttrs'>
+		<label for="node-input-AWSAccountId"><i class="fa fa-tag"></i>AWSAccountId</label>
+		<input type="text" id="node-input-AWSAccountId" placeholder="AWSAccountId"></input>
+	</div> 
+	<div class="form-row" id='ActionNameAttr' class='hiddenAttrs'>
+		<label for="node-input-ActionName"><i class="fa fa-tag"></i>ActionName</label>
+		<input type="text" id="node-input-ActionName" placeholder="ActionName"></input>
+	</div> 
+	<div class="form-row" id='phoneNumberAttr' class='hiddenAttrs'>
+		<label for="node-input-phoneNumber"><i class="fa fa-tag"></i>phoneNumber</label>
+		<input type="text" id="node-input-phoneNumber" placeholder="phoneNumber"></input>
+	</div> 
+	<div class="form-row" id='TokenAttr' class='hiddenAttrs'>
+		<label for="node-input-Token"><i class="fa fa-tag"></i>Token</label>
+		<input type="text" id="node-input-Token" placeholder="Token"></input>
+	</div> 
+	<div class="form-row" id='NameAttr' class='hiddenAttrs'>
+		<label for="node-input-Name"><i class="fa fa-tag"></i>Name</label>
+		<input type="text" id="node-input-Name" placeholder="Name"></input>
+	</div> 
+	<div class="form-row" id='PlatformAttr' class='hiddenAttrs'>
+		<label for="node-input-Platform"><i class="fa fa-tag"></i>Platform</label>
+		<input type="text" id="node-input-Platform" placeholder="Platform"></input>
+	</div> 
+	<div class="form-row" id='AttributesAttr' class='hiddenAttrs'>
+		<label for="node-input-Attributes"><i class="fa fa-tag"></i>Attributes</label>
+		<input type="text" id="node-input-Attributes" placeholder="Attributes"></input>
+	</div> 
+	<div class="form-row" id='PlatformApplicationArnAttr' class='hiddenAttrs'>
+		<label for="node-input-PlatformApplicationArn"><i class="fa fa-tag"></i>PlatformApplicationArn</label>
+		<input type="text" id="node-input-PlatformApplicationArn" placeholder="PlatformApplicationArn"></input>
+	</div> 
+	<div class="form-row" id='EndpointArnAttr' class='hiddenAttrs'>
+		<label for="node-input-EndpointArn"><i class="fa fa-tag"></i>EndpointArn</label>
+		<input type="text" id="node-input-EndpointArn" placeholder="EndpointArn"></input>
+	</div> 
+	<div class="form-row" id='SubscriptionArnAttr' class='hiddenAttrs'>
+		<label for="node-input-SubscriptionArn"><i class="fa fa-tag"></i>SubscriptionArn</label>
+		<input type="text" id="node-input-SubscriptionArn" placeholder="SubscriptionArn"></input>
+	</div> 
+	<div class="form-row" id='MessageAttr' class='hiddenAttrs'>
+		<label for="node-input-Message"><i class="fa fa-tag"></i>Message</label>
+		<input type="text" id="node-input-Message" placeholder="Message"></input>
+	</div> 
+	<div class="form-row" id='attributesAttr' class='hiddenAttrs'>
+		<label for="node-input-attributes"><i class="fa fa-tag"></i>attributes</label>
+		<input type="text" id="node-input-attributes" placeholder="attributes"></input>
+	</div> 
+	<div class="form-row" id='AttributeNameAttr' class='hiddenAttrs'>
+		<label for="node-input-AttributeName"><i class="fa fa-tag"></i>AttributeName</label>
+		<input type="text" id="node-input-AttributeName" placeholder="AttributeName"></input>
+	</div> 
+	<div class="form-row" id='ProtocolAttr' class='hiddenAttrs'>
+		<label for="node-input-Protocol"><i class="fa fa-tag"></i>Protocol</label>
+		<input type="text" id="node-input-Protocol" placeholder="Protocol"></input>
+	</div> 
+	</div>
+
+ <script>
+	  var nodeOps={
+			
+				AddPermission:[
+					'#TopicArnAttr','#LabelAttr','#AWSAccountIdAttr','#ActionNameAttr'
+					],
+				CheckIfPhoneNumberIsOptedOut:[
+					'#phoneNumberAttr'
+					],
+				ConfirmSubscription:[
+					'#TopicArnAttr','#TokenAttr'
+					],
+				CreatePlatformApplication:[
+					'#NameAttr','#PlatformAttr','#AttributesAttr'
+					],
+				CreatePlatformEndpoint:[
+					'#PlatformApplicationArnAttr','#TokenAttr'
+					],
+				CreateTopic:[
+					'#NameAttr'
+					],
+				DeleteEndpoint:[
+					'#EndpointArnAttr'
+					],
+				DeletePlatformApplication:[
+					'#PlatformApplicationArnAttr'
+					],
+				DeleteTopic:[
+					'#TopicArnAttr'
+					],
+				GetEndpointAttributes:[
+					'#EndpointArnAttr'
+					],
+				GetPlatformApplicationAttributes:[
+					'#PlatformApplicationArnAttr'
+					],
+				GetSMSAttributes:[
+					
+					],
+				GetSubscriptionAttributes:[
+					'#SubscriptionArnAttr'
+					],
+				GetTopicAttributes:[
+					'#TopicArnAttr'
+					],
+				ListEndpointsByPlatformApplication:[
+					'#PlatformApplicationArnAttr'
+					],
+				ListPhoneNumbersOptedOut:[
+					
+					],
+				ListPlatformApplications:[
+					
+					],
+				ListSubscriptions:[
+					
+					],
+				ListSubscriptionsByTopic:[
+					'#TopicArnAttr'
+					],
+				ListTopics:[
+					
+					],
+				OptInPhoneNumber:[
+					'#phoneNumberAttr'
+					],
+				Publish:[
+					'#MessageAttr'
+					],
+				RemovePermission:[
+					'#TopicArnAttr','#LabelAttr'
+					],
+				SetEndpointAttributes:[
+					'#EndpointArnAttr','#AttributesAttr'
+					],
+				SetPlatformApplicationAttributes:[
+					'#PlatformApplicationArnAttr','#AttributesAttr'
+					],
+				SetSMSAttributes:[
+					'#attributesAttr'
+					],
+				SetSubscriptionAttributes:[
+					'#SubscriptionArnAttr','#AttributeNameAttr'
+					],
+				SetTopicAttributes:[
+					'#TopicArnAttr','#AttributeNameAttr'
+					],
+				Subscribe:[
+					'#TopicArnAttr','#ProtocolAttr'
+					],
+				Unsubscribe:[
+					'#SubscriptionArnAttr'
+					]
+		};
+		$('#node-input-operation').on('change',function(){
+			$('#AttrHolder').children().addClass('hiddenAttrs').removeClass('visibleAttrs');
+				if (nodeOps[this.value])
+					$(nodeOps[this.value].join()).addClass('visibleAttrs').removeClass('hiddenAttrs');
+		 });
+ </script>
 
 </script>
 
@@ -107,24 +280,41 @@ NOTE: Parameters must be specified in the message, using the case specified in t
 </script>
 
 <script type="text/javascript">
-    RED.nodes.registerType('AWS SNS',{
-        category: 'AWS',
-        color:"#C0DEED",
-        defaults: {
-            aws: {type:"amazon config",required:true},
-            operation: { value: 'AddPermission' },
-            name: { value: "" }
-        },
-        inputs:1,
-        outputs:1,
-        icon: "aws.png",
-        align: "right",
-        label: function() {
-            return this.name || "SNS " + this.operation;
-        },
-        oneditprepare: function () {
+	RED.nodes.registerType('AWS SNS',{
+		category: 'AWS',
+		color:"#C0DEED",
+		defaults: {
+			aws: {type:"amazon config",required:true},
+			operation: { value: 'AddPermission' },
+			
+				TopicArn: { value: ""} ,
+				Label: { value: ""} ,
+				AWSAccountId: { value: ""} ,
+				ActionName: { value: ""} ,
+				phoneNumber: { value: ""} ,
+				Token: { value: ""} ,
+				Name: { value: ""} ,
+				Platform: { value: ""} ,
+				Attributes: { value: ""} ,
+				PlatformApplicationArn: { value: ""} ,
+				EndpointArn: { value: ""} ,
+				SubscriptionArn: { value: ""} ,
+				Message: { value: ""} ,
+				attributes: { value: ""} ,
+				AttributeName: { value: ""} ,
+				Protocol: { value: ""} ,
+			name: { value: "" }
+		},
+		inputs:1,
+		outputs:1,
+		icon: "aws.png",
+		align: "right",
+		label: function() {
+			return this.name || "SNS " + this.operation;
+		},
+		oneditprepare: function () {
 
-        }
-    });
+		}
+	});
 </script>
 

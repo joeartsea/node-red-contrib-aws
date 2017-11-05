@@ -16,13 +16,17 @@
 -->
 
 <script type="text/x-red" data-template-name="AWS IotData">
-    <div class="form-row">
-        <label for="node-input-aws"><i class="fa fa-user"></i> AWS</label>
-        <input type="text" id="node-input-aws">
-    </div>
-    <div class="form-row">
-        <label for="node-input-operation"><i class="fa fa-wrench"></i> Operation</label>
-        <select type="text" id="node-input-operation">
+		<style scoped>
+				.hiddenAttrs {display:none;}
+				.visibleAttrs {display:block;}
+		</style>
+	<div class="form-row">
+		<label for="node-input-aws"><i class="fa fa-user"></i> AWS</label>
+		<input type="text" id="node-input-aws">
+	</div>
+	<div class="form-row">
+		<label for="node-input-operation"><i class="fa fa-wrench"></i> Operation</label>
+		<select type="text" id="node-input-operation">
 		
 			<option value="DeleteThingShadow">DeleteThingShadow</option>
 		
@@ -31,17 +35,57 @@
 			<option value="Publish">Publish</option>
 		
 			<option value="UpdateThingShadow">UpdateThingShadow</option>
-        </select>
-    </div>
-    <div class="form-row">
-        <label for="node-input-name"><i class="fa fa-tag"></i>Name</label>
-	<input type="text" id="node-input-name" placeholder="Name"></input>
-  <div class="form-row">
-        <label for="node-input-endPoint"><i class="fa fa-tag"></i>Endpoint</label>
-        <input type="text" id="node-input-endPoint" placeholder="">
-        </input>
-    </div>
-    </div>
+		;
+		</select>
+	</div>
+	<div class="form-row">
+		<label for="node-input-name"><i class="fa fa-tag"></i>Name</label>
+		<input type="text" id="node-input-name" placeholder="Name"></input>
+	</div>
+	 <div class="form-row">
+         <label for="node-input-endPoint"><i class="fa fa-tag"></i>Endpoint (*)</label>
+         <input type="text" id="node-input-endPoint" placeholder="">
+         </input>
+        </div>
+	<hr/>	
+	<div id="AttrHolder">
+	      
+	<div class="form-row" id='thingNameAttr' class='hiddenAttrs'>
+		<label for="node-input-thingName"><i class="fa fa-tag"></i>thingName</label>
+		<input type="text" id="node-input-thingName" placeholder="thingName"></input>
+	</div> 
+	<div class="form-row" id='topicAttr' class='hiddenAttrs'>
+		<label for="node-input-topic"><i class="fa fa-tag"></i>topic</label>
+		<input type="text" id="node-input-topic" placeholder="topic"></input>
+	</div> 
+	<div class="form-row" id='payloadAttr' class='hiddenAttrs'>
+		<label for="node-input-payload"><i class="fa fa-tag"></i>payload</label>
+		<input type="text" id="node-input-payload" placeholder="payload"></input>
+	</div> 
+	</div>
+
+ <script>
+	  var nodeOps={
+			
+				DeleteThingShadow:[
+					'#thingNameAttr'
+					],
+				GetThingShadow:[
+					'#thingNameAttr'
+					],
+				Publish:[
+					'#topicAttr'
+					],
+				UpdateThingShadow:[
+					'#thingNameAttr','#payloadAttr'
+					]
+		};
+		$('#node-input-operation').on('change',function(){
+			$('#AttrHolder').children().addClass('hiddenAttrs').removeClass('visibleAttrs');
+				if (nodeOps[this.value])
+					$(nodeOps[this.value].join()).addClass('visibleAttrs').removeClass('hiddenAttrs');
+		 });
+ </script>
 
 </script>
 
@@ -59,25 +103,29 @@ NOTE: Parameters must be specified in the message, using the case specified in t
 </script>
 
 <script type="text/javascript">
-    RED.nodes.registerType('AWS IotData',{
-        category: 'AWS',
-        color:"#C0DEED",
-        defaults: {
-            aws: {type:"amazon config",required:true},
-            operation: { value: 'DeleteThingShadow' },
-            endPoint: { value: "" },
-            name: { value: "" }
-        },
-        inputs:1,
-        outputs:1,
-        icon: "aws.png",
-        align: "right",
-        label: function() {
-            return this.name || "IotData " + this.operation;
-        },
-        oneditprepare: function () {
+	RED.nodes.registerType('AWS IotData',{
+		category: 'AWS',
+		color:"#C0DEED",
+		defaults: {
+			aws: {type:"amazon config",required:true},
+			operation: { value: 'DeleteThingShadow' },
+			
+				thingName: { value: ""} ,
+				topic: { value: ""} ,
+				payload: { value: ""} ,
+			endPoint: { value: "" },
+			name: { value: "" }
+		},
+		inputs:1,
+		outputs:1,
+		icon: "aws.png",
+		align: "right",
+		label: function() {
+			return this.name || "IotData " + this.operation;
+		},
+		oneditprepare: function () {
 
-        }
-    });
+		}
+	});
 </script>
 

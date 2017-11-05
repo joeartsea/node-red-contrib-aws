@@ -16,13 +16,17 @@
 -->
 
 <script type="text/x-red" data-template-name="AWS Lambda">
-    <div class="form-row">
-        <label for="node-input-aws"><i class="fa fa-user"></i> AWS</label>
-        <input type="text" id="node-input-aws">
-    </div>
-    <div class="form-row">
-        <label for="node-input-operation"><i class="fa fa-wrench"></i> Operation</label>
-        <select type="text" id="node-input-operation">
+		<style scoped>
+				.hiddenAttrs {display:none;}
+				.visibleAttrs {display:block;}
+		</style>
+	<div class="form-row">
+		<label for="node-input-aws"><i class="fa fa-user"></i> AWS</label>
+		<input type="text" id="node-input-aws">
+	</div>
+	<div class="form-row">
+		<label for="node-input-operation"><i class="fa fa-wrench"></i> Operation</label>
+		<select type="text" id="node-input-operation">
 		
 			<option value="AddPermission">AddPermission</option>
 		
@@ -80,12 +84,179 @@
 		
 			<option value="UpdateFunctionConfiguration">UpdateFunctionConfiguration</option>
 		;
-        </select>
-    </div>
-    <div class="form-row">
-        <label for="node-input-name"><i class="fa fa-tag"></i>Name</label>
- 	<input type="text" id="node-input-name" placeholder="Name">    
-    </div>
+		</select>
+	</div>
+	<div class="form-row">
+		<label for="node-input-name"><i class="fa fa-tag"></i>Name</label>
+		<input type="text" id="node-input-name" placeholder="Name"></input>
+	</div>
+	<hr/>	
+	<div id="AttrHolder">
+	      
+	<div class="form-row" id='FunctionNameAttr' class='hiddenAttrs'>
+		<label for="node-input-FunctionName"><i class="fa fa-tag"></i>FunctionName</label>
+		<input type="text" id="node-input-FunctionName" placeholder="FunctionName"></input>
+	</div> 
+	<div class="form-row" id='StatementIdAttr' class='hiddenAttrs'>
+		<label for="node-input-StatementId"><i class="fa fa-tag"></i>StatementId</label>
+		<input type="text" id="node-input-StatementId" placeholder="StatementId"></input>
+	</div> 
+	<div class="form-row" id='ActionAttr' class='hiddenAttrs'>
+		<label for="node-input-Action"><i class="fa fa-tag"></i>Action</label>
+		<input type="text" id="node-input-Action" placeholder="Action"></input>
+	</div> 
+	<div class="form-row" id='PrincipalAttr' class='hiddenAttrs'>
+		<label for="node-input-Principal"><i class="fa fa-tag"></i>Principal</label>
+		<input type="text" id="node-input-Principal" placeholder="Principal"></input>
+	</div> 
+	<div class="form-row" id='NameAttr' class='hiddenAttrs'>
+		<label for="node-input-Name"><i class="fa fa-tag"></i>Name</label>
+		<input type="text" id="node-input-Name" placeholder="Name"></input>
+	</div> 
+	<div class="form-row" id='FunctionVersionAttr' class='hiddenAttrs'>
+		<label for="node-input-FunctionVersion"><i class="fa fa-tag"></i>FunctionVersion</label>
+		<input type="text" id="node-input-FunctionVersion" placeholder="FunctionVersion"></input>
+	</div> 
+	<div class="form-row" id='EventSourceArnAttr' class='hiddenAttrs'>
+		<label for="node-input-EventSourceArn"><i class="fa fa-tag"></i>EventSourceArn</label>
+		<input type="text" id="node-input-EventSourceArn" placeholder="EventSourceArn"></input>
+	</div> 
+	<div class="form-row" id='StartingPositionAttr' class='hiddenAttrs'>
+		<label for="node-input-StartingPosition"><i class="fa fa-tag"></i>StartingPosition</label>
+		<input type="text" id="node-input-StartingPosition" placeholder="StartingPosition"></input>
+	</div> 
+	<div class="form-row" id='RuntimeAttr' class='hiddenAttrs'>
+		<label for="node-input-Runtime"><i class="fa fa-tag"></i>Runtime</label>
+		<input type="text" id="node-input-Runtime" placeholder="Runtime"></input>
+	</div> 
+	<div class="form-row" id='RoleAttr' class='hiddenAttrs'>
+		<label for="node-input-Role"><i class="fa fa-tag"></i>Role</label>
+		<input type="text" id="node-input-Role" placeholder="Role"></input>
+	</div> 
+	<div class="form-row" id='HandlerAttr' class='hiddenAttrs'>
+		<label for="node-input-Handler"><i class="fa fa-tag"></i>Handler</label>
+		<input type="text" id="node-input-Handler" placeholder="Handler"></input>
+	</div> 
+	<div class="form-row" id='CodeAttr' class='hiddenAttrs'>
+		<label for="node-input-Code"><i class="fa fa-tag"></i>Code</label>
+		<input type="text" id="node-input-Code" placeholder="Code"></input>
+	</div> 
+	<div class="form-row" id='UUIDAttr' class='hiddenAttrs'>
+		<label for="node-input-UUID"><i class="fa fa-tag"></i>UUID</label>
+		<input type="text" id="node-input-UUID" placeholder="UUID"></input>
+	</div> 
+	<div class="form-row" id='InvokeArgsAttr' class='hiddenAttrs'>
+		<label for="node-input-InvokeArgs"><i class="fa fa-tag"></i>InvokeArgs</label>
+		<input type="text" id="node-input-InvokeArgs" placeholder="InvokeArgs"></input>
+	</div> 
+	<div class="form-row" id='ResourceAttr' class='hiddenAttrs'>
+		<label for="node-input-Resource"><i class="fa fa-tag"></i>Resource</label>
+		<input type="text" id="node-input-Resource" placeholder="Resource"></input>
+	</div> 
+	<div class="form-row" id='TagsAttr' class='hiddenAttrs'>
+		<label for="node-input-Tags"><i class="fa fa-tag"></i>Tags</label>
+		<input type="text" id="node-input-Tags" placeholder="Tags"></input>
+	</div> 
+	<div class="form-row" id='TagKeysAttr' class='hiddenAttrs'>
+		<label for="node-input-TagKeys"><i class="fa fa-tag"></i>TagKeys</label>
+		<input type="text" id="node-input-TagKeys" placeholder="TagKeys"></input>
+	</div> 
+	</div>
+
+ <script>
+	  var nodeOps={
+			
+				AddPermission:[
+					'#FunctionNameAttr','#StatementIdAttr','#ActionAttr','#PrincipalAttr'
+					],
+				CreateAlias:[
+					'#FunctionNameAttr','#NameAttr','#FunctionVersionAttr'
+					],
+				CreateEventSourceMapping:[
+					'#EventSourceArnAttr','#FunctionNameAttr','#StartingPositionAttr'
+					],
+				CreateFunction:[
+					'#FunctionNameAttr','#RuntimeAttr','#RoleAttr','#HandlerAttr','#CodeAttr'
+					],
+				DeleteAlias:[
+					'#FunctionNameAttr','#NameAttr'
+					],
+				DeleteEventSourceMapping:[
+					'#UUIDAttr'
+					],
+				DeleteFunction:[
+					'#FunctionNameAttr'
+					],
+				GetAccountSettings:[
+					
+					],
+				GetAlias:[
+					'#FunctionNameAttr','#NameAttr'
+					],
+				GetEventSourceMapping:[
+					'#UUIDAttr'
+					],
+				GetFunction:[
+					'#FunctionNameAttr'
+					],
+				GetFunctionConfiguration:[
+					'#FunctionNameAttr'
+					],
+				GetPolicy:[
+					'#FunctionNameAttr'
+					],
+				Invoke:[
+					'#FunctionNameAttr'
+					],
+				InvokeAsync:[
+					'#FunctionNameAttr','#InvokeArgsAttr'
+					],
+				ListAliases:[
+					'#FunctionNameAttr'
+					],
+				ListEventSourceMappings:[
+					
+					],
+				ListFunctions:[
+					
+					],
+				ListTags:[
+					'#ResourceAttr'
+					],
+				ListVersionsByFunction:[
+					'#FunctionNameAttr'
+					],
+				PublishVersion:[
+					'#FunctionNameAttr'
+					],
+				RemovePermission:[
+					'#FunctionNameAttr','#StatementIdAttr'
+					],
+				TagResource:[
+					'#ResourceAttr','#TagsAttr'
+					],
+				UntagResource:[
+					'#ResourceAttr','#TagKeysAttr'
+					],
+				UpdateAlias:[
+					'#FunctionNameAttr','#NameAttr'
+					],
+				UpdateEventSourceMapping:[
+					'#UUIDAttr'
+					],
+				UpdateFunctionCode:[
+					'#FunctionNameAttr'
+					],
+				UpdateFunctionConfiguration:[
+					'#FunctionNameAttr'
+					]
+		};
+		$('#node-input-operation').on('change',function(){
+			$('#AttrHolder').children().addClass('hiddenAttrs').removeClass('visibleAttrs');
+				if (nodeOps[this.value])
+					$(nodeOps[this.value].join()).addClass('visibleAttrs').removeClass('hiddenAttrs');
+		 });
+ </script>
 
 </script>
 
@@ -103,24 +274,42 @@ NOTE: Parameters must be specified in the message, using the case specified in t
 </script>
 
 <script type="text/javascript">
-    RED.nodes.registerType('AWS Lambda',{
-        category: 'AWS',
-        color:"#C0DEED",
-        defaults: {
-            aws: {type:"amazon config",required:true},
-            operation: { value: 'AddPermission' },
-            name: { value: "" }
-        },
-        inputs:1,
-        outputs:1,
-        icon: "aws.png",
-        align: "right",
-        label: function() {
-            return this.name || "Lambda " + this.operation;
-        },
-        oneditprepare: function () {
+	RED.nodes.registerType('AWS Lambda',{
+		category: 'AWS',
+		color:"#C0DEED",
+		defaults: {
+			aws: {type:"amazon config",required:true},
+			operation: { value: 'AddPermission' },
+			
+				FunctionName: { value: ""} ,
+				StatementId: { value: ""} ,
+				Action: { value: ""} ,
+				Principal: { value: ""} ,
+				Name: { value: ""} ,
+				FunctionVersion: { value: ""} ,
+				EventSourceArn: { value: ""} ,
+				StartingPosition: { value: ""} ,
+				Runtime: { value: ""} ,
+				Role: { value: ""} ,
+				Handler: { value: ""} ,
+				Code: { value: ""} ,
+				UUID: { value: ""} ,
+				InvokeArgs: { value: ""} ,
+				Resource: { value: ""} ,
+				Tags: { value: ""} ,
+				TagKeys: { value: ""} ,
+			name: { value: "" }
+		},
+		inputs:1,
+		outputs:1,
+		icon: "aws.png",
+		align: "right",
+		label: function() {
+			return this.name || "Lambda " + this.operation;
+		},
+		oneditprepare: function () {
 
-        }
-    });
+		}
+	});
 </script>
 

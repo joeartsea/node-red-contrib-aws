@@ -16,13 +16,17 @@
 -->
 
 <script type="text/x-red" data-template-name="AWS SQS">
-    <div class="form-row">
-        <label for="node-input-aws"><i class="fa fa-user"></i> AWS</label>
-        <input type="text" id="node-input-aws">
-    </div>
-    <div class="form-row">
-        <label for="node-input-operation"><i class="fa fa-wrench"></i> Operation</label>
-        <select type="text" id="node-input-operation">
+		<style scoped>
+				.hiddenAttrs {display:none;}
+				.visibleAttrs {display:block;}
+		</style>
+	<div class="form-row">
+		<label for="node-input-aws"><i class="fa fa-user"></i> AWS</label>
+		<input type="text" id="node-input-aws">
+	</div>
+	<div class="form-row">
+		<label for="node-input-operation"><i class="fa fa-wrench"></i> Operation</label>
+		<select type="text" id="node-input-operation">
 		
 			<option value="AddPermission">AddPermission</option>
 		
@@ -64,12 +68,135 @@
 		
 			<option value="UntagQueue">UntagQueue</option>
 		;
-        </select>
-    </div>
-    <div class="form-row">
-        <label for="node-input-name"><i class="fa fa-tag"></i>Name</label>
-	<input type="text" id="node-input-name" placeholder="Name"></input>
-    </div>
+		</select>
+	</div>
+	<div class="form-row">
+		<label for="node-input-name"><i class="fa fa-tag"></i>Name</label>
+		<input type="text" id="node-input-name" placeholder="Name"></input>
+	</div>
+	<hr/>	
+	<div id="AttrHolder">
+	      
+	<div class="form-row" id='QueueUrlAttr' class='hiddenAttrs'>
+		<label for="node-input-QueueUrl"><i class="fa fa-tag"></i>QueueUrl</label>
+		<input type="text" id="node-input-QueueUrl" placeholder="QueueUrl"></input>
+	</div> 
+	<div class="form-row" id='LabelAttr' class='hiddenAttrs'>
+		<label for="node-input-Label"><i class="fa fa-tag"></i>Label</label>
+		<input type="text" id="node-input-Label" placeholder="Label"></input>
+	</div> 
+	<div class="form-row" id='AWSAccountIdsAttr' class='hiddenAttrs'>
+		<label for="node-input-AWSAccountIds"><i class="fa fa-tag"></i>AWSAccountIds</label>
+		<input type="text" id="node-input-AWSAccountIds" placeholder="AWSAccountIds"></input>
+	</div> 
+	<div class="form-row" id='ActionsAttr' class='hiddenAttrs'>
+		<label for="node-input-Actions"><i class="fa fa-tag"></i>Actions</label>
+		<input type="text" id="node-input-Actions" placeholder="Actions"></input>
+	</div> 
+	<div class="form-row" id='ReceiptHandleAttr' class='hiddenAttrs'>
+		<label for="node-input-ReceiptHandle"><i class="fa fa-tag"></i>ReceiptHandle</label>
+		<input type="text" id="node-input-ReceiptHandle" placeholder="ReceiptHandle"></input>
+	</div> 
+	<div class="form-row" id='VisibilityTimeoutAttr' class='hiddenAttrs'>
+		<label for="node-input-VisibilityTimeout"><i class="fa fa-tag"></i>VisibilityTimeout</label>
+		<input type="text" id="node-input-VisibilityTimeout" placeholder="VisibilityTimeout"></input>
+	</div> 
+	<div class="form-row" id='EntriesAttr' class='hiddenAttrs'>
+		<label for="node-input-Entries"><i class="fa fa-tag"></i>Entries</label>
+		<input type="text" id="node-input-Entries" placeholder="Entries"></input>
+	</div> 
+	<div class="form-row" id='QueueNameAttr' class='hiddenAttrs'>
+		<label for="node-input-QueueName"><i class="fa fa-tag"></i>QueueName</label>
+		<input type="text" id="node-input-QueueName" placeholder="QueueName"></input>
+	</div> 
+	<div class="form-row" id='MessageBodyAttr' class='hiddenAttrs'>
+		<label for="node-input-MessageBody"><i class="fa fa-tag"></i>MessageBody</label>
+		<input type="text" id="node-input-MessageBody" placeholder="MessageBody"></input>
+	</div> 
+	<div class="form-row" id='AttributesAttr' class='hiddenAttrs'>
+		<label for="node-input-Attributes"><i class="fa fa-tag"></i>Attributes</label>
+		<input type="text" id="node-input-Attributes" placeholder="Attributes"></input>
+	</div> 
+	<div class="form-row" id='TagsAttr' class='hiddenAttrs'>
+		<label for="node-input-Tags"><i class="fa fa-tag"></i>Tags</label>
+		<input type="text" id="node-input-Tags" placeholder="Tags"></input>
+	</div> 
+	<div class="form-row" id='TagKeysAttr' class='hiddenAttrs'>
+		<label for="node-input-TagKeys"><i class="fa fa-tag"></i>TagKeys</label>
+		<input type="text" id="node-input-TagKeys" placeholder="TagKeys"></input>
+	</div> 
+	</div>
+
+ <script>
+	  var nodeOps={
+			
+				AddPermission:[
+					'#QueueUrlAttr','#LabelAttr','#AWSAccountIdsAttr','#ActionsAttr'
+					],
+				ChangeMessageVisibility:[
+					'#QueueUrlAttr','#ReceiptHandleAttr','#VisibilityTimeoutAttr'
+					],
+				ChangeMessageVisibilityBatch:[
+					'#QueueUrlAttr','#EntriesAttr'
+					],
+				CreateQueue:[
+					'#QueueNameAttr'
+					],
+				DeleteMessage:[
+					'#QueueUrlAttr','#ReceiptHandleAttr'
+					],
+				DeleteMessageBatch:[
+					'#QueueUrlAttr','#EntriesAttr'
+					],
+				DeleteQueue:[
+					'#QueueUrlAttr'
+					],
+				GetQueueAttributes:[
+					'#QueueUrlAttr'
+					],
+				GetQueueUrl:[
+					'#QueueNameAttr'
+					],
+				ListDeadLetterSourceQueues:[
+					'#QueueUrlAttr'
+					],
+				ListQueueTags:[
+					'#QueueUrlAttr'
+					],
+				ListQueues:[
+					
+					],
+				PurgeQueue:[
+					'#QueueUrlAttr'
+					],
+				ReceiveMessage:[
+					'#QueueUrlAttr'
+					],
+				RemovePermission:[
+					'#QueueUrlAttr','#LabelAttr'
+					],
+				SendMessage:[
+					'#QueueUrlAttr','#MessageBodyAttr'
+					],
+				SendMessageBatch:[
+					'#QueueUrlAttr','#EntriesAttr'
+					],
+				SetQueueAttributes:[
+					'#QueueUrlAttr','#AttributesAttr'
+					],
+				TagQueue:[
+					'#QueueUrlAttr','#TagsAttr'
+					],
+				UntagQueue:[
+					'#QueueUrlAttr','#TagKeysAttr'
+					]
+		};
+		$('#node-input-operation').on('change',function(){
+			$('#AttrHolder').children().addClass('hiddenAttrs').removeClass('visibleAttrs');
+				if (nodeOps[this.value])
+					$(nodeOps[this.value].join()).addClass('visibleAttrs').removeClass('hiddenAttrs');
+		 });
+ </script>
 
 </script>
 
@@ -87,24 +214,37 @@ NOTE: Parameters must be specified in the message, using the case specified in t
 </script>
 
 <script type="text/javascript">
-    RED.nodes.registerType('AWS SQS',{
-        category: 'AWS',
-        color:"#C0DEED",
-        defaults: {
-            aws: {type:"amazon config",required:true},
-            operation: { value: 'AddPermission' },
-            name: { value: "" }
-        },
-        inputs:1,
-        outputs:1,
-        icon: "aws.png",
-        align: "right",
-        label: function() {
-            return this.name || "SQS " + this.operation;
-        },
-        oneditprepare: function () {
+	RED.nodes.registerType('AWS SQS',{
+		category: 'AWS',
+		color:"#C0DEED",
+		defaults: {
+			aws: {type:"amazon config",required:true},
+			operation: { value: 'AddPermission' },
+			
+				QueueUrl: { value: ""} ,
+				Label: { value: ""} ,
+				AWSAccountIds: { value: ""} ,
+				Actions: { value: ""} ,
+				ReceiptHandle: { value: ""} ,
+				VisibilityTimeout: { value: ""} ,
+				Entries: { value: ""} ,
+				QueueName: { value: ""} ,
+				MessageBody: { value: ""} ,
+				Attributes: { value: ""} ,
+				Tags: { value: ""} ,
+				TagKeys: { value: ""} ,
+			name: { value: "" }
+		},
+		inputs:1,
+		outputs:1,
+		icon: "aws.png",
+		align: "right",
+		label: function() {
+			return this.name || "SQS " + this.operation;
+		},
+		oneditprepare: function () {
 
-        }
-    });
+		}
+	});
 </script>
 

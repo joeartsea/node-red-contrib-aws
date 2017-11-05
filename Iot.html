@@ -16,13 +16,17 @@
 -->
 
 <script type="text/x-red" data-template-name="AWS Iot">
-    <div class="form-row">
-        <label for="node-input-aws"><i class="fa fa-user"></i> AWS</label>
-        <input type="text" id="node-input-aws">
-    </div>
-    <div class="form-row">
-        <label for="node-input-operation"><i class="fa fa-wrench"></i> Operation</label>
-        <select type="text" id="node-input-operation">
+		<style scoped>
+				.hiddenAttrs {display:none;}
+				.visibleAttrs {display:block;}
+		</style>
+	<div class="form-row">
+		<label for="node-input-aws"><i class="fa fa-user"></i> AWS</label>
+		<input type="text" id="node-input-aws">
+	</div>
+	<div class="form-row">
+		<label for="node-input-operation"><i class="fa fa-wrench"></i> Operation</label>
+		<select type="text" id="node-input-operation">
 		
 			<option value="AcceptCertificateTransfer">AcceptCertificateTransfer</option>
 		
@@ -138,12 +142,266 @@
 		
 			<option value="UpdateThing">UpdateThing</option>
 		;
-        </select>
-    </div>
-    <div class="form-row">
-        <label for="node-input-name"><i class="fa fa-tag"></i>Name</label>
-	<input type="text" id="node-input-name" placeholder="Name"></input>
-    </div>
+		</select>
+	</div>
+	<div class="form-row">
+		<label for="node-input-name"><i class="fa fa-tag"></i>Name</label>
+		<input type="text" id="node-input-name" placeholder="Name"></input>
+	</div>
+	<hr/>	
+	<div id="AttrHolder">
+	      
+	<div class="form-row" id='certificateIdAttr' class='hiddenAttrs'>
+		<label for="node-input-certificateId"><i class="fa fa-tag"></i>certificateId</label>
+		<input type="text" id="node-input-certificateId" placeholder="certificateId"></input>
+	</div> 
+	<div class="form-row" id='policyNameAttr' class='hiddenAttrs'>
+		<label for="node-input-policyName"><i class="fa fa-tag"></i>policyName</label>
+		<input type="text" id="node-input-policyName" placeholder="policyName"></input>
+	</div> 
+	<div class="form-row" id='principalAttr' class='hiddenAttrs'>
+		<label for="node-input-principal"><i class="fa fa-tag"></i>principal</label>
+		<input type="text" id="node-input-principal" placeholder="principal"></input>
+	</div> 
+	<div class="form-row" id='thingNameAttr' class='hiddenAttrs'>
+		<label for="node-input-thingName"><i class="fa fa-tag"></i>thingName</label>
+		<input type="text" id="node-input-thingName" placeholder="thingName"></input>
+	</div> 
+	<div class="form-row" id='certificateSigningRequestAttr' class='hiddenAttrs'>
+		<label for="node-input-certificateSigningRequest"><i class="fa fa-tag"></i>certificateSigningRequest</label>
+		<input type="text" id="node-input-certificateSigningRequest" placeholder="certificateSigningRequest"></input>
+	</div> 
+	<div class="form-row" id='policyDocumentAttr' class='hiddenAttrs'>
+		<label for="node-input-policyDocument"><i class="fa fa-tag"></i>policyDocument</label>
+		<input type="text" id="node-input-policyDocument" placeholder="policyDocument"></input>
+	</div> 
+	<div class="form-row" id='thingTypeNameAttr' class='hiddenAttrs'>
+		<label for="node-input-thingTypeName"><i class="fa fa-tag"></i>thingTypeName</label>
+		<input type="text" id="node-input-thingTypeName" placeholder="thingTypeName"></input>
+	</div> 
+	<div class="form-row" id='ruleNameAttr' class='hiddenAttrs'>
+		<label for="node-input-ruleName"><i class="fa fa-tag"></i>ruleName</label>
+		<input type="text" id="node-input-ruleName" placeholder="ruleName"></input>
+	</div> 
+	<div class="form-row" id='topicRulePayloadAttr' class='hiddenAttrs'>
+		<label for="node-input-topicRulePayload"><i class="fa fa-tag"></i>topicRulePayload</label>
+		<input type="text" id="node-input-topicRulePayload" placeholder="topicRulePayload"></input>
+	</div> 
+	<div class="form-row" id='policyVersionIdAttr' class='hiddenAttrs'>
+		<label for="node-input-policyVersionId"><i class="fa fa-tag"></i>policyVersionId</label>
+		<input type="text" id="node-input-policyVersionId" placeholder="policyVersionId"></input>
+	</div> 
+	<div class="form-row" id='caCertificateIdAttr' class='hiddenAttrs'>
+		<label for="node-input-caCertificateId"><i class="fa fa-tag"></i>caCertificateId</label>
+		<input type="text" id="node-input-caCertificateId" placeholder="caCertificateId"></input>
+	</div> 
+	<div class="form-row" id='caCertificateAttr' class='hiddenAttrs'>
+		<label for="node-input-caCertificate"><i class="fa fa-tag"></i>caCertificate</label>
+		<input type="text" id="node-input-caCertificate" placeholder="caCertificate"></input>
+	</div> 
+	<div class="form-row" id='verificationCertificateAttr' class='hiddenAttrs'>
+		<label for="node-input-verificationCertificate"><i class="fa fa-tag"></i>verificationCertificate</label>
+		<input type="text" id="node-input-verificationCertificate" placeholder="verificationCertificate"></input>
+	</div> 
+	<div class="form-row" id='certificatePemAttr' class='hiddenAttrs'>
+		<label for="node-input-certificatePem"><i class="fa fa-tag"></i>certificatePem</label>
+		<input type="text" id="node-input-certificatePem" placeholder="certificatePem"></input>
+	</div> 
+	<div class="form-row" id='loggingOptionsPayloadAttr' class='hiddenAttrs'>
+		<label for="node-input-loggingOptionsPayload"><i class="fa fa-tag"></i>loggingOptionsPayload</label>
+		<input type="text" id="node-input-loggingOptionsPayload" placeholder="loggingOptionsPayload"></input>
+	</div> 
+	<div class="form-row" id='targetAwsAccountAttr' class='hiddenAttrs'>
+		<label for="node-input-targetAwsAccount"><i class="fa fa-tag"></i>targetAwsAccount</label>
+		<input type="text" id="node-input-targetAwsAccount" placeholder="targetAwsAccount"></input>
+	</div> 
+	<div class="form-row" id='newStatusAttr' class='hiddenAttrs'>
+		<label for="node-input-newStatus"><i class="fa fa-tag"></i>newStatus</label>
+		<input type="text" id="node-input-newStatus" placeholder="newStatus"></input>
+	</div> 
+	</div>
+
+ <script>
+	  var nodeOps={
+			
+				AcceptCertificateTransfer:[
+					'#certificateIdAttr'
+					],
+				AttachPrincipalPolicy:[
+					'#policyNameAttr','#principalAttr'
+					],
+				AttachThingPrincipal:[
+					'#thingNameAttr','#principalAttr'
+					],
+				CancelCertificateTransfer:[
+					'#certificateIdAttr'
+					],
+				CreateCertificateFromCsr:[
+					'#certificateSigningRequestAttr'
+					],
+				CreateKeysAndCertificate:[
+					
+					],
+				CreatePolicy:[
+					'#policyNameAttr','#policyDocumentAttr'
+					],
+				CreatePolicyVersion:[
+					'#policyNameAttr','#policyDocumentAttr'
+					],
+				CreateThing:[
+					'#thingNameAttr'
+					],
+				CreateThingType:[
+					'#thingTypeNameAttr'
+					],
+				CreateTopicRule:[
+					'#ruleNameAttr','#topicRulePayloadAttr'
+					],
+				DeleteCACertificate:[
+					'#certificateIdAttr'
+					],
+				DeleteCertificate:[
+					'#certificateIdAttr'
+					],
+				DeletePolicy:[
+					'#policyNameAttr'
+					],
+				DeletePolicyVersion:[
+					'#policyNameAttr','#policyVersionIdAttr'
+					],
+				DeleteRegistrationCode:[
+					
+					],
+				DeleteThing:[
+					'#thingNameAttr'
+					],
+				DeleteThingType:[
+					'#thingTypeNameAttr'
+					],
+				DeleteTopicRule:[
+					'#ruleNameAttr'
+					],
+				DeprecateThingType:[
+					'#thingTypeNameAttr'
+					],
+				DescribeCACertificate:[
+					'#certificateIdAttr'
+					],
+				DescribeCertificate:[
+					'#certificateIdAttr'
+					],
+				DescribeEndpoint:[
+					
+					],
+				DescribeThing:[
+					'#thingNameAttr'
+					],
+				DescribeThingType:[
+					'#thingTypeNameAttr'
+					],
+				DetachPrincipalPolicy:[
+					'#policyNameAttr','#principalAttr'
+					],
+				DetachThingPrincipal:[
+					'#thingNameAttr','#principalAttr'
+					],
+				DisableTopicRule:[
+					'#ruleNameAttr'
+					],
+				EnableTopicRule:[
+					'#ruleNameAttr'
+					],
+				GetLoggingOptions:[
+					
+					],
+				GetPolicy:[
+					'#policyNameAttr'
+					],
+				GetPolicyVersion:[
+					'#policyNameAttr','#policyVersionIdAttr'
+					],
+				GetRegistrationCode:[
+					
+					],
+				GetTopicRule:[
+					'#ruleNameAttr'
+					],
+				ListCACertificates:[
+					
+					],
+				ListCertificates:[
+					
+					],
+				ListCertificatesByCA:[
+					'#caCertificateIdAttr'
+					],
+				ListOutgoingCertificates:[
+					
+					],
+				ListPolicies:[
+					
+					],
+				ListPolicyPrincipals:[
+					'#policyNameAttr'
+					],
+				ListPolicyVersions:[
+					'#policyNameAttr'
+					],
+				ListPrincipalPolicies:[
+					'#principalAttr'
+					],
+				ListPrincipalThings:[
+					'#principalAttr'
+					],
+				ListThingPrincipals:[
+					'#thingNameAttr'
+					],
+				ListThingTypes:[
+					
+					],
+				ListThings:[
+					
+					],
+				ListTopicRules:[
+					
+					],
+				RegisterCACertificate:[
+					'#caCertificateAttr','#verificationCertificateAttr'
+					],
+				RegisterCertificate:[
+					'#certificatePemAttr'
+					],
+				RejectCertificateTransfer:[
+					'#certificateIdAttr'
+					],
+				ReplaceTopicRule:[
+					'#ruleNameAttr','#topicRulePayloadAttr'
+					],
+				SetDefaultPolicyVersion:[
+					'#policyNameAttr','#policyVersionIdAttr'
+					],
+				SetLoggingOptions:[
+					'#loggingOptionsPayloadAttr'
+					],
+				TransferCertificate:[
+					'#certificateIdAttr','#targetAwsAccountAttr'
+					],
+				UpdateCACertificate:[
+					'#certificateIdAttr'
+					],
+				UpdateCertificate:[
+					'#certificateIdAttr','#newStatusAttr'
+					],
+				UpdateThing:[
+					'#thingNameAttr'
+					]
+		};
+		$('#node-input-operation').on('change',function(){
+			$('#AttrHolder').children().addClass('hiddenAttrs').removeClass('visibleAttrs');
+				if (nodeOps[this.value])
+					$(nodeOps[this.value].join()).addClass('visibleAttrs').removeClass('hiddenAttrs');
+		 });
+ </script>
 
 </script>
 
@@ -161,24 +419,42 @@ NOTE: Parameters must be specified in the message, using the case specified in t
 </script>
 
 <script type="text/javascript">
-    RED.nodes.registerType('AWS Iot',{
-        category: 'AWS',
-        color:"#C0DEED",
-        defaults: {
-            aws: {type:"amazon config",required:true},
-            operation: { value: 'AcceptCertificateTransfer' },
-            name: { value: "" }
-        },
-        inputs:1,
-        outputs:1,
-        icon: "aws.png",
-        align: "right",
-        label: function() {
-            return this.name || "Iot " + this.operation;
-        },
-        oneditprepare: function () {
+	RED.nodes.registerType('AWS Iot',{
+		category: 'AWS',
+		color:"#C0DEED",
+		defaults: {
+			aws: {type:"amazon config",required:true},
+			operation: { value: 'AcceptCertificateTransfer' },
+			
+				certificateId: { value: ""} ,
+				policyName: { value: ""} ,
+				principal: { value: ""} ,
+				thingName: { value: ""} ,
+				certificateSigningRequest: { value: ""} ,
+				policyDocument: { value: ""} ,
+				thingTypeName: { value: ""} ,
+				ruleName: { value: ""} ,
+				topicRulePayload: { value: ""} ,
+				policyVersionId: { value: ""} ,
+				caCertificateId: { value: ""} ,
+				caCertificate: { value: ""} ,
+				verificationCertificate: { value: ""} ,
+				certificatePem: { value: ""} ,
+				loggingOptionsPayload: { value: ""} ,
+				targetAwsAccount: { value: ""} ,
+				newStatus: { value: ""} ,
+			name: { value: "" }
+		},
+		inputs:1,
+		outputs:1,
+		icon: "aws.png",
+		align: "right",
+		label: function() {
+			return this.name || "Iot " + this.operation;
+		},
+		oneditprepare: function () {
 
-        }
-    });
+		}
+	});
 </script>
 

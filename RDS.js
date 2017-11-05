@@ -81,9 +81,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"DBClusterIdentifier",params); 
+			copyArg(n,"RoleArn",params); 
 			
 			copyArg(msg,"DBClusterIdentifier",params); 
-			
 			copyArg(msg,"RoleArn",params); 
 			
 
@@ -95,9 +96,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"SubscriptionName",params); 
+			copyArg(n,"SourceIdentifier",params); 
 			
 			copyArg(msg,"SubscriptionName",params); 
-			
 			copyArg(msg,"SourceIdentifier",params); 
 			
 
@@ -109,9 +111,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"ResourceName",params); 
+			copyArg(n,"Tags",params); 
 			
 			copyArg(msg,"ResourceName",params); 
-			
 			copyArg(msg,"Tags",params); 
 			
 
@@ -123,11 +126,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"ResourceIdentifier",params); 
+			copyArg(n,"ApplyAction",params); 
+			copyArg(n,"OptInType",params); 
 			
 			copyArg(msg,"ResourceIdentifier",params); 
-			
 			copyArg(msg,"ApplyAction",params); 
-			
 			copyArg(msg,"OptInType",params); 
 			
 
@@ -139,15 +143,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"DBSecurityGroupName",params); 
 			
 			copyArg(msg,"DBSecurityGroupName",params); 
-			
 			copyArg(msg,"CIDRIP",params); 
-			
 			copyArg(msg,"EC2SecurityGroupName",params); 
-			
 			copyArg(msg,"EC2SecurityGroupId",params); 
-			
 			copyArg(msg,"EC2SecurityGroupOwnerId",params); 
 			
 
@@ -159,13 +160,13 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"SourceDBClusterParameterGroupIdentifier",params); 
+			copyArg(n,"TargetDBClusterParameterGroupIdentifier",params); 
+			copyArg(n,"TargetDBClusterParameterGroupDescription",params); 
 			
 			copyArg(msg,"SourceDBClusterParameterGroupIdentifier",params); 
-			
 			copyArg(msg,"TargetDBClusterParameterGroupIdentifier",params); 
-			
 			copyArg(msg,"TargetDBClusterParameterGroupDescription",params); 
-			
 			copyArg(msg,"Tags",params); 
 			
 
@@ -177,19 +178,15 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"SourceDBClusterSnapshotIdentifier",params); 
+			copyArg(n,"TargetDBClusterSnapshotIdentifier",params); 
 			
 			copyArg(msg,"SourceDBClusterSnapshotIdentifier",params); 
-			
 			copyArg(msg,"TargetDBClusterSnapshotIdentifier",params); 
-			
 			copyArg(msg,"KmsKeyId",params); 
-			
 			copyArg(msg,"PreSignedUrl",params); 
-			
 			copyArg(msg,"CopyTags",params); 
-			
 			copyArg(msg,"Tags",params); 
-			
 			copyArg(msg,"SourceRegion",params); 
 			
 
@@ -201,13 +198,13 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"SourceDBParameterGroupIdentifier",params); 
+			copyArg(n,"TargetDBParameterGroupIdentifier",params); 
+			copyArg(n,"TargetDBParameterGroupDescription",params); 
 			
 			copyArg(msg,"SourceDBParameterGroupIdentifier",params); 
-			
 			copyArg(msg,"TargetDBParameterGroupIdentifier",params); 
-			
 			copyArg(msg,"TargetDBParameterGroupDescription",params); 
-			
 			copyArg(msg,"Tags",params); 
 			
 
@@ -219,21 +216,16 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"SourceDBSnapshotIdentifier",params); 
+			copyArg(n,"TargetDBSnapshotIdentifier",params); 
 			
 			copyArg(msg,"SourceDBSnapshotIdentifier",params); 
-			
 			copyArg(msg,"TargetDBSnapshotIdentifier",params); 
-			
 			copyArg(msg,"KmsKeyId",params); 
-			
 			copyArg(msg,"Tags",params); 
-			
 			copyArg(msg,"CopyTags",params); 
-			
 			copyArg(msg,"PreSignedUrl",params); 
-			
 			copyArg(msg,"OptionGroupName",params); 
-			
 			copyArg(msg,"SourceRegion",params); 
 			
 
@@ -245,13 +237,13 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"SourceOptionGroupIdentifier",params); 
+			copyArg(n,"TargetOptionGroupIdentifier",params); 
+			copyArg(n,"TargetOptionGroupDescription",params); 
 			
 			copyArg(msg,"SourceOptionGroupIdentifier",params); 
-			
 			copyArg(msg,"TargetOptionGroupIdentifier",params); 
-			
 			copyArg(msg,"TargetOptionGroupDescription",params); 
-			
 			copyArg(msg,"Tags",params); 
 			
 
@@ -263,51 +255,31 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"DBClusterIdentifier",params); 
+			copyArg(n,"Engine",params); 
 			
 			copyArg(msg,"AvailabilityZones",params); 
-			
 			copyArg(msg,"BackupRetentionPeriod",params); 
-			
 			copyArg(msg,"CharacterSetName",params); 
-			
 			copyArg(msg,"DatabaseName",params); 
-			
 			copyArg(msg,"DBClusterIdentifier",params); 
-			
 			copyArg(msg,"DBClusterParameterGroupName",params); 
-			
 			copyArg(msg,"VpcSecurityGroupIds",params); 
-			
 			copyArg(msg,"DBSubnetGroupName",params); 
-			
 			copyArg(msg,"Engine",params); 
-			
 			copyArg(msg,"EngineVersion",params); 
-			
 			copyArg(msg,"Port",params); 
-			
 			copyArg(msg,"MasterUsername",params); 
-			
 			copyArg(msg,"MasterUserPassword",params); 
-			
 			copyArg(msg,"OptionGroupName",params); 
-			
 			copyArg(msg,"PreferredBackupWindow",params); 
-			
 			copyArg(msg,"PreferredMaintenanceWindow",params); 
-			
 			copyArg(msg,"ReplicationSourceIdentifier",params); 
-			
 			copyArg(msg,"Tags",params); 
-			
 			copyArg(msg,"StorageEncrypted",params); 
-			
 			copyArg(msg,"KmsKeyId",params); 
-			
 			copyArg(msg,"PreSignedUrl",params); 
-			
 			copyArg(msg,"EnableIAMDatabaseAuthentication",params); 
-			
 			copyArg(msg,"SourceRegion",params); 
 			
 
@@ -319,13 +291,13 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"DBClusterParameterGroupName",params); 
+			copyArg(n,"DBParameterGroupFamily",params); 
+			copyArg(n,"Description",params); 
 			
 			copyArg(msg,"DBClusterParameterGroupName",params); 
-			
 			copyArg(msg,"DBParameterGroupFamily",params); 
-			
 			copyArg(msg,"Description",params); 
-			
 			copyArg(msg,"Tags",params); 
 			
 
@@ -337,11 +309,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"DBClusterSnapshotIdentifier",params); 
+			copyArg(n,"DBClusterIdentifier",params); 
 			
 			copyArg(msg,"DBClusterSnapshotIdentifier",params); 
-			
 			copyArg(msg,"DBClusterIdentifier",params); 
-			
 			copyArg(msg,"Tags",params); 
 			
 
@@ -353,87 +325,50 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"DBInstanceIdentifier",params); 
+			copyArg(n,"DBInstanceClass",params); 
+			copyArg(n,"Engine",params); 
 			
 			copyArg(msg,"DBName",params); 
-			
 			copyArg(msg,"DBInstanceIdentifier",params); 
-			
 			copyArg(msg,"AllocatedStorage",params); 
-			
 			copyArg(msg,"DBInstanceClass",params); 
-			
 			copyArg(msg,"Engine",params); 
-			
 			copyArg(msg,"MasterUsername",params); 
-			
 			copyArg(msg,"MasterUserPassword",params); 
-			
 			copyArg(msg,"DBSecurityGroups",params); 
-			
 			copyArg(msg,"VpcSecurityGroupIds",params); 
-			
 			copyArg(msg,"AvailabilityZone",params); 
-			
 			copyArg(msg,"DBSubnetGroupName",params); 
-			
 			copyArg(msg,"PreferredMaintenanceWindow",params); 
-			
 			copyArg(msg,"DBParameterGroupName",params); 
-			
 			copyArg(msg,"BackupRetentionPeriod",params); 
-			
 			copyArg(msg,"PreferredBackupWindow",params); 
-			
 			copyArg(msg,"Port",params); 
-			
 			copyArg(msg,"MultiAZ",params); 
-			
 			copyArg(msg,"EngineVersion",params); 
-			
 			copyArg(msg,"AutoMinorVersionUpgrade",params); 
-			
 			copyArg(msg,"LicenseModel",params); 
-			
 			copyArg(msg,"Iops",params); 
-			
 			copyArg(msg,"OptionGroupName",params); 
-			
 			copyArg(msg,"CharacterSetName",params); 
-			
 			copyArg(msg,"PubliclyAccessible",params); 
-			
 			copyArg(msg,"Tags",params); 
-			
 			copyArg(msg,"DBClusterIdentifier",params); 
-			
 			copyArg(msg,"StorageType",params); 
-			
 			copyArg(msg,"TdeCredentialArn",params); 
-			
 			copyArg(msg,"TdeCredentialPassword",params); 
-			
 			copyArg(msg,"StorageEncrypted",params); 
-			
 			copyArg(msg,"KmsKeyId",params); 
-			
 			copyArg(msg,"Domain",params); 
-			
 			copyArg(msg,"CopyTagsToSnapshot",params); 
-			
 			copyArg(msg,"MonitoringInterval",params); 
-			
 			copyArg(msg,"MonitoringRoleArn",params); 
-			
 			copyArg(msg,"DomainIAMRoleName",params); 
-			
 			copyArg(msg,"PromotionTier",params); 
-			
 			copyArg(msg,"Timezone",params); 
-			
 			copyArg(msg,"EnableIAMDatabaseAuthentication",params); 
-			
 			copyArg(msg,"EnablePerformanceInsights",params); 
-			
 			copyArg(msg,"PerformanceInsightsKMSKeyId",params); 
 			
 
@@ -445,47 +380,29 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"DBInstanceIdentifier",params); 
+			copyArg(n,"SourceDBInstanceIdentifier",params); 
 			
 			copyArg(msg,"DBInstanceIdentifier",params); 
-			
 			copyArg(msg,"SourceDBInstanceIdentifier",params); 
-			
 			copyArg(msg,"DBInstanceClass",params); 
-			
 			copyArg(msg,"AvailabilityZone",params); 
-			
 			copyArg(msg,"Port",params); 
-			
 			copyArg(msg,"AutoMinorVersionUpgrade",params); 
-			
 			copyArg(msg,"Iops",params); 
-			
 			copyArg(msg,"OptionGroupName",params); 
-			
 			copyArg(msg,"PubliclyAccessible",params); 
-			
 			copyArg(msg,"Tags",params); 
-			
 			copyArg(msg,"DBSubnetGroupName",params); 
-			
 			copyArg(msg,"StorageType",params); 
-			
 			copyArg(msg,"CopyTagsToSnapshot",params); 
-			
 			copyArg(msg,"MonitoringInterval",params); 
-			
 			copyArg(msg,"MonitoringRoleArn",params); 
-			
 			copyArg(msg,"KmsKeyId",params); 
-			
 			copyArg(msg,"PreSignedUrl",params); 
-			
 			copyArg(msg,"EnableIAMDatabaseAuthentication",params); 
-			
 			copyArg(msg,"EnablePerformanceInsights",params); 
-			
 			copyArg(msg,"PerformanceInsightsKMSKeyId",params); 
-			
 			copyArg(msg,"SourceRegion",params); 
 			
 
@@ -497,13 +414,13 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"DBParameterGroupName",params); 
+			copyArg(n,"DBParameterGroupFamily",params); 
+			copyArg(n,"Description",params); 
 			
 			copyArg(msg,"DBParameterGroupName",params); 
-			
 			copyArg(msg,"DBParameterGroupFamily",params); 
-			
 			copyArg(msg,"Description",params); 
-			
 			copyArg(msg,"Tags",params); 
 			
 
@@ -515,11 +432,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"DBSecurityGroupName",params); 
+			copyArg(n,"DBSecurityGroupDescription",params); 
 			
 			copyArg(msg,"DBSecurityGroupName",params); 
-			
 			copyArg(msg,"DBSecurityGroupDescription",params); 
-			
 			copyArg(msg,"Tags",params); 
 			
 
@@ -531,11 +448,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"DBSnapshotIdentifier",params); 
+			copyArg(n,"DBInstanceIdentifier",params); 
 			
 			copyArg(msg,"DBSnapshotIdentifier",params); 
-			
 			copyArg(msg,"DBInstanceIdentifier",params); 
-			
 			copyArg(msg,"Tags",params); 
 			
 
@@ -547,13 +464,13 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"DBSubnetGroupName",params); 
+			copyArg(n,"DBSubnetGroupDescription",params); 
+			copyArg(n,"SubnetIds",params); 
 			
 			copyArg(msg,"DBSubnetGroupName",params); 
-			
 			copyArg(msg,"DBSubnetGroupDescription",params); 
-			
 			copyArg(msg,"SubnetIds",params); 
-			
 			copyArg(msg,"Tags",params); 
 			
 
@@ -565,19 +482,15 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"SubscriptionName",params); 
+			copyArg(n,"SnsTopicArn",params); 
 			
 			copyArg(msg,"SubscriptionName",params); 
-			
 			copyArg(msg,"SnsTopicArn",params); 
-			
 			copyArg(msg,"SourceType",params); 
-			
 			copyArg(msg,"EventCategories",params); 
-			
 			copyArg(msg,"SourceIds",params); 
-			
 			copyArg(msg,"Enabled",params); 
-			
 			copyArg(msg,"Tags",params); 
 			
 
@@ -589,15 +502,15 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"OptionGroupName",params); 
+			copyArg(n,"EngineName",params); 
+			copyArg(n,"MajorEngineVersion",params); 
+			copyArg(n,"OptionGroupDescription",params); 
 			
 			copyArg(msg,"OptionGroupName",params); 
-			
 			copyArg(msg,"EngineName",params); 
-			
 			copyArg(msg,"MajorEngineVersion",params); 
-			
 			copyArg(msg,"OptionGroupDescription",params); 
-			
 			copyArg(msg,"Tags",params); 
 			
 
@@ -609,11 +522,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"DBClusterIdentifier",params); 
 			
 			copyArg(msg,"DBClusterIdentifier",params); 
-			
 			copyArg(msg,"SkipFinalSnapshot",params); 
-			
 			copyArg(msg,"FinalDBSnapshotIdentifier",params); 
 			
 
@@ -625,6 +537,7 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"DBClusterParameterGroupName",params); 
 			
 			copyArg(msg,"DBClusterParameterGroupName",params); 
 			
@@ -637,6 +550,7 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"DBClusterSnapshotIdentifier",params); 
 			
 			copyArg(msg,"DBClusterSnapshotIdentifier",params); 
 			
@@ -649,11 +563,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"DBInstanceIdentifier",params); 
 			
 			copyArg(msg,"DBInstanceIdentifier",params); 
-			
 			copyArg(msg,"SkipFinalSnapshot",params); 
-			
 			copyArg(msg,"FinalDBSnapshotIdentifier",params); 
 			
 
@@ -665,6 +578,7 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"DBParameterGroupName",params); 
 			
 			copyArg(msg,"DBParameterGroupName",params); 
 			
@@ -677,6 +591,7 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"DBSecurityGroupName",params); 
 			
 			copyArg(msg,"DBSecurityGroupName",params); 
 			
@@ -689,6 +604,7 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"DBSnapshotIdentifier",params); 
 			
 			copyArg(msg,"DBSnapshotIdentifier",params); 
 			
@@ -701,6 +617,7 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"DBSubnetGroupName",params); 
 			
 			copyArg(msg,"DBSubnetGroupName",params); 
 			
@@ -713,6 +630,7 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"SubscriptionName",params); 
 			
 			copyArg(msg,"SubscriptionName",params); 
 			
@@ -725,6 +643,7 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"OptionGroupName",params); 
 			
 			copyArg(msg,"OptionGroupName",params); 
 			
@@ -738,6 +657,7 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
+			
 
 			svc.describeAccountAttributes(params,cb);
 		}
@@ -749,11 +669,8 @@ module.exports = function(RED) {
 			
 			
 			copyArg(msg,"CertificateIdentifier",params); 
-			
 			copyArg(msg,"Filters",params); 
-			
 			copyArg(msg,"MaxRecords",params); 
-			
 			copyArg(msg,"Marker",params); 
 			
 
@@ -767,11 +684,8 @@ module.exports = function(RED) {
 			
 			
 			copyArg(msg,"DBClusterParameterGroupName",params); 
-			
 			copyArg(msg,"Filters",params); 
-			
 			copyArg(msg,"MaxRecords",params); 
-			
 			copyArg(msg,"Marker",params); 
 			
 
@@ -783,15 +697,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"DBClusterParameterGroupName",params); 
 			
 			copyArg(msg,"DBClusterParameterGroupName",params); 
-			
 			copyArg(msg,"Source",params); 
-			
 			copyArg(msg,"Filters",params); 
-			
 			copyArg(msg,"MaxRecords",params); 
-			
 			copyArg(msg,"Marker",params); 
 			
 
@@ -803,6 +714,7 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"DBClusterSnapshotIdentifier",params); 
 			
 			copyArg(msg,"DBClusterSnapshotIdentifier",params); 
 			
@@ -817,19 +729,12 @@ module.exports = function(RED) {
 			
 			
 			copyArg(msg,"DBClusterIdentifier",params); 
-			
 			copyArg(msg,"DBClusterSnapshotIdentifier",params); 
-			
 			copyArg(msg,"SnapshotType",params); 
-			
 			copyArg(msg,"Filters",params); 
-			
 			copyArg(msg,"MaxRecords",params); 
-			
 			copyArg(msg,"Marker",params); 
-			
 			copyArg(msg,"IncludeShared",params); 
-			
 			copyArg(msg,"IncludePublic",params); 
 			
 
@@ -843,11 +748,8 @@ module.exports = function(RED) {
 			
 			
 			copyArg(msg,"DBClusterIdentifier",params); 
-			
 			copyArg(msg,"Filters",params); 
-			
 			copyArg(msg,"MaxRecords",params); 
-			
 			copyArg(msg,"Marker",params); 
 			
 
@@ -861,21 +763,13 @@ module.exports = function(RED) {
 			
 			
 			copyArg(msg,"Engine",params); 
-			
 			copyArg(msg,"EngineVersion",params); 
-			
 			copyArg(msg,"DBParameterGroupFamily",params); 
-			
 			copyArg(msg,"Filters",params); 
-			
 			copyArg(msg,"MaxRecords",params); 
-			
 			copyArg(msg,"Marker",params); 
-			
 			copyArg(msg,"DefaultOnly",params); 
-			
 			copyArg(msg,"ListSupportedCharacterSets",params); 
-			
 			copyArg(msg,"ListSupportedTimezones",params); 
 			
 
@@ -889,11 +783,8 @@ module.exports = function(RED) {
 			
 			
 			copyArg(msg,"DBInstanceIdentifier",params); 
-			
 			copyArg(msg,"Filters",params); 
-			
 			copyArg(msg,"MaxRecords",params); 
-			
 			copyArg(msg,"Marker",params); 
 			
 
@@ -905,19 +796,14 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"DBInstanceIdentifier",params); 
 			
 			copyArg(msg,"DBInstanceIdentifier",params); 
-			
 			copyArg(msg,"FilenameContains",params); 
-			
 			copyArg(msg,"FileLastWritten",params); 
-			
 			copyArg(msg,"FileSize",params); 
-			
 			copyArg(msg,"Filters",params); 
-			
 			copyArg(msg,"MaxRecords",params); 
-			
 			copyArg(msg,"Marker",params); 
 			
 
@@ -931,11 +817,8 @@ module.exports = function(RED) {
 			
 			
 			copyArg(msg,"DBParameterGroupName",params); 
-			
 			copyArg(msg,"Filters",params); 
-			
 			copyArg(msg,"MaxRecords",params); 
-			
 			copyArg(msg,"Marker",params); 
 			
 
@@ -947,15 +830,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"DBParameterGroupName",params); 
 			
 			copyArg(msg,"DBParameterGroupName",params); 
-			
 			copyArg(msg,"Source",params); 
-			
 			copyArg(msg,"Filters",params); 
-			
 			copyArg(msg,"MaxRecords",params); 
-			
 			copyArg(msg,"Marker",params); 
 			
 
@@ -969,11 +849,8 @@ module.exports = function(RED) {
 			
 			
 			copyArg(msg,"DBSecurityGroupName",params); 
-			
 			copyArg(msg,"Filters",params); 
-			
 			copyArg(msg,"MaxRecords",params); 
-			
 			copyArg(msg,"Marker",params); 
 			
 
@@ -985,6 +862,7 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"DBSnapshotIdentifier",params); 
 			
 			copyArg(msg,"DBSnapshotIdentifier",params); 
 			
@@ -999,19 +877,12 @@ module.exports = function(RED) {
 			
 			
 			copyArg(msg,"DBInstanceIdentifier",params); 
-			
 			copyArg(msg,"DBSnapshotIdentifier",params); 
-			
 			copyArg(msg,"SnapshotType",params); 
-			
 			copyArg(msg,"Filters",params); 
-			
 			copyArg(msg,"MaxRecords",params); 
-			
 			copyArg(msg,"Marker",params); 
-			
 			copyArg(msg,"IncludeShared",params); 
-			
 			copyArg(msg,"IncludePublic",params); 
 			
 
@@ -1025,11 +896,8 @@ module.exports = function(RED) {
 			
 			
 			copyArg(msg,"DBSubnetGroupName",params); 
-			
 			copyArg(msg,"Filters",params); 
-			
 			copyArg(msg,"MaxRecords",params); 
-			
 			copyArg(msg,"Marker",params); 
 			
 
@@ -1041,13 +909,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"DBParameterGroupFamily",params); 
 			
 			copyArg(msg,"DBParameterGroupFamily",params); 
-			
 			copyArg(msg,"Filters",params); 
-			
 			copyArg(msg,"MaxRecords",params); 
-			
 			copyArg(msg,"Marker",params); 
 			
 
@@ -1059,13 +925,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"DBParameterGroupFamily",params); 
 			
 			copyArg(msg,"DBParameterGroupFamily",params); 
-			
 			copyArg(msg,"Filters",params); 
-			
 			copyArg(msg,"MaxRecords",params); 
-			
 			copyArg(msg,"Marker",params); 
 			
 
@@ -1079,7 +943,6 @@ module.exports = function(RED) {
 			
 			
 			copyArg(msg,"SourceType",params); 
-			
 			copyArg(msg,"Filters",params); 
 			
 
@@ -1093,11 +956,8 @@ module.exports = function(RED) {
 			
 			
 			copyArg(msg,"SubscriptionName",params); 
-			
 			copyArg(msg,"Filters",params); 
-			
 			copyArg(msg,"MaxRecords",params); 
-			
 			copyArg(msg,"Marker",params); 
 			
 
@@ -1111,21 +971,13 @@ module.exports = function(RED) {
 			
 			
 			copyArg(msg,"SourceIdentifier",params); 
-			
 			copyArg(msg,"SourceType",params); 
-			
 			copyArg(msg,"StartTime",params); 
-			
 			copyArg(msg,"EndTime",params); 
-			
 			copyArg(msg,"Duration",params); 
-			
 			copyArg(msg,"EventCategories",params); 
-			
 			copyArg(msg,"Filters",params); 
-			
 			copyArg(msg,"MaxRecords",params); 
-			
 			copyArg(msg,"Marker",params); 
 			
 
@@ -1137,15 +989,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"EngineName",params); 
 			
 			copyArg(msg,"EngineName",params); 
-			
 			copyArg(msg,"MajorEngineVersion",params); 
-			
 			copyArg(msg,"Filters",params); 
-			
 			copyArg(msg,"MaxRecords",params); 
-			
 			copyArg(msg,"Marker",params); 
 			
 
@@ -1159,15 +1008,10 @@ module.exports = function(RED) {
 			
 			
 			copyArg(msg,"OptionGroupName",params); 
-			
 			copyArg(msg,"Filters",params); 
-			
 			copyArg(msg,"Marker",params); 
-			
 			copyArg(msg,"MaxRecords",params); 
-			
 			copyArg(msg,"EngineName",params); 
-			
 			copyArg(msg,"MajorEngineVersion",params); 
 			
 
@@ -1179,21 +1023,15 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"Engine",params); 
 			
 			copyArg(msg,"Engine",params); 
-			
 			copyArg(msg,"EngineVersion",params); 
-			
 			copyArg(msg,"DBInstanceClass",params); 
-			
 			copyArg(msg,"LicenseModel",params); 
-			
 			copyArg(msg,"Vpc",params); 
-			
 			copyArg(msg,"Filters",params); 
-			
 			copyArg(msg,"MaxRecords",params); 
-			
 			copyArg(msg,"Marker",params); 
 			
 
@@ -1207,11 +1045,8 @@ module.exports = function(RED) {
 			
 			
 			copyArg(msg,"ResourceIdentifier",params); 
-			
 			copyArg(msg,"Filters",params); 
-			
 			copyArg(msg,"Marker",params); 
-			
 			copyArg(msg,"MaxRecords",params); 
 			
 
@@ -1225,23 +1060,14 @@ module.exports = function(RED) {
 			
 			
 			copyArg(msg,"ReservedDBInstanceId",params); 
-			
 			copyArg(msg,"ReservedDBInstancesOfferingId",params); 
-			
 			copyArg(msg,"DBInstanceClass",params); 
-			
 			copyArg(msg,"Duration",params); 
-			
 			copyArg(msg,"ProductDescription",params); 
-			
 			copyArg(msg,"OfferingType",params); 
-			
 			copyArg(msg,"MultiAZ",params); 
-			
 			copyArg(msg,"Filters",params); 
-			
 			copyArg(msg,"MaxRecords",params); 
-			
 			copyArg(msg,"Marker",params); 
 			
 
@@ -1255,21 +1081,13 @@ module.exports = function(RED) {
 			
 			
 			copyArg(msg,"ReservedDBInstancesOfferingId",params); 
-			
 			copyArg(msg,"DBInstanceClass",params); 
-			
 			copyArg(msg,"Duration",params); 
-			
 			copyArg(msg,"ProductDescription",params); 
-			
 			copyArg(msg,"OfferingType",params); 
-			
 			copyArg(msg,"MultiAZ",params); 
-			
 			copyArg(msg,"Filters",params); 
-			
 			copyArg(msg,"MaxRecords",params); 
-			
 			copyArg(msg,"Marker",params); 
 			
 
@@ -1283,11 +1101,8 @@ module.exports = function(RED) {
 			
 			
 			copyArg(msg,"RegionName",params); 
-			
 			copyArg(msg,"MaxRecords",params); 
-			
 			copyArg(msg,"Marker",params); 
-			
 			copyArg(msg,"Filters",params); 
 			
 
@@ -1299,6 +1114,7 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"DBInstanceIdentifier",params); 
 			
 			copyArg(msg,"DBInstanceIdentifier",params); 
 			
@@ -1311,13 +1127,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"DBInstanceIdentifier",params); 
+			copyArg(n,"LogFileName",params); 
 			
 			copyArg(msg,"DBInstanceIdentifier",params); 
-			
 			copyArg(msg,"LogFileName",params); 
-			
 			copyArg(msg,"Marker",params); 
-			
 			copyArg(msg,"NumberOfLines",params); 
 			
 
@@ -1331,7 +1146,6 @@ module.exports = function(RED) {
 			
 			
 			copyArg(msg,"DBClusterIdentifier",params); 
-			
 			copyArg(msg,"TargetDBInstanceIdentifier",params); 
 			
 
@@ -1343,9 +1157,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"ResourceName",params); 
 			
 			copyArg(msg,"ResourceName",params); 
-			
 			copyArg(msg,"Filters",params); 
 			
 
@@ -1357,29 +1171,19 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"DBClusterIdentifier",params); 
 			
 			copyArg(msg,"DBClusterIdentifier",params); 
-			
 			copyArg(msg,"NewDBClusterIdentifier",params); 
-			
 			copyArg(msg,"ApplyImmediately",params); 
-			
 			copyArg(msg,"BackupRetentionPeriod",params); 
-			
 			copyArg(msg,"DBClusterParameterGroupName",params); 
-			
 			copyArg(msg,"VpcSecurityGroupIds",params); 
-			
 			copyArg(msg,"Port",params); 
-			
 			copyArg(msg,"MasterUserPassword",params); 
-			
 			copyArg(msg,"OptionGroupName",params); 
-			
 			copyArg(msg,"PreferredBackupWindow",params); 
-			
 			copyArg(msg,"PreferredMaintenanceWindow",params); 
-			
 			copyArg(msg,"EnableIAMDatabaseAuthentication",params); 
 			
 
@@ -1391,9 +1195,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"DBClusterParameterGroupName",params); 
+			copyArg(n,"Parameters",params); 
 			
 			copyArg(msg,"DBClusterParameterGroupName",params); 
-			
 			copyArg(msg,"Parameters",params); 
 			
 
@@ -1405,13 +1210,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"DBClusterSnapshotIdentifier",params); 
+			copyArg(n,"AttributeName",params); 
 			
 			copyArg(msg,"DBClusterSnapshotIdentifier",params); 
-			
 			copyArg(msg,"AttributeName",params); 
-			
 			copyArg(msg,"ValuesToAdd",params); 
-			
 			copyArg(msg,"ValuesToRemove",params); 
 			
 
@@ -1423,75 +1227,42 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"DBInstanceIdentifier",params); 
 			
 			copyArg(msg,"DBInstanceIdentifier",params); 
-			
 			copyArg(msg,"AllocatedStorage",params); 
-			
 			copyArg(msg,"DBInstanceClass",params); 
-			
 			copyArg(msg,"DBSubnetGroupName",params); 
-			
 			copyArg(msg,"DBSecurityGroups",params); 
-			
 			copyArg(msg,"VpcSecurityGroupIds",params); 
-			
 			copyArg(msg,"ApplyImmediately",params); 
-			
 			copyArg(msg,"MasterUserPassword",params); 
-			
 			copyArg(msg,"DBParameterGroupName",params); 
-			
 			copyArg(msg,"BackupRetentionPeriod",params); 
-			
 			copyArg(msg,"PreferredBackupWindow",params); 
-			
 			copyArg(msg,"PreferredMaintenanceWindow",params); 
-			
 			copyArg(msg,"MultiAZ",params); 
-			
 			copyArg(msg,"EngineVersion",params); 
-			
 			copyArg(msg,"AllowMajorVersionUpgrade",params); 
-			
 			copyArg(msg,"AutoMinorVersionUpgrade",params); 
-			
 			copyArg(msg,"LicenseModel",params); 
-			
 			copyArg(msg,"Iops",params); 
-			
 			copyArg(msg,"OptionGroupName",params); 
-			
 			copyArg(msg,"NewDBInstanceIdentifier",params); 
-			
 			copyArg(msg,"StorageType",params); 
-			
 			copyArg(msg,"TdeCredentialArn",params); 
-			
 			copyArg(msg,"TdeCredentialPassword",params); 
-			
 			copyArg(msg,"CACertificateIdentifier",params); 
-			
 			copyArg(msg,"Domain",params); 
-			
 			copyArg(msg,"CopyTagsToSnapshot",params); 
-			
 			copyArg(msg,"MonitoringInterval",params); 
-			
 			copyArg(msg,"DBPortNumber",params); 
-			
 			copyArg(msg,"PubliclyAccessible",params); 
-			
 			copyArg(msg,"MonitoringRoleArn",params); 
-			
 			copyArg(msg,"DomainIAMRoleName",params); 
-			
 			copyArg(msg,"PromotionTier",params); 
-			
 			copyArg(msg,"EnableIAMDatabaseAuthentication",params); 
-			
 			copyArg(msg,"EnablePerformanceInsights",params); 
-			
 			copyArg(msg,"PerformanceInsightsKMSKeyId",params); 
 			
 
@@ -1503,9 +1274,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"DBParameterGroupName",params); 
+			copyArg(n,"Parameters",params); 
 			
 			copyArg(msg,"DBParameterGroupName",params); 
-			
 			copyArg(msg,"Parameters",params); 
 			
 
@@ -1517,11 +1289,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"DBSnapshotIdentifier",params); 
 			
 			copyArg(msg,"DBSnapshotIdentifier",params); 
-			
 			copyArg(msg,"EngineVersion",params); 
-			
 			copyArg(msg,"OptionGroupName",params); 
 			
 
@@ -1533,13 +1304,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"DBSnapshotIdentifier",params); 
+			copyArg(n,"AttributeName",params); 
 			
 			copyArg(msg,"DBSnapshotIdentifier",params); 
-			
 			copyArg(msg,"AttributeName",params); 
-			
 			copyArg(msg,"ValuesToAdd",params); 
-			
 			copyArg(msg,"ValuesToRemove",params); 
 			
 
@@ -1551,11 +1321,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"DBSubnetGroupName",params); 
+			copyArg(n,"SubnetIds",params); 
 			
 			copyArg(msg,"DBSubnetGroupName",params); 
-			
 			copyArg(msg,"DBSubnetGroupDescription",params); 
-			
 			copyArg(msg,"SubnetIds",params); 
 			
 
@@ -1567,15 +1337,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"SubscriptionName",params); 
 			
 			copyArg(msg,"SubscriptionName",params); 
-			
 			copyArg(msg,"SnsTopicArn",params); 
-			
 			copyArg(msg,"SourceType",params); 
-			
 			copyArg(msg,"EventCategories",params); 
-			
 			copyArg(msg,"Enabled",params); 
 			
 
@@ -1587,13 +1354,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"OptionGroupName",params); 
 			
 			copyArg(msg,"OptionGroupName",params); 
-			
 			copyArg(msg,"OptionsToInclude",params); 
-			
 			copyArg(msg,"OptionsToRemove",params); 
-			
 			copyArg(msg,"ApplyImmediately",params); 
 			
 
@@ -1605,11 +1370,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"DBInstanceIdentifier",params); 
 			
 			copyArg(msg,"DBInstanceIdentifier",params); 
-			
 			copyArg(msg,"BackupRetentionPeriod",params); 
-			
 			copyArg(msg,"PreferredBackupWindow",params); 
 			
 
@@ -1621,6 +1385,7 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"DBClusterIdentifier",params); 
 			
 			copyArg(msg,"DBClusterIdentifier",params); 
 			
@@ -1633,13 +1398,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"ReservedDBInstancesOfferingId",params); 
 			
 			copyArg(msg,"ReservedDBInstancesOfferingId",params); 
-			
 			copyArg(msg,"ReservedDBInstanceId",params); 
-			
 			copyArg(msg,"DBInstanceCount",params); 
-			
 			copyArg(msg,"Tags",params); 
 			
 
@@ -1651,9 +1414,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"DBInstanceIdentifier",params); 
 			
 			copyArg(msg,"DBInstanceIdentifier",params); 
-			
 			copyArg(msg,"ForceFailover",params); 
 			
 
@@ -1665,9 +1428,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"DBClusterIdentifier",params); 
+			copyArg(n,"RoleArn",params); 
 			
 			copyArg(msg,"DBClusterIdentifier",params); 
-			
 			copyArg(msg,"RoleArn",params); 
 			
 
@@ -1679,9 +1443,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"SubscriptionName",params); 
+			copyArg(n,"SourceIdentifier",params); 
 			
 			copyArg(msg,"SubscriptionName",params); 
-			
 			copyArg(msg,"SourceIdentifier",params); 
 			
 
@@ -1693,9 +1458,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"ResourceName",params); 
+			copyArg(n,"TagKeys",params); 
 			
 			copyArg(msg,"ResourceName",params); 
-			
 			copyArg(msg,"TagKeys",params); 
 			
 
@@ -1707,11 +1473,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"DBClusterParameterGroupName",params); 
 			
 			copyArg(msg,"DBClusterParameterGroupName",params); 
-			
 			copyArg(msg,"ResetAllParameters",params); 
-			
 			copyArg(msg,"Parameters",params); 
 			
 
@@ -1723,11 +1488,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"DBParameterGroupName",params); 
 			
 			copyArg(msg,"DBParameterGroupName",params); 
-			
 			copyArg(msg,"ResetAllParameters",params); 
-			
 			copyArg(msg,"Parameters",params); 
 			
 
@@ -1739,55 +1503,39 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"DBClusterIdentifier",params); 
+			copyArg(n,"Engine",params); 
+			copyArg(n,"MasterUsername",params); 
+			copyArg(n,"MasterUserPassword",params); 
+			copyArg(n,"SourceEngine",params); 
+			copyArg(n,"SourceEngineVersion",params); 
+			copyArg(n,"S3BucketName",params); 
+			copyArg(n,"S3IngestionRoleArn",params); 
 			
 			copyArg(msg,"AvailabilityZones",params); 
-			
 			copyArg(msg,"BackupRetentionPeriod",params); 
-			
 			copyArg(msg,"CharacterSetName",params); 
-			
 			copyArg(msg,"DatabaseName",params); 
-			
 			copyArg(msg,"DBClusterIdentifier",params); 
-			
 			copyArg(msg,"DBClusterParameterGroupName",params); 
-			
 			copyArg(msg,"VpcSecurityGroupIds",params); 
-			
 			copyArg(msg,"DBSubnetGroupName",params); 
-			
 			copyArg(msg,"Engine",params); 
-			
 			copyArg(msg,"EngineVersion",params); 
-			
 			copyArg(msg,"Port",params); 
-			
 			copyArg(msg,"MasterUsername",params); 
-			
 			copyArg(msg,"MasterUserPassword",params); 
-			
 			copyArg(msg,"OptionGroupName",params); 
-			
 			copyArg(msg,"PreferredBackupWindow",params); 
-			
 			copyArg(msg,"PreferredMaintenanceWindow",params); 
-			
 			copyArg(msg,"Tags",params); 
-			
 			copyArg(msg,"StorageEncrypted",params); 
-			
 			copyArg(msg,"KmsKeyId",params); 
-			
 			copyArg(msg,"EnableIAMDatabaseAuthentication",params); 
-			
 			copyArg(msg,"SourceEngine",params); 
-			
 			copyArg(msg,"SourceEngineVersion",params); 
-			
 			copyArg(msg,"S3BucketName",params); 
-			
 			copyArg(msg,"S3Prefix",params); 
-			
 			copyArg(msg,"S3IngestionRoleArn",params); 
 			
 
@@ -1799,31 +1547,22 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"DBClusterIdentifier",params); 
+			copyArg(n,"SnapshotIdentifier",params); 
+			copyArg(n,"Engine",params); 
 			
 			copyArg(msg,"AvailabilityZones",params); 
-			
 			copyArg(msg,"DBClusterIdentifier",params); 
-			
 			copyArg(msg,"SnapshotIdentifier",params); 
-			
 			copyArg(msg,"Engine",params); 
-			
 			copyArg(msg,"EngineVersion",params); 
-			
 			copyArg(msg,"Port",params); 
-			
 			copyArg(msg,"DBSubnetGroupName",params); 
-			
 			copyArg(msg,"DatabaseName",params); 
-			
 			copyArg(msg,"OptionGroupName",params); 
-			
 			copyArg(msg,"VpcSecurityGroupIds",params); 
-			
 			copyArg(msg,"Tags",params); 
-			
 			copyArg(msg,"KmsKeyId",params); 
-			
 			copyArg(msg,"EnableIAMDatabaseAuthentication",params); 
 			
 
@@ -1835,29 +1574,20 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"DBClusterIdentifier",params); 
+			copyArg(n,"SourceDBClusterIdentifier",params); 
 			
 			copyArg(msg,"DBClusterIdentifier",params); 
-			
 			copyArg(msg,"RestoreType",params); 
-			
 			copyArg(msg,"SourceDBClusterIdentifier",params); 
-			
 			copyArg(msg,"RestoreToTime",params); 
-			
 			copyArg(msg,"UseLatestRestorableTime",params); 
-			
 			copyArg(msg,"Port",params); 
-			
 			copyArg(msg,"DBSubnetGroupName",params); 
-			
 			copyArg(msg,"OptionGroupName",params); 
-			
 			copyArg(msg,"VpcSecurityGroupIds",params); 
-			
 			copyArg(msg,"Tags",params); 
-			
 			copyArg(msg,"KmsKeyId",params); 
-			
 			copyArg(msg,"EnableIAMDatabaseAuthentication",params); 
 			
 
@@ -1869,49 +1599,30 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"DBInstanceIdentifier",params); 
+			copyArg(n,"DBSnapshotIdentifier",params); 
 			
 			copyArg(msg,"DBInstanceIdentifier",params); 
-			
 			copyArg(msg,"DBSnapshotIdentifier",params); 
-			
 			copyArg(msg,"DBInstanceClass",params); 
-			
 			copyArg(msg,"Port",params); 
-			
 			copyArg(msg,"AvailabilityZone",params); 
-			
 			copyArg(msg,"DBSubnetGroupName",params); 
-			
 			copyArg(msg,"MultiAZ",params); 
-			
 			copyArg(msg,"PubliclyAccessible",params); 
-			
 			copyArg(msg,"AutoMinorVersionUpgrade",params); 
-			
 			copyArg(msg,"LicenseModel",params); 
-			
 			copyArg(msg,"DBName",params); 
-			
 			copyArg(msg,"Engine",params); 
-			
 			copyArg(msg,"Iops",params); 
-			
 			copyArg(msg,"OptionGroupName",params); 
-			
 			copyArg(msg,"Tags",params); 
-			
 			copyArg(msg,"StorageType",params); 
-			
 			copyArg(msg,"TdeCredentialArn",params); 
-			
 			copyArg(msg,"TdeCredentialPassword",params); 
-			
 			copyArg(msg,"Domain",params); 
-			
 			copyArg(msg,"CopyTagsToSnapshot",params); 
-			
 			copyArg(msg,"DomainIAMRoleName",params); 
-			
 			copyArg(msg,"EnableIAMDatabaseAuthentication",params); 
 			
 
@@ -1923,53 +1634,32 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"SourceDBInstanceIdentifier",params); 
+			copyArg(n,"TargetDBInstanceIdentifier",params); 
 			
 			copyArg(msg,"SourceDBInstanceIdentifier",params); 
-			
 			copyArg(msg,"TargetDBInstanceIdentifier",params); 
-			
 			copyArg(msg,"RestoreTime",params); 
-			
 			copyArg(msg,"UseLatestRestorableTime",params); 
-			
 			copyArg(msg,"DBInstanceClass",params); 
-			
 			copyArg(msg,"Port",params); 
-			
 			copyArg(msg,"AvailabilityZone",params); 
-			
 			copyArg(msg,"DBSubnetGroupName",params); 
-			
 			copyArg(msg,"MultiAZ",params); 
-			
 			copyArg(msg,"PubliclyAccessible",params); 
-			
 			copyArg(msg,"AutoMinorVersionUpgrade",params); 
-			
 			copyArg(msg,"LicenseModel",params); 
-			
 			copyArg(msg,"DBName",params); 
-			
 			copyArg(msg,"Engine",params); 
-			
 			copyArg(msg,"Iops",params); 
-			
 			copyArg(msg,"OptionGroupName",params); 
-			
 			copyArg(msg,"CopyTagsToSnapshot",params); 
-			
 			copyArg(msg,"Tags",params); 
-			
 			copyArg(msg,"StorageType",params); 
-			
 			copyArg(msg,"TdeCredentialArn",params); 
-			
 			copyArg(msg,"TdeCredentialPassword",params); 
-			
 			copyArg(msg,"Domain",params); 
-			
 			copyArg(msg,"DomainIAMRoleName",params); 
-			
 			copyArg(msg,"EnableIAMDatabaseAuthentication",params); 
 			
 
@@ -1981,15 +1671,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"DBSecurityGroupName",params); 
 			
 			copyArg(msg,"DBSecurityGroupName",params); 
-			
 			copyArg(msg,"CIDRIP",params); 
-			
 			copyArg(msg,"EC2SecurityGroupName",params); 
-			
 			copyArg(msg,"EC2SecurityGroupId",params); 
-			
 			copyArg(msg,"EC2SecurityGroupOwnerId",params); 
 			
 
@@ -2001,6 +1688,7 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"DBInstanceIdentifier",params); 
 			
 			copyArg(msg,"DBInstanceIdentifier",params); 
 			
@@ -2013,9 +1701,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"DBInstanceIdentifier",params); 
 			
 			copyArg(msg,"DBInstanceIdentifier",params); 
-			
 			copyArg(msg,"DBSnapshotIdentifier",params); 
 			
 

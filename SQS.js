@@ -81,13 +81,14 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"QueueUrl",params); 
+			copyArg(n,"Label",params); 
+			copyArg(n,"AWSAccountIds",params); 
+			copyArg(n,"Actions",params); 
 			
 			copyArg(msg,"QueueUrl",params); 
-			
 			copyArg(msg,"Label",params); 
-			
 			copyArg(msg,"AWSAccountIds",params); 
-			
 			copyArg(msg,"Actions",params); 
 			
 
@@ -99,11 +100,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"QueueUrl",params); 
+			copyArg(n,"ReceiptHandle",params); 
+			copyArg(n,"VisibilityTimeout",params); 
 			
 			copyArg(msg,"QueueUrl",params); 
-			
 			copyArg(msg,"ReceiptHandle",params); 
-			
 			copyArg(msg,"VisibilityTimeout",params); 
 			
 
@@ -115,9 +117,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"QueueUrl",params); 
+			copyArg(n,"Entries",params); 
 			
 			copyArg(msg,"QueueUrl",params); 
-			
 			copyArg(msg,"Entries",params); 
 			
 
@@ -129,9 +132,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"QueueName",params); 
 			
 			copyArg(msg,"QueueName",params); 
-			
 			copyArg(msg,"Attributes",params); 
 			
 
@@ -143,9 +146,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"QueueUrl",params); 
+			copyArg(n,"ReceiptHandle",params); 
 			
 			copyArg(msg,"QueueUrl",params); 
-			
 			copyArg(msg,"ReceiptHandle",params); 
 			
 
@@ -157,9 +161,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"QueueUrl",params); 
+			copyArg(n,"Entries",params); 
 			
 			copyArg(msg,"QueueUrl",params); 
-			
 			copyArg(msg,"Entries",params); 
 			
 
@@ -171,6 +176,7 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"QueueUrl",params); 
 			
 			copyArg(msg,"QueueUrl",params); 
 			
@@ -183,9 +189,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"QueueUrl",params); 
 			
 			copyArg(msg,"QueueUrl",params); 
-			
 			copyArg(msg,"AttributeNames",params); 
 			
 
@@ -197,9 +203,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"QueueName",params); 
 			
 			copyArg(msg,"QueueName",params); 
-			
 			copyArg(msg,"QueueOwnerAWSAccountId",params); 
 			
 
@@ -211,6 +217,7 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"QueueUrl",params); 
 			
 			copyArg(msg,"QueueUrl",params); 
 			
@@ -223,6 +230,7 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"QueueUrl",params); 
 			
 			copyArg(msg,"QueueUrl",params); 
 			
@@ -247,6 +255,7 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"QueueUrl",params); 
 			
 			copyArg(msg,"QueueUrl",params); 
 			
@@ -259,19 +268,14 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"QueueUrl",params); 
 			
 			copyArg(msg,"QueueUrl",params); 
-			
 			copyArg(msg,"AttributeNames",params); 
-			
 			copyArg(msg,"MessageAttributeNames",params); 
-			
 			copyArg(msg,"MaxNumberOfMessages",params); 
-			
 			copyArg(msg,"VisibilityTimeout",params); 
-			
 			copyArg(msg,"WaitTimeSeconds",params); 
-			
 			copyArg(msg,"ReceiveRequestAttemptId",params); 
 			
 
@@ -283,9 +287,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"QueueUrl",params); 
+			copyArg(n,"Label",params); 
 			
 			copyArg(msg,"QueueUrl",params); 
-			
 			copyArg(msg,"Label",params); 
 			
 
@@ -297,17 +302,14 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"QueueUrl",params); 
+			copyArg(n,"MessageBody",params); 
 			
 			copyArg(msg,"QueueUrl",params); 
-			
 			copyArg(msg,"MessageBody",params); 
-			
 			copyArg(msg,"DelaySeconds",params); 
-			
 			copyArg(msg,"MessageAttributes",params); 
-			
 			copyArg(msg,"MessageDeduplicationId",params); 
-			
 			copyArg(msg,"MessageGroupId",params); 
 			
 
@@ -319,9 +321,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"QueueUrl",params); 
+			copyArg(n,"Entries",params); 
 			
 			copyArg(msg,"QueueUrl",params); 
-			
 			copyArg(msg,"Entries",params); 
 			
 
@@ -333,9 +336,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"QueueUrl",params); 
+			copyArg(n,"Attributes",params); 
 			
 			copyArg(msg,"QueueUrl",params); 
-			
 			copyArg(msg,"Attributes",params); 
 			
 
@@ -347,9 +351,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"QueueUrl",params); 
+			copyArg(n,"Tags",params); 
 			
 			copyArg(msg,"QueueUrl",params); 
-			
 			copyArg(msg,"Tags",params); 
 			
 
@@ -361,9 +366,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"QueueUrl",params); 
+			copyArg(n,"TagKeys",params); 
 			
 			copyArg(msg,"QueueUrl",params); 
-			
 			copyArg(msg,"TagKeys",params); 
 			
 

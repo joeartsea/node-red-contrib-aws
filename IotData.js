@@ -24,7 +24,6 @@ module.exports = function(RED) {
 		this.region = n.region;
 		this.operation = n.operation;
 		this.name = n.name;
-		this.endPoint = n.endPoint;
 		this.region = this.awsConfig.region;
 		this.accessKey = this.awsConfig.accessKey;
 		this.secretKey = this.awsConfig.secretKey;
@@ -41,7 +40,7 @@ module.exports = function(RED) {
 			return;
 		}
 
-		var awsService = new AWS.IotData( { 'region': node.region, 'endpoint':node.endPoint } );
+		var awsService = new AWS.IotData( { 'region': node.region ,'endpoint':n.endPoint} );
 
 		node.on("input", function(msg) {
 			node.sendMsg = function (err, data) {
@@ -82,6 +81,7 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"thingName",params); 
 			
 			copyArg(msg,"thingName",params); 
 			
@@ -94,6 +94,7 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"thingName",params); 
 			
 			copyArg(msg,"thingName",params); 
 			
@@ -106,11 +107,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"topic",params); 
 			
 			copyArg(msg,"topic",params); 
-			
 			copyArg(msg,"qos",params); 
-			
 			copyArg(msg,"payload",params); 
 			
 
@@ -122,9 +122,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"thingName",params); 
+			copyArg(n,"payload",params); 
 			
 			copyArg(msg,"thingName",params); 
-			
 			copyArg(msg,"payload",params); 
 			
 

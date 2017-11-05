@@ -81,9 +81,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"RequestItems",params); 
 			
 			copyArg(msg,"RequestItems",params); 
-			
 			copyArg(msg,"ReturnConsumedCapacity",params); 
 			
 
@@ -95,11 +95,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"RequestItems",params); 
 			
 			copyArg(msg,"RequestItems",params); 
-			
 			copyArg(msg,"ReturnConsumedCapacity",params); 
-			
 			copyArg(msg,"ReturnItemCollectionMetrics",params); 
 			
 
@@ -111,19 +110,17 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"AttributeDefinitions",params); 
+			copyArg(n,"TableName",params); 
+			copyArg(n,"KeySchema",params); 
+			copyArg(n,"ProvisionedThroughput",params); 
 			
 			copyArg(msg,"AttributeDefinitions",params); 
-			
 			copyArg(msg,"TableName",params); 
-			
 			copyArg(msg,"KeySchema",params); 
-			
 			copyArg(msg,"LocalSecondaryIndexes",params); 
-			
 			copyArg(msg,"GlobalSecondaryIndexes",params); 
-			
 			copyArg(msg,"ProvisionedThroughput",params); 
-			
 			copyArg(msg,"StreamSpecification",params); 
 			
 
@@ -135,25 +132,18 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"TableName",params); 
+			copyArg(n,"Key",params); 
 			
 			copyArg(msg,"TableName",params); 
-			
 			copyArg(msg,"Key",params); 
-			
 			copyArg(msg,"Expected",params); 
-			
 			copyArg(msg,"ConditionalOperator",params); 
-			
 			copyArg(msg,"ReturnValues",params); 
-			
 			copyArg(msg,"ReturnConsumedCapacity",params); 
-			
 			copyArg(msg,"ReturnItemCollectionMetrics",params); 
-			
 			copyArg(msg,"ConditionExpression",params); 
-			
 			copyArg(msg,"ExpressionAttributeNames",params); 
-			
 			copyArg(msg,"ExpressionAttributeValues",params); 
 			
 
@@ -165,6 +155,7 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"TableName",params); 
 			
 			copyArg(msg,"TableName",params); 
 			
@@ -178,6 +169,7 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
+			
 
 			svc.describeLimits(params,cb);
 		}
@@ -187,6 +179,7 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"TableName",params); 
 			
 			copyArg(msg,"TableName",params); 
 			
@@ -199,6 +192,7 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"TableName",params); 
 			
 			copyArg(msg,"TableName",params); 
 			
@@ -211,19 +205,15 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"TableName",params); 
+			copyArg(n,"Key",params); 
 			
 			copyArg(msg,"TableName",params); 
-			
 			copyArg(msg,"Key",params); 
-			
 			copyArg(msg,"AttributesToGet",params); 
-			
 			copyArg(msg,"ConsistentRead",params); 
-			
 			copyArg(msg,"ReturnConsumedCapacity",params); 
-			
 			copyArg(msg,"ProjectionExpression",params); 
-			
 			copyArg(msg,"ExpressionAttributeNames",params); 
 			
 
@@ -237,7 +227,6 @@ module.exports = function(RED) {
 			
 			
 			copyArg(msg,"ExclusiveStartTableName",params); 
-			
 			copyArg(msg,"Limit",params); 
 			
 
@@ -249,9 +238,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"ResourceArn",params); 
 			
 			copyArg(msg,"ResourceArn",params); 
-			
 			copyArg(msg,"NextToken",params); 
 			
 
@@ -263,25 +252,18 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"TableName",params); 
+			copyArg(n,"Item",params); 
 			
 			copyArg(msg,"TableName",params); 
-			
 			copyArg(msg,"Item",params); 
-			
 			copyArg(msg,"Expected",params); 
-			
 			copyArg(msg,"ReturnValues",params); 
-			
 			copyArg(msg,"ReturnConsumedCapacity",params); 
-			
 			copyArg(msg,"ReturnItemCollectionMetrics",params); 
-			
 			copyArg(msg,"ConditionalOperator",params); 
-			
 			copyArg(msg,"ConditionExpression",params); 
-			
 			copyArg(msg,"ExpressionAttributeNames",params); 
-			
 			copyArg(msg,"ExpressionAttributeValues",params); 
 			
 
@@ -293,39 +275,24 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"TableName",params); 
 			
 			copyArg(msg,"TableName",params); 
-			
 			copyArg(msg,"IndexName",params); 
-			
 			copyArg(msg,"Select",params); 
-			
 			copyArg(msg,"AttributesToGet",params); 
-			
 			copyArg(msg,"Limit",params); 
-			
 			copyArg(msg,"ConsistentRead",params); 
-			
 			copyArg(msg,"KeyConditions",params); 
-			
 			copyArg(msg,"QueryFilter",params); 
-			
 			copyArg(msg,"ConditionalOperator",params); 
-			
 			copyArg(msg,"ScanIndexForward",params); 
-			
 			copyArg(msg,"ExclusiveStartKey",params); 
-			
 			copyArg(msg,"ReturnConsumedCapacity",params); 
-			
 			copyArg(msg,"ProjectionExpression",params); 
-			
 			copyArg(msg,"FilterExpression",params); 
-			
 			copyArg(msg,"KeyConditionExpression",params); 
-			
 			copyArg(msg,"ExpressionAttributeNames",params); 
-			
 			copyArg(msg,"ExpressionAttributeValues",params); 
 			
 
@@ -337,37 +304,23 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"TableName",params); 
 			
 			copyArg(msg,"TableName",params); 
-			
 			copyArg(msg,"IndexName",params); 
-			
 			copyArg(msg,"AttributesToGet",params); 
-			
 			copyArg(msg,"Limit",params); 
-			
 			copyArg(msg,"Select",params); 
-			
 			copyArg(msg,"ScanFilter",params); 
-			
 			copyArg(msg,"ConditionalOperator",params); 
-			
 			copyArg(msg,"ExclusiveStartKey",params); 
-			
 			copyArg(msg,"ReturnConsumedCapacity",params); 
-			
 			copyArg(msg,"TotalSegments",params); 
-			
 			copyArg(msg,"Segment",params); 
-			
 			copyArg(msg,"ProjectionExpression",params); 
-			
 			copyArg(msg,"FilterExpression",params); 
-			
 			copyArg(msg,"ExpressionAttributeNames",params); 
-			
 			copyArg(msg,"ExpressionAttributeValues",params); 
-			
 			copyArg(msg,"ConsistentRead",params); 
 			
 
@@ -379,9 +332,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"ResourceArn",params); 
+			copyArg(n,"Tags",params); 
 			
 			copyArg(msg,"ResourceArn",params); 
-			
 			copyArg(msg,"Tags",params); 
 			
 
@@ -393,9 +347,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"ResourceArn",params); 
+			copyArg(n,"TagKeys",params); 
 			
 			copyArg(msg,"ResourceArn",params); 
-			
 			copyArg(msg,"TagKeys",params); 
 			
 
@@ -407,29 +362,20 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"TableName",params); 
+			copyArg(n,"Key",params); 
 			
 			copyArg(msg,"TableName",params); 
-			
 			copyArg(msg,"Key",params); 
-			
 			copyArg(msg,"AttributeUpdates",params); 
-			
 			copyArg(msg,"Expected",params); 
-			
 			copyArg(msg,"ConditionalOperator",params); 
-			
 			copyArg(msg,"ReturnValues",params); 
-			
 			copyArg(msg,"ReturnConsumedCapacity",params); 
-			
 			copyArg(msg,"ReturnItemCollectionMetrics",params); 
-			
 			copyArg(msg,"UpdateExpression",params); 
-			
 			copyArg(msg,"ConditionExpression",params); 
-			
 			copyArg(msg,"ExpressionAttributeNames",params); 
-			
 			copyArg(msg,"ExpressionAttributeValues",params); 
 			
 
@@ -441,15 +387,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"TableName",params); 
 			
 			copyArg(msg,"AttributeDefinitions",params); 
-			
 			copyArg(msg,"TableName",params); 
-			
 			copyArg(msg,"ProvisionedThroughput",params); 
-			
 			copyArg(msg,"GlobalSecondaryIndexUpdates",params); 
-			
 			copyArg(msg,"StreamSpecification",params); 
 			
 
@@ -461,9 +404,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"TableName",params); 
+			copyArg(n,"TimeToLiveSpecification",params); 
 			
 			copyArg(msg,"TableName",params); 
-			
 			copyArg(msg,"TimeToLiveSpecification",params); 
 			
 

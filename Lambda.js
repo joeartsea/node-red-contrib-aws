@@ -81,21 +81,18 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"FunctionName",params); 
+			copyArg(n,"StatementId",params); 
+			copyArg(n,"Action",params); 
+			copyArg(n,"Principal",params); 
 			
 			copyArg(msg,"FunctionName",params); 
-			
 			copyArg(msg,"StatementId",params); 
-			
 			copyArg(msg,"Action",params); 
-			
 			copyArg(msg,"Principal",params); 
-			
 			copyArg(msg,"SourceArn",params); 
-			
 			copyArg(msg,"SourceAccount",params); 
-			
 			copyArg(msg,"EventSourceToken",params); 
-			
 			copyArg(msg,"Qualifier",params); 
 			
 
@@ -107,13 +104,13 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"FunctionName",params); 
+			copyArg(n,"Name",params); 
+			copyArg(n,"FunctionVersion",params); 
 			
 			copyArg(msg,"FunctionName",params); 
-			
 			copyArg(msg,"Name",params); 
-			
 			copyArg(msg,"FunctionVersion",params); 
-			
 			copyArg(msg,"Description",params); 
 			
 
@@ -125,17 +122,15 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"EventSourceArn",params); 
+			copyArg(n,"FunctionName",params); 
+			copyArg(n,"StartingPosition",params); 
 			
 			copyArg(msg,"EventSourceArn",params); 
-			
 			copyArg(msg,"FunctionName",params); 
-			
 			copyArg(msg,"Enabled",params); 
-			
 			copyArg(msg,"BatchSize",params); 
-			
 			copyArg(msg,"StartingPosition",params); 
-			
 			copyArg(msg,"StartingPositionTimestamp",params); 
 			
 
@@ -147,35 +142,26 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"FunctionName",params); 
+			copyArg(n,"Runtime",params); 
+			copyArg(n,"Role",params); 
+			copyArg(n,"Handler",params); 
+			copyArg(n,"Code",params); 
 			
 			copyArg(msg,"FunctionName",params); 
-			
 			copyArg(msg,"Runtime",params); 
-			
 			copyArg(msg,"Role",params); 
-			
 			copyArg(msg,"Handler",params); 
-			
 			copyArg(msg,"Code",params); 
-			
 			copyArg(msg,"Description",params); 
-			
 			copyArg(msg,"Timeout",params); 
-			
 			copyArg(msg,"MemorySize",params); 
-			
 			copyArg(msg,"Publish",params); 
-			
 			copyArg(msg,"VpcConfig",params); 
-			
 			copyArg(msg,"DeadLetterConfig",params); 
-			
 			copyArg(msg,"Environment",params); 
-			
 			copyArg(msg,"KMSKeyArn",params); 
-			
 			copyArg(msg,"TracingConfig",params); 
-			
 			copyArg(msg,"Tags",params); 
 			
 
@@ -187,9 +173,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"FunctionName",params); 
+			copyArg(n,"Name",params); 
 			
 			copyArg(msg,"FunctionName",params); 
-			
 			copyArg(msg,"Name",params); 
 			
 
@@ -201,6 +188,7 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"UUID",params); 
 			
 			copyArg(msg,"UUID",params); 
 			
@@ -213,9 +201,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"FunctionName",params); 
 			
 			copyArg(msg,"FunctionName",params); 
-			
 			copyArg(msg,"Qualifier",params); 
 			
 
@@ -228,6 +216,7 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
+			
 
 			svc.getAccountSettings(params,cb);
 		}
@@ -237,9 +226,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"FunctionName",params); 
+			copyArg(n,"Name",params); 
 			
 			copyArg(msg,"FunctionName",params); 
-			
 			copyArg(msg,"Name",params); 
 			
 
@@ -251,6 +241,7 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"UUID",params); 
 			
 			copyArg(msg,"UUID",params); 
 			
@@ -263,9 +254,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"FunctionName",params); 
 			
 			copyArg(msg,"FunctionName",params); 
-			
 			copyArg(msg,"Qualifier",params); 
 			
 
@@ -277,9 +268,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"FunctionName",params); 
 			
 			copyArg(msg,"FunctionName",params); 
-			
 			copyArg(msg,"Qualifier",params); 
 			
 
@@ -291,9 +282,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"FunctionName",params); 
 			
 			copyArg(msg,"FunctionName",params); 
-			
 			copyArg(msg,"Qualifier",params); 
 			
 
@@ -305,17 +296,13 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"FunctionName",params); 
 			
 			copyArg(msg,"FunctionName",params); 
-			
 			copyArg(msg,"InvocationType",params); 
-			
 			copyArg(msg,"LogType",params); 
-			
 			copyArg(msg,"ClientContext",params); 
-			
 			copyArg(msg,"Payload",params); 
-			
 			copyArg(msg,"Qualifier",params); 
 			
 
@@ -327,9 +314,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"FunctionName",params); 
+			copyArg(n,"InvokeArgs",params); 
 			
 			copyArg(msg,"FunctionName",params); 
-			
 			copyArg(msg,"InvokeArgs",params); 
 			
 
@@ -341,13 +329,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"FunctionName",params); 
 			
 			copyArg(msg,"FunctionName",params); 
-			
 			copyArg(msg,"FunctionVersion",params); 
-			
 			copyArg(msg,"Marker",params); 
-			
 			copyArg(msg,"MaxItems",params); 
 			
 
@@ -361,11 +347,8 @@ module.exports = function(RED) {
 			
 			
 			copyArg(msg,"EventSourceArn",params); 
-			
 			copyArg(msg,"FunctionName",params); 
-			
 			copyArg(msg,"Marker",params); 
-			
 			copyArg(msg,"MaxItems",params); 
 			
 
@@ -379,11 +362,8 @@ module.exports = function(RED) {
 			
 			
 			copyArg(msg,"MasterRegion",params); 
-			
 			copyArg(msg,"FunctionVersion",params); 
-			
 			copyArg(msg,"Marker",params); 
-			
 			copyArg(msg,"MaxItems",params); 
 			
 
@@ -395,6 +375,7 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"Resource",params); 
 			
 			copyArg(msg,"Resource",params); 
 			
@@ -407,11 +388,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"FunctionName",params); 
 			
 			copyArg(msg,"FunctionName",params); 
-			
 			copyArg(msg,"Marker",params); 
-			
 			copyArg(msg,"MaxItems",params); 
 			
 
@@ -423,11 +403,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"FunctionName",params); 
 			
 			copyArg(msg,"FunctionName",params); 
-			
 			copyArg(msg,"CodeSha256",params); 
-			
 			copyArg(msg,"Description",params); 
 			
 
@@ -439,11 +418,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"FunctionName",params); 
+			copyArg(n,"StatementId",params); 
 			
 			copyArg(msg,"FunctionName",params); 
-			
 			copyArg(msg,"StatementId",params); 
-			
 			copyArg(msg,"Qualifier",params); 
 			
 
@@ -455,9 +434,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"Resource",params); 
+			copyArg(n,"Tags",params); 
 			
 			copyArg(msg,"Resource",params); 
-			
 			copyArg(msg,"Tags",params); 
 			
 
@@ -469,9 +449,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"Resource",params); 
+			copyArg(n,"TagKeys",params); 
 			
 			copyArg(msg,"Resource",params); 
-			
 			copyArg(msg,"TagKeys",params); 
 			
 
@@ -483,13 +464,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"FunctionName",params); 
+			copyArg(n,"Name",params); 
 			
 			copyArg(msg,"FunctionName",params); 
-			
 			copyArg(msg,"Name",params); 
-			
 			copyArg(msg,"FunctionVersion",params); 
-			
 			copyArg(msg,"Description",params); 
 			
 
@@ -501,13 +481,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"UUID",params); 
 			
 			copyArg(msg,"UUID",params); 
-			
 			copyArg(msg,"FunctionName",params); 
-			
 			copyArg(msg,"Enabled",params); 
-			
 			copyArg(msg,"BatchSize",params); 
 			
 
@@ -519,19 +497,14 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"FunctionName",params); 
 			
 			copyArg(msg,"FunctionName",params); 
-			
 			copyArg(msg,"ZipFile",params); 
-			
 			copyArg(msg,"S3Bucket",params); 
-			
 			copyArg(msg,"S3Key",params); 
-			
 			copyArg(msg,"S3ObjectVersion",params); 
-			
 			copyArg(msg,"Publish",params); 
-			
 			copyArg(msg,"DryRun",params); 
 			
 
@@ -543,29 +516,19 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"FunctionName",params); 
 			
 			copyArg(msg,"FunctionName",params); 
-			
 			copyArg(msg,"Role",params); 
-			
 			copyArg(msg,"Handler",params); 
-			
 			copyArg(msg,"Description",params); 
-			
 			copyArg(msg,"Timeout",params); 
-			
 			copyArg(msg,"MemorySize",params); 
-			
 			copyArg(msg,"VpcConfig",params); 
-			
 			copyArg(msg,"Environment",params); 
-			
 			copyArg(msg,"Runtime",params); 
-			
 			copyArg(msg,"DeadLetterConfig",params); 
-			
 			copyArg(msg,"KMSKeyArn",params); 
-			
 			copyArg(msg,"TracingConfig",params); 
 			
 

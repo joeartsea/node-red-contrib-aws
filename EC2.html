@@ -16,13 +16,17 @@
 -->
 
 <script type="text/x-red" data-template-name="AWS EC2">
-    <div class="form-row">
-        <label for="node-input-aws"><i class="fa fa-user"></i> AWS</label>
-        <input type="text" id="node-input-aws">
-    </div>
-    <div class="form-row">
-        <label for="node-input-operation"><i class="fa fa-wrench"></i> Operation</label>
-        <select type="text" id="node-input-operation">
+		<style scoped>
+				.hiddenAttrs {display:none;}
+				.visibleAttrs {display:block;}
+		</style>
+	<div class="form-row">
+		<label for="node-input-aws"><i class="fa fa-user"></i> AWS</label>
+		<input type="text" id="node-input-aws">
+	</div>
+	<div class="form-row">
+		<label for="node-input-operation"><i class="fa fa-wrench"></i> Operation</label>
+		<select type="text" id="node-input-operation">
 		
 			<option value="AcceptReservedInstancesExchangeQuote">AcceptReservedInstancesExchangeQuote</option>
 		
@@ -508,12 +512,1205 @@
 		
 			<option value="UpdateSecurityGroupRuleDescriptionsIngress">UpdateSecurityGroupRuleDescriptionsIngress</option>
 		;
-        </select>
-    </div>
-    <div class="form-row">
-        <label for="node-input-name"><i class="fa fa-tag"></i>Name</label>
-	<input type="text" id="node-input-name" placeholder="Name"></input>
-    </div>
+		</select>
+	</div>
+	<div class="form-row">
+		<label for="node-input-name"><i class="fa fa-tag"></i>Name</label>
+		<input type="text" id="node-input-name" placeholder="Name"></input>
+	</div>
+	<hr/>	
+	<div id="AttrHolder">
+	      
+	<div class="form-row" id='ReservedInstanceIdsAttr' class='hiddenAttrs'>
+		<label for="node-input-ReservedInstanceIds"><i class="fa fa-tag"></i>ReservedInstanceIds</label>
+		<input type="text" id="node-input-ReservedInstanceIds" placeholder="ReservedInstanceIds"></input>
+	</div> 
+	<div class="form-row" id='AvailabilityZoneAttr' class='hiddenAttrs'>
+		<label for="node-input-AvailabilityZone"><i class="fa fa-tag"></i>AvailabilityZone</label>
+		<input type="text" id="node-input-AvailabilityZone" placeholder="AvailabilityZone"></input>
+	</div> 
+	<div class="form-row" id='InstanceTypeAttr' class='hiddenAttrs'>
+		<label for="node-input-InstanceType"><i class="fa fa-tag"></i>InstanceType</label>
+		<input type="text" id="node-input-InstanceType" placeholder="InstanceType"></input>
+	</div> 
+	<div class="form-row" id='QuantityAttr' class='hiddenAttrs'>
+		<label for="node-input-Quantity"><i class="fa fa-tag"></i>Quantity</label>
+		<input type="text" id="node-input-Quantity" placeholder="Quantity"></input>
+	</div> 
+	<div class="form-row" id='NetworkInterfaceIdAttr' class='hiddenAttrs'>
+		<label for="node-input-NetworkInterfaceId"><i class="fa fa-tag"></i>NetworkInterfaceId</label>
+		<input type="text" id="node-input-NetworkInterfaceId" placeholder="NetworkInterfaceId"></input>
+	</div> 
+	<div class="form-row" id='DhcpOptionsIdAttr' class='hiddenAttrs'>
+		<label for="node-input-DhcpOptionsId"><i class="fa fa-tag"></i>DhcpOptionsId</label>
+		<input type="text" id="node-input-DhcpOptionsId" placeholder="DhcpOptionsId"></input>
+	</div> 
+	<div class="form-row" id='VpcIdAttr' class='hiddenAttrs'>
+		<label for="node-input-VpcId"><i class="fa fa-tag"></i>VpcId</label>
+		<input type="text" id="node-input-VpcId" placeholder="VpcId"></input>
+	</div> 
+	<div class="form-row" id='IamInstanceProfileAttr' class='hiddenAttrs'>
+		<label for="node-input-IamInstanceProfile"><i class="fa fa-tag"></i>IamInstanceProfile</label>
+		<input type="text" id="node-input-IamInstanceProfile" placeholder="IamInstanceProfile"></input>
+	</div> 
+	<div class="form-row" id='InstanceIdAttr' class='hiddenAttrs'>
+		<label for="node-input-InstanceId"><i class="fa fa-tag"></i>InstanceId</label>
+		<input type="text" id="node-input-InstanceId" placeholder="InstanceId"></input>
+	</div> 
+	<div class="form-row" id='RouteTableIdAttr' class='hiddenAttrs'>
+		<label for="node-input-RouteTableId"><i class="fa fa-tag"></i>RouteTableId</label>
+		<input type="text" id="node-input-RouteTableId" placeholder="RouteTableId"></input>
+	</div> 
+	<div class="form-row" id='SubnetIdAttr' class='hiddenAttrs'>
+		<label for="node-input-SubnetId"><i class="fa fa-tag"></i>SubnetId</label>
+		<input type="text" id="node-input-SubnetId" placeholder="SubnetId"></input>
+	</div> 
+	<div class="form-row" id='Ipv6CidrBlockAttr' class='hiddenAttrs'>
+		<label for="node-input-Ipv6CidrBlock"><i class="fa fa-tag"></i>Ipv6CidrBlock</label>
+		<input type="text" id="node-input-Ipv6CidrBlock" placeholder="Ipv6CidrBlock"></input>
+	</div> 
+	<div class="form-row" id='GroupsAttr' class='hiddenAttrs'>
+		<label for="node-input-Groups"><i class="fa fa-tag"></i>Groups</label>
+		<input type="text" id="node-input-Groups" placeholder="Groups"></input>
+	</div> 
+	<div class="form-row" id='InternetGatewayIdAttr' class='hiddenAttrs'>
+		<label for="node-input-InternetGatewayId"><i class="fa fa-tag"></i>InternetGatewayId</label>
+		<input type="text" id="node-input-InternetGatewayId" placeholder="InternetGatewayId"></input>
+	</div> 
+	<div class="form-row" id='DeviceIndexAttr' class='hiddenAttrs'>
+		<label for="node-input-DeviceIndex"><i class="fa fa-tag"></i>DeviceIndex</label>
+		<input type="text" id="node-input-DeviceIndex" placeholder="DeviceIndex"></input>
+	</div> 
+	<div class="form-row" id='DeviceAttr' class='hiddenAttrs'>
+		<label for="node-input-Device"><i class="fa fa-tag"></i>Device</label>
+		<input type="text" id="node-input-Device" placeholder="Device"></input>
+	</div> 
+	<div class="form-row" id='VolumeIdAttr' class='hiddenAttrs'>
+		<label for="node-input-VolumeId"><i class="fa fa-tag"></i>VolumeId</label>
+		<input type="text" id="node-input-VolumeId" placeholder="VolumeId"></input>
+	</div> 
+	<div class="form-row" id='VpnGatewayIdAttr' class='hiddenAttrs'>
+		<label for="node-input-VpnGatewayId"><i class="fa fa-tag"></i>VpnGatewayId</label>
+		<input type="text" id="node-input-VpnGatewayId" placeholder="VpnGatewayId"></input>
+	</div> 
+	<div class="form-row" id='GroupIdAttr' class='hiddenAttrs'>
+		<label for="node-input-GroupId"><i class="fa fa-tag"></i>GroupId</label>
+		<input type="text" id="node-input-GroupId" placeholder="GroupId"></input>
+	</div> 
+	<div class="form-row" id='StorageAttr' class='hiddenAttrs'>
+		<label for="node-input-Storage"><i class="fa fa-tag"></i>Storage</label>
+		<input type="text" id="node-input-Storage" placeholder="Storage"></input>
+	</div> 
+	<div class="form-row" id='BundleIdAttr' class='hiddenAttrs'>
+		<label for="node-input-BundleId"><i class="fa fa-tag"></i>BundleId</label>
+		<input type="text" id="node-input-BundleId" placeholder="BundleId"></input>
+	</div> 
+	<div class="form-row" id='ConversionTaskIdAttr' class='hiddenAttrs'>
+		<label for="node-input-ConversionTaskId"><i class="fa fa-tag"></i>ConversionTaskId</label>
+		<input type="text" id="node-input-ConversionTaskId" placeholder="ConversionTaskId"></input>
+	</div> 
+	<div class="form-row" id='ExportTaskIdAttr' class='hiddenAttrs'>
+		<label for="node-input-ExportTaskId"><i class="fa fa-tag"></i>ExportTaskId</label>
+		<input type="text" id="node-input-ExportTaskId" placeholder="ExportTaskId"></input>
+	</div> 
+	<div class="form-row" id='ReservedInstancesListingIdAttr' class='hiddenAttrs'>
+		<label for="node-input-ReservedInstancesListingId"><i class="fa fa-tag"></i>ReservedInstancesListingId</label>
+		<input type="text" id="node-input-ReservedInstancesListingId" placeholder="ReservedInstancesListingId"></input>
+	</div> 
+	<div class="form-row" id='SpotFleetRequestIdsAttr' class='hiddenAttrs'>
+		<label for="node-input-SpotFleetRequestIds"><i class="fa fa-tag"></i>SpotFleetRequestIds</label>
+		<input type="text" id="node-input-SpotFleetRequestIds" placeholder="SpotFleetRequestIds"></input>
+	</div> 
+	<div class="form-row" id='TerminateInstancesAttr' class='hiddenAttrs'>
+		<label for="node-input-TerminateInstances"><i class="fa fa-tag"></i>TerminateInstances</label>
+		<input type="text" id="node-input-TerminateInstances" placeholder="TerminateInstances"></input>
+	</div> 
+	<div class="form-row" id='SpotInstanceRequestIdsAttr' class='hiddenAttrs'>
+		<label for="node-input-SpotInstanceRequestIds"><i class="fa fa-tag"></i>SpotInstanceRequestIds</label>
+		<input type="text" id="node-input-SpotInstanceRequestIds" placeholder="SpotInstanceRequestIds"></input>
+	</div> 
+	<div class="form-row" id='ProductCodeAttr' class='hiddenAttrs'>
+		<label for="node-input-ProductCode"><i class="fa fa-tag"></i>ProductCode</label>
+		<input type="text" id="node-input-ProductCode" placeholder="ProductCode"></input>
+	</div> 
+	<div class="form-row" id='SourceFpgaImageIdAttr' class='hiddenAttrs'>
+		<label for="node-input-SourceFpgaImageId"><i class="fa fa-tag"></i>SourceFpgaImageId</label>
+		<input type="text" id="node-input-SourceFpgaImageId" placeholder="SourceFpgaImageId"></input>
+	</div> 
+	<div class="form-row" id='SourceRegionAttr' class='hiddenAttrs'>
+		<label for="node-input-SourceRegion"><i class="fa fa-tag"></i>SourceRegion</label>
+		<input type="text" id="node-input-SourceRegion" placeholder="SourceRegion"></input>
+	</div> 
+	<div class="form-row" id='NameAttr' class='hiddenAttrs'>
+		<label for="node-input-Name"><i class="fa fa-tag"></i>Name</label>
+		<input type="text" id="node-input-Name" placeholder="Name"></input>
+	</div> 
+	<div class="form-row" id='SourceImageIdAttr' class='hiddenAttrs'>
+		<label for="node-input-SourceImageId"><i class="fa fa-tag"></i>SourceImageId</label>
+		<input type="text" id="node-input-SourceImageId" placeholder="SourceImageId"></input>
+	</div> 
+	<div class="form-row" id='SourceSnapshotIdAttr' class='hiddenAttrs'>
+		<label for="node-input-SourceSnapshotId"><i class="fa fa-tag"></i>SourceSnapshotId</label>
+		<input type="text" id="node-input-SourceSnapshotId" placeholder="SourceSnapshotId"></input>
+	</div> 
+	<div class="form-row" id='BgpAsnAttr' class='hiddenAttrs'>
+		<label for="node-input-BgpAsn"><i class="fa fa-tag"></i>BgpAsn</label>
+		<input type="text" id="node-input-BgpAsn" placeholder="BgpAsn"></input>
+	</div> 
+	<div class="form-row" id='PublicIpAttr' class='hiddenAttrs'>
+		<label for="node-input-PublicIp"><i class="fa fa-tag"></i>PublicIp</label>
+		<input type="text" id="node-input-PublicIp" placeholder="PublicIp"></input>
+	</div> 
+	<div class="form-row" id='TypeAttr' class='hiddenAttrs'>
+		<label for="node-input-Type"><i class="fa fa-tag"></i>Type</label>
+		<input type="text" id="node-input-Type" placeholder="Type"></input>
+	</div> 
+	<div class="form-row" id='DhcpConfigurationsAttr' class='hiddenAttrs'>
+		<label for="node-input-DhcpConfigurations"><i class="fa fa-tag"></i>DhcpConfigurations</label>
+		<input type="text" id="node-input-DhcpConfigurations" placeholder="DhcpConfigurations"></input>
+	</div> 
+	<div class="form-row" id='DeliverLogsPermissionArnAttr' class='hiddenAttrs'>
+		<label for="node-input-DeliverLogsPermissionArn"><i class="fa fa-tag"></i>DeliverLogsPermissionArn</label>
+		<input type="text" id="node-input-DeliverLogsPermissionArn" placeholder="DeliverLogsPermissionArn"></input>
+	</div> 
+	<div class="form-row" id='LogGroupNameAttr' class='hiddenAttrs'>
+		<label for="node-input-LogGroupName"><i class="fa fa-tag"></i>LogGroupName</label>
+		<input type="text" id="node-input-LogGroupName" placeholder="LogGroupName"></input>
+	</div> 
+	<div class="form-row" id='ResourceIdsAttr' class='hiddenAttrs'>
+		<label for="node-input-ResourceIds"><i class="fa fa-tag"></i>ResourceIds</label>
+		<input type="text" id="node-input-ResourceIds" placeholder="ResourceIds"></input>
+	</div> 
+	<div class="form-row" id='ResourceTypeAttr' class='hiddenAttrs'>
+		<label for="node-input-ResourceType"><i class="fa fa-tag"></i>ResourceType</label>
+		<input type="text" id="node-input-ResourceType" placeholder="ResourceType"></input>
+	</div> 
+	<div class="form-row" id='TrafficTypeAttr' class='hiddenAttrs'>
+		<label for="node-input-TrafficType"><i class="fa fa-tag"></i>TrafficType</label>
+		<input type="text" id="node-input-TrafficType" placeholder="TrafficType"></input>
+	</div> 
+	<div class="form-row" id='InputStorageLocationAttr' class='hiddenAttrs'>
+		<label for="node-input-InputStorageLocation"><i class="fa fa-tag"></i>InputStorageLocation</label>
+		<input type="text" id="node-input-InputStorageLocation" placeholder="InputStorageLocation"></input>
+	</div> 
+	<div class="form-row" id='KeyNameAttr' class='hiddenAttrs'>
+		<label for="node-input-KeyName"><i class="fa fa-tag"></i>KeyName</label>
+		<input type="text" id="node-input-KeyName" placeholder="KeyName"></input>
+	</div> 
+	<div class="form-row" id='AllocationIdAttr' class='hiddenAttrs'>
+		<label for="node-input-AllocationId"><i class="fa fa-tag"></i>AllocationId</label>
+		<input type="text" id="node-input-AllocationId" placeholder="AllocationId"></input>
+	</div> 
+	<div class="form-row" id='EgressAttr' class='hiddenAttrs'>
+		<label for="node-input-Egress"><i class="fa fa-tag"></i>Egress</label>
+		<input type="text" id="node-input-Egress" placeholder="Egress"></input>
+	</div> 
+	<div class="form-row" id='NetworkAclIdAttr' class='hiddenAttrs'>
+		<label for="node-input-NetworkAclId"><i class="fa fa-tag"></i>NetworkAclId</label>
+		<input type="text" id="node-input-NetworkAclId" placeholder="NetworkAclId"></input>
+	</div> 
+	<div class="form-row" id='ProtocolAttr' class='hiddenAttrs'>
+		<label for="node-input-Protocol"><i class="fa fa-tag"></i>Protocol</label>
+		<input type="text" id="node-input-Protocol" placeholder="Protocol"></input>
+	</div> 
+	<div class="form-row" id='RuleActionAttr' class='hiddenAttrs'>
+		<label for="node-input-RuleAction"><i class="fa fa-tag"></i>RuleAction</label>
+		<input type="text" id="node-input-RuleAction" placeholder="RuleAction"></input>
+	</div> 
+	<div class="form-row" id='RuleNumberAttr' class='hiddenAttrs'>
+		<label for="node-input-RuleNumber"><i class="fa fa-tag"></i>RuleNumber</label>
+		<input type="text" id="node-input-RuleNumber" placeholder="RuleNumber"></input>
+	</div> 
+	<div class="form-row" id='PermissionAttr' class='hiddenAttrs'>
+		<label for="node-input-Permission"><i class="fa fa-tag"></i>Permission</label>
+		<input type="text" id="node-input-Permission" placeholder="Permission"></input>
+	</div> 
+	<div class="form-row" id='GroupNameAttr' class='hiddenAttrs'>
+		<label for="node-input-GroupName"><i class="fa fa-tag"></i>GroupName</label>
+		<input type="text" id="node-input-GroupName" placeholder="GroupName"></input>
+	</div> 
+	<div class="form-row" id='StrategyAttr' class='hiddenAttrs'>
+		<label for="node-input-Strategy"><i class="fa fa-tag"></i>Strategy</label>
+		<input type="text" id="node-input-Strategy" placeholder="Strategy"></input>
+	</div> 
+	<div class="form-row" id='ClientTokenAttr' class='hiddenAttrs'>
+		<label for="node-input-ClientToken"><i class="fa fa-tag"></i>ClientToken</label>
+		<input type="text" id="node-input-ClientToken" placeholder="ClientToken"></input>
+	</div> 
+	<div class="form-row" id='InstanceCountAttr' class='hiddenAttrs'>
+		<label for="node-input-InstanceCount"><i class="fa fa-tag"></i>InstanceCount</label>
+		<input type="text" id="node-input-InstanceCount" placeholder="InstanceCount"></input>
+	</div> 
+	<div class="form-row" id='PriceSchedulesAttr' class='hiddenAttrs'>
+		<label for="node-input-PriceSchedules"><i class="fa fa-tag"></i>PriceSchedules</label>
+		<input type="text" id="node-input-PriceSchedules" placeholder="PriceSchedules"></input>
+	</div> 
+	<div class="form-row" id='ReservedInstancesIdAttr' class='hiddenAttrs'>
+		<label for="node-input-ReservedInstancesId"><i class="fa fa-tag"></i>ReservedInstancesId</label>
+		<input type="text" id="node-input-ReservedInstancesId" placeholder="ReservedInstancesId"></input>
+	</div> 
+	<div class="form-row" id='DescriptionAttr' class='hiddenAttrs'>
+		<label for="node-input-Description"><i class="fa fa-tag"></i>Description</label>
+		<input type="text" id="node-input-Description" placeholder="Description"></input>
+	</div> 
+	<div class="form-row" id='BucketAttr' class='hiddenAttrs'>
+		<label for="node-input-Bucket"><i class="fa fa-tag"></i>Bucket</label>
+		<input type="text" id="node-input-Bucket" placeholder="Bucket"></input>
+	</div> 
+	<div class="form-row" id='CidrBlockAttr' class='hiddenAttrs'>
+		<label for="node-input-CidrBlock"><i class="fa fa-tag"></i>CidrBlock</label>
+		<input type="text" id="node-input-CidrBlock" placeholder="CidrBlock"></input>
+	</div> 
+	<div class="form-row" id='ResourcesAttr' class='hiddenAttrs'>
+		<label for="node-input-Resources"><i class="fa fa-tag"></i>Resources</label>
+		<input type="text" id="node-input-Resources" placeholder="Resources"></input>
+	</div> 
+	<div class="form-row" id='TagsAttr' class='hiddenAttrs'>
+		<label for="node-input-Tags"><i class="fa fa-tag"></i>Tags</label>
+		<input type="text" id="node-input-Tags" placeholder="Tags"></input>
+	</div> 
+	<div class="form-row" id='ServiceNameAttr' class='hiddenAttrs'>
+		<label for="node-input-ServiceName"><i class="fa fa-tag"></i>ServiceName</label>
+		<input type="text" id="node-input-ServiceName" placeholder="ServiceName"></input>
+	</div> 
+	<div class="form-row" id='CustomerGatewayIdAttr' class='hiddenAttrs'>
+		<label for="node-input-CustomerGatewayId"><i class="fa fa-tag"></i>CustomerGatewayId</label>
+		<input type="text" id="node-input-CustomerGatewayId" placeholder="CustomerGatewayId"></input>
+	</div> 
+	<div class="form-row" id='DestinationCidrBlockAttr' class='hiddenAttrs'>
+		<label for="node-input-DestinationCidrBlock"><i class="fa fa-tag"></i>DestinationCidrBlock</label>
+		<input type="text" id="node-input-DestinationCidrBlock" placeholder="DestinationCidrBlock"></input>
+	</div> 
+	<div class="form-row" id='VpnConnectionIdAttr' class='hiddenAttrs'>
+		<label for="node-input-VpnConnectionId"><i class="fa fa-tag"></i>VpnConnectionId</label>
+		<input type="text" id="node-input-VpnConnectionId" placeholder="VpnConnectionId"></input>
+	</div> 
+	<div class="form-row" id='EgressOnlyInternetGatewayIdAttr' class='hiddenAttrs'>
+		<label for="node-input-EgressOnlyInternetGatewayId"><i class="fa fa-tag"></i>EgressOnlyInternetGatewayId</label>
+		<input type="text" id="node-input-EgressOnlyInternetGatewayId" placeholder="EgressOnlyInternetGatewayId"></input>
+	</div> 
+	<div class="form-row" id='FlowLogIdsAttr' class='hiddenAttrs'>
+		<label for="node-input-FlowLogIds"><i class="fa fa-tag"></i>FlowLogIds</label>
+		<input type="text" id="node-input-FlowLogIds" placeholder="FlowLogIds"></input>
+	</div> 
+	<div class="form-row" id='FpgaImageIdAttr' class='hiddenAttrs'>
+		<label for="node-input-FpgaImageId"><i class="fa fa-tag"></i>FpgaImageId</label>
+		<input type="text" id="node-input-FpgaImageId" placeholder="FpgaImageId"></input>
+	</div> 
+	<div class="form-row" id='NatGatewayIdAttr' class='hiddenAttrs'>
+		<label for="node-input-NatGatewayId"><i class="fa fa-tag"></i>NatGatewayId</label>
+		<input type="text" id="node-input-NatGatewayId" placeholder="NatGatewayId"></input>
+	</div> 
+	<div class="form-row" id='NetworkInterfacePermissionIdAttr' class='hiddenAttrs'>
+		<label for="node-input-NetworkInterfacePermissionId"><i class="fa fa-tag"></i>NetworkInterfacePermissionId</label>
+		<input type="text" id="node-input-NetworkInterfacePermissionId" placeholder="NetworkInterfacePermissionId"></input>
+	</div> 
+	<div class="form-row" id='SnapshotIdAttr' class='hiddenAttrs'>
+		<label for="node-input-SnapshotId"><i class="fa fa-tag"></i>SnapshotId</label>
+		<input type="text" id="node-input-SnapshotId" placeholder="SnapshotId"></input>
+	</div> 
+	<div class="form-row" id='VpcEndpointIdsAttr' class='hiddenAttrs'>
+		<label for="node-input-VpcEndpointIds"><i class="fa fa-tag"></i>VpcEndpointIds</label>
+		<input type="text" id="node-input-VpcEndpointIds" placeholder="VpcEndpointIds"></input>
+	</div> 
+	<div class="form-row" id='VpcPeeringConnectionIdAttr' class='hiddenAttrs'>
+		<label for="node-input-VpcPeeringConnectionId"><i class="fa fa-tag"></i>VpcPeeringConnectionId</label>
+		<input type="text" id="node-input-VpcPeeringConnectionId" placeholder="VpcPeeringConnectionId"></input>
+	</div> 
+	<div class="form-row" id='ImageIdAttr' class='hiddenAttrs'>
+		<label for="node-input-ImageId"><i class="fa fa-tag"></i>ImageId</label>
+		<input type="text" id="node-input-ImageId" placeholder="ImageId"></input>
+	</div> 
+	<div class="form-row" id='AttributeAttr' class='hiddenAttrs'>
+		<label for="node-input-Attribute"><i class="fa fa-tag"></i>Attribute</label>
+		<input type="text" id="node-input-Attribute" placeholder="Attribute"></input>
+	</div> 
+	<div class="form-row" id='PrincipalArnAttr' class='hiddenAttrs'>
+		<label for="node-input-PrincipalArn"><i class="fa fa-tag"></i>PrincipalArn</label>
+		<input type="text" id="node-input-PrincipalArn" placeholder="PrincipalArn"></input>
+	</div> 
+	<div class="form-row" id='FirstSlotStartTimeRangeAttr' class='hiddenAttrs'>
+		<label for="node-input-FirstSlotStartTimeRange"><i class="fa fa-tag"></i>FirstSlotStartTimeRange</label>
+		<input type="text" id="node-input-FirstSlotStartTimeRange" placeholder="FirstSlotStartTimeRange"></input>
+	</div> 
+	<div class="form-row" id='RecurrenceAttr' class='hiddenAttrs'>
+		<label for="node-input-Recurrence"><i class="fa fa-tag"></i>Recurrence</label>
+		<input type="text" id="node-input-Recurrence" placeholder="Recurrence"></input>
+	</div> 
+	<div class="form-row" id='SpotFleetRequestIdAttr' class='hiddenAttrs'>
+		<label for="node-input-SpotFleetRequestId"><i class="fa fa-tag"></i>SpotFleetRequestId</label>
+		<input type="text" id="node-input-SpotFleetRequestId" placeholder="SpotFleetRequestId"></input>
+	</div> 
+	<div class="form-row" id='StartTimeAttr' class='hiddenAttrs'>
+		<label for="node-input-StartTime"><i class="fa fa-tag"></i>StartTime</label>
+		<input type="text" id="node-input-StartTime" placeholder="StartTime"></input>
+	</div> 
+	<div class="form-row" id='AttachmentIdAttr' class='hiddenAttrs'>
+		<label for="node-input-AttachmentId"><i class="fa fa-tag"></i>AttachmentId</label>
+		<input type="text" id="node-input-AttachmentId" placeholder="AttachmentId"></input>
+	</div> 
+	<div class="form-row" id='GatewayIdAttr' class='hiddenAttrs'>
+		<label for="node-input-GatewayId"><i class="fa fa-tag"></i>GatewayId</label>
+		<input type="text" id="node-input-GatewayId" placeholder="GatewayId"></input>
+	</div> 
+	<div class="form-row" id='AssociationIdAttr' class='hiddenAttrs'>
+		<label for="node-input-AssociationId"><i class="fa fa-tag"></i>AssociationId</label>
+		<input type="text" id="node-input-AssociationId" placeholder="AssociationId"></input>
+	</div> 
+	<div class="form-row" id='HostIdSetAttr' class='hiddenAttrs'>
+		<label for="node-input-HostIdSet"><i class="fa fa-tag"></i>HostIdSet</label>
+		<input type="text" id="node-input-HostIdSet" placeholder="HostIdSet"></input>
+	</div> 
+	<div class="form-row" id='OfferingIdAttr' class='hiddenAttrs'>
+		<label for="node-input-OfferingId"><i class="fa fa-tag"></i>OfferingId</label>
+		<input type="text" id="node-input-OfferingId" placeholder="OfferingId"></input>
+	</div> 
+	<div class="form-row" id='PlatformAttr' class='hiddenAttrs'>
+		<label for="node-input-Platform"><i class="fa fa-tag"></i>Platform</label>
+		<input type="text" id="node-input-Platform" placeholder="Platform"></input>
+	</div> 
+	<div class="form-row" id='PublicKeyMaterialAttr' class='hiddenAttrs'>
+		<label for="node-input-PublicKeyMaterial"><i class="fa fa-tag"></i>PublicKeyMaterial</label>
+		<input type="text" id="node-input-PublicKeyMaterial" placeholder="PublicKeyMaterial"></input>
+	</div> 
+	<div class="form-row" id='ImageAttr' class='hiddenAttrs'>
+		<label for="node-input-Image"><i class="fa fa-tag"></i>Image</label>
+		<input type="text" id="node-input-Image" placeholder="Image"></input>
+	</div> 
+	<div class="form-row" id='VolumeAttr' class='hiddenAttrs'>
+		<label for="node-input-Volume"><i class="fa fa-tag"></i>Volume</label>
+		<input type="text" id="node-input-Volume" placeholder="Volume"></input>
+	</div> 
+	<div class="form-row" id='AutoPlacementAttr' class='hiddenAttrs'>
+		<label for="node-input-AutoPlacement"><i class="fa fa-tag"></i>AutoPlacement</label>
+		<input type="text" id="node-input-AutoPlacement" placeholder="AutoPlacement"></input>
+	</div> 
+	<div class="form-row" id='HostIdsAttr' class='hiddenAttrs'>
+		<label for="node-input-HostIds"><i class="fa fa-tag"></i>HostIds</label>
+		<input type="text" id="node-input-HostIds" placeholder="HostIds"></input>
+	</div> 
+	<div class="form-row" id='ResourceAttr' class='hiddenAttrs'>
+		<label for="node-input-Resource"><i class="fa fa-tag"></i>Resource</label>
+		<input type="text" id="node-input-Resource" placeholder="Resource"></input>
+	</div> 
+	<div class="form-row" id='UseLongIdsAttr' class='hiddenAttrs'>
+		<label for="node-input-UseLongIds"><i class="fa fa-tag"></i>UseLongIds</label>
+		<input type="text" id="node-input-UseLongIds" placeholder="UseLongIds"></input>
+	</div> 
+	<div class="form-row" id='ReservedInstancesIdsAttr' class='hiddenAttrs'>
+		<label for="node-input-ReservedInstancesIds"><i class="fa fa-tag"></i>ReservedInstancesIds</label>
+		<input type="text" id="node-input-ReservedInstancesIds" placeholder="ReservedInstancesIds"></input>
+	</div> 
+	<div class="form-row" id='TargetConfigurationsAttr' class='hiddenAttrs'>
+		<label for="node-input-TargetConfigurations"><i class="fa fa-tag"></i>TargetConfigurations</label>
+		<input type="text" id="node-input-TargetConfigurations" placeholder="TargetConfigurations"></input>
+	</div> 
+	<div class="form-row" id='VpcEndpointIdAttr' class='hiddenAttrs'>
+		<label for="node-input-VpcEndpointId"><i class="fa fa-tag"></i>VpcEndpointId</label>
+		<input type="text" id="node-input-VpcEndpointId" placeholder="VpcEndpointId"></input>
+	</div> 
+	<div class="form-row" id='InstanceTenancyAttr' class='hiddenAttrs'>
+		<label for="node-input-InstanceTenancy"><i class="fa fa-tag"></i>InstanceTenancy</label>
+		<input type="text" id="node-input-InstanceTenancy" placeholder="InstanceTenancy"></input>
+	</div> 
+	<div class="form-row" id='InstanceIdsAttr' class='hiddenAttrs'>
+		<label for="node-input-InstanceIds"><i class="fa fa-tag"></i>InstanceIds</label>
+		<input type="text" id="node-input-InstanceIds" placeholder="InstanceIds"></input>
+	</div> 
+	<div class="form-row" id='ReservedInstancesOfferingIdAttr' class='hiddenAttrs'>
+		<label for="node-input-ReservedInstancesOfferingId"><i class="fa fa-tag"></i>ReservedInstancesOfferingId</label>
+		<input type="text" id="node-input-ReservedInstancesOfferingId" placeholder="ReservedInstancesOfferingId"></input>
+	</div> 
+	<div class="form-row" id='PurchaseRequestsAttr' class='hiddenAttrs'>
+		<label for="node-input-PurchaseRequests"><i class="fa fa-tag"></i>PurchaseRequests</label>
+		<input type="text" id="node-input-PurchaseRequests" placeholder="PurchaseRequests"></input>
+	</div> 
+	<div class="form-row" id='InstancesAttr' class='hiddenAttrs'>
+		<label for="node-input-Instances"><i class="fa fa-tag"></i>Instances</label>
+		<input type="text" id="node-input-Instances" placeholder="Instances"></input>
+	</div> 
+	<div class="form-row" id='ReasonCodesAttr' class='hiddenAttrs'>
+		<label for="node-input-ReasonCodes"><i class="fa fa-tag"></i>ReasonCodes</label>
+		<input type="text" id="node-input-ReasonCodes" placeholder="ReasonCodes"></input>
+	</div> 
+	<div class="form-row" id='StatusAttr' class='hiddenAttrs'>
+		<label for="node-input-Status"><i class="fa fa-tag"></i>Status</label>
+		<input type="text" id="node-input-Status" placeholder="Status"></input>
+	</div> 
+	<div class="form-row" id='SpotFleetRequestConfigAttr' class='hiddenAttrs'>
+		<label for="node-input-SpotFleetRequestConfig"><i class="fa fa-tag"></i>SpotFleetRequestConfig</label>
+		<input type="text" id="node-input-SpotFleetRequestConfig" placeholder="SpotFleetRequestConfig"></input>
+	</div> 
+	<div class="form-row" id='SpotPriceAttr' class='hiddenAttrs'>
+		<label for="node-input-SpotPrice"><i class="fa fa-tag"></i>SpotPrice</label>
+		<input type="text" id="node-input-SpotPrice" placeholder="SpotPrice"></input>
+	</div> 
+	<div class="form-row" id='MaxCountAttr' class='hiddenAttrs'>
+		<label for="node-input-MaxCount"><i class="fa fa-tag"></i>MaxCount</label>
+		<input type="text" id="node-input-MaxCount" placeholder="MaxCount"></input>
+	</div> 
+	<div class="form-row" id='MinCountAttr' class='hiddenAttrs'>
+		<label for="node-input-MinCount"><i class="fa fa-tag"></i>MinCount</label>
+		<input type="text" id="node-input-MinCount" placeholder="MinCount"></input>
+	</div> 
+	<div class="form-row" id='LaunchSpecificationAttr' class='hiddenAttrs'>
+		<label for="node-input-LaunchSpecification"><i class="fa fa-tag"></i>LaunchSpecification</label>
+		<input type="text" id="node-input-LaunchSpecification" placeholder="LaunchSpecification"></input>
+	</div> 
+	<div class="form-row" id='ScheduledInstanceIdAttr' class='hiddenAttrs'>
+		<label for="node-input-ScheduledInstanceId"><i class="fa fa-tag"></i>ScheduledInstanceId</label>
+		<input type="text" id="node-input-ScheduledInstanceId" placeholder="ScheduledInstanceId"></input>
+	</div> 
+	<div class="form-row" id='Ipv6AddressesAttr' class='hiddenAttrs'>
+		<label for="node-input-Ipv6Addresses"><i class="fa fa-tag"></i>Ipv6Addresses</label>
+		<input type="text" id="node-input-Ipv6Addresses" placeholder="Ipv6Addresses"></input>
+	</div> 
+	<div class="form-row" id='PrivateIpAddressesAttr' class='hiddenAttrs'>
+		<label for="node-input-PrivateIpAddresses"><i class="fa fa-tag"></i>PrivateIpAddresses</label>
+		<input type="text" id="node-input-PrivateIpAddresses" placeholder="PrivateIpAddresses"></input>
+	</div> 
+	<div class="form-row" id='IpPermissionsAttr' class='hiddenAttrs'>
+		<label for="node-input-IpPermissions"><i class="fa fa-tag"></i>IpPermissions</label>
+		<input type="text" id="node-input-IpPermissions" placeholder="IpPermissions"></input>
+	</div> 
+	</div>
+
+ <script>
+	  var nodeOps={
+			
+				AcceptReservedInstancesExchangeQuote:[
+					'#ReservedInstanceIdsAttr'
+					],
+				AcceptVpcPeeringConnection:[
+					
+					],
+				AllocateAddress:[
+					
+					],
+				AllocateHosts:[
+					'#AvailabilityZoneAttr','#InstanceTypeAttr','#QuantityAttr'
+					],
+				AssignIpv6Addresses:[
+					'#NetworkInterfaceIdAttr'
+					],
+				AssignPrivateIpAddresses:[
+					'#NetworkInterfaceIdAttr'
+					],
+				AssociateAddress:[
+					
+					],
+				AssociateDhcpOptions:[
+					'#DhcpOptionsIdAttr','#VpcIdAttr'
+					],
+				AssociateIamInstanceProfile:[
+					'#IamInstanceProfileAttr','#InstanceIdAttr'
+					],
+				AssociateRouteTable:[
+					'#RouteTableIdAttr','#SubnetIdAttr'
+					],
+				AssociateSubnetCidrBlock:[
+					'#Ipv6CidrBlockAttr','#SubnetIdAttr'
+					],
+				AssociateVpcCidrBlock:[
+					'#VpcIdAttr'
+					],
+				AttachClassicLinkVpc:[
+					'#GroupsAttr','#InstanceIdAttr','#VpcIdAttr'
+					],
+				AttachInternetGateway:[
+					'#InternetGatewayIdAttr','#VpcIdAttr'
+					],
+				AttachNetworkInterface:[
+					'#DeviceIndexAttr','#InstanceIdAttr','#NetworkInterfaceIdAttr'
+					],
+				AttachVolume:[
+					'#DeviceAttr','#InstanceIdAttr','#VolumeIdAttr'
+					],
+				AttachVpnGateway:[
+					'#VpcIdAttr','#VpnGatewayIdAttr'
+					],
+				AuthorizeSecurityGroupEgress:[
+					'#GroupIdAttr'
+					],
+				AuthorizeSecurityGroupIngress:[
+					
+					],
+				BundleInstance:[
+					'#InstanceIdAttr','#StorageAttr'
+					],
+				CancelBundleTask:[
+					'#BundleIdAttr'
+					],
+				CancelConversionTask:[
+					'#ConversionTaskIdAttr'
+					],
+				CancelExportTask:[
+					'#ExportTaskIdAttr'
+					],
+				CancelImportTask:[
+					
+					],
+				CancelReservedInstancesListing:[
+					'#ReservedInstancesListingIdAttr'
+					],
+				CancelSpotFleetRequests:[
+					'#SpotFleetRequestIdsAttr','#TerminateInstancesAttr'
+					],
+				CancelSpotInstanceRequests:[
+					'#SpotInstanceRequestIdsAttr'
+					],
+				ConfirmProductInstance:[
+					'#InstanceIdAttr','#ProductCodeAttr'
+					],
+				CopyFpgaImage:[
+					'#SourceFpgaImageIdAttr','#SourceRegionAttr'
+					],
+				CopyImage:[
+					'#NameAttr','#SourceImageIdAttr','#SourceRegionAttr'
+					],
+				CopySnapshot:[
+					'#SourceRegionAttr','#SourceSnapshotIdAttr'
+					],
+				CreateCustomerGateway:[
+					'#BgpAsnAttr','#PublicIpAttr','#TypeAttr'
+					],
+				CreateDefaultVpc:[
+					
+					],
+				CreateDhcpOptions:[
+					'#DhcpConfigurationsAttr'
+					],
+				CreateEgressOnlyInternetGateway:[
+					'#VpcIdAttr'
+					],
+				CreateFlowLogs:[
+					'#DeliverLogsPermissionArnAttr','#LogGroupNameAttr','#ResourceIdsAttr','#ResourceTypeAttr','#TrafficTypeAttr'
+					],
+				CreateFpgaImage:[
+					'#InputStorageLocationAttr'
+					],
+				CreateImage:[
+					'#InstanceIdAttr','#NameAttr'
+					],
+				CreateInstanceExportTask:[
+					'#InstanceIdAttr'
+					],
+				CreateInternetGateway:[
+					
+					],
+				CreateKeyPair:[
+					'#KeyNameAttr'
+					],
+				CreateNatGateway:[
+					'#AllocationIdAttr','#SubnetIdAttr'
+					],
+				CreateNetworkAcl:[
+					'#VpcIdAttr'
+					],
+				CreateNetworkAclEntry:[
+					'#EgressAttr','#NetworkAclIdAttr','#ProtocolAttr','#RuleActionAttr','#RuleNumberAttr'
+					],
+				CreateNetworkInterface:[
+					'#SubnetIdAttr'
+					],
+				CreateNetworkInterfacePermission:[
+					'#NetworkInterfaceIdAttr','#PermissionAttr'
+					],
+				CreatePlacementGroup:[
+					'#GroupNameAttr','#StrategyAttr'
+					],
+				CreateReservedInstancesListing:[
+					'#ClientTokenAttr','#InstanceCountAttr','#PriceSchedulesAttr','#ReservedInstancesIdAttr'
+					],
+				CreateRoute:[
+					'#RouteTableIdAttr'
+					],
+				CreateRouteTable:[
+					'#VpcIdAttr'
+					],
+				CreateSecurityGroup:[
+					'#DescriptionAttr','#GroupNameAttr'
+					],
+				CreateSnapshot:[
+					'#VolumeIdAttr'
+					],
+				CreateSpotDatafeedSubscription:[
+					'#BucketAttr'
+					],
+				CreateSubnet:[
+					'#CidrBlockAttr','#VpcIdAttr'
+					],
+				CreateTags:[
+					'#ResourcesAttr','#TagsAttr'
+					],
+				CreateVolume:[
+					'#AvailabilityZoneAttr'
+					],
+				CreateVpc:[
+					'#CidrBlockAttr'
+					],
+				CreateVpcEndpoint:[
+					'#ServiceNameAttr','#VpcIdAttr'
+					],
+				CreateVpcPeeringConnection:[
+					
+					],
+				CreateVpnConnection:[
+					'#CustomerGatewayIdAttr','#TypeAttr','#VpnGatewayIdAttr'
+					],
+				CreateVpnConnectionRoute:[
+					'#DestinationCidrBlockAttr','#VpnConnectionIdAttr'
+					],
+				CreateVpnGateway:[
+					'#TypeAttr'
+					],
+				DeleteCustomerGateway:[
+					'#CustomerGatewayIdAttr'
+					],
+				DeleteDhcpOptions:[
+					'#DhcpOptionsIdAttr'
+					],
+				DeleteEgressOnlyInternetGateway:[
+					'#EgressOnlyInternetGatewayIdAttr'
+					],
+				DeleteFlowLogs:[
+					'#FlowLogIdsAttr'
+					],
+				DeleteFpgaImage:[
+					'#FpgaImageIdAttr'
+					],
+				DeleteInternetGateway:[
+					'#InternetGatewayIdAttr'
+					],
+				DeleteKeyPair:[
+					'#KeyNameAttr'
+					],
+				DeleteNatGateway:[
+					'#NatGatewayIdAttr'
+					],
+				DeleteNetworkAcl:[
+					'#NetworkAclIdAttr'
+					],
+				DeleteNetworkAclEntry:[
+					'#EgressAttr','#NetworkAclIdAttr','#RuleNumberAttr'
+					],
+				DeleteNetworkInterface:[
+					'#NetworkInterfaceIdAttr'
+					],
+				DeleteNetworkInterfacePermission:[
+					'#NetworkInterfacePermissionIdAttr'
+					],
+				DeletePlacementGroup:[
+					'#GroupNameAttr'
+					],
+				DeleteRoute:[
+					'#RouteTableIdAttr'
+					],
+				DeleteRouteTable:[
+					'#RouteTableIdAttr'
+					],
+				DeleteSecurityGroup:[
+					
+					],
+				DeleteSnapshot:[
+					'#SnapshotIdAttr'
+					],
+				DeleteSpotDatafeedSubscription:[
+					
+					],
+				DeleteSubnet:[
+					'#SubnetIdAttr'
+					],
+				DeleteTags:[
+					'#ResourcesAttr'
+					],
+				DeleteVolume:[
+					'#VolumeIdAttr'
+					],
+				DeleteVpc:[
+					'#VpcIdAttr'
+					],
+				DeleteVpcEndpoints:[
+					'#VpcEndpointIdsAttr'
+					],
+				DeleteVpcPeeringConnection:[
+					'#VpcPeeringConnectionIdAttr'
+					],
+				DeleteVpnConnection:[
+					'#VpnConnectionIdAttr'
+					],
+				DeleteVpnConnectionRoute:[
+					'#DestinationCidrBlockAttr','#VpnConnectionIdAttr'
+					],
+				DeleteVpnGateway:[
+					'#VpnGatewayIdAttr'
+					],
+				DeregisterImage:[
+					'#ImageIdAttr'
+					],
+				DescribeAccountAttributes:[
+					
+					],
+				DescribeAddresses:[
+					
+					],
+				DescribeAvailabilityZones:[
+					
+					],
+				DescribeBundleTasks:[
+					
+					],
+				DescribeClassicLinkInstances:[
+					
+					],
+				DescribeConversionTasks:[
+					
+					],
+				DescribeCustomerGateways:[
+					
+					],
+				DescribeDhcpOptions:[
+					
+					],
+				DescribeEgressOnlyInternetGateways:[
+					
+					],
+				DescribeElasticGpus:[
+					
+					],
+				DescribeExportTasks:[
+					
+					],
+				DescribeFlowLogs:[
+					
+					],
+				DescribeFpgaImageAttribute:[
+					'#FpgaImageIdAttr','#AttributeAttr'
+					],
+				DescribeFpgaImages:[
+					
+					],
+				DescribeHostReservationOfferings:[
+					
+					],
+				DescribeHostReservations:[
+					
+					],
+				DescribeHosts:[
+					
+					],
+				DescribeIamInstanceProfileAssociations:[
+					
+					],
+				DescribeIdFormat:[
+					
+					],
+				DescribeIdentityIdFormat:[
+					'#PrincipalArnAttr'
+					],
+				DescribeImageAttribute:[
+					'#AttributeAttr','#ImageIdAttr'
+					],
+				DescribeImages:[
+					
+					],
+				DescribeImportImageTasks:[
+					
+					],
+				DescribeImportSnapshotTasks:[
+					
+					],
+				DescribeInstanceAttribute:[
+					'#AttributeAttr','#InstanceIdAttr'
+					],
+				DescribeInstanceStatus:[
+					
+					],
+				DescribeInstances:[
+					
+					],
+				DescribeInternetGateways:[
+					
+					],
+				DescribeKeyPairs:[
+					
+					],
+				DescribeMovingAddresses:[
+					
+					],
+				DescribeNatGateways:[
+					
+					],
+				DescribeNetworkAcls:[
+					
+					],
+				DescribeNetworkInterfaceAttribute:[
+					'#NetworkInterfaceIdAttr'
+					],
+				DescribeNetworkInterfacePermissions:[
+					
+					],
+				DescribeNetworkInterfaces:[
+					
+					],
+				DescribePlacementGroups:[
+					
+					],
+				DescribePrefixLists:[
+					
+					],
+				DescribeRegions:[
+					
+					],
+				DescribeReservedInstances:[
+					
+					],
+				DescribeReservedInstancesListings:[
+					
+					],
+				DescribeReservedInstancesModifications:[
+					
+					],
+				DescribeReservedInstancesOfferings:[
+					
+					],
+				DescribeRouteTables:[
+					
+					],
+				DescribeScheduledInstanceAvailability:[
+					'#FirstSlotStartTimeRangeAttr','#RecurrenceAttr'
+					],
+				DescribeScheduledInstances:[
+					
+					],
+				DescribeSecurityGroupReferences:[
+					'#GroupIdAttr'
+					],
+				DescribeSecurityGroups:[
+					
+					],
+				DescribeSnapshotAttribute:[
+					'#AttributeAttr','#SnapshotIdAttr'
+					],
+				DescribeSnapshots:[
+					
+					],
+				DescribeSpotDatafeedSubscription:[
+					
+					],
+				DescribeSpotFleetInstances:[
+					'#SpotFleetRequestIdAttr'
+					],
+				DescribeSpotFleetRequestHistory:[
+					'#SpotFleetRequestIdAttr','#StartTimeAttr'
+					],
+				DescribeSpotFleetRequests:[
+					
+					],
+				DescribeSpotInstanceRequests:[
+					
+					],
+				DescribeSpotPriceHistory:[
+					
+					],
+				DescribeStaleSecurityGroups:[
+					'#VpcIdAttr'
+					],
+				DescribeSubnets:[
+					
+					],
+				DescribeTags:[
+					
+					],
+				DescribeVolumeAttribute:[
+					'#VolumeIdAttr'
+					],
+				DescribeVolumeStatus:[
+					
+					],
+				DescribeVolumes:[
+					
+					],
+				DescribeVolumesModifications:[
+					
+					],
+				DescribeVpcAttribute:[
+					'#AttributeAttr','#VpcIdAttr'
+					],
+				DescribeVpcClassicLink:[
+					
+					],
+				DescribeVpcClassicLinkDnsSupport:[
+					
+					],
+				DescribeVpcEndpointServices:[
+					
+					],
+				DescribeVpcEndpoints:[
+					
+					],
+				DescribeVpcPeeringConnections:[
+					
+					],
+				DescribeVpcs:[
+					
+					],
+				DescribeVpnConnections:[
+					
+					],
+				DescribeVpnGateways:[
+					
+					],
+				DetachClassicLinkVpc:[
+					'#InstanceIdAttr','#VpcIdAttr'
+					],
+				DetachInternetGateway:[
+					'#InternetGatewayIdAttr','#VpcIdAttr'
+					],
+				DetachNetworkInterface:[
+					'#AttachmentIdAttr'
+					],
+				DetachVolume:[
+					'#VolumeIdAttr'
+					],
+				DetachVpnGateway:[
+					'#VpcIdAttr','#VpnGatewayIdAttr'
+					],
+				DisableVgwRoutePropagation:[
+					'#GatewayIdAttr','#RouteTableIdAttr'
+					],
+				DisableVpcClassicLink:[
+					'#VpcIdAttr'
+					],
+				DisableVpcClassicLinkDnsSupport:[
+					
+					],
+				DisassociateAddress:[
+					
+					],
+				DisassociateIamInstanceProfile:[
+					'#AssociationIdAttr'
+					],
+				DisassociateRouteTable:[
+					'#AssociationIdAttr'
+					],
+				DisassociateSubnetCidrBlock:[
+					'#AssociationIdAttr'
+					],
+				DisassociateVpcCidrBlock:[
+					'#AssociationIdAttr'
+					],
+				EnableVgwRoutePropagation:[
+					'#GatewayIdAttr','#RouteTableIdAttr'
+					],
+				EnableVolumeIO:[
+					'#VolumeIdAttr'
+					],
+				EnableVpcClassicLink:[
+					'#VpcIdAttr'
+					],
+				EnableVpcClassicLinkDnsSupport:[
+					
+					],
+				GetConsoleOutput:[
+					'#InstanceIdAttr'
+					],
+				GetConsoleScreenshot:[
+					'#InstanceIdAttr'
+					],
+				GetHostReservationPurchasePreview:[
+					'#HostIdSetAttr','#OfferingIdAttr'
+					],
+				GetPasswordData:[
+					'#InstanceIdAttr'
+					],
+				GetReservedInstancesExchangeQuote:[
+					'#ReservedInstanceIdsAttr'
+					],
+				ImportImage:[
+					
+					],
+				ImportInstance:[
+					'#PlatformAttr'
+					],
+				ImportKeyPair:[
+					'#KeyNameAttr','#PublicKeyMaterialAttr'
+					],
+				ImportSnapshot:[
+					
+					],
+				ImportVolume:[
+					'#AvailabilityZoneAttr','#ImageAttr','#VolumeAttr'
+					],
+				ModifyFpgaImageAttribute:[
+					'#FpgaImageIdAttr'
+					],
+				ModifyHosts:[
+					'#AutoPlacementAttr','#HostIdsAttr'
+					],
+				ModifyIdFormat:[
+					'#ResourceAttr','#UseLongIdsAttr'
+					],
+				ModifyIdentityIdFormat:[
+					'#PrincipalArnAttr','#ResourceAttr','#UseLongIdsAttr'
+					],
+				ModifyImageAttribute:[
+					'#ImageIdAttr'
+					],
+				ModifyInstanceAttribute:[
+					'#InstanceIdAttr'
+					],
+				ModifyInstancePlacement:[
+					'#InstanceIdAttr'
+					],
+				ModifyNetworkInterfaceAttribute:[
+					'#NetworkInterfaceIdAttr'
+					],
+				ModifyReservedInstances:[
+					'#ReservedInstancesIdsAttr','#TargetConfigurationsAttr'
+					],
+				ModifySnapshotAttribute:[
+					'#SnapshotIdAttr'
+					],
+				ModifySpotFleetRequest:[
+					'#SpotFleetRequestIdAttr'
+					],
+				ModifySubnetAttribute:[
+					'#SubnetIdAttr'
+					],
+				ModifyVolume:[
+					'#VolumeIdAttr'
+					],
+				ModifyVolumeAttribute:[
+					'#VolumeIdAttr'
+					],
+				ModifyVpcAttribute:[
+					'#VpcIdAttr'
+					],
+				ModifyVpcEndpoint:[
+					'#VpcEndpointIdAttr'
+					],
+				ModifyVpcPeeringConnectionOptions:[
+					'#VpcPeeringConnectionIdAttr'
+					],
+				ModifyVpcTenancy:[
+					'#VpcIdAttr','#InstanceTenancyAttr'
+					],
+				MonitorInstances:[
+					'#InstanceIdsAttr'
+					],
+				MoveAddressToVpc:[
+					'#PublicIpAttr'
+					],
+				PurchaseHostReservation:[
+					'#HostIdSetAttr','#OfferingIdAttr'
+					],
+				PurchaseReservedInstancesOffering:[
+					'#InstanceCountAttr','#ReservedInstancesOfferingIdAttr'
+					],
+				PurchaseScheduledInstances:[
+					'#PurchaseRequestsAttr'
+					],
+				RebootInstances:[
+					'#InstanceIdsAttr'
+					],
+				RegisterImage:[
+					'#NameAttr'
+					],
+				RejectVpcPeeringConnection:[
+					'#VpcPeeringConnectionIdAttr'
+					],
+				ReleaseAddress:[
+					
+					],
+				ReleaseHosts:[
+					'#HostIdsAttr'
+					],
+				ReplaceIamInstanceProfileAssociation:[
+					'#IamInstanceProfileAttr','#AssociationIdAttr'
+					],
+				ReplaceNetworkAclAssociation:[
+					'#AssociationIdAttr','#NetworkAclIdAttr'
+					],
+				ReplaceNetworkAclEntry:[
+					'#EgressAttr','#NetworkAclIdAttr','#ProtocolAttr','#RuleActionAttr','#RuleNumberAttr'
+					],
+				ReplaceRoute:[
+					'#RouteTableIdAttr'
+					],
+				ReplaceRouteTableAssociation:[
+					'#AssociationIdAttr','#RouteTableIdAttr'
+					],
+				ReportInstanceStatus:[
+					'#InstancesAttr','#ReasonCodesAttr','#StatusAttr'
+					],
+				RequestSpotFleet:[
+					'#SpotFleetRequestConfigAttr'
+					],
+				RequestSpotInstances:[
+					'#SpotPriceAttr'
+					],
+				ResetFpgaImageAttribute:[
+					'#FpgaImageIdAttr'
+					],
+				ResetImageAttribute:[
+					'#AttributeAttr','#ImageIdAttr'
+					],
+				ResetInstanceAttribute:[
+					'#AttributeAttr','#InstanceIdAttr'
+					],
+				ResetNetworkInterfaceAttribute:[
+					'#NetworkInterfaceIdAttr'
+					],
+				ResetSnapshotAttribute:[
+					'#AttributeAttr','#SnapshotIdAttr'
+					],
+				RestoreAddressToClassic:[
+					'#PublicIpAttr'
+					],
+				RevokeSecurityGroupEgress:[
+					'#GroupIdAttr'
+					],
+				RevokeSecurityGroupIngress:[
+					
+					],
+				RunInstances:[
+					'#ImageIdAttr','#MaxCountAttr','#MinCountAttr'
+					],
+				RunScheduledInstances:[
+					'#LaunchSpecificationAttr','#ScheduledInstanceIdAttr'
+					],
+				StartInstances:[
+					'#InstanceIdsAttr'
+					],
+				StopInstances:[
+					'#InstanceIdsAttr'
+					],
+				TerminateInstances:[
+					'#InstanceIdsAttr'
+					],
+				UnassignIpv6Addresses:[
+					'#Ipv6AddressesAttr','#NetworkInterfaceIdAttr'
+					],
+				UnassignPrivateIpAddresses:[
+					'#NetworkInterfaceIdAttr','#PrivateIpAddressesAttr'
+					],
+				UnmonitorInstances:[
+					'#InstanceIdsAttr'
+					],
+				UpdateSecurityGroupRuleDescriptionsEgress:[
+					'#IpPermissionsAttr'
+					],
+				UpdateSecurityGroupRuleDescriptionsIngress:[
+					'#IpPermissionsAttr'
+					]
+		};
+		$('#node-input-operation').on('change',function(){
+			$('#AttrHolder').children().addClass('hiddenAttrs').removeClass('visibleAttrs');
+				if (nodeOps[this.value])
+					$(nodeOps[this.value].join()).addClass('visibleAttrs').removeClass('hiddenAttrs');
+		 });
+ </script>
 
 </script>
 
@@ -531,24 +1728,138 @@ NOTE: Parameters must be specified in the message, using the case specified in t
 </script>
 
 <script type="text/javascript">
-    RED.nodes.registerType('AWS EC2',{
-        category: 'AWS',
-        color:"#C0DEED",
-        defaults: {
-            aws: {type:"amazon config",required:true},
-            operation: { value: 'AcceptReservedInstancesExchangeQuote' },
-            name: { value: "" }
-        },
-        inputs:1,
-        outputs:1,
-        icon: "aws.png",
-        align: "right",
-        label: function() {
-            return this.name || "EC2 " + this.operation;
-        },
-        oneditprepare: function () {
+	RED.nodes.registerType('AWS EC2',{
+		category: 'AWS',
+		color:"#C0DEED",
+		defaults: {
+			aws: {type:"amazon config",required:true},
+			operation: { value: 'AcceptReservedInstancesExchangeQuote' },
+			
+				ReservedInstanceIds: { value: ""} ,
+				AvailabilityZone: { value: ""} ,
+				InstanceType: { value: ""} ,
+				Quantity: { value: ""} ,
+				NetworkInterfaceId: { value: ""} ,
+				DhcpOptionsId: { value: ""} ,
+				VpcId: { value: ""} ,
+				IamInstanceProfile: { value: ""} ,
+				InstanceId: { value: ""} ,
+				RouteTableId: { value: ""} ,
+				SubnetId: { value: ""} ,
+				Ipv6CidrBlock: { value: ""} ,
+				Groups: { value: ""} ,
+				InternetGatewayId: { value: ""} ,
+				DeviceIndex: { value: ""} ,
+				Device: { value: ""} ,
+				VolumeId: { value: ""} ,
+				VpnGatewayId: { value: ""} ,
+				GroupId: { value: ""} ,
+				Storage: { value: ""} ,
+				BundleId: { value: ""} ,
+				ConversionTaskId: { value: ""} ,
+				ExportTaskId: { value: ""} ,
+				ReservedInstancesListingId: { value: ""} ,
+				SpotFleetRequestIds: { value: ""} ,
+				TerminateInstances: { value: ""} ,
+				SpotInstanceRequestIds: { value: ""} ,
+				ProductCode: { value: ""} ,
+				SourceFpgaImageId: { value: ""} ,
+				SourceRegion: { value: ""} ,
+				Name: { value: ""} ,
+				SourceImageId: { value: ""} ,
+				SourceSnapshotId: { value: ""} ,
+				BgpAsn: { value: ""} ,
+				PublicIp: { value: ""} ,
+				Type: { value: ""} ,
+				DhcpConfigurations: { value: ""} ,
+				DeliverLogsPermissionArn: { value: ""} ,
+				LogGroupName: { value: ""} ,
+				ResourceIds: { value: ""} ,
+				ResourceType: { value: ""} ,
+				TrafficType: { value: ""} ,
+				InputStorageLocation: { value: ""} ,
+				KeyName: { value: ""} ,
+				AllocationId: { value: ""} ,
+				Egress: { value: ""} ,
+				NetworkAclId: { value: ""} ,
+				Protocol: { value: ""} ,
+				RuleAction: { value: ""} ,
+				RuleNumber: { value: ""} ,
+				Permission: { value: ""} ,
+				GroupName: { value: ""} ,
+				Strategy: { value: ""} ,
+				ClientToken: { value: ""} ,
+				InstanceCount: { value: ""} ,
+				PriceSchedules: { value: ""} ,
+				ReservedInstancesId: { value: ""} ,
+				Description: { value: ""} ,
+				Bucket: { value: ""} ,
+				CidrBlock: { value: ""} ,
+				Resources: { value: ""} ,
+				Tags: { value: ""} ,
+				ServiceName: { value: ""} ,
+				CustomerGatewayId: { value: ""} ,
+				DestinationCidrBlock: { value: ""} ,
+				VpnConnectionId: { value: ""} ,
+				EgressOnlyInternetGatewayId: { value: ""} ,
+				FlowLogIds: { value: ""} ,
+				FpgaImageId: { value: ""} ,
+				NatGatewayId: { value: ""} ,
+				NetworkInterfacePermissionId: { value: ""} ,
+				SnapshotId: { value: ""} ,
+				VpcEndpointIds: { value: ""} ,
+				VpcPeeringConnectionId: { value: ""} ,
+				ImageId: { value: ""} ,
+				Attribute: { value: ""} ,
+				PrincipalArn: { value: ""} ,
+				FirstSlotStartTimeRange: { value: ""} ,
+				Recurrence: { value: ""} ,
+				SpotFleetRequestId: { value: ""} ,
+				StartTime: { value: ""} ,
+				AttachmentId: { value: ""} ,
+				GatewayId: { value: ""} ,
+				AssociationId: { value: ""} ,
+				HostIdSet: { value: ""} ,
+				OfferingId: { value: ""} ,
+				Platform: { value: ""} ,
+				PublicKeyMaterial: { value: ""} ,
+				Image: { value: ""} ,
+				Volume: { value: ""} ,
+				AutoPlacement: { value: ""} ,
+				HostIds: { value: ""} ,
+				Resource: { value: ""} ,
+				UseLongIds: { value: ""} ,
+				ReservedInstancesIds: { value: ""} ,
+				TargetConfigurations: { value: ""} ,
+				VpcEndpointId: { value: ""} ,
+				InstanceTenancy: { value: ""} ,
+				InstanceIds: { value: ""} ,
+				ReservedInstancesOfferingId: { value: ""} ,
+				PurchaseRequests: { value: ""} ,
+				Instances: { value: ""} ,
+				ReasonCodes: { value: ""} ,
+				Status: { value: ""} ,
+				SpotFleetRequestConfig: { value: ""} ,
+				SpotPrice: { value: ""} ,
+				MaxCount: { value: ""} ,
+				MinCount: { value: ""} ,
+				LaunchSpecification: { value: ""} ,
+				ScheduledInstanceId: { value: ""} ,
+				Ipv6Addresses: { value: ""} ,
+				PrivateIpAddresses: { value: ""} ,
+				IpPermissions: { value: ""} ,
+			name: { value: "" }
+		},
+		inputs:1,
+		outputs:1,
+		icon: "aws.png",
+		align: "right",
+		label: function() {
+			return this.name || "EC2 " + this.operation;
+		},
+		oneditprepare: function () {
 
-        }
-    });
+		}
+	});
 </script>
 
