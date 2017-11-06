@@ -1,0 +1,195 @@
+
+<!--
+  Copyright 2017 Daniel Thomas.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+<script type="text/x-red" data-template-name="AWS ES">
+		<style scoped>
+				.hiddenAttrs {display:none;}
+				.visibleAttrs {display:block;}
+		</style>
+	<div class="form-row">
+		<label for="node-input-aws"><i class="fa fa-user"></i> AWS</label>
+		<input type="text" id="node-input-aws">
+	</div>
+	<div class="form-row">
+		<label for="node-input-operation"><i class="fa fa-wrench"></i> Operation</label>
+		<select type="text" id="node-input-operation">
+		
+			<option value="AddTags">AddTags</option>
+		
+			<option value="CreateElasticsearchDomain">CreateElasticsearchDomain</option>
+		
+			<option value="DeleteElasticsearchDomain">DeleteElasticsearchDomain</option>
+		
+			<option value="DeleteElasticsearchServiceRole">DeleteElasticsearchServiceRole</option>
+		
+			<option value="DescribeElasticsearchDomain">DescribeElasticsearchDomain</option>
+		
+			<option value="DescribeElasticsearchDomainConfig">DescribeElasticsearchDomainConfig</option>
+		
+			<option value="DescribeElasticsearchDomains">DescribeElasticsearchDomains</option>
+		
+			<option value="DescribeElasticsearchInstanceTypeLimits">DescribeElasticsearchInstanceTypeLimits</option>
+		
+			<option value="ListDomainNames">ListDomainNames</option>
+		
+			<option value="ListElasticsearchInstanceTypes">ListElasticsearchInstanceTypes</option>
+		
+			<option value="ListElasticsearchVersions">ListElasticsearchVersions</option>
+		
+			<option value="ListTags">ListTags</option>
+		
+			<option value="RemoveTags">RemoveTags</option>
+		
+			<option value="UpdateElasticsearchDomainConfig">UpdateElasticsearchDomainConfig</option>
+		;
+		</select>
+	</div>
+	<div class="form-row">
+		<label for="node-input-name"><i class="fa fa-tag"></i>Name</label>
+		<input type="text" id="node-input-name" placeholder="Name"></input>
+	</div>
+	<hr/>	
+	<div id="AttrHolder">
+	      
+	<div class="form-row" id='ARNAttr' class='hiddenAttrs'>
+		<label for="node-input-ARN"><i class="fa fa-tag"></i>ARN</label>
+		<input type="text" id="node-input-ARN" placeholder="ARN"></input>
+	</div> 
+	<div class="form-row" id='TagListAttr' class='hiddenAttrs'>
+		<label for="node-input-TagList"><i class="fa fa-tag"></i>TagList</label>
+		<input type="text" id="node-input-TagList" placeholder="TagList"></input>
+	</div> 
+	<div class="form-row" id='DomainNameAttr' class='hiddenAttrs'>
+		<label for="node-input-DomainName"><i class="fa fa-tag"></i>DomainName</label>
+		<input type="text" id="node-input-DomainName" placeholder="DomainName"></input>
+	</div> 
+	<div class="form-row" id='DomainNamesAttr' class='hiddenAttrs'>
+		<label for="node-input-DomainNames"><i class="fa fa-tag"></i>DomainNames</label>
+		<input type="text" id="node-input-DomainNames" placeholder="DomainNames"></input>
+	</div> 
+	<div class="form-row" id='InstanceTypeAttr' class='hiddenAttrs'>
+		<label for="node-input-InstanceType"><i class="fa fa-tag"></i>InstanceType</label>
+		<input type="text" id="node-input-InstanceType" placeholder="InstanceType"></input>
+	</div> 
+	<div class="form-row" id='ElasticsearchVersionAttr' class='hiddenAttrs'>
+		<label for="node-input-ElasticsearchVersion"><i class="fa fa-tag"></i>ElasticsearchVersion</label>
+		<input type="text" id="node-input-ElasticsearchVersion" placeholder="ElasticsearchVersion"></input>
+	</div> 
+	<div class="form-row" id='TagKeysAttr' class='hiddenAttrs'>
+		<label for="node-input-TagKeys"><i class="fa fa-tag"></i>TagKeys</label>
+		<input type="text" id="node-input-TagKeys" placeholder="TagKeys"></input>
+	</div> 
+	</div>
+
+ <script>
+	  var nodeOps={
+			
+				AddTags:[
+					'#ARNAttr','#TagListAttr'
+					],
+				CreateElasticsearchDomain:[
+					'#DomainNameAttr'
+					],
+				DeleteElasticsearchDomain:[
+					'#DomainNameAttr'
+					],
+				DeleteElasticsearchServiceRole:[
+					
+					],
+				DescribeElasticsearchDomain:[
+					'#DomainNameAttr'
+					],
+				DescribeElasticsearchDomainConfig:[
+					'#DomainNameAttr'
+					],
+				DescribeElasticsearchDomains:[
+					'#DomainNamesAttr'
+					],
+				DescribeElasticsearchInstanceTypeLimits:[
+					'#InstanceTypeAttr','#ElasticsearchVersionAttr'
+					],
+				ListDomainNames:[
+					
+					],
+				ListElasticsearchInstanceTypes:[
+					'#ElasticsearchVersionAttr'
+					],
+				ListElasticsearchVersions:[
+					
+					],
+				ListTags:[
+					'#ARNAttr'
+					],
+				RemoveTags:[
+					'#ARNAttr','#TagKeysAttr'
+					],
+				UpdateElasticsearchDomainConfig:[
+					'#DomainNameAttr'
+					]
+		};
+		$('#node-input-operation').on('change',function(){
+			$('#AttrHolder').children().addClass('hiddenAttrs').removeClass('visibleAttrs');
+				if (nodeOps[this.value])
+					$(nodeOps[this.value].join()).addClass('visibleAttrs').removeClass('hiddenAttrs');
+		 });
+ </script>
+
+</script>
+
+<script type="text/x-red" data-help-name="amazon ES">
+<p>
+AWS Amazon Elasticsearch Service
+</p>
+<p>
+<b>Descriptions to be added</b<
+</p>
+<p>
+NOTE: Parameters must be specified in the message, using the case specified in the AWS API documentation (normally UpperCaseLeading)..
+</p>
+
+</script>
+
+<script type="text/javascript">
+	RED.nodes.registerType('AWS ES',{
+		category: 'AWS',
+		color:"#C0DEED",
+		defaults: {
+			aws: {type:"amazon config",required:true},
+			operation: { value: 'AddTags' },
+			
+				ARN: { value: ""} ,
+				TagList: { value: ""} ,
+				DomainName: { value: ""} ,
+				DomainNames: { value: ""} ,
+				InstanceType: { value: ""} ,
+				ElasticsearchVersion: { value: ""} ,
+				TagKeys: { value: ""} ,
+			name: { value: "" }
+		},
+		inputs:1,
+		outputs:1,
+		icon: "aws.png",
+		align: "right",
+		label: function() {
+			return this.name || "ES " + this.operation;
+		},
+		oneditprepare: function () {
+
+		}
+	});
+</script>
+

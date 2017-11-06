@@ -21,6 +21,7 @@
     "sns",
     "dynamodb",
     "iot",
+    "es",
     "rds"
   ],
   "node-red": {
@@ -36,6 +37,7 @@
       "AWS Iot": "Iot.js",
       "AWS IotData": "IotData.js",
       "AWS KMS": "KMS.js",
+      "AWS ES": "ES.js",
       "amazon config": "config.js"
     }
   },

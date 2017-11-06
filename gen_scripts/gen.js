@@ -18,6 +18,7 @@ function serviceNameMapper(name){
 		Sqs:'SQS',
 		Rds:'RDS',
 		Kms:'KMS',
+		Es:'ES',
 		DynamoDB:'DynamoDB',
 		Ec2:'EC2'
 	};
