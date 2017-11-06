@@ -35,6 +35,7 @@
       "AWS RDS": "RDS.js",
       "AWS Iot": "Iot.js",
       "AWS IotData": "IotData.js",
+      "AWS KMS": "KMS.js",
       "amazon config": "config.js"
     }
   },

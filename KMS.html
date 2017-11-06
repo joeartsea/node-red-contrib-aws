@@ -1,0 +1,355 @@
+
+<!--
+  Copyright 2017 Daniel Thomas.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+<script type="text/x-red" data-template-name="AWS KMS">
+		<style scoped>
+				.hiddenAttrs {display:none;}
+				.visibleAttrs {display:block;}
+		</style>
+	<div class="form-row">
+		<label for="node-input-aws"><i class="fa fa-user"></i> AWS</label>
+		<input type="text" id="node-input-aws">
+	</div>
+	<div class="form-row">
+		<label for="node-input-operation"><i class="fa fa-wrench"></i> Operation</label>
+		<select type="text" id="node-input-operation">
+		
+			<option value="CancelKeyDeletion">CancelKeyDeletion</option>
+		
+			<option value="CreateAlias">CreateAlias</option>
+		
+			<option value="CreateGrant">CreateGrant</option>
+		
+			<option value="CreateKey">CreateKey</option>
+		
+			<option value="Decrypt">Decrypt</option>
+		
+			<option value="DeleteAlias">DeleteAlias</option>
+		
+			<option value="DeleteImportedKeyMaterial">DeleteImportedKeyMaterial</option>
+		
+			<option value="DescribeKey">DescribeKey</option>
+		
+			<option value="DisableKey">DisableKey</option>
+		
+			<option value="DisableKeyRotation">DisableKeyRotation</option>
+		
+			<option value="EnableKey">EnableKey</option>
+		
+			<option value="EnableKeyRotation">EnableKeyRotation</option>
+		
+			<option value="Encrypt">Encrypt</option>
+		
+			<option value="GenerateDataKey">GenerateDataKey</option>
+		
+			<option value="GenerateDataKeyWithoutPlaintext">GenerateDataKeyWithoutPlaintext</option>
+		
+			<option value="GenerateRandom">GenerateRandom</option>
+		
+			<option value="GetKeyPolicy">GetKeyPolicy</option>
+		
+			<option value="GetKeyRotationStatus">GetKeyRotationStatus</option>
+		
+			<option value="GetParametersForImport">GetParametersForImport</option>
+		
+			<option value="ImportKeyMaterial">ImportKeyMaterial</option>
+		
+			<option value="ListAliases">ListAliases</option>
+		
+			<option value="ListGrants">ListGrants</option>
+		
+			<option value="ListKeyPolicies">ListKeyPolicies</option>
+		
+			<option value="ListKeys">ListKeys</option>
+		
+			<option value="ListResourceTags">ListResourceTags</option>
+		
+			<option value="ListRetirableGrants">ListRetirableGrants</option>
+		
+			<option value="PutKeyPolicy">PutKeyPolicy</option>
+		
+			<option value="ReEncrypt">ReEncrypt</option>
+		
+			<option value="RetireGrant">RetireGrant</option>
+		
+			<option value="RevokeGrant">RevokeGrant</option>
+		
+			<option value="ScheduleKeyDeletion">ScheduleKeyDeletion</option>
+		
+			<option value="TagResource">TagResource</option>
+		
+			<option value="UntagResource">UntagResource</option>
+		
+			<option value="UpdateAlias">UpdateAlias</option>
+		
+			<option value="UpdateKeyDescription">UpdateKeyDescription</option>
+		;
+		</select>
+	</div>
+	<div class="form-row">
+		<label for="node-input-name"><i class="fa fa-tag"></i>Name</label>
+		<input type="text" id="node-input-name" placeholder="Name"></input>
+	</div>
+	<hr/>	
+	<div id="AttrHolder">
+	      
+	<div class="form-row" id='KeyIdAttr' class='hiddenAttrs'>
+		<label for="node-input-KeyId"><i class="fa fa-tag"></i>KeyId</label>
+		<input type="text" id="node-input-KeyId" placeholder="KeyId"></input>
+	</div> 
+	<div class="form-row" id='AliasNameAttr' class='hiddenAttrs'>
+		<label for="node-input-AliasName"><i class="fa fa-tag"></i>AliasName</label>
+		<input type="text" id="node-input-AliasName" placeholder="AliasName"></input>
+	</div> 
+	<div class="form-row" id='TargetKeyIdAttr' class='hiddenAttrs'>
+		<label for="node-input-TargetKeyId"><i class="fa fa-tag"></i>TargetKeyId</label>
+		<input type="text" id="node-input-TargetKeyId" placeholder="TargetKeyId"></input>
+	</div> 
+	<div class="form-row" id='GranteePrincipalAttr' class='hiddenAttrs'>
+		<label for="node-input-GranteePrincipal"><i class="fa fa-tag"></i>GranteePrincipal</label>
+		<input type="text" id="node-input-GranteePrincipal" placeholder="GranteePrincipal"></input>
+	</div> 
+	<div class="form-row" id='CiphertextBlobAttr' class='hiddenAttrs'>
+		<label for="node-input-CiphertextBlob"><i class="fa fa-tag"></i>CiphertextBlob</label>
+		<input type="text" id="node-input-CiphertextBlob" placeholder="CiphertextBlob"></input>
+	</div> 
+	<div class="form-row" id='PlaintextAttr' class='hiddenAttrs'>
+		<label for="node-input-Plaintext"><i class="fa fa-tag"></i>Plaintext</label>
+		<input type="text" id="node-input-Plaintext" placeholder="Plaintext"></input>
+	</div> 
+	<div class="form-row" id='PolicyNameAttr' class='hiddenAttrs'>
+		<label for="node-input-PolicyName"><i class="fa fa-tag"></i>PolicyName</label>
+		<input type="text" id="node-input-PolicyName" placeholder="PolicyName"></input>
+	</div> 
+	<div class="form-row" id='WrappingAlgorithmAttr' class='hiddenAttrs'>
+		<label for="node-input-WrappingAlgorithm"><i class="fa fa-tag"></i>WrappingAlgorithm</label>
+		<input type="text" id="node-input-WrappingAlgorithm" placeholder="WrappingAlgorithm"></input>
+	</div> 
+	<div class="form-row" id='WrappingKeySpecAttr' class='hiddenAttrs'>
+		<label for="node-input-WrappingKeySpec"><i class="fa fa-tag"></i>WrappingKeySpec</label>
+		<input type="text" id="node-input-WrappingKeySpec" placeholder="WrappingKeySpec"></input>
+	</div> 
+	<div class="form-row" id='ImportTokenAttr' class='hiddenAttrs'>
+		<label for="node-input-ImportToken"><i class="fa fa-tag"></i>ImportToken</label>
+		<input type="text" id="node-input-ImportToken" placeholder="ImportToken"></input>
+	</div> 
+	<div class="form-row" id='EncryptedKeyMaterialAttr' class='hiddenAttrs'>
+		<label for="node-input-EncryptedKeyMaterial"><i class="fa fa-tag"></i>EncryptedKeyMaterial</label>
+		<input type="text" id="node-input-EncryptedKeyMaterial" placeholder="EncryptedKeyMaterial"></input>
+	</div> 
+	<div class="form-row" id='RetiringPrincipalAttr' class='hiddenAttrs'>
+		<label for="node-input-RetiringPrincipal"><i class="fa fa-tag"></i>RetiringPrincipal</label>
+		<input type="text" id="node-input-RetiringPrincipal" placeholder="RetiringPrincipal"></input>
+	</div> 
+	<div class="form-row" id='PolicyAttr' class='hiddenAttrs'>
+		<label for="node-input-Policy"><i class="fa fa-tag"></i>Policy</label>
+		<input type="text" id="node-input-Policy" placeholder="Policy"></input>
+	</div> 
+	<div class="form-row" id='DestinationKeyIdAttr' class='hiddenAttrs'>
+		<label for="node-input-DestinationKeyId"><i class="fa fa-tag"></i>DestinationKeyId</label>
+		<input type="text" id="node-input-DestinationKeyId" placeholder="DestinationKeyId"></input>
+	</div> 
+	<div class="form-row" id='GrantIdAttr' class='hiddenAttrs'>
+		<label for="node-input-GrantId"><i class="fa fa-tag"></i>GrantId</label>
+		<input type="text" id="node-input-GrantId" placeholder="GrantId"></input>
+	</div> 
+	<div class="form-row" id='TagsAttr' class='hiddenAttrs'>
+		<label for="node-input-Tags"><i class="fa fa-tag"></i>Tags</label>
+		<input type="text" id="node-input-Tags" placeholder="Tags"></input>
+	</div> 
+	<div class="form-row" id='TagKeysAttr' class='hiddenAttrs'>
+		<label for="node-input-TagKeys"><i class="fa fa-tag"></i>TagKeys</label>
+		<input type="text" id="node-input-TagKeys" placeholder="TagKeys"></input>
+	</div> 
+	<div class="form-row" id='DescriptionAttr' class='hiddenAttrs'>
+		<label for="node-input-Description"><i class="fa fa-tag"></i>Description</label>
+		<input type="text" id="node-input-Description" placeholder="Description"></input>
+	</div> 
+	</div>
+
+ <script>
+	  var nodeOps={
+			
+				CancelKeyDeletion:[
+					'#KeyIdAttr'
+					],
+				CreateAlias:[
+					'#AliasNameAttr','#TargetKeyIdAttr'
+					],
+				CreateGrant:[
+					'#KeyIdAttr','#GranteePrincipalAttr'
+					],
+				CreateKey:[
+					
+					],
+				Decrypt:[
+					'#CiphertextBlobAttr'
+					],
+				DeleteAlias:[
+					'#AliasNameAttr'
+					],
+				DeleteImportedKeyMaterial:[
+					'#KeyIdAttr'
+					],
+				DescribeKey:[
+					'#KeyIdAttr'
+					],
+				DisableKey:[
+					'#KeyIdAttr'
+					],
+				DisableKeyRotation:[
+					'#KeyIdAttr'
+					],
+				EnableKey:[
+					'#KeyIdAttr'
+					],
+				EnableKeyRotation:[
+					'#KeyIdAttr'
+					],
+				Encrypt:[
+					'#KeyIdAttr','#PlaintextAttr'
+					],
+				GenerateDataKey:[
+					'#KeyIdAttr'
+					],
+				GenerateDataKeyWithoutPlaintext:[
+					'#KeyIdAttr'
+					],
+				GenerateRandom:[
+					
+					],
+				GetKeyPolicy:[
+					'#KeyIdAttr','#PolicyNameAttr'
+					],
+				GetKeyRotationStatus:[
+					'#KeyIdAttr'
+					],
+				GetParametersForImport:[
+					'#KeyIdAttr','#WrappingAlgorithmAttr','#WrappingKeySpecAttr'
+					],
+				ImportKeyMaterial:[
+					'#KeyIdAttr','#ImportTokenAttr','#EncryptedKeyMaterialAttr'
+					],
+				ListAliases:[
+					
+					],
+				ListGrants:[
+					'#KeyIdAttr'
+					],
+				ListKeyPolicies:[
+					'#KeyIdAttr'
+					],
+				ListKeys:[
+					
+					],
+				ListResourceTags:[
+					'#KeyIdAttr'
+					],
+				ListRetirableGrants:[
+					'#RetiringPrincipalAttr'
+					],
+				PutKeyPolicy:[
+					'#KeyIdAttr','#PolicyNameAttr','#PolicyAttr'
+					],
+				ReEncrypt:[
+					'#CiphertextBlobAttr','#DestinationKeyIdAttr'
+					],
+				RetireGrant:[
+					
+					],
+				RevokeGrant:[
+					'#KeyIdAttr','#GrantIdAttr'
+					],
+				ScheduleKeyDeletion:[
+					'#KeyIdAttr'
+					],
+				TagResource:[
+					'#KeyIdAttr','#TagsAttr'
+					],
+				UntagResource:[
+					'#KeyIdAttr','#TagKeysAttr'
+					],
+				UpdateAlias:[
+					'#AliasNameAttr','#TargetKeyIdAttr'
+					],
+				UpdateKeyDescription:[
+					'#KeyIdAttr','#DescriptionAttr'
+					]
+		};
+		$('#node-input-operation').on('change',function(){
+			$('#AttrHolder').children().addClass('hiddenAttrs').removeClass('visibleAttrs');
+				if (nodeOps[this.value])
+					$(nodeOps[this.value].join()).addClass('visibleAttrs').removeClass('hiddenAttrs');
+		 });
+ </script>
+
+</script>
+
+<script type="text/x-red" data-help-name="amazon KMS">
+<p>
+AWS AWS Key Management Service
+</p>
+<p>
+<b>Descriptions to be added</b<
+</p>
+<p>
+NOTE: Parameters must be specified in the message, using the case specified in the AWS API documentation (normally UpperCaseLeading)..
+</p>
+
+</script>
+
+<script type="text/javascript">
+	RED.nodes.registerType('AWS KMS',{
+		category: 'AWS',
+		color:"#C0DEED",
+		defaults: {
+			aws: {type:"amazon config",required:true},
+			operation: { value: 'CancelKeyDeletion' },
+			
+				KeyId: { value: ""} ,
+				AliasName: { value: ""} ,
+				TargetKeyId: { value: ""} ,
+				GranteePrincipal: { value: ""} ,
+				CiphertextBlob: { value: ""} ,
+				Plaintext: { value: ""} ,
+				PolicyName: { value: ""} ,
+				WrappingAlgorithm: { value: ""} ,
+				WrappingKeySpec: { value: ""} ,
+				ImportToken: { value: ""} ,
+				EncryptedKeyMaterial: { value: ""} ,
+				RetiringPrincipal: { value: ""} ,
+				Policy: { value: ""} ,
+				DestinationKeyId: { value: ""} ,
+				GrantId: { value: ""} ,
+				Tags: { value: ""} ,
+				TagKeys: { value: ""} ,
+				Description: { value: ""} ,
+			name: { value: "" }
+		},
+		inputs:1,
+		outputs:1,
+		icon: "aws.png",
+		align: "right",
+		label: function() {
+			return this.name || "KMS " + this.operation;
+		},
+		oneditprepare: function () {
+
+		}
+	});
+</script>
+
