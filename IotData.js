@@ -40,7 +40,7 @@ module.exports = function(RED) {
 			return;
 		}
 
-		var awsService = new AWS.IotData( { 'region': node.region ,'endpoint':n.endPoint} );
+		var awsService = new AWS.IotData( { 'region': node.region } );
 
 		node.on("input", function(msg) {
 			node.sendMsg = function (err, data) {
@@ -72,6 +72,11 @@ module.exports = function(RED) {
 			if (typeof src[arg] !== 'undefined'){
 				out[outArg]=src[arg];
 			}
+                        //AWS API takes 'Payload' not 'payload' (see Lambda)
+                        if (arg=="Payload" && typeof src[arg] == 'undefined'){
+                                out[arg]=src["payload"];
+                        }
+
 		}
 
 		var service={};

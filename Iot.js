@@ -72,6 +72,11 @@ module.exports = function(RED) {
 			if (typeof src[arg] !== 'undefined'){
 				out[outArg]=src[arg];
 			}
+                        //AWS API takes 'Payload' not 'payload' (see Lambda)
+                        if (arg=="Payload" && typeof src[arg] == 'undefined'){
+                                out[arg]=src["payload"];
+                        }
+
 		}
 
 		var service={};
