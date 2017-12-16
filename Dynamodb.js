@@ -106,6 +106,36 @@ module.exports = function(RED) {
 		}
 
 		
+		service.CreateBackup=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"TableName",params); 
+			copyArg(n,"BackupName",params); 
+			
+			copyArg(msg,"TableName",params); 
+			copyArg(msg,"BackupName",params); 
+			
+
+			svc.createBackup(params,cb);
+		}
+
+		
+		service.CreateGlobalTable=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"GlobalTableName",params); 
+			copyArg(n,"ReplicationGroup",params); 
+			
+			copyArg(msg,"GlobalTableName",params); 
+			copyArg(msg,"ReplicationGroup",params); 
+			
+
+			svc.createGlobalTable(params,cb);
+		}
+
+		
 		service.CreateTable=function(svc,msg,cb){
 			var params={};
 			//copyArgs
@@ -125,6 +155,19 @@ module.exports = function(RED) {
 			
 
 			svc.createTable(params,cb);
+		}
+
+		
+		service.DeleteBackup=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"BackupArn",params); 
+			
+			copyArg(msg,"BackupArn",params); 
+			
+
+			svc.deleteBackup(params,cb);
 		}
 
 		
@@ -161,6 +204,45 @@ module.exports = function(RED) {
 			
 
 			svc.deleteTable(params,cb);
+		}
+
+		
+		service.DescribeBackup=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"BackupArn",params); 
+			
+			copyArg(msg,"BackupArn",params); 
+			
+
+			svc.describeBackup(params,cb);
+		}
+
+		
+		service.DescribeContinuousBackups=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"TableName",params); 
+			
+			copyArg(msg,"TableName",params); 
+			
+
+			svc.describeContinuousBackups(params,cb);
+		}
+
+		
+		service.DescribeGlobalTable=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"GlobalTableName",params); 
+			
+			copyArg(msg,"GlobalTableName",params); 
+			
+
+			svc.describeGlobalTable(params,cb);
 		}
 
 		
@@ -218,6 +300,36 @@ module.exports = function(RED) {
 			
 
 			svc.getItem(params,cb);
+		}
+
+		
+		service.ListBackups=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			
+			copyArg(msg,"TableName",params); 
+			copyArg(msg,"Limit",params); 
+			copyArg(msg,"TimeRangeLowerBound",params); 
+			copyArg(msg,"TimeRangeUpperBound",params); 
+			copyArg(msg,"ExclusiveStartBackupArn",params); 
+			
+
+			svc.listBackups(params,cb);
+		}
+
+		
+		service.ListGlobalTables=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			
+			copyArg(msg,"ExclusiveStartGlobalTableName",params); 
+			copyArg(msg,"Limit",params); 
+			copyArg(msg,"RegionName",params); 
+			
+
+			svc.listGlobalTables(params,cb);
 		}
 
 		
@@ -300,6 +412,21 @@ module.exports = function(RED) {
 		}
 
 		
+		service.RestoreTableFromBackup=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"TargetTableName",params); 
+			copyArg(n,"BackupArn",params); 
+			
+			copyArg(msg,"TargetTableName",params); 
+			copyArg(msg,"BackupArn",params); 
+			
+
+			svc.restoreTableFromBackup(params,cb);
+		}
+
+		
 		service.Scan=function(svc,msg,cb){
 			var params={};
 			//copyArgs
@@ -355,6 +482,21 @@ module.exports = function(RED) {
 			
 
 			svc.untagResource(params,cb);
+		}
+
+		
+		service.UpdateGlobalTable=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"GlobalTableName",params); 
+			copyArg(n,"ReplicaUpdates",params); 
+			
+			copyArg(msg,"GlobalTableName",params); 
+			copyArg(msg,"ReplicaUpdates",params); 
+			
+
+			svc.updateGlobalTable(params,cb);
 		}
 
 		

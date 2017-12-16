@@ -105,6 +105,7 @@ module.exports = function(RED) {
 			copyArg(msg,"AccessPolicies",params); 
 			copyArg(msg,"SnapshotOptions",params); 
 			copyArg(msg,"VPCOptions",params); 
+			copyArg(msg,"EncryptionAtRestOptions",params); 
 			copyArg(msg,"AdvancedOptions",params); 
 			copyArg(msg,"LogPublishingOptions",params); 
 			

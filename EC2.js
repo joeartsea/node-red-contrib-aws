@@ -92,6 +92,22 @@ module.exports = function(RED) {
 		}
 
 		
+		service.AcceptVpcEndpointConnections=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"ServiceId",params); 
+			copyArg(n,"VpcEndpointIds",params); 
+			
+			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"ServiceId",params); 
+			copyArg(msg,"VpcEndpointIds",params); 
+			
+
+			svc.acceptVpcEndpointConnections(params,cb);
+		}
+
+		
 		service.AcceptVpcPeeringConnection=function(svc,msg,cb){
 			var params={};
 			//copyArgs
@@ -603,6 +619,20 @@ module.exports = function(RED) {
 		}
 
 		
+		service.CreateDefaultSubnet=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"AvailabilityZone",params); 
+			
+			copyArg(msg,"AvailabilityZone",params); 
+			copyArg(msg,"DryRun",params); 
+			
+
+			svc.createDefaultSubnet(params,cb);
+		}
+
+		
 		service.CreateDefaultVpc=function(svc,msg,cb){
 			var params={};
 			//copyArgs
@@ -742,6 +772,43 @@ module.exports = function(RED) {
 			
 
 			svc.createKeyPair(params,cb);
+		}
+
+		
+		service.CreateLaunchTemplate=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"LaunchTemplateName",params); 
+			copyArg(n,"LaunchTemplateData",params); 
+			
+			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"ClientToken",params); 
+			copyArg(msg,"LaunchTemplateName",params); 
+			copyArg(msg,"VersionDescription",params); 
+			copyArg(msg,"LaunchTemplateData",params); 
+			
+
+			svc.createLaunchTemplate(params,cb);
+		}
+
+		
+		service.CreateLaunchTemplateVersion=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"LaunchTemplateData",params); 
+			
+			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"ClientToken",params); 
+			copyArg(msg,"LaunchTemplateId",params); 
+			copyArg(msg,"LaunchTemplateName",params); 
+			copyArg(msg,"SourceVersion",params); 
+			copyArg(msg,"VersionDescription",params); 
+			copyArg(msg,"LaunchTemplateData",params); 
+			
+
+			svc.createLaunchTemplateVersion(params,cb);
 		}
 
 		
@@ -1033,18 +1100,57 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"ServiceName",params); 
 			copyArg(n,"VpcId",params); 
+			copyArg(n,"ServiceName",params); 
 			
-			copyArg(msg,"ClientToken",params); 
 			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"VpcEndpointType",params); 
+			copyArg(msg,"VpcId",params); 
+			copyArg(msg,"ServiceName",params); 
 			copyArg(msg,"PolicyDocument",params); 
 			copyArg(msg,"RouteTableIds",params); 
-			copyArg(msg,"ServiceName",params); 
-			copyArg(msg,"VpcId",params); 
+			copyArg(msg,"SubnetIds",params); 
+			copyArg(msg,"SecurityGroupIds",params); 
+			copyArg(msg,"ClientToken",params); 
+			copyArg(msg,"PrivateDnsEnabled",params); 
 			
 
 			svc.createVpcEndpoint(params,cb);
+		}
+
+		
+		service.CreateVpcEndpointConnectionNotification=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"ConnectionNotificationArn",params); 
+			copyArg(n,"ConnectionEvents",params); 
+			
+			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"ServiceId",params); 
+			copyArg(msg,"VpcEndpointId",params); 
+			copyArg(msg,"ConnectionNotificationArn",params); 
+			copyArg(msg,"ConnectionEvents",params); 
+			copyArg(msg,"ClientToken",params); 
+			
+
+			svc.createVpcEndpointConnectionNotification(params,cb);
+		}
+
+		
+		service.CreateVpcEndpointServiceConfiguration=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"NetworkLoadBalancerArns",params); 
+			
+			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"AcceptanceRequired",params); 
+			copyArg(msg,"NetworkLoadBalancerArns",params); 
+			copyArg(msg,"ClientToken",params); 
+			
+
+			svc.createVpcEndpointServiceConfiguration(params,cb);
 		}
 
 		
@@ -1057,6 +1163,7 @@ module.exports = function(RED) {
 			copyArg(msg,"PeerOwnerId",params); 
 			copyArg(msg,"PeerVpcId",params); 
 			copyArg(msg,"VpcId",params); 
+			copyArg(msg,"PeerRegion",params); 
 			
 
 			svc.createVpcPeeringConnection(params,cb);
@@ -1207,6 +1314,36 @@ module.exports = function(RED) {
 			
 
 			svc.deleteKeyPair(params,cb);
+		}
+
+		
+		service.DeleteLaunchTemplate=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			
+			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"LaunchTemplateId",params); 
+			copyArg(msg,"LaunchTemplateName",params); 
+			
+
+			svc.deleteLaunchTemplate(params,cb);
+		}
+
+		
+		service.DeleteLaunchTemplateVersions=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"Versions",params); 
+			
+			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"LaunchTemplateId",params); 
+			copyArg(msg,"LaunchTemplateName",params); 
+			copyArg(msg,"Versions",params); 
+			
+
+			svc.deleteLaunchTemplateVersions(params,cb);
 		}
 
 		
@@ -1422,6 +1559,34 @@ module.exports = function(RED) {
 			
 
 			svc.deleteVpc(params,cb);
+		}
+
+		
+		service.DeleteVpcEndpointConnectionNotifications=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"ConnectionNotificationIds",params); 
+			
+			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"ConnectionNotificationIds",params); 
+			
+
+			svc.deleteVpcEndpointConnectionNotifications(params,cb);
+		}
+
+		
+		service.DeleteVpcEndpointServiceConfigurations=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"ServiceIds",params); 
+			
+			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"ServiceIds",params); 
+			
+
+			svc.deleteVpcEndpointServiceConfigurations(params,cb);
 		}
 
 		
@@ -1882,6 +2047,22 @@ module.exports = function(RED) {
 		}
 
 		
+		service.DescribeInstanceCreditSpecifications=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			
+			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"Filters",params); 
+			copyArg(msg,"InstanceIds",params); 
+			copyArg(msg,"MaxResults",params); 
+			copyArg(msg,"NextToken",params); 
+			
+
+			svc.describeInstanceCreditSpecifications(params,cb);
+		}
+
+		
 		service.DescribeInstanceStatus=function(svc,msg,cb){
 			var params={};
 			//copyArgs
@@ -1940,6 +2121,43 @@ module.exports = function(RED) {
 			
 
 			svc.describeKeyPairs(params,cb);
+		}
+
+		
+		service.DescribeLaunchTemplateVersions=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			
+			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"LaunchTemplateId",params); 
+			copyArg(msg,"LaunchTemplateName",params); 
+			copyArg(msg,"Versions",params); 
+			copyArg(msg,"MinVersion",params); 
+			copyArg(msg,"MaxVersion",params); 
+			copyArg(msg,"NextToken",params); 
+			copyArg(msg,"MaxResults",params); 
+			copyArg(msg,"Filters",params); 
+			
+
+			svc.describeLaunchTemplateVersions(params,cb);
+		}
+
+		
+		service.DescribeLaunchTemplates=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			
+			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"LaunchTemplateIds",params); 
+			copyArg(msg,"LaunchTemplateNames",params); 
+			copyArg(msg,"Filters",params); 
+			copyArg(msg,"NextToken",params); 
+			copyArg(msg,"MaxResults",params); 
+			
+
+			svc.describeLaunchTemplates(params,cb);
 		}
 
 		
@@ -2511,12 +2729,78 @@ module.exports = function(RED) {
 		}
 
 		
+		service.DescribeVpcEndpointConnectionNotifications=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			
+			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"ConnectionNotificationId",params); 
+			copyArg(msg,"Filters",params); 
+			copyArg(msg,"MaxResults",params); 
+			copyArg(msg,"NextToken",params); 
+			
+
+			svc.describeVpcEndpointConnectionNotifications(params,cb);
+		}
+
+		
+		service.DescribeVpcEndpointConnections=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			
+			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"Filters",params); 
+			copyArg(msg,"MaxResults",params); 
+			copyArg(msg,"NextToken",params); 
+			
+
+			svc.describeVpcEndpointConnections(params,cb);
+		}
+
+		
+		service.DescribeVpcEndpointServiceConfigurations=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			
+			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"ServiceIds",params); 
+			copyArg(msg,"Filters",params); 
+			copyArg(msg,"MaxResults",params); 
+			copyArg(msg,"NextToken",params); 
+			
+
+			svc.describeVpcEndpointServiceConfigurations(params,cb);
+		}
+
+		
+		service.DescribeVpcEndpointServicePermissions=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"ServiceId",params); 
+			
+			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"ServiceId",params); 
+			copyArg(msg,"Filters",params); 
+			copyArg(msg,"MaxResults",params); 
+			copyArg(msg,"NextToken",params); 
+			
+
+			svc.describeVpcEndpointServicePermissions(params,cb);
+		}
+
+		
 		service.DescribeVpcEndpointServices=function(svc,msg,cb){
 			var params={};
 			//copyArgs
 			
 			
 			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"ServiceNames",params); 
+			copyArg(msg,"Filters",params); 
 			copyArg(msg,"MaxResults",params); 
 			copyArg(msg,"NextToken",params); 
 			
@@ -2531,10 +2815,10 @@ module.exports = function(RED) {
 			
 			
 			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"VpcEndpointIds",params); 
 			copyArg(msg,"Filters",params); 
 			copyArg(msg,"MaxResults",params); 
 			copyArg(msg,"NextToken",params); 
-			copyArg(msg,"VpcEndpointIds",params); 
 			
 
 			svc.describeVpcEndpoints(params,cb);
@@ -2884,6 +3168,20 @@ module.exports = function(RED) {
 		}
 
 		
+		service.GetLaunchTemplateData=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"InstanceId",params); 
+			
+			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"InstanceId",params); 
+			
+
+			svc.getLaunchTemplateData(params,cb);
+		}
+
+		
 		service.GetPasswordData=function(svc,msg,cb){
 			var params={};
 			//copyArgs
@@ -3122,6 +3420,21 @@ module.exports = function(RED) {
 		}
 
 		
+		service.ModifyInstanceCreditSpecification=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"InstanceCreditSpecifications",params); 
+			
+			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"ClientToken",params); 
+			copyArg(msg,"InstanceCreditSpecifications",params); 
+			
+
+			svc.modifyInstanceCreditSpecification(params,cb);
+		}
+
+		
 		service.ModifyInstancePlacement=function(svc,msg,cb){
 			var params={};
 			//copyArgs
@@ -3135,6 +3448,22 @@ module.exports = function(RED) {
 			
 
 			svc.modifyInstancePlacement(params,cb);
+		}
+
+		
+		service.ModifyLaunchTemplate=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			
+			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"ClientToken",params); 
+			copyArg(msg,"LaunchTemplateId",params); 
+			copyArg(msg,"LaunchTemplateName",params); 
+			copyArg(msg,"DefaultVersion",params); 
+			
+
+			svc.modifyLaunchTemplate(params,cb);
 		}
 
 		
@@ -3274,15 +3603,69 @@ module.exports = function(RED) {
 			
 			copyArg(n,"VpcEndpointId",params); 
 			
-			copyArg(msg,"AddRouteTableIds",params); 
 			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"PolicyDocument",params); 
-			copyArg(msg,"RemoveRouteTableIds",params); 
-			copyArg(msg,"ResetPolicy",params); 
 			copyArg(msg,"VpcEndpointId",params); 
+			copyArg(msg,"ResetPolicy",params); 
+			copyArg(msg,"PolicyDocument",params); 
+			copyArg(msg,"AddRouteTableIds",params); 
+			copyArg(msg,"RemoveRouteTableIds",params); 
+			copyArg(msg,"AddSubnetIds",params); 
+			copyArg(msg,"RemoveSubnetIds",params); 
+			copyArg(msg,"AddSecurityGroupIds",params); 
+			copyArg(msg,"RemoveSecurityGroupIds",params); 
+			copyArg(msg,"PrivateDnsEnabled",params); 
 			
 
 			svc.modifyVpcEndpoint(params,cb);
+		}
+
+		
+		service.ModifyVpcEndpointConnectionNotification=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"ConnectionNotificationId",params); 
+			
+			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"ConnectionNotificationId",params); 
+			copyArg(msg,"ConnectionNotificationArn",params); 
+			copyArg(msg,"ConnectionEvents",params); 
+			
+
+			svc.modifyVpcEndpointConnectionNotification(params,cb);
+		}
+
+		
+		service.ModifyVpcEndpointServiceConfiguration=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"ServiceId",params); 
+			
+			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"ServiceId",params); 
+			copyArg(msg,"AcceptanceRequired",params); 
+			copyArg(msg,"AddNetworkLoadBalancerArns",params); 
+			copyArg(msg,"RemoveNetworkLoadBalancerArns",params); 
+			
+
+			svc.modifyVpcEndpointServiceConfiguration(params,cb);
+		}
+
+		
+		service.ModifyVpcEndpointServicePermissions=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"ServiceId",params); 
+			
+			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"ServiceId",params); 
+			copyArg(msg,"AddAllowedPrincipals",params); 
+			copyArg(msg,"RemoveAllowedPrincipals",params); 
+			
+
+			svc.modifyVpcEndpointServicePermissions(params,cb);
 		}
 
 		
@@ -3432,6 +3815,22 @@ module.exports = function(RED) {
 			
 
 			svc.registerImage(params,cb);
+		}
+
+		
+		service.RejectVpcEndpointConnections=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"ServiceId",params); 
+			copyArg(n,"VpcEndpointIds",params); 
+			
+			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"ServiceId",params); 
+			copyArg(msg,"VpcEndpointIds",params); 
+			
+
+			svc.rejectVpcEndpointConnections(params,cb);
 		}
 
 		
@@ -3610,7 +4009,6 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"SpotPrice",params); 
 			
 			copyArg(msg,"AvailabilityZoneGroup",params); 
 			copyArg(msg,"BlockDurationMinutes",params); 
@@ -3768,7 +4166,6 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"ImageId",params); 
 			copyArg(n,"MaxCount",params); 
 			copyArg(n,"MinCount",params); 
 			
@@ -3799,6 +4196,9 @@ module.exports = function(RED) {
 			copyArg(msg,"PrivateIpAddress",params); 
 			copyArg(msg,"ElasticGpuSpecification",params); 
 			copyArg(msg,"TagSpecifications",params); 
+			copyArg(msg,"LaunchTemplate",params); 
+			copyArg(msg,"InstanceMarketOptions",params); 
+			copyArg(msg,"CreditSpecification",params); 
 			
 
 			svc.runInstances(params,cb);

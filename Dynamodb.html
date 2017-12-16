@@ -32,11 +32,23 @@
 		
 			<option value="BatchWriteItem">BatchWriteItem</option>
 		
+			<option value="CreateBackup">CreateBackup</option>
+		
+			<option value="CreateGlobalTable">CreateGlobalTable</option>
+		
 			<option value="CreateTable">CreateTable</option>
+		
+			<option value="DeleteBackup">DeleteBackup</option>
 		
 			<option value="DeleteItem">DeleteItem</option>
 		
 			<option value="DeleteTable">DeleteTable</option>
+		
+			<option value="DescribeBackup">DescribeBackup</option>
+		
+			<option value="DescribeContinuousBackups">DescribeContinuousBackups</option>
+		
+			<option value="DescribeGlobalTable">DescribeGlobalTable</option>
 		
 			<option value="DescribeLimits">DescribeLimits</option>
 		
@@ -46,6 +58,10 @@
 		
 			<option value="GetItem">GetItem</option>
 		
+			<option value="ListBackups">ListBackups</option>
+		
+			<option value="ListGlobalTables">ListGlobalTables</option>
+		
 			<option value="ListTables">ListTables</option>
 		
 			<option value="ListTagsOfResource">ListTagsOfResource</option>
@@ -54,11 +70,15 @@
 		
 			<option value="Query">Query</option>
 		
+			<option value="RestoreTableFromBackup">RestoreTableFromBackup</option>
+		
 			<option value="Scan">Scan</option>
 		
 			<option value="TagResource">TagResource</option>
 		
 			<option value="UntagResource">UntagResource</option>
+		
+			<option value="UpdateGlobalTable">UpdateGlobalTable</option>
 		
 			<option value="UpdateItem">UpdateItem</option>
 		
@@ -79,13 +99,25 @@
 		<label for="node-input-RequestItems"><i class="fa fa-tag"></i>RequestItems</label>
 		<input type="text" id="node-input-RequestItems" placeholder="RequestItems"></input>
 	</div> 
-	<div class="form-row" id='AttributeDefinitionsAttr' class='hiddenAttrs'>
-		<label for="node-input-AttributeDefinitions"><i class="fa fa-tag"></i>AttributeDefinitions</label>
-		<input type="text" id="node-input-AttributeDefinitions" placeholder="AttributeDefinitions"></input>
-	</div> 
 	<div class="form-row" id='TableNameAttr' class='hiddenAttrs'>
 		<label for="node-input-TableName"><i class="fa fa-tag"></i>TableName</label>
 		<input type="text" id="node-input-TableName" placeholder="TableName"></input>
+	</div> 
+	<div class="form-row" id='BackupNameAttr' class='hiddenAttrs'>
+		<label for="node-input-BackupName"><i class="fa fa-tag"></i>BackupName</label>
+		<input type="text" id="node-input-BackupName" placeholder="BackupName"></input>
+	</div> 
+	<div class="form-row" id='GlobalTableNameAttr' class='hiddenAttrs'>
+		<label for="node-input-GlobalTableName"><i class="fa fa-tag"></i>GlobalTableName</label>
+		<input type="text" id="node-input-GlobalTableName" placeholder="GlobalTableName"></input>
+	</div> 
+	<div class="form-row" id='ReplicationGroupAttr' class='hiddenAttrs'>
+		<label for="node-input-ReplicationGroup"><i class="fa fa-tag"></i>ReplicationGroup</label>
+		<input type="text" id="node-input-ReplicationGroup" placeholder="ReplicationGroup"></input>
+	</div> 
+	<div class="form-row" id='AttributeDefinitionsAttr' class='hiddenAttrs'>
+		<label for="node-input-AttributeDefinitions"><i class="fa fa-tag"></i>AttributeDefinitions</label>
+		<input type="text" id="node-input-AttributeDefinitions" placeholder="AttributeDefinitions"></input>
 	</div> 
 	<div class="form-row" id='KeySchemaAttr' class='hiddenAttrs'>
 		<label for="node-input-KeySchema"><i class="fa fa-tag"></i>KeySchema</label>
@@ -94,6 +126,10 @@
 	<div class="form-row" id='ProvisionedThroughputAttr' class='hiddenAttrs'>
 		<label for="node-input-ProvisionedThroughput"><i class="fa fa-tag"></i>ProvisionedThroughput</label>
 		<input type="text" id="node-input-ProvisionedThroughput" placeholder="ProvisionedThroughput"></input>
+	</div> 
+	<div class="form-row" id='BackupArnAttr' class='hiddenAttrs'>
+		<label for="node-input-BackupArn"><i class="fa fa-tag"></i>BackupArn</label>
+		<input type="text" id="node-input-BackupArn" placeholder="BackupArn"></input>
 	</div> 
 	<div class="form-row" id='KeyAttr' class='hiddenAttrs'>
 		<label for="node-input-Key"><i class="fa fa-tag"></i>Key</label>
@@ -107,6 +143,10 @@
 		<label for="node-input-Item"><i class="fa fa-tag"></i>Item</label>
 		<input type="text" id="node-input-Item" placeholder="Item"></input>
 	</div> 
+	<div class="form-row" id='TargetTableNameAttr' class='hiddenAttrs'>
+		<label for="node-input-TargetTableName"><i class="fa fa-tag"></i>TargetTableName</label>
+		<input type="text" id="node-input-TargetTableName" placeholder="TargetTableName"></input>
+	</div> 
 	<div class="form-row" id='TagsAttr' class='hiddenAttrs'>
 		<label for="node-input-Tags"><i class="fa fa-tag"></i>Tags</label>
 		<input type="text" id="node-input-Tags" placeholder="Tags"></input>
@@ -114,6 +154,10 @@
 	<div class="form-row" id='TagKeysAttr' class='hiddenAttrs'>
 		<label for="node-input-TagKeys"><i class="fa fa-tag"></i>TagKeys</label>
 		<input type="text" id="node-input-TagKeys" placeholder="TagKeys"></input>
+	</div> 
+	<div class="form-row" id='ReplicaUpdatesAttr' class='hiddenAttrs'>
+		<label for="node-input-ReplicaUpdates"><i class="fa fa-tag"></i>ReplicaUpdates</label>
+		<input type="text" id="node-input-ReplicaUpdates" placeholder="ReplicaUpdates"></input>
 	</div> 
 	<div class="form-row" id='TimeToLiveSpecificationAttr' class='hiddenAttrs'>
 		<label for="node-input-TimeToLiveSpecification"><i class="fa fa-tag"></i>TimeToLiveSpecification</label>
@@ -130,14 +174,32 @@
 				BatchWriteItem:[
 					'#RequestItemsAttr'
 					],
+				CreateBackup:[
+					'#TableNameAttr','#BackupNameAttr'
+					],
+				CreateGlobalTable:[
+					'#GlobalTableNameAttr','#ReplicationGroupAttr'
+					],
 				CreateTable:[
 					'#AttributeDefinitionsAttr','#TableNameAttr','#KeySchemaAttr','#ProvisionedThroughputAttr'
+					],
+				DeleteBackup:[
+					'#BackupArnAttr'
 					],
 				DeleteItem:[
 					'#TableNameAttr','#KeyAttr'
 					],
 				DeleteTable:[
 					'#TableNameAttr'
+					],
+				DescribeBackup:[
+					'#BackupArnAttr'
+					],
+				DescribeContinuousBackups:[
+					'#TableNameAttr'
+					],
+				DescribeGlobalTable:[
+					'#GlobalTableNameAttr'
 					],
 				DescribeLimits:[
 					
@@ -151,6 +213,12 @@
 				GetItem:[
 					'#TableNameAttr','#KeyAttr'
 					],
+				ListBackups:[
+					
+					],
+				ListGlobalTables:[
+					
+					],
 				ListTables:[
 					
 					],
@@ -163,6 +231,9 @@
 				Query:[
 					'#TableNameAttr'
 					],
+				RestoreTableFromBackup:[
+					'#TargetTableNameAttr','#BackupArnAttr'
+					],
 				Scan:[
 					'#TableNameAttr'
 					],
@@ -171,6 +242,9 @@
 					],
 				UntagResource:[
 					'#ResourceArnAttr','#TagKeysAttr'
+					],
+				UpdateGlobalTable:[
+					'#GlobalTableNameAttr','#ReplicaUpdatesAttr'
 					],
 				UpdateItem:[
 					'#TableNameAttr','#KeyAttr'
@@ -213,15 +287,21 @@ NOTE: Parameters must be specified in the message, using the case specified in t
 			operation: { value: 'BatchGetItem' },
 			
 				RequestItems: { value: ""} ,
-				AttributeDefinitions: { value: ""} ,
 				TableName: { value: ""} ,
+				BackupName: { value: ""} ,
+				GlobalTableName: { value: ""} ,
+				ReplicationGroup: { value: ""} ,
+				AttributeDefinitions: { value: ""} ,
 				KeySchema: { value: ""} ,
 				ProvisionedThroughput: { value: ""} ,
+				BackupArn: { value: ""} ,
 				Key: { value: ""} ,
 				ResourceArn: { value: ""} ,
 				Item: { value: ""} ,
+				TargetTableName: { value: ""} ,
 				Tags: { value: ""} ,
 				TagKeys: { value: ""} ,
+				ReplicaUpdates: { value: ""} ,
 				TimeToLiveSpecification: { value: ""} ,
 			name: { value: "" }
 		},

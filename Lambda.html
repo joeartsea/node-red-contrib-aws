@@ -42,6 +42,8 @@
 		
 			<option value="DeleteFunction">DeleteFunction</option>
 		
+			<option value="DeleteFunctionConcurrency">DeleteFunctionConcurrency</option>
+		
 			<option value="GetAccountSettings">GetAccountSettings</option>
 		
 			<option value="GetAlias">GetAlias</option>
@@ -69,6 +71,8 @@
 			<option value="ListVersionsByFunction">ListVersionsByFunction</option>
 		
 			<option value="PublishVersion">PublishVersion</option>
+		
+			<option value="PutFunctionConcurrency">PutFunctionConcurrency</option>
 		
 			<option value="RemovePermission">RemovePermission</option>
 		
@@ -153,6 +157,10 @@
 		<label for="node-input-Resource"><i class="fa fa-tag"></i>Resource</label>
 		<input type="text" id="node-input-Resource" placeholder="Resource"></input>
 	</div> 
+	<div class="form-row" id='ReservedConcurrentExecutionsAttr' class='hiddenAttrs'>
+		<label for="node-input-ReservedConcurrentExecutions"><i class="fa fa-tag"></i>ReservedConcurrentExecutions</label>
+		<input type="text" id="node-input-ReservedConcurrentExecutions" placeholder="ReservedConcurrentExecutions"></input>
+	</div> 
 	<div class="form-row" id='TagsAttr' class='hiddenAttrs'>
 		<label for="node-input-Tags"><i class="fa fa-tag"></i>Tags</label>
 		<input type="text" id="node-input-Tags" placeholder="Tags"></input>
@@ -185,6 +193,9 @@
 					'#UUIDAttr'
 					],
 				DeleteFunction:[
+					'#FunctionNameAttr'
+					],
+				DeleteFunctionConcurrency:[
 					'#FunctionNameAttr'
 					],
 				GetAccountSettings:[
@@ -228,6 +239,9 @@
 					],
 				PublishVersion:[
 					'#FunctionNameAttr'
+					],
+				PutFunctionConcurrency:[
+					'#FunctionNameAttr','#ReservedConcurrentExecutionsAttr'
 					],
 				RemovePermission:[
 					'#FunctionNameAttr','#StatementIdAttr'
@@ -296,6 +310,7 @@ NOTE: Parameters must be specified in the message, using the case specified in t
 				UUID: { value: ""} ,
 				InvokeArgs: { value: ""} ,
 				Resource: { value: ""} ,
+				ReservedConcurrentExecutions: { value: ""} ,
 				Tags: { value: ""} ,
 				TagKeys: { value: ""} ,
 			name: { value: "" }

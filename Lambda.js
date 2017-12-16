@@ -112,6 +112,7 @@ module.exports = function(RED) {
 			copyArg(msg,"Name",params); 
 			copyArg(msg,"FunctionVersion",params); 
 			copyArg(msg,"Description",params); 
+			copyArg(msg,"RoutingConfig",params); 
 			
 
 			svc.createAlias(params,cb);
@@ -208,6 +209,19 @@ module.exports = function(RED) {
 			
 
 			svc.deleteFunction(params,cb);
+		}
+
+		
+		service.DeleteFunctionConcurrency=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"FunctionName",params); 
+			
+			copyArg(msg,"FunctionName",params); 
+			
+
+			svc.deleteFunctionConcurrency(params,cb);
 		}
 
 		
@@ -414,6 +428,21 @@ module.exports = function(RED) {
 		}
 
 		
+		service.PutFunctionConcurrency=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"FunctionName",params); 
+			copyArg(n,"ReservedConcurrentExecutions",params); 
+			
+			copyArg(msg,"FunctionName",params); 
+			copyArg(msg,"ReservedConcurrentExecutions",params); 
+			
+
+			svc.putFunctionConcurrency(params,cb);
+		}
+
+		
 		service.RemovePermission=function(svc,msg,cb){
 			var params={};
 			//copyArgs
@@ -471,6 +500,7 @@ module.exports = function(RED) {
 			copyArg(msg,"Name",params); 
 			copyArg(msg,"FunctionVersion",params); 
 			copyArg(msg,"Description",params); 
+			copyArg(msg,"RoutingConfig",params); 
 			
 
 			svc.updateAlias(params,cb);

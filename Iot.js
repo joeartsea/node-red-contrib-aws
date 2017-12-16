@@ -91,6 +91,52 @@ module.exports = function(RED) {
 		}
 
 		
+		service.AddThingToThingGroup=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			
+			copyArg(msg,"thingGroupName",params); 
+			copyArg(msg,"thingGroupArn",params); 
+			copyArg(msg,"thingName",params); 
+			copyArg(msg,"thingArn",params); 
+			
+
+			svc.addThingToThingGroup(params,cb);
+		}
+
+		
+		service.AssociateTargetsWithJob=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"targets",params); 
+			copyArg(n,"jobId",params); 
+			
+			copyArg(msg,"targets",params); 
+			copyArg(msg,"jobId",params); 
+			copyArg(msg,"comment",params); 
+			
+
+			svc.associateTargetsWithJob(params,cb);
+		}
+
+		
+		service.AttachPolicy=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"policyName",params); 
+			copyArg(n,"target",params); 
+			
+			copyArg(msg,"policyName",params); 
+			copyArg(msg,"target",params); 
+			
+
+			svc.attachPolicy(params,cb);
+		}
+
+		
 		service.AttachPrincipalPolicy=function(svc,msg,cb){
 			var params={};
 			//copyArgs
@@ -134,6 +180,51 @@ module.exports = function(RED) {
 		}
 
 		
+		service.CancelJob=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"jobId",params); 
+			
+			copyArg(msg,"jobId",params); 
+			copyArg(msg,"comment",params); 
+			
+
+			svc.cancelJob(params,cb);
+		}
+
+		
+		service.ClearDefaultAuthorizer=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			
+			
+
+			svc.clearDefaultAuthorizer(params,cb);
+		}
+
+		
+		service.CreateAuthorizer=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"authorizerName",params); 
+			copyArg(n,"authorizerFunctionArn",params); 
+			copyArg(n,"tokenKeyName",params); 
+			copyArg(n,"tokenSigningPublicKeys",params); 
+			
+			copyArg(msg,"authorizerName",params); 
+			copyArg(msg,"authorizerFunctionArn",params); 
+			copyArg(msg,"tokenKeyName",params); 
+			copyArg(msg,"tokenSigningPublicKeys",params); 
+			copyArg(msg,"status",params); 
+			
+
+			svc.createAuthorizer(params,cb);
+		}
+
+		
 		service.CreateCertificateFromCsr=function(svc,msg,cb){
 			var params={};
 			//copyArgs
@@ -145,6 +236,28 @@ module.exports = function(RED) {
 			
 
 			svc.createCertificateFromCsr(params,cb);
+		}
+
+		
+		service.CreateJob=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"jobId",params); 
+			copyArg(n,"targets",params); 
+			
+			copyArg(msg,"jobId",params); 
+			copyArg(msg,"targets",params); 
+			copyArg(msg,"documentSource",params); 
+			copyArg(msg,"document",params); 
+			copyArg(msg,"description",params); 
+			copyArg(msg,"presignedUrlConfig",params); 
+			copyArg(msg,"targetSelection",params); 
+			copyArg(msg,"jobExecutionsRolloutConfig",params); 
+			copyArg(msg,"documentParameters",params); 
+			
+
+			svc.createJob(params,cb);
 		}
 
 		
@@ -191,6 +304,22 @@ module.exports = function(RED) {
 		}
 
 		
+		service.CreateRoleAlias=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"roleAlias",params); 
+			copyArg(n,"roleArn",params); 
+			
+			copyArg(msg,"roleAlias",params); 
+			copyArg(msg,"roleArn",params); 
+			copyArg(msg,"credentialDurationSeconds",params); 
+			
+
+			svc.createRoleAlias(params,cb);
+		}
+
+		
 		service.CreateThing=function(svc,msg,cb){
 			var params={};
 			//copyArgs
@@ -203,6 +332,21 @@ module.exports = function(RED) {
 			
 
 			svc.createThing(params,cb);
+		}
+
+		
+		service.CreateThingGroup=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"thingGroupName",params); 
+			
+			copyArg(msg,"thingGroupName",params); 
+			copyArg(msg,"parentGroupName",params); 
+			copyArg(msg,"thingGroupProperties",params); 
+			
+
+			svc.createThingGroup(params,cb);
 		}
 
 		
@@ -235,6 +379,19 @@ module.exports = function(RED) {
 		}
 
 		
+		service.DeleteAuthorizer=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"authorizerName",params); 
+			
+			copyArg(msg,"authorizerName",params); 
+			
+
+			svc.deleteAuthorizer(params,cb);
+		}
+
+		
 		service.DeleteCACertificate=function(svc,msg,cb){
 			var params={};
 			//copyArgs
@@ -255,6 +412,7 @@ module.exports = function(RED) {
 			copyArg(n,"certificateId",params); 
 			
 			copyArg(msg,"certificateId",params); 
+			copyArg(msg,"forceDelete",params); 
 			
 
 			svc.deleteCertificate(params,cb);
@@ -300,6 +458,19 @@ module.exports = function(RED) {
 		}
 
 		
+		service.DeleteRoleAlias=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"roleAlias",params); 
+			
+			copyArg(msg,"roleAlias",params); 
+			
+
+			svc.deleteRoleAlias(params,cb);
+		}
+
+		
 		service.DeleteThing=function(svc,msg,cb){
 			var params={};
 			//copyArgs
@@ -311,6 +482,20 @@ module.exports = function(RED) {
 			
 
 			svc.deleteThing(params,cb);
+		}
+
+		
+		service.DeleteThingGroup=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"thingGroupName",params); 
+			
+			copyArg(msg,"thingGroupName",params); 
+			copyArg(msg,"expectedVersion",params); 
+			
+
+			svc.deleteThingGroup(params,cb);
 		}
 
 		
@@ -340,6 +525,21 @@ module.exports = function(RED) {
 		}
 
 		
+		service.DeleteV2LoggingLevel=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"targetType",params); 
+			copyArg(n,"targetName",params); 
+			
+			copyArg(msg,"targetType",params); 
+			copyArg(msg,"targetName",params); 
+			
+
+			svc.deleteV2LoggingLevel(params,cb);
+		}
+
+		
 		service.DeprecateThingType=function(svc,msg,cb){
 			var params={};
 			//copyArgs
@@ -351,6 +551,19 @@ module.exports = function(RED) {
 			
 
 			svc.deprecateThingType(params,cb);
+		}
+
+		
+		service.DescribeAuthorizer=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"authorizerName",params); 
+			
+			copyArg(msg,"authorizerName",params); 
+			
+
+			svc.describeAuthorizer(params,cb);
 		}
 
 		
@@ -380,14 +593,92 @@ module.exports = function(RED) {
 		}
 
 		
-		service.DescribeEndpoint=function(svc,msg,cb){
+		service.DescribeDefaultAuthorizer=function(svc,msg,cb){
 			var params={};
 			//copyArgs
 			
 			
 			
 
+			svc.describeDefaultAuthorizer(params,cb);
+		}
+
+		
+		service.DescribeEndpoint=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			
+			copyArg(msg,"endpointType",params); 
+			
+
 			svc.describeEndpoint(params,cb);
+		}
+
+		
+		service.DescribeEventConfigurations=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			
+			
+
+			svc.describeEventConfigurations(params,cb);
+		}
+
+		
+		service.DescribeIndex=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"indexName",params); 
+			
+			copyArg(msg,"indexName",params); 
+			
+
+			svc.describeIndex(params,cb);
+		}
+
+		
+		service.DescribeJob=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"jobId",params); 
+			
+			copyArg(msg,"jobId",params); 
+			
+
+			svc.describeJob(params,cb);
+		}
+
+		
+		service.DescribeJobExecution=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"jobId",params); 
+			copyArg(n,"thingName",params); 
+			
+			copyArg(msg,"jobId",params); 
+			copyArg(msg,"thingName",params); 
+			copyArg(msg,"executionNumber",params); 
+			
+
+			svc.describeJobExecution(params,cb);
+		}
+
+		
+		service.DescribeRoleAlias=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"roleAlias",params); 
+			
+			copyArg(msg,"roleAlias",params); 
+			
+
+			svc.describeRoleAlias(params,cb);
 		}
 
 		
@@ -404,6 +695,32 @@ module.exports = function(RED) {
 		}
 
 		
+		service.DescribeThingGroup=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"thingGroupName",params); 
+			
+			copyArg(msg,"thingGroupName",params); 
+			
+
+			svc.describeThingGroup(params,cb);
+		}
+
+		
+		service.DescribeThingRegistrationTask=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"taskId",params); 
+			
+			copyArg(msg,"taskId",params); 
+			
+
+			svc.describeThingRegistrationTask(params,cb);
+		}
+
+		
 		service.DescribeThingType=function(svc,msg,cb){
 			var params={};
 			//copyArgs
@@ -414,6 +731,21 @@ module.exports = function(RED) {
 			
 
 			svc.describeThingType(params,cb);
+		}
+
+		
+		service.DetachPolicy=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"policyName",params); 
+			copyArg(n,"target",params); 
+			
+			copyArg(msg,"policyName",params); 
+			copyArg(msg,"target",params); 
+			
+
+			svc.detachPolicy(params,cb);
 		}
 
 		
@@ -470,6 +802,44 @@ module.exports = function(RED) {
 			
 
 			svc.enableTopicRule(params,cb);
+		}
+
+		
+		service.GetEffectivePolicies=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			
+			copyArg(msg,"principal",params); 
+			copyArg(msg,"cognitoIdentityPoolId",params); 
+			copyArg(msg,"thingName",params); 
+			
+
+			svc.getEffectivePolicies(params,cb);
+		}
+
+		
+		service.GetIndexingConfiguration=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			
+			
+
+			svc.getIndexingConfiguration(params,cb);
+		}
+
+		
+		service.GetJobDocument=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"jobId",params); 
+			
+			copyArg(msg,"jobId",params); 
+			
+
+			svc.getJobDocument(params,cb);
 		}
 
 		
@@ -536,6 +906,48 @@ module.exports = function(RED) {
 		}
 
 		
+		service.GetV2LoggingOptions=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			
+			
+
+			svc.getV2LoggingOptions(params,cb);
+		}
+
+		
+		service.ListAttachedPolicies=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"target",params); 
+			
+			copyArg(msg,"target",params); 
+			copyArg(msg,"recursive",params); 
+			copyArg(msg,"marker",params); 
+			copyArg(msg,"pageSize",params); 
+			
+
+			svc.listAttachedPolicies(params,cb);
+		}
+
+		
+		service.ListAuthorizers=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			
+			copyArg(msg,"pageSize",params); 
+			copyArg(msg,"marker",params); 
+			copyArg(msg,"ascendingOrder",params); 
+			copyArg(msg,"status",params); 
+			
+
+			svc.listAuthorizers(params,cb);
+		}
+
+		
 		service.ListCACertificates=function(svc,msg,cb){
 			var params={};
 			//copyArgs
@@ -577,6 +989,68 @@ module.exports = function(RED) {
 			
 
 			svc.listCertificatesByCA(params,cb);
+		}
+
+		
+		service.ListIndices=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			
+			copyArg(msg,"nextToken",params); 
+			copyArg(msg,"maxResults",params); 
+			
+
+			svc.listIndices(params,cb);
+		}
+
+		
+		service.ListJobExecutionsForJob=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"jobId",params); 
+			
+			copyArg(msg,"jobId",params); 
+			copyArg(msg,"status",params); 
+			copyArg(msg,"maxResults",params); 
+			copyArg(msg,"nextToken",params); 
+			
+
+			svc.listJobExecutionsForJob(params,cb);
+		}
+
+		
+		service.ListJobExecutionsForThing=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"thingName",params); 
+			
+			copyArg(msg,"thingName",params); 
+			copyArg(msg,"status",params); 
+			copyArg(msg,"maxResults",params); 
+			copyArg(msg,"nextToken",params); 
+			
+
+			svc.listJobExecutionsForThing(params,cb);
+		}
+
+		
+		service.ListJobs=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			
+			copyArg(msg,"status",params); 
+			copyArg(msg,"targetSelection",params); 
+			copyArg(msg,"maxResults",params); 
+			copyArg(msg,"nextToken",params); 
+			copyArg(msg,"thingGroupName",params); 
+			copyArg(msg,"thingGroupId",params); 
+			
+
+			svc.listJobs(params,cb);
 		}
 
 		
@@ -668,6 +1142,66 @@ module.exports = function(RED) {
 		}
 
 		
+		service.ListRoleAliases=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			
+			copyArg(msg,"pageSize",params); 
+			copyArg(msg,"marker",params); 
+			copyArg(msg,"ascendingOrder",params); 
+			
+
+			svc.listRoleAliases(params,cb);
+		}
+
+		
+		service.ListTargetsForPolicy=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"policyName",params); 
+			
+			copyArg(msg,"policyName",params); 
+			copyArg(msg,"marker",params); 
+			copyArg(msg,"pageSize",params); 
+			
+
+			svc.listTargetsForPolicy(params,cb);
+		}
+
+		
+		service.ListThingGroups=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			
+			copyArg(msg,"nextToken",params); 
+			copyArg(msg,"maxResults",params); 
+			copyArg(msg,"parentGroup",params); 
+			copyArg(msg,"namePrefixFilter",params); 
+			copyArg(msg,"recursive",params); 
+			
+
+			svc.listThingGroups(params,cb);
+		}
+
+		
+		service.ListThingGroupsForThing=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"thingName",params); 
+			
+			copyArg(msg,"thingName",params); 
+			copyArg(msg,"nextToken",params); 
+			copyArg(msg,"maxResults",params); 
+			
+
+			svc.listThingGroupsForThing(params,cb);
+		}
+
+		
 		service.ListThingPrincipals=function(svc,msg,cb){
 			var params={};
 			//copyArgs
@@ -678,6 +1212,37 @@ module.exports = function(RED) {
 			
 
 			svc.listThingPrincipals(params,cb);
+		}
+
+		
+		service.ListThingRegistrationTaskReports=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"taskId",params); 
+			copyArg(n,"reportType",params); 
+			
+			copyArg(msg,"taskId",params); 
+			copyArg(msg,"reportType",params); 
+			copyArg(msg,"nextToken",params); 
+			copyArg(msg,"maxResults",params); 
+			
+
+			svc.listThingRegistrationTaskReports(params,cb);
+		}
+
+		
+		service.ListThingRegistrationTasks=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			
+			copyArg(msg,"nextToken",params); 
+			copyArg(msg,"maxResults",params); 
+			copyArg(msg,"status",params); 
+			
+
+			svc.listThingRegistrationTasks(params,cb);
 		}
 
 		
@@ -711,6 +1276,22 @@ module.exports = function(RED) {
 		}
 
 		
+		service.ListThingsInThingGroup=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"thingGroupName",params); 
+			
+			copyArg(msg,"thingGroupName",params); 
+			copyArg(msg,"recursive",params); 
+			copyArg(msg,"nextToken",params); 
+			copyArg(msg,"maxResults",params); 
+			
+
+			svc.listThingsInThingGroup(params,cb);
+		}
+
+		
 		service.ListTopicRules=function(svc,msg,cb){
 			var params={};
 			//copyArgs
@@ -726,6 +1307,20 @@ module.exports = function(RED) {
 		}
 
 		
+		service.ListV2LoggingLevels=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			
+			copyArg(msg,"targetType",params); 
+			copyArg(msg,"nextToken",params); 
+			copyArg(msg,"maxResults",params); 
+			
+
+			svc.listV2LoggingLevels(params,cb);
+		}
+
+		
 		service.RegisterCACertificate=function(svc,msg,cb){
 			var params={};
 			//copyArgs
@@ -737,6 +1332,7 @@ module.exports = function(RED) {
 			copyArg(msg,"verificationCertificate",params); 
 			copyArg(msg,"setAsActive",params); 
 			copyArg(msg,"allowAutoRegistration",params); 
+			copyArg(msg,"registrationConfig",params); 
 			
 
 			svc.registerCACertificate(params,cb);
@@ -759,6 +1355,20 @@ module.exports = function(RED) {
 		}
 
 		
+		service.RegisterThing=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"templateBody",params); 
+			
+			copyArg(msg,"templateBody",params); 
+			copyArg(msg,"parameters",params); 
+			
+
+			svc.registerThing(params,cb);
+		}
+
+		
 		service.RejectCertificateTransfer=function(svc,msg,cb){
 			var params={};
 			//copyArgs
@@ -770,6 +1380,21 @@ module.exports = function(RED) {
 			
 
 			svc.rejectCertificateTransfer(params,cb);
+		}
+
+		
+		service.RemoveThingFromThingGroup=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			
+			copyArg(msg,"thingGroupName",params); 
+			copyArg(msg,"thingGroupArn",params); 
+			copyArg(msg,"thingName",params); 
+			copyArg(msg,"thingArn",params); 
+			
+
+			svc.removeThingFromThingGroup(params,cb);
 		}
 
 		
@@ -785,6 +1410,36 @@ module.exports = function(RED) {
 			
 
 			svc.replaceTopicRule(params,cb);
+		}
+
+		
+		service.SearchIndex=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"queryString",params); 
+			
+			copyArg(msg,"indexName",params); 
+			copyArg(msg,"queryString",params); 
+			copyArg(msg,"nextToken",params); 
+			copyArg(msg,"maxResults",params); 
+			copyArg(msg,"queryVersion",params); 
+			
+
+			svc.searchIndex(params,cb);
+		}
+
+		
+		service.SetDefaultAuthorizer=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"authorizerName",params); 
+			
+			copyArg(msg,"authorizerName",params); 
+			
+
+			svc.setDefaultAuthorizer(params,cb);
 		}
 
 		
@@ -816,6 +1471,102 @@ module.exports = function(RED) {
 		}
 
 		
+		service.SetV2LoggingLevel=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"logTarget",params); 
+			copyArg(n,"logLevel",params); 
+			
+			copyArg(msg,"logTarget",params); 
+			copyArg(msg,"logLevel",params); 
+			
+
+			svc.setV2LoggingLevel(params,cb);
+		}
+
+		
+		service.SetV2LoggingOptions=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			
+			copyArg(msg,"roleArn",params); 
+			copyArg(msg,"defaultLogLevel",params); 
+			copyArg(msg,"disableAllLogs",params); 
+			
+
+			svc.setV2LoggingOptions(params,cb);
+		}
+
+		
+		service.StartThingRegistrationTask=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"templateBody",params); 
+			copyArg(n,"inputFileBucket",params); 
+			copyArg(n,"inputFileKey",params); 
+			copyArg(n,"roleArn",params); 
+			
+			copyArg(msg,"templateBody",params); 
+			copyArg(msg,"inputFileBucket",params); 
+			copyArg(msg,"inputFileKey",params); 
+			copyArg(msg,"roleArn",params); 
+			
+
+			svc.startThingRegistrationTask(params,cb);
+		}
+
+		
+		service.StopThingRegistrationTask=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"taskId",params); 
+			
+			copyArg(msg,"taskId",params); 
+			
+
+			svc.stopThingRegistrationTask(params,cb);
+		}
+
+		
+		service.TestAuthorization=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"authInfos",params); 
+			
+			copyArg(msg,"principal",params); 
+			copyArg(msg,"cognitoIdentityPoolId",params); 
+			copyArg(msg,"authInfos",params); 
+			copyArg(msg,"clientId",params); 
+			copyArg(msg,"policyNamesToAdd",params); 
+			copyArg(msg,"policyNamesToSkip",params); 
+			
+
+			svc.testAuthorization(params,cb);
+		}
+
+		
+		service.TestInvokeAuthorizer=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"authorizerName",params); 
+			copyArg(n,"token",params); 
+			copyArg(n,"tokenSignature",params); 
+			
+			copyArg(msg,"authorizerName",params); 
+			copyArg(msg,"token",params); 
+			copyArg(msg,"tokenSignature",params); 
+			
+
+			svc.testInvokeAuthorizer(params,cb);
+		}
+
+		
 		service.TransferCertificate=function(svc,msg,cb){
 			var params={};
 			//copyArgs
@@ -832,6 +1583,23 @@ module.exports = function(RED) {
 		}
 
 		
+		service.UpdateAuthorizer=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"authorizerName",params); 
+			
+			copyArg(msg,"authorizerName",params); 
+			copyArg(msg,"authorizerFunctionArn",params); 
+			copyArg(msg,"tokenKeyName",params); 
+			copyArg(msg,"tokenSigningPublicKeys",params); 
+			copyArg(msg,"status",params); 
+			
+
+			svc.updateAuthorizer(params,cb);
+		}
+
+		
 		service.UpdateCACertificate=function(svc,msg,cb){
 			var params={};
 			//copyArgs
@@ -841,6 +1609,8 @@ module.exports = function(RED) {
 			copyArg(msg,"certificateId",params); 
 			copyArg(msg,"newStatus",params); 
 			copyArg(msg,"newAutoRegistrationStatus",params); 
+			copyArg(msg,"registrationConfig",params); 
+			copyArg(msg,"removeAutoRegistration",params); 
 			
 
 			svc.updateCACertificate(params,cb);
@@ -862,6 +1632,45 @@ module.exports = function(RED) {
 		}
 
 		
+		service.UpdateEventConfigurations=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			
+			copyArg(msg,"eventConfigurations",params); 
+			
+
+			svc.updateEventConfigurations(params,cb);
+		}
+
+		
+		service.UpdateIndexingConfiguration=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			
+			copyArg(msg,"thingIndexingConfiguration",params); 
+			
+
+			svc.updateIndexingConfiguration(params,cb);
+		}
+
+		
+		service.UpdateRoleAlias=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"roleAlias",params); 
+			
+			copyArg(msg,"roleAlias",params); 
+			copyArg(msg,"roleArn",params); 
+			copyArg(msg,"credentialDurationSeconds",params); 
+			
+
+			svc.updateRoleAlias(params,cb);
+		}
+
+		
 		service.UpdateThing=function(svc,msg,cb){
 			var params={};
 			//copyArgs
@@ -876,6 +1685,36 @@ module.exports = function(RED) {
 			
 
 			svc.updateThing(params,cb);
+		}
+
+		
+		service.UpdateThingGroup=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"thingGroupName",params); 
+			copyArg(n,"thingGroupProperties",params); 
+			
+			copyArg(msg,"thingGroupName",params); 
+			copyArg(msg,"thingGroupProperties",params); 
+			copyArg(msg,"expectedVersion",params); 
+			
+
+			svc.updateThingGroup(params,cb);
+		}
+
+		
+		service.UpdateThingGroupsForThing=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			
+			copyArg(msg,"thingName",params); 
+			copyArg(msg,"thingGroupsToAdd",params); 
+			copyArg(msg,"thingGroupsToRemove",params); 
+			
+
+			svc.updateThingGroupsForThing(params,cb);
 		}
 
 			

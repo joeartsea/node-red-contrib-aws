@@ -161,6 +161,19 @@ module.exports = function(RED) {
 		}
 
 		
+		service.DescribeStreamSummary=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"StreamName",params); 
+			
+			copyArg(msg,"StreamName",params); 
+			
+
+			svc.describeStreamSummary(params,cb);
+		}
+
+		
 		service.DisableEnhancedMonitoring=function(svc,msg,cb){
 			var params={};
 			//copyArgs
