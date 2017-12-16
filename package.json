@@ -22,6 +22,9 @@
     "dynamodb",
     "iot",
     "es",
+    "ecs",
+    "polly",
+    "rekognition",
     "rds"
   ],
   "node-red": {
@@ -38,6 +41,9 @@
       "AWS IotData": "IotData.js",
       "AWS KMS": "KMS.js",
       "AWS ES": "ES.js",
+      "Rekognition": "Rekognition.js",
+      "Polly": "Polly.js",
+      "AWS ECS": "Ecs.js",
       "amazon config": "config.js"
     }
   },
