@@ -40,7 +40,7 @@ module.exports = function(RED) {
 			return;
 		}
 
-		var awsService = new AWS.Dynamodb( { 'region': node.region } );
+		var awsService = new AWS.DynamoDB( { 'region': node.region } );
 
 		node.on("input", function(msg) {
 			node.sendMsg = function (err, data) {
