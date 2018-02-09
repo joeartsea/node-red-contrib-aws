@@ -15,6 +15,7 @@ Nodes (All AWS API functions are available)
 * IoT
 * IotData
 * RDS
+* Firehose
 * KMS
 * AWS config
 
@@ -39,3 +40,29 @@ License
 -------
 
 See [license] (https://github.com/daniel-t/node-red-contrib-aws/blob/master/LICENSE) (Apache License Version 2.0).
+
+Contributions
+----
+
+If you want to add a new node to this library, here's some pointers.
+- I only accept nodes which are built from the run_build.js script without modification.   This is to ensure that I can keep things up to date as the AWS API changes.   If for some reason you cant do that (such as with the IOT node), please also supply a contextual Diff against the automatically built node and an explanation of why it has to be this way.   It's OK to propose changes to the gen scripts, but they need to be as generic as possible.
+- Please only submit changes to one node per pull request.  If there's a problem with a node, it will delay getting them all in.
+- If you update teh build scripts, please submit those in a seperate request to any new/modified nodes
+- Dont submit a complete set of nodes which have only been updated due to a new version of the AWS API.  if you need to features, submit individual nodes or create an issue and I will raise the AWS API level across the board.
+
+How to build nodes:
+
+- Make sure you have a working install, and can create flows with some of the existing nodes
+- Switch into the gen_scripts directory
+- Make a directory called 'build'
+- Run 'nodejs run_build.js' - this will automatically generate the entire node set for all AWS services, many which haven't been validated so aren't part of the library
+- Copy the files for the service of interest from 'build' to the parent directory
+- update package.json to reference the new js file
+- Restart node red
+- If it works please submit a pull request and let me know how extensively its been tested.
+
+Donations
+---
+If you like this library and would like to financially support its ongoing developement, you can make donations by
+Paypal https://www.paypal.me/DanielT253
+Bitcoin 124fjAWzBYxhW4CtEj8g9uZqc15z97Fu9A
