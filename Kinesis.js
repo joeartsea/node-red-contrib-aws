@@ -67,13 +67,18 @@ module.exports = function(RED) {
 			}
 
 		});
-		var copyArg=function(src,arg,out,outArg){
+		var copyArg=function(src,arg,out,outArg,isObject){
+			var tmpValue=src[arg];
 			outArg = (typeof outArg !== 'undefined') ? outArg : arg;
+
 			if (typeof src[arg] !== 'undefined'){
-				out[outArg]=src[arg];
+				if (isObject && typeof src[arg]=="string" && src[arg] != "") { 
+					tmpValue=JSON.parse(src[arg]);
+				}
+				out[outArg]=tmpValue;
 			}
                         //AWS API takes 'Payload' not 'payload' (see Lambda)
-                        if (arg=="Payload" && typeof src[arg] == 'undefined'){
+                        if (arg=="Payload" && typeof tmpValue == 'undefined'){
                                 out[arg]=src["payload"];
                         }
 
@@ -86,11 +91,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"StreamName",params); 
-			copyArg(n,"Tags",params); 
+			copyArg(n,"StreamName",params,undefined,false); 
+			copyArg(n,"Tags",params,undefined,false); 
 			
-			copyArg(msg,"StreamName",params); 
-			copyArg(msg,"Tags",params); 
+			copyArg(msg,"StreamName",params,undefined,false); 
+			copyArg(msg,"Tags",params,undefined,false); 
 			
 
 			svc.addTagsToStream(params,cb);
@@ -101,11 +106,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"StreamName",params); 
-			copyArg(n,"ShardCount",params); 
+			copyArg(n,"StreamName",params,undefined,false); 
+			copyArg(n,"ShardCount",params,undefined,false); 
 			
-			copyArg(msg,"StreamName",params); 
-			copyArg(msg,"ShardCount",params); 
+			copyArg(msg,"StreamName",params,undefined,false); 
+			copyArg(msg,"ShardCount",params,undefined,false); 
 			
 
 			svc.createStream(params,cb);
@@ -116,11 +121,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"StreamName",params); 
-			copyArg(n,"RetentionPeriodHours",params); 
+			copyArg(n,"StreamName",params,undefined,false); 
+			copyArg(n,"RetentionPeriodHours",params,undefined,false); 
 			
-			copyArg(msg,"StreamName",params); 
-			copyArg(msg,"RetentionPeriodHours",params); 
+			copyArg(msg,"StreamName",params,undefined,false); 
+			copyArg(msg,"RetentionPeriodHours",params,undefined,false); 
 			
 
 			svc.decreaseStreamRetentionPeriod(params,cb);
@@ -131,9 +136,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"StreamName",params); 
+			copyArg(n,"StreamName",params,undefined,false); 
 			
-			copyArg(msg,"StreamName",params); 
+			copyArg(msg,"StreamName",params,undefined,false); 
 			
 
 			svc.deleteStream(params,cb);
@@ -155,11 +160,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"StreamName",params); 
+			copyArg(n,"StreamName",params,undefined,false); 
 			
-			copyArg(msg,"StreamName",params); 
-			copyArg(msg,"Limit",params); 
-			copyArg(msg,"ExclusiveStartShardId",params); 
+			copyArg(msg,"StreamName",params,undefined,false); 
+			copyArg(msg,"Limit",params,undefined,false); 
+			copyArg(msg,"ExclusiveStartShardId",params,undefined,false); 
 			
 
 			svc.describeStream(params,cb);
@@ -170,9 +175,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"StreamName",params); 
+			copyArg(n,"StreamName",params,undefined,false); 
 			
-			copyArg(msg,"StreamName",params); 
+			copyArg(msg,"StreamName",params,undefined,false); 
 			
 
 			svc.describeStreamSummary(params,cb);
@@ -183,11 +188,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"StreamName",params); 
-			copyArg(n,"ShardLevelMetrics",params); 
+			copyArg(n,"StreamName",params,undefined,false); 
+			copyArg(n,"ShardLevelMetrics",params,undefined,true); 
 			
-			copyArg(msg,"StreamName",params); 
-			copyArg(msg,"ShardLevelMetrics",params); 
+			copyArg(msg,"StreamName",params,undefined,false); 
+			copyArg(msg,"ShardLevelMetrics",params,undefined,true); 
 			
 
 			svc.disableEnhancedMonitoring(params,cb);
@@ -198,11 +203,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"StreamName",params); 
-			copyArg(n,"ShardLevelMetrics",params); 
+			copyArg(n,"StreamName",params,undefined,false); 
+			copyArg(n,"ShardLevelMetrics",params,undefined,true); 
 			
-			copyArg(msg,"StreamName",params); 
-			copyArg(msg,"ShardLevelMetrics",params); 
+			copyArg(msg,"StreamName",params,undefined,false); 
+			copyArg(msg,"ShardLevelMetrics",params,undefined,true); 
 			
 
 			svc.enableEnhancedMonitoring(params,cb);
@@ -213,10 +218,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"ShardIterator",params); 
+			copyArg(n,"ShardIterator",params,undefined,false); 
 			
-			copyArg(msg,"ShardIterator",params); 
-			copyArg(msg,"Limit",params); 
+			copyArg(msg,"ShardIterator",params,undefined,false); 
+			copyArg(msg,"Limit",params,undefined,false); 
 			
 
 			svc.getRecords(params,cb);
@@ -227,15 +232,15 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"StreamName",params); 
-			copyArg(n,"ShardId",params); 
-			copyArg(n,"ShardIteratorType",params); 
+			copyArg(n,"StreamName",params,undefined,false); 
+			copyArg(n,"ShardId",params,undefined,false); 
+			copyArg(n,"ShardIteratorType",params,undefined,false); 
 			
-			copyArg(msg,"StreamName",params); 
-			copyArg(msg,"ShardId",params); 
-			copyArg(msg,"ShardIteratorType",params); 
-			copyArg(msg,"StartingSequenceNumber",params); 
-			copyArg(msg,"Timestamp",params); 
+			copyArg(msg,"StreamName",params,undefined,false); 
+			copyArg(msg,"ShardId",params,undefined,false); 
+			copyArg(msg,"ShardIteratorType",params,undefined,false); 
+			copyArg(msg,"StartingSequenceNumber",params,undefined,false); 
+			copyArg(msg,"Timestamp",params,undefined,false); 
 			
 
 			svc.getShardIterator(params,cb);
@@ -246,11 +251,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"StreamName",params); 
-			copyArg(n,"RetentionPeriodHours",params); 
+			copyArg(n,"StreamName",params,undefined,false); 
+			copyArg(n,"RetentionPeriodHours",params,undefined,false); 
 			
-			copyArg(msg,"StreamName",params); 
-			copyArg(msg,"RetentionPeriodHours",params); 
+			copyArg(msg,"StreamName",params,undefined,false); 
+			copyArg(msg,"RetentionPeriodHours",params,undefined,false); 
 			
 
 			svc.increaseStreamRetentionPeriod(params,cb);
@@ -262,8 +267,8 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"Limit",params); 
-			copyArg(msg,"ExclusiveStartStreamName",params); 
+			copyArg(msg,"Limit",params,undefined,false); 
+			copyArg(msg,"ExclusiveStartStreamName",params,undefined,false); 
 			
 
 			svc.listStreams(params,cb);
@@ -274,11 +279,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"StreamName",params); 
+			copyArg(n,"StreamName",params,undefined,false); 
 			
-			copyArg(msg,"StreamName",params); 
-			copyArg(msg,"ExclusiveStartTagKey",params); 
-			copyArg(msg,"Limit",params); 
+			copyArg(msg,"StreamName",params,undefined,false); 
+			copyArg(msg,"ExclusiveStartTagKey",params,undefined,false); 
+			copyArg(msg,"Limit",params,undefined,false); 
 			
 
 			svc.listTagsForStream(params,cb);
@@ -289,13 +294,13 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"StreamName",params); 
-			copyArg(n,"ShardToMerge",params); 
-			copyArg(n,"AdjacentShardToMerge",params); 
+			copyArg(n,"StreamName",params,undefined,false); 
+			copyArg(n,"ShardToMerge",params,undefined,false); 
+			copyArg(n,"AdjacentShardToMerge",params,undefined,false); 
 			
-			copyArg(msg,"StreamName",params); 
-			copyArg(msg,"ShardToMerge",params); 
-			copyArg(msg,"AdjacentShardToMerge",params); 
+			copyArg(msg,"StreamName",params,undefined,false); 
+			copyArg(msg,"ShardToMerge",params,undefined,false); 
+			copyArg(msg,"AdjacentShardToMerge",params,undefined,false); 
 			
 
 			svc.mergeShards(params,cb);
@@ -306,15 +311,15 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"StreamName",params); 
-			copyArg(n,"Data",params); 
-			copyArg(n,"PartitionKey",params); 
+			copyArg(n,"StreamName",params,undefined,false); 
+			copyArg(n,"Data",params,undefined,false); 
+			copyArg(n,"PartitionKey",params,undefined,false); 
 			
-			copyArg(msg,"StreamName",params); 
-			copyArg(msg,"Data",params); 
-			copyArg(msg,"PartitionKey",params); 
-			copyArg(msg,"ExplicitHashKey",params); 
-			copyArg(msg,"SequenceNumberForOrdering",params); 
+			copyArg(msg,"StreamName",params,undefined,false); 
+			copyArg(msg,"Data",params,undefined,false); 
+			copyArg(msg,"PartitionKey",params,undefined,false); 
+			copyArg(msg,"ExplicitHashKey",params,undefined,false); 
+			copyArg(msg,"SequenceNumberForOrdering",params,undefined,false); 
 			
 
 			svc.putRecord(params,cb);
@@ -325,11 +330,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Records",params); 
-			copyArg(n,"StreamName",params); 
+			copyArg(n,"Records",params,undefined,false); 
+			copyArg(n,"StreamName",params,undefined,false); 
 			
-			copyArg(msg,"Records",params); 
-			copyArg(msg,"StreamName",params); 
+			copyArg(msg,"Records",params,undefined,false); 
+			copyArg(msg,"StreamName",params,undefined,false); 
 			
 
 			svc.putRecords(params,cb);
@@ -340,11 +345,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"StreamName",params); 
-			copyArg(n,"TagKeys",params); 
+			copyArg(n,"StreamName",params,undefined,false); 
+			copyArg(n,"TagKeys",params,undefined,false); 
 			
-			copyArg(msg,"StreamName",params); 
-			copyArg(msg,"TagKeys",params); 
+			copyArg(msg,"StreamName",params,undefined,false); 
+			copyArg(msg,"TagKeys",params,undefined,false); 
 			
 
 			svc.removeTagsFromStream(params,cb);
@@ -355,13 +360,13 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"StreamName",params); 
-			copyArg(n,"ShardToSplit",params); 
-			copyArg(n,"NewStartingHashKey",params); 
+			copyArg(n,"StreamName",params,undefined,false); 
+			copyArg(n,"ShardToSplit",params,undefined,false); 
+			copyArg(n,"NewStartingHashKey",params,undefined,false); 
 			
-			copyArg(msg,"StreamName",params); 
-			copyArg(msg,"ShardToSplit",params); 
-			copyArg(msg,"NewStartingHashKey",params); 
+			copyArg(msg,"StreamName",params,undefined,false); 
+			copyArg(msg,"ShardToSplit",params,undefined,false); 
+			copyArg(msg,"NewStartingHashKey",params,undefined,false); 
 			
 
 			svc.splitShard(params,cb);
@@ -372,13 +377,13 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"StreamName",params); 
-			copyArg(n,"EncryptionType",params); 
-			copyArg(n,"KeyId",params); 
+			copyArg(n,"StreamName",params,undefined,false); 
+			copyArg(n,"EncryptionType",params,undefined,false); 
+			copyArg(n,"KeyId",params,undefined,false); 
 			
-			copyArg(msg,"StreamName",params); 
-			copyArg(msg,"EncryptionType",params); 
-			copyArg(msg,"KeyId",params); 
+			copyArg(msg,"StreamName",params,undefined,false); 
+			copyArg(msg,"EncryptionType",params,undefined,false); 
+			copyArg(msg,"KeyId",params,undefined,false); 
 			
 
 			svc.startStreamEncryption(params,cb);
@@ -389,13 +394,13 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"StreamName",params); 
-			copyArg(n,"EncryptionType",params); 
-			copyArg(n,"KeyId",params); 
+			copyArg(n,"StreamName",params,undefined,false); 
+			copyArg(n,"EncryptionType",params,undefined,false); 
+			copyArg(n,"KeyId",params,undefined,false); 
 			
-			copyArg(msg,"StreamName",params); 
-			copyArg(msg,"EncryptionType",params); 
-			copyArg(msg,"KeyId",params); 
+			copyArg(msg,"StreamName",params,undefined,false); 
+			copyArg(msg,"EncryptionType",params,undefined,false); 
+			copyArg(msg,"KeyId",params,undefined,false); 
 			
 
 			svc.stopStreamEncryption(params,cb);
@@ -406,13 +411,13 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"StreamName",params); 
-			copyArg(n,"TargetShardCount",params); 
-			copyArg(n,"ScalingType",params); 
+			copyArg(n,"StreamName",params,undefined,false); 
+			copyArg(n,"TargetShardCount",params,undefined,false); 
+			copyArg(n,"ScalingType",params,undefined,false); 
 			
-			copyArg(msg,"StreamName",params); 
-			copyArg(msg,"TargetShardCount",params); 
-			copyArg(msg,"ScalingType",params); 
+			copyArg(msg,"StreamName",params,undefined,false); 
+			copyArg(msg,"TargetShardCount",params,undefined,false); 
+			copyArg(msg,"ScalingType",params,undefined,false); 
 			
 
 			svc.updateShardCount(params,cb);

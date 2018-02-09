@@ -67,13 +67,18 @@ module.exports = function(RED) {
 			}
 
 		});
-		var copyArg=function(src,arg,out,outArg){
+		var copyArg=function(src,arg,out,outArg,isObject){
+			var tmpValue=src[arg];
 			outArg = (typeof outArg !== 'undefined') ? outArg : arg;
+
 			if (typeof src[arg] !== 'undefined'){
-				out[outArg]=src[arg];
+				if (isObject && typeof src[arg]=="string" && src[arg] != "") { 
+					tmpValue=JSON.parse(src[arg]);
+				}
+				out[outArg]=tmpValue;
 			}
                         //AWS API takes 'Payload' not 'payload' (see Lambda)
-                        if (arg=="Payload" && typeof src[arg] == 'undefined'){
+                        if (arg=="Payload" && typeof tmpValue == 'undefined'){
                                 out[arg]=src["payload"];
                         }
 
@@ -86,15 +91,15 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"QueueUrl",params); 
-			copyArg(n,"Label",params); 
-			copyArg(n,"AWSAccountIds",params); 
-			copyArg(n,"Actions",params); 
+			copyArg(n,"QueueUrl",params,undefined,false); 
+			copyArg(n,"Label",params,undefined,false); 
+			copyArg(n,"AWSAccountIds",params,undefined,false); 
+			copyArg(n,"Actions",params,undefined,false); 
 			
-			copyArg(msg,"QueueUrl",params); 
-			copyArg(msg,"Label",params); 
-			copyArg(msg,"AWSAccountIds",params); 
-			copyArg(msg,"Actions",params); 
+			copyArg(msg,"QueueUrl",params,undefined,false); 
+			copyArg(msg,"Label",params,undefined,false); 
+			copyArg(msg,"AWSAccountIds",params,undefined,false); 
+			copyArg(msg,"Actions",params,undefined,false); 
 			
 
 			svc.addPermission(params,cb);
@@ -105,13 +110,13 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"QueueUrl",params); 
-			copyArg(n,"ReceiptHandle",params); 
-			copyArg(n,"VisibilityTimeout",params); 
+			copyArg(n,"QueueUrl",params,undefined,false); 
+			copyArg(n,"ReceiptHandle",params,undefined,false); 
+			copyArg(n,"VisibilityTimeout",params,undefined,false); 
 			
-			copyArg(msg,"QueueUrl",params); 
-			copyArg(msg,"ReceiptHandle",params); 
-			copyArg(msg,"VisibilityTimeout",params); 
+			copyArg(msg,"QueueUrl",params,undefined,false); 
+			copyArg(msg,"ReceiptHandle",params,undefined,false); 
+			copyArg(msg,"VisibilityTimeout",params,undefined,false); 
 			
 
 			svc.changeMessageVisibility(params,cb);
@@ -122,11 +127,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"QueueUrl",params); 
-			copyArg(n,"Entries",params); 
+			copyArg(n,"QueueUrl",params,undefined,false); 
+			copyArg(n,"Entries",params,undefined,false); 
 			
-			copyArg(msg,"QueueUrl",params); 
-			copyArg(msg,"Entries",params); 
+			copyArg(msg,"QueueUrl",params,undefined,false); 
+			copyArg(msg,"Entries",params,undefined,false); 
 			
 
 			svc.changeMessageVisibilityBatch(params,cb);
@@ -137,10 +142,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"QueueName",params); 
+			copyArg(n,"QueueName",params,undefined,false); 
 			
-			copyArg(msg,"QueueName",params); 
-			copyArg(msg,"Attributes",params); 
+			copyArg(msg,"QueueName",params,undefined,false); 
+			copyArg(msg,"Attributes",params,undefined,true); 
 			
 
 			svc.createQueue(params,cb);
@@ -151,11 +156,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"QueueUrl",params); 
-			copyArg(n,"ReceiptHandle",params); 
+			copyArg(n,"QueueUrl",params,undefined,false); 
+			copyArg(n,"ReceiptHandle",params,undefined,false); 
 			
-			copyArg(msg,"QueueUrl",params); 
-			copyArg(msg,"ReceiptHandle",params); 
+			copyArg(msg,"QueueUrl",params,undefined,false); 
+			copyArg(msg,"ReceiptHandle",params,undefined,false); 
 			
 
 			svc.deleteMessage(params,cb);
@@ -166,11 +171,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"QueueUrl",params); 
-			copyArg(n,"Entries",params); 
+			copyArg(n,"QueueUrl",params,undefined,false); 
+			copyArg(n,"Entries",params,undefined,false); 
 			
-			copyArg(msg,"QueueUrl",params); 
-			copyArg(msg,"Entries",params); 
+			copyArg(msg,"QueueUrl",params,undefined,false); 
+			copyArg(msg,"Entries",params,undefined,false); 
 			
 
 			svc.deleteMessageBatch(params,cb);
@@ -181,9 +186,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"QueueUrl",params); 
+			copyArg(n,"QueueUrl",params,undefined,false); 
 			
-			copyArg(msg,"QueueUrl",params); 
+			copyArg(msg,"QueueUrl",params,undefined,false); 
 			
 
 			svc.deleteQueue(params,cb);
@@ -194,10 +199,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"QueueUrl",params); 
+			copyArg(n,"QueueUrl",params,undefined,false); 
 			
-			copyArg(msg,"QueueUrl",params); 
-			copyArg(msg,"AttributeNames",params); 
+			copyArg(msg,"QueueUrl",params,undefined,false); 
+			copyArg(msg,"AttributeNames",params,undefined,true); 
 			
 
 			svc.getQueueAttributes(params,cb);
@@ -208,10 +213,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"QueueName",params); 
+			copyArg(n,"QueueName",params,undefined,false); 
 			
-			copyArg(msg,"QueueName",params); 
-			copyArg(msg,"QueueOwnerAWSAccountId",params); 
+			copyArg(msg,"QueueName",params,undefined,false); 
+			copyArg(msg,"QueueOwnerAWSAccountId",params,undefined,false); 
 			
 
 			svc.getQueueUrl(params,cb);
@@ -222,9 +227,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"QueueUrl",params); 
+			copyArg(n,"QueueUrl",params,undefined,false); 
 			
-			copyArg(msg,"QueueUrl",params); 
+			copyArg(msg,"QueueUrl",params,undefined,false); 
 			
 
 			svc.listDeadLetterSourceQueues(params,cb);
@@ -235,9 +240,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"QueueUrl",params); 
+			copyArg(n,"QueueUrl",params,undefined,false); 
 			
-			copyArg(msg,"QueueUrl",params); 
+			copyArg(msg,"QueueUrl",params,undefined,false); 
 			
 
 			svc.listQueueTags(params,cb);
@@ -249,7 +254,7 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"QueueNamePrefix",params); 
+			copyArg(msg,"QueueNamePrefix",params,undefined,false); 
 			
 
 			svc.listQueues(params,cb);
@@ -260,9 +265,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"QueueUrl",params); 
+			copyArg(n,"QueueUrl",params,undefined,false); 
 			
-			copyArg(msg,"QueueUrl",params); 
+			copyArg(msg,"QueueUrl",params,undefined,false); 
 			
 
 			svc.purgeQueue(params,cb);
@@ -273,15 +278,15 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"QueueUrl",params); 
+			copyArg(n,"QueueUrl",params,undefined,false); 
 			
-			copyArg(msg,"QueueUrl",params); 
-			copyArg(msg,"AttributeNames",params); 
-			copyArg(msg,"MessageAttributeNames",params); 
-			copyArg(msg,"MaxNumberOfMessages",params); 
-			copyArg(msg,"VisibilityTimeout",params); 
-			copyArg(msg,"WaitTimeSeconds",params); 
-			copyArg(msg,"ReceiveRequestAttemptId",params); 
+			copyArg(msg,"QueueUrl",params,undefined,false); 
+			copyArg(msg,"AttributeNames",params,undefined,true); 
+			copyArg(msg,"MessageAttributeNames",params,undefined,false); 
+			copyArg(msg,"MaxNumberOfMessages",params,undefined,false); 
+			copyArg(msg,"VisibilityTimeout",params,undefined,false); 
+			copyArg(msg,"WaitTimeSeconds",params,undefined,false); 
+			copyArg(msg,"ReceiveRequestAttemptId",params,undefined,false); 
 			
 
 			svc.receiveMessage(params,cb);
@@ -292,11 +297,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"QueueUrl",params); 
-			copyArg(n,"Label",params); 
+			copyArg(n,"QueueUrl",params,undefined,false); 
+			copyArg(n,"Label",params,undefined,false); 
 			
-			copyArg(msg,"QueueUrl",params); 
-			copyArg(msg,"Label",params); 
+			copyArg(msg,"QueueUrl",params,undefined,false); 
+			copyArg(msg,"Label",params,undefined,false); 
 			
 
 			svc.removePermission(params,cb);
@@ -307,15 +312,15 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"QueueUrl",params); 
-			copyArg(n,"MessageBody",params); 
+			copyArg(n,"QueueUrl",params,undefined,false); 
+			copyArg(n,"MessageBody",params,undefined,false); 
 			
-			copyArg(msg,"QueueUrl",params); 
-			copyArg(msg,"MessageBody",params); 
-			copyArg(msg,"DelaySeconds",params); 
-			copyArg(msg,"MessageAttributes",params); 
-			copyArg(msg,"MessageDeduplicationId",params); 
-			copyArg(msg,"MessageGroupId",params); 
+			copyArg(msg,"QueueUrl",params,undefined,false); 
+			copyArg(msg,"MessageBody",params,undefined,false); 
+			copyArg(msg,"DelaySeconds",params,undefined,false); 
+			copyArg(msg,"MessageAttributes",params,undefined,true); 
+			copyArg(msg,"MessageDeduplicationId",params,undefined,false); 
+			copyArg(msg,"MessageGroupId",params,undefined,false); 
 			
 
 			svc.sendMessage(params,cb);
@@ -326,11 +331,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"QueueUrl",params); 
-			copyArg(n,"Entries",params); 
+			copyArg(n,"QueueUrl",params,undefined,false); 
+			copyArg(n,"Entries",params,undefined,false); 
 			
-			copyArg(msg,"QueueUrl",params); 
-			copyArg(msg,"Entries",params); 
+			copyArg(msg,"QueueUrl",params,undefined,false); 
+			copyArg(msg,"Entries",params,undefined,false); 
 			
 
 			svc.sendMessageBatch(params,cb);
@@ -341,11 +346,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"QueueUrl",params); 
-			copyArg(n,"Attributes",params); 
+			copyArg(n,"QueueUrl",params,undefined,false); 
+			copyArg(n,"Attributes",params,undefined,true); 
 			
-			copyArg(msg,"QueueUrl",params); 
-			copyArg(msg,"Attributes",params); 
+			copyArg(msg,"QueueUrl",params,undefined,false); 
+			copyArg(msg,"Attributes",params,undefined,true); 
 			
 
 			svc.setQueueAttributes(params,cb);
@@ -356,11 +361,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"QueueUrl",params); 
-			copyArg(n,"Tags",params); 
+			copyArg(n,"QueueUrl",params,undefined,false); 
+			copyArg(n,"Tags",params,undefined,true); 
 			
-			copyArg(msg,"QueueUrl",params); 
-			copyArg(msg,"Tags",params); 
+			copyArg(msg,"QueueUrl",params,undefined,false); 
+			copyArg(msg,"Tags",params,undefined,true); 
 			
 
 			svc.tagQueue(params,cb);
@@ -371,11 +376,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"QueueUrl",params); 
-			copyArg(n,"TagKeys",params); 
+			copyArg(n,"QueueUrl",params,undefined,false); 
+			copyArg(n,"TagKeys",params,undefined,false); 
 			
-			copyArg(msg,"QueueUrl",params); 
-			copyArg(msg,"TagKeys",params); 
+			copyArg(msg,"QueueUrl",params,undefined,false); 
+			copyArg(msg,"TagKeys",params,undefined,false); 
 			
 
 			svc.untagQueue(params,cb);

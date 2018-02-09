@@ -67,13 +67,18 @@ module.exports = function(RED) {
 			}
 
 		});
-		var copyArg=function(src,arg,out,outArg){
+		var copyArg=function(src,arg,out,outArg,isObject){
+			var tmpValue=src[arg];
 			outArg = (typeof outArg !== 'undefined') ? outArg : arg;
+
 			if (typeof src[arg] !== 'undefined'){
-				out[outArg]=src[arg];
+				if (isObject && typeof src[arg]=="string" && src[arg] != "") { 
+					tmpValue=JSON.parse(src[arg]);
+				}
+				out[outArg]=tmpValue;
 			}
                         //AWS API takes 'Payload' not 'payload' (see Lambda)
-                        if (arg=="Payload" && typeof src[arg] == 'undefined'){
+                        if (arg=="Payload" && typeof tmpValue == 'undefined'){
                                 out[arg]=src["payload"];
                         }
 
@@ -86,15 +91,15 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"TopicArn",params); 
-			copyArg(n,"Label",params); 
-			copyArg(n,"AWSAccountId",params); 
-			copyArg(n,"ActionName",params); 
+			copyArg(n,"TopicArn",params,undefined,false); 
+			copyArg(n,"Label",params,undefined,false); 
+			copyArg(n,"AWSAccountId",params,undefined,false); 
+			copyArg(n,"ActionName",params,undefined,false); 
 			
-			copyArg(msg,"TopicArn",params); 
-			copyArg(msg,"Label",params); 
-			copyArg(msg,"AWSAccountId",params); 
-			copyArg(msg,"ActionName",params); 
+			copyArg(msg,"TopicArn",params,undefined,false); 
+			copyArg(msg,"Label",params,undefined,false); 
+			copyArg(msg,"AWSAccountId",params,undefined,false); 
+			copyArg(msg,"ActionName",params,undefined,false); 
 			
 
 			svc.addPermission(params,cb);
@@ -105,9 +110,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"phoneNumber",params); 
+			copyArg(n,"phoneNumber",params,undefined,false); 
 			
-			copyArg(msg,"phoneNumber",params); 
+			copyArg(msg,"phoneNumber",params,undefined,false); 
 			
 
 			svc.checkIfPhoneNumberIsOptedOut(params,cb);
@@ -118,12 +123,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"TopicArn",params); 
-			copyArg(n,"Token",params); 
+			copyArg(n,"TopicArn",params,undefined,false); 
+			copyArg(n,"Token",params,undefined,false); 
 			
-			copyArg(msg,"TopicArn",params); 
-			copyArg(msg,"Token",params); 
-			copyArg(msg,"AuthenticateOnUnsubscribe",params); 
+			copyArg(msg,"TopicArn",params,undefined,false); 
+			copyArg(msg,"Token",params,undefined,false); 
+			copyArg(msg,"AuthenticateOnUnsubscribe",params,undefined,false); 
 			
 
 			svc.confirmSubscription(params,cb);
@@ -134,13 +139,13 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Name",params); 
-			copyArg(n,"Platform",params); 
-			copyArg(n,"Attributes",params); 
+			copyArg(n,"Name",params,undefined,false); 
+			copyArg(n,"Platform",params,undefined,false); 
+			copyArg(n,"Attributes",params,undefined,true); 
 			
-			copyArg(msg,"Name",params); 
-			copyArg(msg,"Platform",params); 
-			copyArg(msg,"Attributes",params); 
+			copyArg(msg,"Name",params,undefined,false); 
+			copyArg(msg,"Platform",params,undefined,false); 
+			copyArg(msg,"Attributes",params,undefined,true); 
 			
 
 			svc.createPlatformApplication(params,cb);
@@ -151,13 +156,13 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"PlatformApplicationArn",params); 
-			copyArg(n,"Token",params); 
+			copyArg(n,"PlatformApplicationArn",params,undefined,false); 
+			copyArg(n,"Token",params,undefined,false); 
 			
-			copyArg(msg,"PlatformApplicationArn",params); 
-			copyArg(msg,"Token",params); 
-			copyArg(msg,"CustomUserData",params); 
-			copyArg(msg,"Attributes",params); 
+			copyArg(msg,"PlatformApplicationArn",params,undefined,false); 
+			copyArg(msg,"Token",params,undefined,false); 
+			copyArg(msg,"CustomUserData",params,undefined,false); 
+			copyArg(msg,"Attributes",params,undefined,true); 
 			
 
 			svc.createPlatformEndpoint(params,cb);
@@ -168,9 +173,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Name",params); 
+			copyArg(n,"Name",params,undefined,false); 
 			
-			copyArg(msg,"Name",params); 
+			copyArg(msg,"Name",params,undefined,false); 
 			
 
 			svc.createTopic(params,cb);
@@ -181,9 +186,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"EndpointArn",params); 
+			copyArg(n,"EndpointArn",params,undefined,false); 
 			
-			copyArg(msg,"EndpointArn",params); 
+			copyArg(msg,"EndpointArn",params,undefined,false); 
 			
 
 			svc.deleteEndpoint(params,cb);
@@ -194,9 +199,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"PlatformApplicationArn",params); 
+			copyArg(n,"PlatformApplicationArn",params,undefined,false); 
 			
-			copyArg(msg,"PlatformApplicationArn",params); 
+			copyArg(msg,"PlatformApplicationArn",params,undefined,false); 
 			
 
 			svc.deletePlatformApplication(params,cb);
@@ -207,9 +212,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"TopicArn",params); 
+			copyArg(n,"TopicArn",params,undefined,false); 
 			
-			copyArg(msg,"TopicArn",params); 
+			copyArg(msg,"TopicArn",params,undefined,false); 
 			
 
 			svc.deleteTopic(params,cb);
@@ -220,9 +225,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"EndpointArn",params); 
+			copyArg(n,"EndpointArn",params,undefined,false); 
 			
-			copyArg(msg,"EndpointArn",params); 
+			copyArg(msg,"EndpointArn",params,undefined,false); 
 			
 
 			svc.getEndpointAttributes(params,cb);
@@ -233,9 +238,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"PlatformApplicationArn",params); 
+			copyArg(n,"PlatformApplicationArn",params,undefined,false); 
 			
-			copyArg(msg,"PlatformApplicationArn",params); 
+			copyArg(msg,"PlatformApplicationArn",params,undefined,false); 
 			
 
 			svc.getPlatformApplicationAttributes(params,cb);
@@ -247,7 +252,7 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"attributes",params); 
+			copyArg(msg,"attributes",params,undefined,false); 
 			
 
 			svc.getSMSAttributes(params,cb);
@@ -258,9 +263,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"SubscriptionArn",params); 
+			copyArg(n,"SubscriptionArn",params,undefined,false); 
 			
-			copyArg(msg,"SubscriptionArn",params); 
+			copyArg(msg,"SubscriptionArn",params,undefined,false); 
 			
 
 			svc.getSubscriptionAttributes(params,cb);
@@ -271,9 +276,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"TopicArn",params); 
+			copyArg(n,"TopicArn",params,undefined,false); 
 			
-			copyArg(msg,"TopicArn",params); 
+			copyArg(msg,"TopicArn",params,undefined,false); 
 			
 
 			svc.getTopicAttributes(params,cb);
@@ -284,10 +289,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"PlatformApplicationArn",params); 
+			copyArg(n,"PlatformApplicationArn",params,undefined,false); 
 			
-			copyArg(msg,"PlatformApplicationArn",params); 
-			copyArg(msg,"NextToken",params); 
+			copyArg(msg,"PlatformApplicationArn",params,undefined,false); 
+			copyArg(msg,"NextToken",params,undefined,false); 
 			
 
 			svc.listEndpointsByPlatformApplication(params,cb);
@@ -299,7 +304,7 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"nextToken",params); 
+			copyArg(msg,"nextToken",params,undefined,false); 
 			
 
 			svc.listPhoneNumbersOptedOut(params,cb);
@@ -311,7 +316,7 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"NextToken",params); 
+			copyArg(msg,"NextToken",params,undefined,false); 
 			
 
 			svc.listPlatformApplications(params,cb);
@@ -323,7 +328,7 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"NextToken",params); 
+			copyArg(msg,"NextToken",params,undefined,false); 
 			
 
 			svc.listSubscriptions(params,cb);
@@ -334,10 +339,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"TopicArn",params); 
+			copyArg(n,"TopicArn",params,undefined,false); 
 			
-			copyArg(msg,"TopicArn",params); 
-			copyArg(msg,"NextToken",params); 
+			copyArg(msg,"TopicArn",params,undefined,false); 
+			copyArg(msg,"NextToken",params,undefined,false); 
 			
 
 			svc.listSubscriptionsByTopic(params,cb);
@@ -349,7 +354,7 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"NextToken",params); 
+			copyArg(msg,"NextToken",params,undefined,false); 
 			
 
 			svc.listTopics(params,cb);
@@ -360,9 +365,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"phoneNumber",params); 
+			copyArg(n,"phoneNumber",params,undefined,false); 
 			
-			copyArg(msg,"phoneNumber",params); 
+			copyArg(msg,"phoneNumber",params,undefined,false); 
 			
 
 			svc.optInPhoneNumber(params,cb);
@@ -373,15 +378,15 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Message",params); 
+			copyArg(n,"Message",params,undefined,false); 
 			
-			copyArg(msg,"TopicArn",params); 
-			copyArg(msg,"TargetArn",params); 
-			copyArg(msg,"PhoneNumber",params); 
-			copyArg(msg,"Message",params); 
-			copyArg(msg,"Subject",params); 
-			copyArg(msg,"MessageStructure",params); 
-			copyArg(msg,"MessageAttributes",params); 
+			copyArg(msg,"TopicArn",params,undefined,false); 
+			copyArg(msg,"TargetArn",params,undefined,false); 
+			copyArg(msg,"PhoneNumber",params,undefined,false); 
+			copyArg(msg,"Message",params,undefined,false); 
+			copyArg(msg,"Subject",params,undefined,false); 
+			copyArg(msg,"MessageStructure",params,undefined,false); 
+			copyArg(msg,"MessageAttributes",params,undefined,false); 
 			
 
 			svc.publish(params,cb);
@@ -392,11 +397,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"TopicArn",params); 
-			copyArg(n,"Label",params); 
+			copyArg(n,"TopicArn",params,undefined,false); 
+			copyArg(n,"Label",params,undefined,false); 
 			
-			copyArg(msg,"TopicArn",params); 
-			copyArg(msg,"Label",params); 
+			copyArg(msg,"TopicArn",params,undefined,false); 
+			copyArg(msg,"Label",params,undefined,false); 
 			
 
 			svc.removePermission(params,cb);
@@ -407,11 +412,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"EndpointArn",params); 
-			copyArg(n,"Attributes",params); 
+			copyArg(n,"EndpointArn",params,undefined,false); 
+			copyArg(n,"Attributes",params,undefined,true); 
 			
-			copyArg(msg,"EndpointArn",params); 
-			copyArg(msg,"Attributes",params); 
+			copyArg(msg,"EndpointArn",params,undefined,false); 
+			copyArg(msg,"Attributes",params,undefined,true); 
 			
 
 			svc.setEndpointAttributes(params,cb);
@@ -422,11 +427,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"PlatformApplicationArn",params); 
-			copyArg(n,"Attributes",params); 
+			copyArg(n,"PlatformApplicationArn",params,undefined,false); 
+			copyArg(n,"Attributes",params,undefined,true); 
 			
-			copyArg(msg,"PlatformApplicationArn",params); 
-			copyArg(msg,"Attributes",params); 
+			copyArg(msg,"PlatformApplicationArn",params,undefined,false); 
+			copyArg(msg,"Attributes",params,undefined,true); 
 			
 
 			svc.setPlatformApplicationAttributes(params,cb);
@@ -437,9 +442,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"attributes",params); 
+			copyArg(n,"attributes",params,undefined,true); 
 			
-			copyArg(msg,"attributes",params); 
+			copyArg(msg,"attributes",params,undefined,true); 
 			
 
 			svc.setSMSAttributes(params,cb);
@@ -450,12 +455,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"SubscriptionArn",params); 
-			copyArg(n,"AttributeName",params); 
+			copyArg(n,"SubscriptionArn",params,undefined,false); 
+			copyArg(n,"AttributeName",params,undefined,false); 
 			
-			copyArg(msg,"SubscriptionArn",params); 
-			copyArg(msg,"AttributeName",params); 
-			copyArg(msg,"AttributeValue",params); 
+			copyArg(msg,"SubscriptionArn",params,undefined,false); 
+			copyArg(msg,"AttributeName",params,undefined,false); 
+			copyArg(msg,"AttributeValue",params,undefined,false); 
 			
 
 			svc.setSubscriptionAttributes(params,cb);
@@ -466,12 +471,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"TopicArn",params); 
-			copyArg(n,"AttributeName",params); 
+			copyArg(n,"TopicArn",params,undefined,false); 
+			copyArg(n,"AttributeName",params,undefined,false); 
 			
-			copyArg(msg,"TopicArn",params); 
-			copyArg(msg,"AttributeName",params); 
-			copyArg(msg,"AttributeValue",params); 
+			copyArg(msg,"TopicArn",params,undefined,false); 
+			copyArg(msg,"AttributeName",params,undefined,false); 
+			copyArg(msg,"AttributeValue",params,undefined,false); 
 			
 
 			svc.setTopicAttributes(params,cb);
@@ -482,12 +487,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"TopicArn",params); 
-			copyArg(n,"Protocol",params); 
+			copyArg(n,"TopicArn",params,undefined,false); 
+			copyArg(n,"Protocol",params,undefined,false); 
 			
-			copyArg(msg,"TopicArn",params); 
-			copyArg(msg,"Protocol",params); 
-			copyArg(msg,"Endpoint",params); 
+			copyArg(msg,"TopicArn",params,undefined,false); 
+			copyArg(msg,"Protocol",params,undefined,false); 
+			copyArg(msg,"Endpoint",params,undefined,false); 
 			
 
 			svc.subscribe(params,cb);
@@ -498,9 +503,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"SubscriptionArn",params); 
+			copyArg(n,"SubscriptionArn",params,undefined,false); 
 			
-			copyArg(msg,"SubscriptionArn",params); 
+			copyArg(msg,"SubscriptionArn",params,undefined,false); 
 			
 
 			svc.unsubscribe(params,cb);

@@ -67,13 +67,18 @@ module.exports = function(RED) {
 			}
 
 		});
-		var copyArg=function(src,arg,out,outArg){
+		var copyArg=function(src,arg,out,outArg,isObject){
+			var tmpValue=src[arg];
 			outArg = (typeof outArg !== 'undefined') ? outArg : arg;
+
 			if (typeof src[arg] !== 'undefined'){
-				out[outArg]=src[arg];
+				if (isObject && typeof src[arg]=="string" && src[arg] != "") { 
+					tmpValue=JSON.parse(src[arg]);
+				}
+				out[outArg]=tmpValue;
 			}
                         //AWS API takes 'Payload' not 'payload' (see Lambda)
-                        if (arg=="Payload" && typeof src[arg] == 'undefined'){
+                        if (arg=="Payload" && typeof tmpValue == 'undefined'){
                                 out[arg]=src["payload"];
                         }
 
@@ -86,11 +91,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"DBClusterIdentifier",params); 
-			copyArg(n,"RoleArn",params); 
+			copyArg(n,"DBClusterIdentifier",params,undefined,false); 
+			copyArg(n,"RoleArn",params,undefined,false); 
 			
-			copyArg(msg,"DBClusterIdentifier",params); 
-			copyArg(msg,"RoleArn",params); 
+			copyArg(msg,"DBClusterIdentifier",params,undefined,false); 
+			copyArg(msg,"RoleArn",params,undefined,false); 
 			
 
 			svc.addRoleToDBCluster(params,cb);
@@ -101,11 +106,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"SubscriptionName",params); 
-			copyArg(n,"SourceIdentifier",params); 
+			copyArg(n,"SubscriptionName",params,undefined,false); 
+			copyArg(n,"SourceIdentifier",params,undefined,false); 
 			
-			copyArg(msg,"SubscriptionName",params); 
-			copyArg(msg,"SourceIdentifier",params); 
+			copyArg(msg,"SubscriptionName",params,undefined,false); 
+			copyArg(msg,"SourceIdentifier",params,undefined,false); 
 			
 
 			svc.addSourceIdentifierToSubscription(params,cb);
@@ -116,11 +121,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"ResourceName",params); 
-			copyArg(n,"Tags",params); 
+			copyArg(n,"ResourceName",params,undefined,false); 
+			copyArg(n,"Tags",params,undefined,true); 
 			
-			copyArg(msg,"ResourceName",params); 
-			copyArg(msg,"Tags",params); 
+			copyArg(msg,"ResourceName",params,undefined,false); 
+			copyArg(msg,"Tags",params,undefined,true); 
 			
 
 			svc.addTagsToResource(params,cb);
@@ -131,13 +136,13 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"ResourceIdentifier",params); 
-			copyArg(n,"ApplyAction",params); 
-			copyArg(n,"OptInType",params); 
+			copyArg(n,"ResourceIdentifier",params,undefined,false); 
+			copyArg(n,"ApplyAction",params,undefined,false); 
+			copyArg(n,"OptInType",params,undefined,false); 
 			
-			copyArg(msg,"ResourceIdentifier",params); 
-			copyArg(msg,"ApplyAction",params); 
-			copyArg(msg,"OptInType",params); 
+			copyArg(msg,"ResourceIdentifier",params,undefined,false); 
+			copyArg(msg,"ApplyAction",params,undefined,false); 
+			copyArg(msg,"OptInType",params,undefined,false); 
 			
 
 			svc.applyPendingMaintenanceAction(params,cb);
@@ -148,13 +153,13 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"DBSecurityGroupName",params); 
+			copyArg(n,"DBSecurityGroupName",params,undefined,false); 
 			
-			copyArg(msg,"DBSecurityGroupName",params); 
-			copyArg(msg,"CIDRIP",params); 
-			copyArg(msg,"EC2SecurityGroupName",params); 
-			copyArg(msg,"EC2SecurityGroupId",params); 
-			copyArg(msg,"EC2SecurityGroupOwnerId",params); 
+			copyArg(msg,"DBSecurityGroupName",params,undefined,false); 
+			copyArg(msg,"CIDRIP",params,undefined,false); 
+			copyArg(msg,"EC2SecurityGroupName",params,undefined,false); 
+			copyArg(msg,"EC2SecurityGroupId",params,undefined,false); 
+			copyArg(msg,"EC2SecurityGroupOwnerId",params,undefined,false); 
 			
 
 			svc.authorizeDBSecurityGroupIngress(params,cb);
@@ -165,14 +170,14 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"SourceDBClusterParameterGroupIdentifier",params); 
-			copyArg(n,"TargetDBClusterParameterGroupIdentifier",params); 
-			copyArg(n,"TargetDBClusterParameterGroupDescription",params); 
+			copyArg(n,"SourceDBClusterParameterGroupIdentifier",params,undefined,false); 
+			copyArg(n,"TargetDBClusterParameterGroupIdentifier",params,undefined,false); 
+			copyArg(n,"TargetDBClusterParameterGroupDescription",params,undefined,false); 
 			
-			copyArg(msg,"SourceDBClusterParameterGroupIdentifier",params); 
-			copyArg(msg,"TargetDBClusterParameterGroupIdentifier",params); 
-			copyArg(msg,"TargetDBClusterParameterGroupDescription",params); 
-			copyArg(msg,"Tags",params); 
+			copyArg(msg,"SourceDBClusterParameterGroupIdentifier",params,undefined,false); 
+			copyArg(msg,"TargetDBClusterParameterGroupIdentifier",params,undefined,false); 
+			copyArg(msg,"TargetDBClusterParameterGroupDescription",params,undefined,false); 
+			copyArg(msg,"Tags",params,undefined,true); 
 			
 
 			svc.copyDBClusterParameterGroup(params,cb);
@@ -183,16 +188,16 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"SourceDBClusterSnapshotIdentifier",params); 
-			copyArg(n,"TargetDBClusterSnapshotIdentifier",params); 
+			copyArg(n,"SourceDBClusterSnapshotIdentifier",params,undefined,false); 
+			copyArg(n,"TargetDBClusterSnapshotIdentifier",params,undefined,false); 
 			
-			copyArg(msg,"SourceDBClusterSnapshotIdentifier",params); 
-			copyArg(msg,"TargetDBClusterSnapshotIdentifier",params); 
-			copyArg(msg,"KmsKeyId",params); 
-			copyArg(msg,"PreSignedUrl",params); 
-			copyArg(msg,"CopyTags",params); 
-			copyArg(msg,"Tags",params); 
-			copyArg(msg,"SourceRegion",params); 
+			copyArg(msg,"SourceDBClusterSnapshotIdentifier",params,undefined,false); 
+			copyArg(msg,"TargetDBClusterSnapshotIdentifier",params,undefined,false); 
+			copyArg(msg,"KmsKeyId",params,undefined,false); 
+			copyArg(msg,"PreSignedUrl",params,undefined,false); 
+			copyArg(msg,"CopyTags",params,undefined,false); 
+			copyArg(msg,"Tags",params,undefined,true); 
+			copyArg(msg,"SourceRegion",params,undefined,false); 
 			
 
 			svc.copyDBClusterSnapshot(params,cb);
@@ -203,14 +208,14 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"SourceDBParameterGroupIdentifier",params); 
-			copyArg(n,"TargetDBParameterGroupIdentifier",params); 
-			copyArg(n,"TargetDBParameterGroupDescription",params); 
+			copyArg(n,"SourceDBParameterGroupIdentifier",params,undefined,false); 
+			copyArg(n,"TargetDBParameterGroupIdentifier",params,undefined,false); 
+			copyArg(n,"TargetDBParameterGroupDescription",params,undefined,false); 
 			
-			copyArg(msg,"SourceDBParameterGroupIdentifier",params); 
-			copyArg(msg,"TargetDBParameterGroupIdentifier",params); 
-			copyArg(msg,"TargetDBParameterGroupDescription",params); 
-			copyArg(msg,"Tags",params); 
+			copyArg(msg,"SourceDBParameterGroupIdentifier",params,undefined,false); 
+			copyArg(msg,"TargetDBParameterGroupIdentifier",params,undefined,false); 
+			copyArg(msg,"TargetDBParameterGroupDescription",params,undefined,false); 
+			copyArg(msg,"Tags",params,undefined,true); 
 			
 
 			svc.copyDBParameterGroup(params,cb);
@@ -221,17 +226,17 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"SourceDBSnapshotIdentifier",params); 
-			copyArg(n,"TargetDBSnapshotIdentifier",params); 
+			copyArg(n,"SourceDBSnapshotIdentifier",params,undefined,false); 
+			copyArg(n,"TargetDBSnapshotIdentifier",params,undefined,false); 
 			
-			copyArg(msg,"SourceDBSnapshotIdentifier",params); 
-			copyArg(msg,"TargetDBSnapshotIdentifier",params); 
-			copyArg(msg,"KmsKeyId",params); 
-			copyArg(msg,"Tags",params); 
-			copyArg(msg,"CopyTags",params); 
-			copyArg(msg,"PreSignedUrl",params); 
-			copyArg(msg,"OptionGroupName",params); 
-			copyArg(msg,"SourceRegion",params); 
+			copyArg(msg,"SourceDBSnapshotIdentifier",params,undefined,false); 
+			copyArg(msg,"TargetDBSnapshotIdentifier",params,undefined,false); 
+			copyArg(msg,"KmsKeyId",params,undefined,false); 
+			copyArg(msg,"Tags",params,undefined,true); 
+			copyArg(msg,"CopyTags",params,undefined,false); 
+			copyArg(msg,"PreSignedUrl",params,undefined,false); 
+			copyArg(msg,"OptionGroupName",params,undefined,false); 
+			copyArg(msg,"SourceRegion",params,undefined,false); 
 			
 
 			svc.copyDBSnapshot(params,cb);
@@ -242,14 +247,14 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"SourceOptionGroupIdentifier",params); 
-			copyArg(n,"TargetOptionGroupIdentifier",params); 
-			copyArg(n,"TargetOptionGroupDescription",params); 
+			copyArg(n,"SourceOptionGroupIdentifier",params,undefined,false); 
+			copyArg(n,"TargetOptionGroupIdentifier",params,undefined,false); 
+			copyArg(n,"TargetOptionGroupDescription",params,undefined,false); 
 			
-			copyArg(msg,"SourceOptionGroupIdentifier",params); 
-			copyArg(msg,"TargetOptionGroupIdentifier",params); 
-			copyArg(msg,"TargetOptionGroupDescription",params); 
-			copyArg(msg,"Tags",params); 
+			copyArg(msg,"SourceOptionGroupIdentifier",params,undefined,false); 
+			copyArg(msg,"TargetOptionGroupIdentifier",params,undefined,false); 
+			copyArg(msg,"TargetOptionGroupDescription",params,undefined,false); 
+			copyArg(msg,"Tags",params,undefined,true); 
 			
 
 			svc.copyOptionGroup(params,cb);
@@ -260,32 +265,32 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"DBClusterIdentifier",params); 
-			copyArg(n,"Engine",params); 
+			copyArg(n,"DBClusterIdentifier",params,undefined,false); 
+			copyArg(n,"Engine",params,undefined,false); 
 			
-			copyArg(msg,"AvailabilityZones",params); 
-			copyArg(msg,"BackupRetentionPeriod",params); 
-			copyArg(msg,"CharacterSetName",params); 
-			copyArg(msg,"DatabaseName",params); 
-			copyArg(msg,"DBClusterIdentifier",params); 
-			copyArg(msg,"DBClusterParameterGroupName",params); 
-			copyArg(msg,"VpcSecurityGroupIds",params); 
-			copyArg(msg,"DBSubnetGroupName",params); 
-			copyArg(msg,"Engine",params); 
-			copyArg(msg,"EngineVersion",params); 
-			copyArg(msg,"Port",params); 
-			copyArg(msg,"MasterUsername",params); 
-			copyArg(msg,"MasterUserPassword",params); 
-			copyArg(msg,"OptionGroupName",params); 
-			copyArg(msg,"PreferredBackupWindow",params); 
-			copyArg(msg,"PreferredMaintenanceWindow",params); 
-			copyArg(msg,"ReplicationSourceIdentifier",params); 
-			copyArg(msg,"Tags",params); 
-			copyArg(msg,"StorageEncrypted",params); 
-			copyArg(msg,"KmsKeyId",params); 
-			copyArg(msg,"PreSignedUrl",params); 
-			copyArg(msg,"EnableIAMDatabaseAuthentication",params); 
-			copyArg(msg,"SourceRegion",params); 
+			copyArg(msg,"AvailabilityZones",params,undefined,true); 
+			copyArg(msg,"BackupRetentionPeriod",params,undefined,false); 
+			copyArg(msg,"CharacterSetName",params,undefined,false); 
+			copyArg(msg,"DatabaseName",params,undefined,false); 
+			copyArg(msg,"DBClusterIdentifier",params,undefined,false); 
+			copyArg(msg,"DBClusterParameterGroupName",params,undefined,false); 
+			copyArg(msg,"VpcSecurityGroupIds",params,undefined,true); 
+			copyArg(msg,"DBSubnetGroupName",params,undefined,false); 
+			copyArg(msg,"Engine",params,undefined,false); 
+			copyArg(msg,"EngineVersion",params,undefined,false); 
+			copyArg(msg,"Port",params,undefined,false); 
+			copyArg(msg,"MasterUsername",params,undefined,false); 
+			copyArg(msg,"MasterUserPassword",params,undefined,false); 
+			copyArg(msg,"OptionGroupName",params,undefined,false); 
+			copyArg(msg,"PreferredBackupWindow",params,undefined,false); 
+			copyArg(msg,"PreferredMaintenanceWindow",params,undefined,false); 
+			copyArg(msg,"ReplicationSourceIdentifier",params,undefined,false); 
+			copyArg(msg,"Tags",params,undefined,true); 
+			copyArg(msg,"StorageEncrypted",params,undefined,false); 
+			copyArg(msg,"KmsKeyId",params,undefined,false); 
+			copyArg(msg,"PreSignedUrl",params,undefined,false); 
+			copyArg(msg,"EnableIAMDatabaseAuthentication",params,undefined,false); 
+			copyArg(msg,"SourceRegion",params,undefined,false); 
 			
 
 			svc.createDBCluster(params,cb);
@@ -296,14 +301,14 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"DBClusterParameterGroupName",params); 
-			copyArg(n,"DBParameterGroupFamily",params); 
-			copyArg(n,"Description",params); 
+			copyArg(n,"DBClusterParameterGroupName",params,undefined,false); 
+			copyArg(n,"DBParameterGroupFamily",params,undefined,false); 
+			copyArg(n,"Description",params,undefined,false); 
 			
-			copyArg(msg,"DBClusterParameterGroupName",params); 
-			copyArg(msg,"DBParameterGroupFamily",params); 
-			copyArg(msg,"Description",params); 
-			copyArg(msg,"Tags",params); 
+			copyArg(msg,"DBClusterParameterGroupName",params,undefined,false); 
+			copyArg(msg,"DBParameterGroupFamily",params,undefined,false); 
+			copyArg(msg,"Description",params,undefined,false); 
+			copyArg(msg,"Tags",params,undefined,true); 
 			
 
 			svc.createDBClusterParameterGroup(params,cb);
@@ -314,12 +319,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"DBClusterSnapshotIdentifier",params); 
-			copyArg(n,"DBClusterIdentifier",params); 
+			copyArg(n,"DBClusterSnapshotIdentifier",params,undefined,false); 
+			copyArg(n,"DBClusterIdentifier",params,undefined,false); 
 			
-			copyArg(msg,"DBClusterSnapshotIdentifier",params); 
-			copyArg(msg,"DBClusterIdentifier",params); 
-			copyArg(msg,"Tags",params); 
+			copyArg(msg,"DBClusterSnapshotIdentifier",params,undefined,false); 
+			copyArg(msg,"DBClusterIdentifier",params,undefined,false); 
+			copyArg(msg,"Tags",params,undefined,true); 
 			
 
 			svc.createDBClusterSnapshot(params,cb);
@@ -330,51 +335,52 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"DBInstanceIdentifier",params); 
-			copyArg(n,"DBInstanceClass",params); 
-			copyArg(n,"Engine",params); 
+			copyArg(n,"DBInstanceIdentifier",params,undefined,false); 
+			copyArg(n,"DBInstanceClass",params,undefined,false); 
+			copyArg(n,"Engine",params,undefined,false); 
 			
-			copyArg(msg,"DBName",params); 
-			copyArg(msg,"DBInstanceIdentifier",params); 
-			copyArg(msg,"AllocatedStorage",params); 
-			copyArg(msg,"DBInstanceClass",params); 
-			copyArg(msg,"Engine",params); 
-			copyArg(msg,"MasterUsername",params); 
-			copyArg(msg,"MasterUserPassword",params); 
-			copyArg(msg,"DBSecurityGroups",params); 
-			copyArg(msg,"VpcSecurityGroupIds",params); 
-			copyArg(msg,"AvailabilityZone",params); 
-			copyArg(msg,"DBSubnetGroupName",params); 
-			copyArg(msg,"PreferredMaintenanceWindow",params); 
-			copyArg(msg,"DBParameterGroupName",params); 
-			copyArg(msg,"BackupRetentionPeriod",params); 
-			copyArg(msg,"PreferredBackupWindow",params); 
-			copyArg(msg,"Port",params); 
-			copyArg(msg,"MultiAZ",params); 
-			copyArg(msg,"EngineVersion",params); 
-			copyArg(msg,"AutoMinorVersionUpgrade",params); 
-			copyArg(msg,"LicenseModel",params); 
-			copyArg(msg,"Iops",params); 
-			copyArg(msg,"OptionGroupName",params); 
-			copyArg(msg,"CharacterSetName",params); 
-			copyArg(msg,"PubliclyAccessible",params); 
-			copyArg(msg,"Tags",params); 
-			copyArg(msg,"DBClusterIdentifier",params); 
-			copyArg(msg,"StorageType",params); 
-			copyArg(msg,"TdeCredentialArn",params); 
-			copyArg(msg,"TdeCredentialPassword",params); 
-			copyArg(msg,"StorageEncrypted",params); 
-			copyArg(msg,"KmsKeyId",params); 
-			copyArg(msg,"Domain",params); 
-			copyArg(msg,"CopyTagsToSnapshot",params); 
-			copyArg(msg,"MonitoringInterval",params); 
-			copyArg(msg,"MonitoringRoleArn",params); 
-			copyArg(msg,"DomainIAMRoleName",params); 
-			copyArg(msg,"PromotionTier",params); 
-			copyArg(msg,"Timezone",params); 
-			copyArg(msg,"EnableIAMDatabaseAuthentication",params); 
-			copyArg(msg,"EnablePerformanceInsights",params); 
-			copyArg(msg,"PerformanceInsightsKMSKeyId",params); 
+			copyArg(msg,"DBName",params,undefined,false); 
+			copyArg(msg,"DBInstanceIdentifier",params,undefined,false); 
+			copyArg(msg,"AllocatedStorage",params,undefined,false); 
+			copyArg(msg,"DBInstanceClass",params,undefined,false); 
+			copyArg(msg,"Engine",params,undefined,false); 
+			copyArg(msg,"MasterUsername",params,undefined,false); 
+			copyArg(msg,"MasterUserPassword",params,undefined,false); 
+			copyArg(msg,"DBSecurityGroups",params,undefined,true); 
+			copyArg(msg,"VpcSecurityGroupIds",params,undefined,true); 
+			copyArg(msg,"AvailabilityZone",params,undefined,false); 
+			copyArg(msg,"DBSubnetGroupName",params,undefined,false); 
+			copyArg(msg,"PreferredMaintenanceWindow",params,undefined,false); 
+			copyArg(msg,"DBParameterGroupName",params,undefined,false); 
+			copyArg(msg,"BackupRetentionPeriod",params,undefined,false); 
+			copyArg(msg,"PreferredBackupWindow",params,undefined,false); 
+			copyArg(msg,"Port",params,undefined,false); 
+			copyArg(msg,"MultiAZ",params,undefined,false); 
+			copyArg(msg,"EngineVersion",params,undefined,false); 
+			copyArg(msg,"AutoMinorVersionUpgrade",params,undefined,false); 
+			copyArg(msg,"LicenseModel",params,undefined,false); 
+			copyArg(msg,"Iops",params,undefined,false); 
+			copyArg(msg,"OptionGroupName",params,undefined,false); 
+			copyArg(msg,"CharacterSetName",params,undefined,false); 
+			copyArg(msg,"PubliclyAccessible",params,undefined,false); 
+			copyArg(msg,"Tags",params,undefined,true); 
+			copyArg(msg,"DBClusterIdentifier",params,undefined,false); 
+			copyArg(msg,"StorageType",params,undefined,false); 
+			copyArg(msg,"TdeCredentialArn",params,undefined,false); 
+			copyArg(msg,"TdeCredentialPassword",params,undefined,false); 
+			copyArg(msg,"StorageEncrypted",params,undefined,false); 
+			copyArg(msg,"KmsKeyId",params,undefined,false); 
+			copyArg(msg,"Domain",params,undefined,false); 
+			copyArg(msg,"CopyTagsToSnapshot",params,undefined,false); 
+			copyArg(msg,"MonitoringInterval",params,undefined,false); 
+			copyArg(msg,"MonitoringRoleArn",params,undefined,false); 
+			copyArg(msg,"DomainIAMRoleName",params,undefined,false); 
+			copyArg(msg,"PromotionTier",params,undefined,false); 
+			copyArg(msg,"Timezone",params,undefined,false); 
+			copyArg(msg,"EnableIAMDatabaseAuthentication",params,undefined,false); 
+			copyArg(msg,"EnablePerformanceInsights",params,undefined,false); 
+			copyArg(msg,"PerformanceInsightsKMSKeyId",params,undefined,false); 
+			copyArg(msg,"EnableCloudwatchLogsExports",params,undefined,true); 
 			
 
 			svc.createDBInstance(params,cb);
@@ -385,30 +391,32 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"DBInstanceIdentifier",params); 
-			copyArg(n,"SourceDBInstanceIdentifier",params); 
+			copyArg(n,"DBInstanceIdentifier",params,undefined,false); 
+			copyArg(n,"SourceDBInstanceIdentifier",params,undefined,false); 
 			
-			copyArg(msg,"DBInstanceIdentifier",params); 
-			copyArg(msg,"SourceDBInstanceIdentifier",params); 
-			copyArg(msg,"DBInstanceClass",params); 
-			copyArg(msg,"AvailabilityZone",params); 
-			copyArg(msg,"Port",params); 
-			copyArg(msg,"AutoMinorVersionUpgrade",params); 
-			copyArg(msg,"Iops",params); 
-			copyArg(msg,"OptionGroupName",params); 
-			copyArg(msg,"PubliclyAccessible",params); 
-			copyArg(msg,"Tags",params); 
-			copyArg(msg,"DBSubnetGroupName",params); 
-			copyArg(msg,"StorageType",params); 
-			copyArg(msg,"CopyTagsToSnapshot",params); 
-			copyArg(msg,"MonitoringInterval",params); 
-			copyArg(msg,"MonitoringRoleArn",params); 
-			copyArg(msg,"KmsKeyId",params); 
-			copyArg(msg,"PreSignedUrl",params); 
-			copyArg(msg,"EnableIAMDatabaseAuthentication",params); 
-			copyArg(msg,"EnablePerformanceInsights",params); 
-			copyArg(msg,"PerformanceInsightsKMSKeyId",params); 
-			copyArg(msg,"SourceRegion",params); 
+			copyArg(msg,"DBInstanceIdentifier",params,undefined,false); 
+			copyArg(msg,"SourceDBInstanceIdentifier",params,undefined,false); 
+			copyArg(msg,"DBInstanceClass",params,undefined,false); 
+			copyArg(msg,"AvailabilityZone",params,undefined,false); 
+			copyArg(msg,"Port",params,undefined,false); 
+			copyArg(msg,"MultiAZ",params,undefined,false); 
+			copyArg(msg,"AutoMinorVersionUpgrade",params,undefined,false); 
+			copyArg(msg,"Iops",params,undefined,false); 
+			copyArg(msg,"OptionGroupName",params,undefined,false); 
+			copyArg(msg,"PubliclyAccessible",params,undefined,false); 
+			copyArg(msg,"Tags",params,undefined,true); 
+			copyArg(msg,"DBSubnetGroupName",params,undefined,false); 
+			copyArg(msg,"StorageType",params,undefined,false); 
+			copyArg(msg,"CopyTagsToSnapshot",params,undefined,false); 
+			copyArg(msg,"MonitoringInterval",params,undefined,false); 
+			copyArg(msg,"MonitoringRoleArn",params,undefined,false); 
+			copyArg(msg,"KmsKeyId",params,undefined,false); 
+			copyArg(msg,"PreSignedUrl",params,undefined,false); 
+			copyArg(msg,"EnableIAMDatabaseAuthentication",params,undefined,false); 
+			copyArg(msg,"EnablePerformanceInsights",params,undefined,false); 
+			copyArg(msg,"PerformanceInsightsKMSKeyId",params,undefined,false); 
+			copyArg(msg,"EnableCloudwatchLogsExports",params,undefined,true); 
+			copyArg(msg,"SourceRegion",params,undefined,false); 
 			
 
 			svc.createDBInstanceReadReplica(params,cb);
@@ -419,14 +427,14 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"DBParameterGroupName",params); 
-			copyArg(n,"DBParameterGroupFamily",params); 
-			copyArg(n,"Description",params); 
+			copyArg(n,"DBParameterGroupName",params,undefined,false); 
+			copyArg(n,"DBParameterGroupFamily",params,undefined,false); 
+			copyArg(n,"Description",params,undefined,false); 
 			
-			copyArg(msg,"DBParameterGroupName",params); 
-			copyArg(msg,"DBParameterGroupFamily",params); 
-			copyArg(msg,"Description",params); 
-			copyArg(msg,"Tags",params); 
+			copyArg(msg,"DBParameterGroupName",params,undefined,false); 
+			copyArg(msg,"DBParameterGroupFamily",params,undefined,false); 
+			copyArg(msg,"Description",params,undefined,false); 
+			copyArg(msg,"Tags",params,undefined,true); 
 			
 
 			svc.createDBParameterGroup(params,cb);
@@ -437,12 +445,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"DBSecurityGroupName",params); 
-			copyArg(n,"DBSecurityGroupDescription",params); 
+			copyArg(n,"DBSecurityGroupName",params,undefined,false); 
+			copyArg(n,"DBSecurityGroupDescription",params,undefined,false); 
 			
-			copyArg(msg,"DBSecurityGroupName",params); 
-			copyArg(msg,"DBSecurityGroupDescription",params); 
-			copyArg(msg,"Tags",params); 
+			copyArg(msg,"DBSecurityGroupName",params,undefined,false); 
+			copyArg(msg,"DBSecurityGroupDescription",params,undefined,false); 
+			copyArg(msg,"Tags",params,undefined,true); 
 			
 
 			svc.createDBSecurityGroup(params,cb);
@@ -453,12 +461,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"DBSnapshotIdentifier",params); 
-			copyArg(n,"DBInstanceIdentifier",params); 
+			copyArg(n,"DBSnapshotIdentifier",params,undefined,false); 
+			copyArg(n,"DBInstanceIdentifier",params,undefined,false); 
 			
-			copyArg(msg,"DBSnapshotIdentifier",params); 
-			copyArg(msg,"DBInstanceIdentifier",params); 
-			copyArg(msg,"Tags",params); 
+			copyArg(msg,"DBSnapshotIdentifier",params,undefined,false); 
+			copyArg(msg,"DBInstanceIdentifier",params,undefined,false); 
+			copyArg(msg,"Tags",params,undefined,true); 
 			
 
 			svc.createDBSnapshot(params,cb);
@@ -469,14 +477,14 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"DBSubnetGroupName",params); 
-			copyArg(n,"DBSubnetGroupDescription",params); 
-			copyArg(n,"SubnetIds",params); 
+			copyArg(n,"DBSubnetGroupName",params,undefined,false); 
+			copyArg(n,"DBSubnetGroupDescription",params,undefined,false); 
+			copyArg(n,"SubnetIds",params,undefined,true); 
 			
-			copyArg(msg,"DBSubnetGroupName",params); 
-			copyArg(msg,"DBSubnetGroupDescription",params); 
-			copyArg(msg,"SubnetIds",params); 
-			copyArg(msg,"Tags",params); 
+			copyArg(msg,"DBSubnetGroupName",params,undefined,false); 
+			copyArg(msg,"DBSubnetGroupDescription",params,undefined,false); 
+			copyArg(msg,"SubnetIds",params,undefined,true); 
+			copyArg(msg,"Tags",params,undefined,true); 
 			
 
 			svc.createDBSubnetGroup(params,cb);
@@ -487,16 +495,16 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"SubscriptionName",params); 
-			copyArg(n,"SnsTopicArn",params); 
+			copyArg(n,"SubscriptionName",params,undefined,false); 
+			copyArg(n,"SnsTopicArn",params,undefined,false); 
 			
-			copyArg(msg,"SubscriptionName",params); 
-			copyArg(msg,"SnsTopicArn",params); 
-			copyArg(msg,"SourceType",params); 
-			copyArg(msg,"EventCategories",params); 
-			copyArg(msg,"SourceIds",params); 
-			copyArg(msg,"Enabled",params); 
-			copyArg(msg,"Tags",params); 
+			copyArg(msg,"SubscriptionName",params,undefined,false); 
+			copyArg(msg,"SnsTopicArn",params,undefined,false); 
+			copyArg(msg,"SourceType",params,undefined,false); 
+			copyArg(msg,"EventCategories",params,undefined,true); 
+			copyArg(msg,"SourceIds",params,undefined,true); 
+			copyArg(msg,"Enabled",params,undefined,false); 
+			copyArg(msg,"Tags",params,undefined,true); 
 			
 
 			svc.createEventSubscription(params,cb);
@@ -507,16 +515,16 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"OptionGroupName",params); 
-			copyArg(n,"EngineName",params); 
-			copyArg(n,"MajorEngineVersion",params); 
-			copyArg(n,"OptionGroupDescription",params); 
+			copyArg(n,"OptionGroupName",params,undefined,false); 
+			copyArg(n,"EngineName",params,undefined,false); 
+			copyArg(n,"MajorEngineVersion",params,undefined,false); 
+			copyArg(n,"OptionGroupDescription",params,undefined,false); 
 			
-			copyArg(msg,"OptionGroupName",params); 
-			copyArg(msg,"EngineName",params); 
-			copyArg(msg,"MajorEngineVersion",params); 
-			copyArg(msg,"OptionGroupDescription",params); 
-			copyArg(msg,"Tags",params); 
+			copyArg(msg,"OptionGroupName",params,undefined,false); 
+			copyArg(msg,"EngineName",params,undefined,false); 
+			copyArg(msg,"MajorEngineVersion",params,undefined,false); 
+			copyArg(msg,"OptionGroupDescription",params,undefined,false); 
+			copyArg(msg,"Tags",params,undefined,true); 
 			
 
 			svc.createOptionGroup(params,cb);
@@ -527,11 +535,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"DBClusterIdentifier",params); 
+			copyArg(n,"DBClusterIdentifier",params,undefined,false); 
 			
-			copyArg(msg,"DBClusterIdentifier",params); 
-			copyArg(msg,"SkipFinalSnapshot",params); 
-			copyArg(msg,"FinalDBSnapshotIdentifier",params); 
+			copyArg(msg,"DBClusterIdentifier",params,undefined,false); 
+			copyArg(msg,"SkipFinalSnapshot",params,undefined,false); 
+			copyArg(msg,"FinalDBSnapshotIdentifier",params,undefined,false); 
 			
 
 			svc.deleteDBCluster(params,cb);
@@ -542,9 +550,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"DBClusterParameterGroupName",params); 
+			copyArg(n,"DBClusterParameterGroupName",params,undefined,false); 
 			
-			copyArg(msg,"DBClusterParameterGroupName",params); 
+			copyArg(msg,"DBClusterParameterGroupName",params,undefined,false); 
 			
 
 			svc.deleteDBClusterParameterGroup(params,cb);
@@ -555,9 +563,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"DBClusterSnapshotIdentifier",params); 
+			copyArg(n,"DBClusterSnapshotIdentifier",params,undefined,false); 
 			
-			copyArg(msg,"DBClusterSnapshotIdentifier",params); 
+			copyArg(msg,"DBClusterSnapshotIdentifier",params,undefined,false); 
 			
 
 			svc.deleteDBClusterSnapshot(params,cb);
@@ -568,11 +576,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"DBInstanceIdentifier",params); 
+			copyArg(n,"DBInstanceIdentifier",params,undefined,false); 
 			
-			copyArg(msg,"DBInstanceIdentifier",params); 
-			copyArg(msg,"SkipFinalSnapshot",params); 
-			copyArg(msg,"FinalDBSnapshotIdentifier",params); 
+			copyArg(msg,"DBInstanceIdentifier",params,undefined,false); 
+			copyArg(msg,"SkipFinalSnapshot",params,undefined,false); 
+			copyArg(msg,"FinalDBSnapshotIdentifier",params,undefined,false); 
 			
 
 			svc.deleteDBInstance(params,cb);
@@ -583,9 +591,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"DBParameterGroupName",params); 
+			copyArg(n,"DBParameterGroupName",params,undefined,false); 
 			
-			copyArg(msg,"DBParameterGroupName",params); 
+			copyArg(msg,"DBParameterGroupName",params,undefined,false); 
 			
 
 			svc.deleteDBParameterGroup(params,cb);
@@ -596,9 +604,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"DBSecurityGroupName",params); 
+			copyArg(n,"DBSecurityGroupName",params,undefined,false); 
 			
-			copyArg(msg,"DBSecurityGroupName",params); 
+			copyArg(msg,"DBSecurityGroupName",params,undefined,false); 
 			
 
 			svc.deleteDBSecurityGroup(params,cb);
@@ -609,9 +617,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"DBSnapshotIdentifier",params); 
+			copyArg(n,"DBSnapshotIdentifier",params,undefined,false); 
 			
-			copyArg(msg,"DBSnapshotIdentifier",params); 
+			copyArg(msg,"DBSnapshotIdentifier",params,undefined,false); 
 			
 
 			svc.deleteDBSnapshot(params,cb);
@@ -622,9 +630,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"DBSubnetGroupName",params); 
+			copyArg(n,"DBSubnetGroupName",params,undefined,false); 
 			
-			copyArg(msg,"DBSubnetGroupName",params); 
+			copyArg(msg,"DBSubnetGroupName",params,undefined,false); 
 			
 
 			svc.deleteDBSubnetGroup(params,cb);
@@ -635,9 +643,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"SubscriptionName",params); 
+			copyArg(n,"SubscriptionName",params,undefined,false); 
 			
-			copyArg(msg,"SubscriptionName",params); 
+			copyArg(msg,"SubscriptionName",params,undefined,false); 
 			
 
 			svc.deleteEventSubscription(params,cb);
@@ -648,9 +656,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"OptionGroupName",params); 
+			copyArg(n,"OptionGroupName",params,undefined,false); 
 			
-			copyArg(msg,"OptionGroupName",params); 
+			copyArg(msg,"OptionGroupName",params,undefined,false); 
 			
 
 			svc.deleteOptionGroup(params,cb);
@@ -673,10 +681,10 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"CertificateIdentifier",params); 
-			copyArg(msg,"Filters",params); 
-			copyArg(msg,"MaxRecords",params); 
-			copyArg(msg,"Marker",params); 
+			copyArg(msg,"CertificateIdentifier",params,undefined,false); 
+			copyArg(msg,"Filters",params,undefined,true); 
+			copyArg(msg,"MaxRecords",params,undefined,false); 
+			copyArg(msg,"Marker",params,undefined,false); 
 			
 
 			svc.describeCertificates(params,cb);
@@ -688,10 +696,10 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"DBClusterParameterGroupName",params); 
-			copyArg(msg,"Filters",params); 
-			copyArg(msg,"MaxRecords",params); 
-			copyArg(msg,"Marker",params); 
+			copyArg(msg,"DBClusterParameterGroupName",params,undefined,false); 
+			copyArg(msg,"Filters",params,undefined,true); 
+			copyArg(msg,"MaxRecords",params,undefined,false); 
+			copyArg(msg,"Marker",params,undefined,false); 
 			
 
 			svc.describeDBClusterParameterGroups(params,cb);
@@ -702,13 +710,13 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"DBClusterParameterGroupName",params); 
+			copyArg(n,"DBClusterParameterGroupName",params,undefined,false); 
 			
-			copyArg(msg,"DBClusterParameterGroupName",params); 
-			copyArg(msg,"Source",params); 
-			copyArg(msg,"Filters",params); 
-			copyArg(msg,"MaxRecords",params); 
-			copyArg(msg,"Marker",params); 
+			copyArg(msg,"DBClusterParameterGroupName",params,undefined,false); 
+			copyArg(msg,"Source",params,undefined,false); 
+			copyArg(msg,"Filters",params,undefined,true); 
+			copyArg(msg,"MaxRecords",params,undefined,false); 
+			copyArg(msg,"Marker",params,undefined,false); 
 			
 
 			svc.describeDBClusterParameters(params,cb);
@@ -719,9 +727,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"DBClusterSnapshotIdentifier",params); 
+			copyArg(n,"DBClusterSnapshotIdentifier",params,undefined,false); 
 			
-			copyArg(msg,"DBClusterSnapshotIdentifier",params); 
+			copyArg(msg,"DBClusterSnapshotIdentifier",params,undefined,false); 
 			
 
 			svc.describeDBClusterSnapshotAttributes(params,cb);
@@ -733,14 +741,14 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"DBClusterIdentifier",params); 
-			copyArg(msg,"DBClusterSnapshotIdentifier",params); 
-			copyArg(msg,"SnapshotType",params); 
-			copyArg(msg,"Filters",params); 
-			copyArg(msg,"MaxRecords",params); 
-			copyArg(msg,"Marker",params); 
-			copyArg(msg,"IncludeShared",params); 
-			copyArg(msg,"IncludePublic",params); 
+			copyArg(msg,"DBClusterIdentifier",params,undefined,false); 
+			copyArg(msg,"DBClusterSnapshotIdentifier",params,undefined,false); 
+			copyArg(msg,"SnapshotType",params,undefined,false); 
+			copyArg(msg,"Filters",params,undefined,true); 
+			copyArg(msg,"MaxRecords",params,undefined,false); 
+			copyArg(msg,"Marker",params,undefined,false); 
+			copyArg(msg,"IncludeShared",params,undefined,false); 
+			copyArg(msg,"IncludePublic",params,undefined,false); 
 			
 
 			svc.describeDBClusterSnapshots(params,cb);
@@ -752,10 +760,10 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"DBClusterIdentifier",params); 
-			copyArg(msg,"Filters",params); 
-			copyArg(msg,"MaxRecords",params); 
-			copyArg(msg,"Marker",params); 
+			copyArg(msg,"DBClusterIdentifier",params,undefined,false); 
+			copyArg(msg,"Filters",params,undefined,true); 
+			copyArg(msg,"MaxRecords",params,undefined,false); 
+			copyArg(msg,"Marker",params,undefined,false); 
 			
 
 			svc.describeDBClusters(params,cb);
@@ -767,15 +775,15 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"Engine",params); 
-			copyArg(msg,"EngineVersion",params); 
-			copyArg(msg,"DBParameterGroupFamily",params); 
-			copyArg(msg,"Filters",params); 
-			copyArg(msg,"MaxRecords",params); 
-			copyArg(msg,"Marker",params); 
-			copyArg(msg,"DefaultOnly",params); 
-			copyArg(msg,"ListSupportedCharacterSets",params); 
-			copyArg(msg,"ListSupportedTimezones",params); 
+			copyArg(msg,"Engine",params,undefined,false); 
+			copyArg(msg,"EngineVersion",params,undefined,false); 
+			copyArg(msg,"DBParameterGroupFamily",params,undefined,false); 
+			copyArg(msg,"Filters",params,undefined,true); 
+			copyArg(msg,"MaxRecords",params,undefined,false); 
+			copyArg(msg,"Marker",params,undefined,false); 
+			copyArg(msg,"DefaultOnly",params,undefined,false); 
+			copyArg(msg,"ListSupportedCharacterSets",params,undefined,false); 
+			copyArg(msg,"ListSupportedTimezones",params,undefined,false); 
 			
 
 			svc.describeDBEngineVersions(params,cb);
@@ -787,10 +795,10 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"DBInstanceIdentifier",params); 
-			copyArg(msg,"Filters",params); 
-			copyArg(msg,"MaxRecords",params); 
-			copyArg(msg,"Marker",params); 
+			copyArg(msg,"DBInstanceIdentifier",params,undefined,false); 
+			copyArg(msg,"Filters",params,undefined,true); 
+			copyArg(msg,"MaxRecords",params,undefined,false); 
+			copyArg(msg,"Marker",params,undefined,false); 
 			
 
 			svc.describeDBInstances(params,cb);
@@ -801,15 +809,15 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"DBInstanceIdentifier",params); 
+			copyArg(n,"DBInstanceIdentifier",params,undefined,false); 
 			
-			copyArg(msg,"DBInstanceIdentifier",params); 
-			copyArg(msg,"FilenameContains",params); 
-			copyArg(msg,"FileLastWritten",params); 
-			copyArg(msg,"FileSize",params); 
-			copyArg(msg,"Filters",params); 
-			copyArg(msg,"MaxRecords",params); 
-			copyArg(msg,"Marker",params); 
+			copyArg(msg,"DBInstanceIdentifier",params,undefined,false); 
+			copyArg(msg,"FilenameContains",params,undefined,false); 
+			copyArg(msg,"FileLastWritten",params,undefined,false); 
+			copyArg(msg,"FileSize",params,undefined,false); 
+			copyArg(msg,"Filters",params,undefined,true); 
+			copyArg(msg,"MaxRecords",params,undefined,false); 
+			copyArg(msg,"Marker",params,undefined,false); 
 			
 
 			svc.describeDBLogFiles(params,cb);
@@ -821,10 +829,10 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"DBParameterGroupName",params); 
-			copyArg(msg,"Filters",params); 
-			copyArg(msg,"MaxRecords",params); 
-			copyArg(msg,"Marker",params); 
+			copyArg(msg,"DBParameterGroupName",params,undefined,false); 
+			copyArg(msg,"Filters",params,undefined,true); 
+			copyArg(msg,"MaxRecords",params,undefined,false); 
+			copyArg(msg,"Marker",params,undefined,false); 
 			
 
 			svc.describeDBParameterGroups(params,cb);
@@ -835,13 +843,13 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"DBParameterGroupName",params); 
+			copyArg(n,"DBParameterGroupName",params,undefined,false); 
 			
-			copyArg(msg,"DBParameterGroupName",params); 
-			copyArg(msg,"Source",params); 
-			copyArg(msg,"Filters",params); 
-			copyArg(msg,"MaxRecords",params); 
-			copyArg(msg,"Marker",params); 
+			copyArg(msg,"DBParameterGroupName",params,undefined,false); 
+			copyArg(msg,"Source",params,undefined,false); 
+			copyArg(msg,"Filters",params,undefined,true); 
+			copyArg(msg,"MaxRecords",params,undefined,false); 
+			copyArg(msg,"Marker",params,undefined,false); 
 			
 
 			svc.describeDBParameters(params,cb);
@@ -853,10 +861,10 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"DBSecurityGroupName",params); 
-			copyArg(msg,"Filters",params); 
-			copyArg(msg,"MaxRecords",params); 
-			copyArg(msg,"Marker",params); 
+			copyArg(msg,"DBSecurityGroupName",params,undefined,false); 
+			copyArg(msg,"Filters",params,undefined,true); 
+			copyArg(msg,"MaxRecords",params,undefined,false); 
+			copyArg(msg,"Marker",params,undefined,false); 
 			
 
 			svc.describeDBSecurityGroups(params,cb);
@@ -867,9 +875,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"DBSnapshotIdentifier",params); 
+			copyArg(n,"DBSnapshotIdentifier",params,undefined,false); 
 			
-			copyArg(msg,"DBSnapshotIdentifier",params); 
+			copyArg(msg,"DBSnapshotIdentifier",params,undefined,false); 
 			
 
 			svc.describeDBSnapshotAttributes(params,cb);
@@ -881,14 +889,14 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"DBInstanceIdentifier",params); 
-			copyArg(msg,"DBSnapshotIdentifier",params); 
-			copyArg(msg,"SnapshotType",params); 
-			copyArg(msg,"Filters",params); 
-			copyArg(msg,"MaxRecords",params); 
-			copyArg(msg,"Marker",params); 
-			copyArg(msg,"IncludeShared",params); 
-			copyArg(msg,"IncludePublic",params); 
+			copyArg(msg,"DBInstanceIdentifier",params,undefined,false); 
+			copyArg(msg,"DBSnapshotIdentifier",params,undefined,false); 
+			copyArg(msg,"SnapshotType",params,undefined,false); 
+			copyArg(msg,"Filters",params,undefined,true); 
+			copyArg(msg,"MaxRecords",params,undefined,false); 
+			copyArg(msg,"Marker",params,undefined,false); 
+			copyArg(msg,"IncludeShared",params,undefined,false); 
+			copyArg(msg,"IncludePublic",params,undefined,false); 
 			
 
 			svc.describeDBSnapshots(params,cb);
@@ -900,10 +908,10 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"DBSubnetGroupName",params); 
-			copyArg(msg,"Filters",params); 
-			copyArg(msg,"MaxRecords",params); 
-			copyArg(msg,"Marker",params); 
+			copyArg(msg,"DBSubnetGroupName",params,undefined,false); 
+			copyArg(msg,"Filters",params,undefined,true); 
+			copyArg(msg,"MaxRecords",params,undefined,false); 
+			copyArg(msg,"Marker",params,undefined,false); 
 			
 
 			svc.describeDBSubnetGroups(params,cb);
@@ -914,12 +922,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"DBParameterGroupFamily",params); 
+			copyArg(n,"DBParameterGroupFamily",params,undefined,false); 
 			
-			copyArg(msg,"DBParameterGroupFamily",params); 
-			copyArg(msg,"Filters",params); 
-			copyArg(msg,"MaxRecords",params); 
-			copyArg(msg,"Marker",params); 
+			copyArg(msg,"DBParameterGroupFamily",params,undefined,false); 
+			copyArg(msg,"Filters",params,undefined,true); 
+			copyArg(msg,"MaxRecords",params,undefined,false); 
+			copyArg(msg,"Marker",params,undefined,false); 
 			
 
 			svc.describeEngineDefaultClusterParameters(params,cb);
@@ -930,12 +938,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"DBParameterGroupFamily",params); 
+			copyArg(n,"DBParameterGroupFamily",params,undefined,false); 
 			
-			copyArg(msg,"DBParameterGroupFamily",params); 
-			copyArg(msg,"Filters",params); 
-			copyArg(msg,"MaxRecords",params); 
-			copyArg(msg,"Marker",params); 
+			copyArg(msg,"DBParameterGroupFamily",params,undefined,false); 
+			copyArg(msg,"Filters",params,undefined,true); 
+			copyArg(msg,"MaxRecords",params,undefined,false); 
+			copyArg(msg,"Marker",params,undefined,false); 
 			
 
 			svc.describeEngineDefaultParameters(params,cb);
@@ -947,8 +955,8 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"SourceType",params); 
-			copyArg(msg,"Filters",params); 
+			copyArg(msg,"SourceType",params,undefined,false); 
+			copyArg(msg,"Filters",params,undefined,true); 
 			
 
 			svc.describeEventCategories(params,cb);
@@ -960,10 +968,10 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"SubscriptionName",params); 
-			copyArg(msg,"Filters",params); 
-			copyArg(msg,"MaxRecords",params); 
-			copyArg(msg,"Marker",params); 
+			copyArg(msg,"SubscriptionName",params,undefined,false); 
+			copyArg(msg,"Filters",params,undefined,true); 
+			copyArg(msg,"MaxRecords",params,undefined,false); 
+			copyArg(msg,"Marker",params,undefined,false); 
 			
 
 			svc.describeEventSubscriptions(params,cb);
@@ -975,15 +983,15 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"SourceIdentifier",params); 
-			copyArg(msg,"SourceType",params); 
-			copyArg(msg,"StartTime",params); 
-			copyArg(msg,"EndTime",params); 
-			copyArg(msg,"Duration",params); 
-			copyArg(msg,"EventCategories",params); 
-			copyArg(msg,"Filters",params); 
-			copyArg(msg,"MaxRecords",params); 
-			copyArg(msg,"Marker",params); 
+			copyArg(msg,"SourceIdentifier",params,undefined,false); 
+			copyArg(msg,"SourceType",params,undefined,false); 
+			copyArg(msg,"StartTime",params,undefined,false); 
+			copyArg(msg,"EndTime",params,undefined,false); 
+			copyArg(msg,"Duration",params,undefined,false); 
+			copyArg(msg,"EventCategories",params,undefined,true); 
+			copyArg(msg,"Filters",params,undefined,true); 
+			copyArg(msg,"MaxRecords",params,undefined,false); 
+			copyArg(msg,"Marker",params,undefined,false); 
 			
 
 			svc.describeEvents(params,cb);
@@ -994,13 +1002,13 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"EngineName",params); 
+			copyArg(n,"EngineName",params,undefined,false); 
 			
-			copyArg(msg,"EngineName",params); 
-			copyArg(msg,"MajorEngineVersion",params); 
-			copyArg(msg,"Filters",params); 
-			copyArg(msg,"MaxRecords",params); 
-			copyArg(msg,"Marker",params); 
+			copyArg(msg,"EngineName",params,undefined,false); 
+			copyArg(msg,"MajorEngineVersion",params,undefined,false); 
+			copyArg(msg,"Filters",params,undefined,true); 
+			copyArg(msg,"MaxRecords",params,undefined,false); 
+			copyArg(msg,"Marker",params,undefined,false); 
 			
 
 			svc.describeOptionGroupOptions(params,cb);
@@ -1012,12 +1020,12 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"OptionGroupName",params); 
-			copyArg(msg,"Filters",params); 
-			copyArg(msg,"Marker",params); 
-			copyArg(msg,"MaxRecords",params); 
-			copyArg(msg,"EngineName",params); 
-			copyArg(msg,"MajorEngineVersion",params); 
+			copyArg(msg,"OptionGroupName",params,undefined,false); 
+			copyArg(msg,"Filters",params,undefined,true); 
+			copyArg(msg,"Marker",params,undefined,false); 
+			copyArg(msg,"MaxRecords",params,undefined,false); 
+			copyArg(msg,"EngineName",params,undefined,false); 
+			copyArg(msg,"MajorEngineVersion",params,undefined,false); 
 			
 
 			svc.describeOptionGroups(params,cb);
@@ -1028,16 +1036,16 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Engine",params); 
+			copyArg(n,"Engine",params,undefined,false); 
 			
-			copyArg(msg,"Engine",params); 
-			copyArg(msg,"EngineVersion",params); 
-			copyArg(msg,"DBInstanceClass",params); 
-			copyArg(msg,"LicenseModel",params); 
-			copyArg(msg,"Vpc",params); 
-			copyArg(msg,"Filters",params); 
-			copyArg(msg,"MaxRecords",params); 
-			copyArg(msg,"Marker",params); 
+			copyArg(msg,"Engine",params,undefined,false); 
+			copyArg(msg,"EngineVersion",params,undefined,false); 
+			copyArg(msg,"DBInstanceClass",params,undefined,false); 
+			copyArg(msg,"LicenseModel",params,undefined,false); 
+			copyArg(msg,"Vpc",params,undefined,false); 
+			copyArg(msg,"Filters",params,undefined,true); 
+			copyArg(msg,"MaxRecords",params,undefined,false); 
+			copyArg(msg,"Marker",params,undefined,false); 
 			
 
 			svc.describeOrderableDBInstanceOptions(params,cb);
@@ -1049,10 +1057,10 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"ResourceIdentifier",params); 
-			copyArg(msg,"Filters",params); 
-			copyArg(msg,"Marker",params); 
-			copyArg(msg,"MaxRecords",params); 
+			copyArg(msg,"ResourceIdentifier",params,undefined,false); 
+			copyArg(msg,"Filters",params,undefined,true); 
+			copyArg(msg,"Marker",params,undefined,false); 
+			copyArg(msg,"MaxRecords",params,undefined,false); 
 			
 
 			svc.describePendingMaintenanceActions(params,cb);
@@ -1064,16 +1072,16 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"ReservedDBInstanceId",params); 
-			copyArg(msg,"ReservedDBInstancesOfferingId",params); 
-			copyArg(msg,"DBInstanceClass",params); 
-			copyArg(msg,"Duration",params); 
-			copyArg(msg,"ProductDescription",params); 
-			copyArg(msg,"OfferingType",params); 
-			copyArg(msg,"MultiAZ",params); 
-			copyArg(msg,"Filters",params); 
-			copyArg(msg,"MaxRecords",params); 
-			copyArg(msg,"Marker",params); 
+			copyArg(msg,"ReservedDBInstanceId",params,undefined,false); 
+			copyArg(msg,"ReservedDBInstancesOfferingId",params,undefined,false); 
+			copyArg(msg,"DBInstanceClass",params,undefined,false); 
+			copyArg(msg,"Duration",params,undefined,false); 
+			copyArg(msg,"ProductDescription",params,undefined,false); 
+			copyArg(msg,"OfferingType",params,undefined,false); 
+			copyArg(msg,"MultiAZ",params,undefined,false); 
+			copyArg(msg,"Filters",params,undefined,true); 
+			copyArg(msg,"MaxRecords",params,undefined,false); 
+			copyArg(msg,"Marker",params,undefined,false); 
 			
 
 			svc.describeReservedDBInstances(params,cb);
@@ -1085,15 +1093,15 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"ReservedDBInstancesOfferingId",params); 
-			copyArg(msg,"DBInstanceClass",params); 
-			copyArg(msg,"Duration",params); 
-			copyArg(msg,"ProductDescription",params); 
-			copyArg(msg,"OfferingType",params); 
-			copyArg(msg,"MultiAZ",params); 
-			copyArg(msg,"Filters",params); 
-			copyArg(msg,"MaxRecords",params); 
-			copyArg(msg,"Marker",params); 
+			copyArg(msg,"ReservedDBInstancesOfferingId",params,undefined,false); 
+			copyArg(msg,"DBInstanceClass",params,undefined,false); 
+			copyArg(msg,"Duration",params,undefined,false); 
+			copyArg(msg,"ProductDescription",params,undefined,false); 
+			copyArg(msg,"OfferingType",params,undefined,false); 
+			copyArg(msg,"MultiAZ",params,undefined,false); 
+			copyArg(msg,"Filters",params,undefined,true); 
+			copyArg(msg,"MaxRecords",params,undefined,false); 
+			copyArg(msg,"Marker",params,undefined,false); 
 			
 
 			svc.describeReservedDBInstancesOfferings(params,cb);
@@ -1105,10 +1113,10 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"RegionName",params); 
-			copyArg(msg,"MaxRecords",params); 
-			copyArg(msg,"Marker",params); 
-			copyArg(msg,"Filters",params); 
+			copyArg(msg,"RegionName",params,undefined,false); 
+			copyArg(msg,"MaxRecords",params,undefined,false); 
+			copyArg(msg,"Marker",params,undefined,false); 
+			copyArg(msg,"Filters",params,undefined,true); 
 			
 
 			svc.describeSourceRegions(params,cb);
@@ -1119,9 +1127,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"DBInstanceIdentifier",params); 
+			copyArg(n,"DBInstanceIdentifier",params,undefined,false); 
 			
-			copyArg(msg,"DBInstanceIdentifier",params); 
+			copyArg(msg,"DBInstanceIdentifier",params,undefined,false); 
 			
 
 			svc.describeValidDBInstanceModifications(params,cb);
@@ -1132,13 +1140,13 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"DBInstanceIdentifier",params); 
-			copyArg(n,"LogFileName",params); 
+			copyArg(n,"DBInstanceIdentifier",params,undefined,false); 
+			copyArg(n,"LogFileName",params,undefined,false); 
 			
-			copyArg(msg,"DBInstanceIdentifier",params); 
-			copyArg(msg,"LogFileName",params); 
-			copyArg(msg,"Marker",params); 
-			copyArg(msg,"NumberOfLines",params); 
+			copyArg(msg,"DBInstanceIdentifier",params,undefined,false); 
+			copyArg(msg,"LogFileName",params,undefined,false); 
+			copyArg(msg,"Marker",params,undefined,false); 
+			copyArg(msg,"NumberOfLines",params,undefined,false); 
 			
 
 			svc.downloadDBLogFilePortion(params,cb);
@@ -1150,8 +1158,8 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"DBClusterIdentifier",params); 
-			copyArg(msg,"TargetDBInstanceIdentifier",params); 
+			copyArg(msg,"DBClusterIdentifier",params,undefined,false); 
+			copyArg(msg,"TargetDBInstanceIdentifier",params,undefined,false); 
 			
 
 			svc.failoverDBCluster(params,cb);
@@ -1162,10 +1170,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"ResourceName",params); 
+			copyArg(n,"ResourceName",params,undefined,false); 
 			
-			copyArg(msg,"ResourceName",params); 
-			copyArg(msg,"Filters",params); 
+			copyArg(msg,"ResourceName",params,undefined,false); 
+			copyArg(msg,"Filters",params,undefined,true); 
 			
 
 			svc.listTagsForResource(params,cb);
@@ -1176,20 +1184,20 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"DBClusterIdentifier",params); 
+			copyArg(n,"DBClusterIdentifier",params,undefined,false); 
 			
-			copyArg(msg,"DBClusterIdentifier",params); 
-			copyArg(msg,"NewDBClusterIdentifier",params); 
-			copyArg(msg,"ApplyImmediately",params); 
-			copyArg(msg,"BackupRetentionPeriod",params); 
-			copyArg(msg,"DBClusterParameterGroupName",params); 
-			copyArg(msg,"VpcSecurityGroupIds",params); 
-			copyArg(msg,"Port",params); 
-			copyArg(msg,"MasterUserPassword",params); 
-			copyArg(msg,"OptionGroupName",params); 
-			copyArg(msg,"PreferredBackupWindow",params); 
-			copyArg(msg,"PreferredMaintenanceWindow",params); 
-			copyArg(msg,"EnableIAMDatabaseAuthentication",params); 
+			copyArg(msg,"DBClusterIdentifier",params,undefined,false); 
+			copyArg(msg,"NewDBClusterIdentifier",params,undefined,false); 
+			copyArg(msg,"ApplyImmediately",params,undefined,false); 
+			copyArg(msg,"BackupRetentionPeriod",params,undefined,false); 
+			copyArg(msg,"DBClusterParameterGroupName",params,undefined,false); 
+			copyArg(msg,"VpcSecurityGroupIds",params,undefined,true); 
+			copyArg(msg,"Port",params,undefined,false); 
+			copyArg(msg,"MasterUserPassword",params,undefined,false); 
+			copyArg(msg,"OptionGroupName",params,undefined,false); 
+			copyArg(msg,"PreferredBackupWindow",params,undefined,false); 
+			copyArg(msg,"PreferredMaintenanceWindow",params,undefined,false); 
+			copyArg(msg,"EnableIAMDatabaseAuthentication",params,undefined,false); 
 			
 
 			svc.modifyDBCluster(params,cb);
@@ -1200,11 +1208,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"DBClusterParameterGroupName",params); 
-			copyArg(n,"Parameters",params); 
+			copyArg(n,"DBClusterParameterGroupName",params,undefined,false); 
+			copyArg(n,"Parameters",params,undefined,true); 
 			
-			copyArg(msg,"DBClusterParameterGroupName",params); 
-			copyArg(msg,"Parameters",params); 
+			copyArg(msg,"DBClusterParameterGroupName",params,undefined,false); 
+			copyArg(msg,"Parameters",params,undefined,true); 
 			
 
 			svc.modifyDBClusterParameterGroup(params,cb);
@@ -1215,13 +1223,13 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"DBClusterSnapshotIdentifier",params); 
-			copyArg(n,"AttributeName",params); 
+			copyArg(n,"DBClusterSnapshotIdentifier",params,undefined,false); 
+			copyArg(n,"AttributeName",params,undefined,false); 
 			
-			copyArg(msg,"DBClusterSnapshotIdentifier",params); 
-			copyArg(msg,"AttributeName",params); 
-			copyArg(msg,"ValuesToAdd",params); 
-			copyArg(msg,"ValuesToRemove",params); 
+			copyArg(msg,"DBClusterSnapshotIdentifier",params,undefined,false); 
+			copyArg(msg,"AttributeName",params,undefined,false); 
+			copyArg(msg,"ValuesToAdd",params,undefined,true); 
+			copyArg(msg,"ValuesToRemove",params,undefined,true); 
 			
 
 			svc.modifyDBClusterSnapshotAttribute(params,cb);
@@ -1232,43 +1240,44 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"DBInstanceIdentifier",params); 
+			copyArg(n,"DBInstanceIdentifier",params,undefined,false); 
 			
-			copyArg(msg,"DBInstanceIdentifier",params); 
-			copyArg(msg,"AllocatedStorage",params); 
-			copyArg(msg,"DBInstanceClass",params); 
-			copyArg(msg,"DBSubnetGroupName",params); 
-			copyArg(msg,"DBSecurityGroups",params); 
-			copyArg(msg,"VpcSecurityGroupIds",params); 
-			copyArg(msg,"ApplyImmediately",params); 
-			copyArg(msg,"MasterUserPassword",params); 
-			copyArg(msg,"DBParameterGroupName",params); 
-			copyArg(msg,"BackupRetentionPeriod",params); 
-			copyArg(msg,"PreferredBackupWindow",params); 
-			copyArg(msg,"PreferredMaintenanceWindow",params); 
-			copyArg(msg,"MultiAZ",params); 
-			copyArg(msg,"EngineVersion",params); 
-			copyArg(msg,"AllowMajorVersionUpgrade",params); 
-			copyArg(msg,"AutoMinorVersionUpgrade",params); 
-			copyArg(msg,"LicenseModel",params); 
-			copyArg(msg,"Iops",params); 
-			copyArg(msg,"OptionGroupName",params); 
-			copyArg(msg,"NewDBInstanceIdentifier",params); 
-			copyArg(msg,"StorageType",params); 
-			copyArg(msg,"TdeCredentialArn",params); 
-			copyArg(msg,"TdeCredentialPassword",params); 
-			copyArg(msg,"CACertificateIdentifier",params); 
-			copyArg(msg,"Domain",params); 
-			copyArg(msg,"CopyTagsToSnapshot",params); 
-			copyArg(msg,"MonitoringInterval",params); 
-			copyArg(msg,"DBPortNumber",params); 
-			copyArg(msg,"PubliclyAccessible",params); 
-			copyArg(msg,"MonitoringRoleArn",params); 
-			copyArg(msg,"DomainIAMRoleName",params); 
-			copyArg(msg,"PromotionTier",params); 
-			copyArg(msg,"EnableIAMDatabaseAuthentication",params); 
-			copyArg(msg,"EnablePerformanceInsights",params); 
-			copyArg(msg,"PerformanceInsightsKMSKeyId",params); 
+			copyArg(msg,"DBInstanceIdentifier",params,undefined,false); 
+			copyArg(msg,"AllocatedStorage",params,undefined,false); 
+			copyArg(msg,"DBInstanceClass",params,undefined,false); 
+			copyArg(msg,"DBSubnetGroupName",params,undefined,false); 
+			copyArg(msg,"DBSecurityGroups",params,undefined,true); 
+			copyArg(msg,"VpcSecurityGroupIds",params,undefined,true); 
+			copyArg(msg,"ApplyImmediately",params,undefined,false); 
+			copyArg(msg,"MasterUserPassword",params,undefined,false); 
+			copyArg(msg,"DBParameterGroupName",params,undefined,false); 
+			copyArg(msg,"BackupRetentionPeriod",params,undefined,false); 
+			copyArg(msg,"PreferredBackupWindow",params,undefined,false); 
+			copyArg(msg,"PreferredMaintenanceWindow",params,undefined,false); 
+			copyArg(msg,"MultiAZ",params,undefined,false); 
+			copyArg(msg,"EngineVersion",params,undefined,false); 
+			copyArg(msg,"AllowMajorVersionUpgrade",params,undefined,false); 
+			copyArg(msg,"AutoMinorVersionUpgrade",params,undefined,false); 
+			copyArg(msg,"LicenseModel",params,undefined,false); 
+			copyArg(msg,"Iops",params,undefined,false); 
+			copyArg(msg,"OptionGroupName",params,undefined,false); 
+			copyArg(msg,"NewDBInstanceIdentifier",params,undefined,false); 
+			copyArg(msg,"StorageType",params,undefined,false); 
+			copyArg(msg,"TdeCredentialArn",params,undefined,false); 
+			copyArg(msg,"TdeCredentialPassword",params,undefined,false); 
+			copyArg(msg,"CACertificateIdentifier",params,undefined,false); 
+			copyArg(msg,"Domain",params,undefined,false); 
+			copyArg(msg,"CopyTagsToSnapshot",params,undefined,false); 
+			copyArg(msg,"MonitoringInterval",params,undefined,false); 
+			copyArg(msg,"DBPortNumber",params,undefined,false); 
+			copyArg(msg,"PubliclyAccessible",params,undefined,false); 
+			copyArg(msg,"MonitoringRoleArn",params,undefined,false); 
+			copyArg(msg,"DomainIAMRoleName",params,undefined,false); 
+			copyArg(msg,"PromotionTier",params,undefined,false); 
+			copyArg(msg,"EnableIAMDatabaseAuthentication",params,undefined,false); 
+			copyArg(msg,"EnablePerformanceInsights",params,undefined,false); 
+			copyArg(msg,"PerformanceInsightsKMSKeyId",params,undefined,false); 
+			copyArg(msg,"CloudwatchLogsExportConfiguration",params,undefined,false); 
 			
 
 			svc.modifyDBInstance(params,cb);
@@ -1279,11 +1288,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"DBParameterGroupName",params); 
-			copyArg(n,"Parameters",params); 
+			copyArg(n,"DBParameterGroupName",params,undefined,false); 
+			copyArg(n,"Parameters",params,undefined,true); 
 			
-			copyArg(msg,"DBParameterGroupName",params); 
-			copyArg(msg,"Parameters",params); 
+			copyArg(msg,"DBParameterGroupName",params,undefined,false); 
+			copyArg(msg,"Parameters",params,undefined,true); 
 			
 
 			svc.modifyDBParameterGroup(params,cb);
@@ -1294,11 +1303,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"DBSnapshotIdentifier",params); 
+			copyArg(n,"DBSnapshotIdentifier",params,undefined,false); 
 			
-			copyArg(msg,"DBSnapshotIdentifier",params); 
-			copyArg(msg,"EngineVersion",params); 
-			copyArg(msg,"OptionGroupName",params); 
+			copyArg(msg,"DBSnapshotIdentifier",params,undefined,false); 
+			copyArg(msg,"EngineVersion",params,undefined,false); 
+			copyArg(msg,"OptionGroupName",params,undefined,false); 
 			
 
 			svc.modifyDBSnapshot(params,cb);
@@ -1309,13 +1318,13 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"DBSnapshotIdentifier",params); 
-			copyArg(n,"AttributeName",params); 
+			copyArg(n,"DBSnapshotIdentifier",params,undefined,false); 
+			copyArg(n,"AttributeName",params,undefined,false); 
 			
-			copyArg(msg,"DBSnapshotIdentifier",params); 
-			copyArg(msg,"AttributeName",params); 
-			copyArg(msg,"ValuesToAdd",params); 
-			copyArg(msg,"ValuesToRemove",params); 
+			copyArg(msg,"DBSnapshotIdentifier",params,undefined,false); 
+			copyArg(msg,"AttributeName",params,undefined,false); 
+			copyArg(msg,"ValuesToAdd",params,undefined,true); 
+			copyArg(msg,"ValuesToRemove",params,undefined,true); 
 			
 
 			svc.modifyDBSnapshotAttribute(params,cb);
@@ -1326,12 +1335,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"DBSubnetGroupName",params); 
-			copyArg(n,"SubnetIds",params); 
+			copyArg(n,"DBSubnetGroupName",params,undefined,false); 
+			copyArg(n,"SubnetIds",params,undefined,true); 
 			
-			copyArg(msg,"DBSubnetGroupName",params); 
-			copyArg(msg,"DBSubnetGroupDescription",params); 
-			copyArg(msg,"SubnetIds",params); 
+			copyArg(msg,"DBSubnetGroupName",params,undefined,false); 
+			copyArg(msg,"DBSubnetGroupDescription",params,undefined,false); 
+			copyArg(msg,"SubnetIds",params,undefined,true); 
 			
 
 			svc.modifyDBSubnetGroup(params,cb);
@@ -1342,13 +1351,13 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"SubscriptionName",params); 
+			copyArg(n,"SubscriptionName",params,undefined,false); 
 			
-			copyArg(msg,"SubscriptionName",params); 
-			copyArg(msg,"SnsTopicArn",params); 
-			copyArg(msg,"SourceType",params); 
-			copyArg(msg,"EventCategories",params); 
-			copyArg(msg,"Enabled",params); 
+			copyArg(msg,"SubscriptionName",params,undefined,false); 
+			copyArg(msg,"SnsTopicArn",params,undefined,false); 
+			copyArg(msg,"SourceType",params,undefined,false); 
+			copyArg(msg,"EventCategories",params,undefined,true); 
+			copyArg(msg,"Enabled",params,undefined,false); 
 			
 
 			svc.modifyEventSubscription(params,cb);
@@ -1359,12 +1368,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"OptionGroupName",params); 
+			copyArg(n,"OptionGroupName",params,undefined,false); 
 			
-			copyArg(msg,"OptionGroupName",params); 
-			copyArg(msg,"OptionsToInclude",params); 
-			copyArg(msg,"OptionsToRemove",params); 
-			copyArg(msg,"ApplyImmediately",params); 
+			copyArg(msg,"OptionGroupName",params,undefined,false); 
+			copyArg(msg,"OptionsToInclude",params,undefined,false); 
+			copyArg(msg,"OptionsToRemove",params,undefined,false); 
+			copyArg(msg,"ApplyImmediately",params,undefined,false); 
 			
 
 			svc.modifyOptionGroup(params,cb);
@@ -1375,11 +1384,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"DBInstanceIdentifier",params); 
+			copyArg(n,"DBInstanceIdentifier",params,undefined,false); 
 			
-			copyArg(msg,"DBInstanceIdentifier",params); 
-			copyArg(msg,"BackupRetentionPeriod",params); 
-			copyArg(msg,"PreferredBackupWindow",params); 
+			copyArg(msg,"DBInstanceIdentifier",params,undefined,false); 
+			copyArg(msg,"BackupRetentionPeriod",params,undefined,false); 
+			copyArg(msg,"PreferredBackupWindow",params,undefined,false); 
 			
 
 			svc.promoteReadReplica(params,cb);
@@ -1390,9 +1399,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"DBClusterIdentifier",params); 
+			copyArg(n,"DBClusterIdentifier",params,undefined,false); 
 			
-			copyArg(msg,"DBClusterIdentifier",params); 
+			copyArg(msg,"DBClusterIdentifier",params,undefined,false); 
 			
 
 			svc.promoteReadReplicaDBCluster(params,cb);
@@ -1403,12 +1412,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"ReservedDBInstancesOfferingId",params); 
+			copyArg(n,"ReservedDBInstancesOfferingId",params,undefined,false); 
 			
-			copyArg(msg,"ReservedDBInstancesOfferingId",params); 
-			copyArg(msg,"ReservedDBInstanceId",params); 
-			copyArg(msg,"DBInstanceCount",params); 
-			copyArg(msg,"Tags",params); 
+			copyArg(msg,"ReservedDBInstancesOfferingId",params,undefined,false); 
+			copyArg(msg,"ReservedDBInstanceId",params,undefined,false); 
+			copyArg(msg,"DBInstanceCount",params,undefined,false); 
+			copyArg(msg,"Tags",params,undefined,true); 
 			
 
 			svc.purchaseReservedDBInstancesOffering(params,cb);
@@ -1419,10 +1428,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"DBInstanceIdentifier",params); 
+			copyArg(n,"DBInstanceIdentifier",params,undefined,false); 
 			
-			copyArg(msg,"DBInstanceIdentifier",params); 
-			copyArg(msg,"ForceFailover",params); 
+			copyArg(msg,"DBInstanceIdentifier",params,undefined,false); 
+			copyArg(msg,"ForceFailover",params,undefined,false); 
 			
 
 			svc.rebootDBInstance(params,cb);
@@ -1433,11 +1442,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"DBClusterIdentifier",params); 
-			copyArg(n,"RoleArn",params); 
+			copyArg(n,"DBClusterIdentifier",params,undefined,false); 
+			copyArg(n,"RoleArn",params,undefined,false); 
 			
-			copyArg(msg,"DBClusterIdentifier",params); 
-			copyArg(msg,"RoleArn",params); 
+			copyArg(msg,"DBClusterIdentifier",params,undefined,false); 
+			copyArg(msg,"RoleArn",params,undefined,false); 
 			
 
 			svc.removeRoleFromDBCluster(params,cb);
@@ -1448,11 +1457,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"SubscriptionName",params); 
-			copyArg(n,"SourceIdentifier",params); 
+			copyArg(n,"SubscriptionName",params,undefined,false); 
+			copyArg(n,"SourceIdentifier",params,undefined,false); 
 			
-			copyArg(msg,"SubscriptionName",params); 
-			copyArg(msg,"SourceIdentifier",params); 
+			copyArg(msg,"SubscriptionName",params,undefined,false); 
+			copyArg(msg,"SourceIdentifier",params,undefined,false); 
 			
 
 			svc.removeSourceIdentifierFromSubscription(params,cb);
@@ -1463,11 +1472,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"ResourceName",params); 
-			copyArg(n,"TagKeys",params); 
+			copyArg(n,"ResourceName",params,undefined,false); 
+			copyArg(n,"TagKeys",params,undefined,false); 
 			
-			copyArg(msg,"ResourceName",params); 
-			copyArg(msg,"TagKeys",params); 
+			copyArg(msg,"ResourceName",params,undefined,false); 
+			copyArg(msg,"TagKeys",params,undefined,false); 
 			
 
 			svc.removeTagsFromResource(params,cb);
@@ -1478,11 +1487,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"DBClusterParameterGroupName",params); 
+			copyArg(n,"DBClusterParameterGroupName",params,undefined,false); 
 			
-			copyArg(msg,"DBClusterParameterGroupName",params); 
-			copyArg(msg,"ResetAllParameters",params); 
-			copyArg(msg,"Parameters",params); 
+			copyArg(msg,"DBClusterParameterGroupName",params,undefined,false); 
+			copyArg(msg,"ResetAllParameters",params,undefined,false); 
+			copyArg(msg,"Parameters",params,undefined,true); 
 			
 
 			svc.resetDBClusterParameterGroup(params,cb);
@@ -1493,11 +1502,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"DBParameterGroupName",params); 
+			copyArg(n,"DBParameterGroupName",params,undefined,false); 
 			
-			copyArg(msg,"DBParameterGroupName",params); 
-			copyArg(msg,"ResetAllParameters",params); 
-			copyArg(msg,"Parameters",params); 
+			copyArg(msg,"DBParameterGroupName",params,undefined,false); 
+			copyArg(msg,"ResetAllParameters",params,undefined,false); 
+			copyArg(msg,"Parameters",params,undefined,true); 
 			
 
 			svc.resetDBParameterGroup(params,cb);
@@ -1508,40 +1517,40 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"DBClusterIdentifier",params); 
-			copyArg(n,"Engine",params); 
-			copyArg(n,"MasterUsername",params); 
-			copyArg(n,"MasterUserPassword",params); 
-			copyArg(n,"SourceEngine",params); 
-			copyArg(n,"SourceEngineVersion",params); 
-			copyArg(n,"S3BucketName",params); 
-			copyArg(n,"S3IngestionRoleArn",params); 
+			copyArg(n,"DBClusterIdentifier",params,undefined,false); 
+			copyArg(n,"Engine",params,undefined,false); 
+			copyArg(n,"MasterUsername",params,undefined,false); 
+			copyArg(n,"MasterUserPassword",params,undefined,false); 
+			copyArg(n,"SourceEngine",params,undefined,false); 
+			copyArg(n,"SourceEngineVersion",params,undefined,false); 
+			copyArg(n,"S3BucketName",params,undefined,false); 
+			copyArg(n,"S3IngestionRoleArn",params,undefined,false); 
 			
-			copyArg(msg,"AvailabilityZones",params); 
-			copyArg(msg,"BackupRetentionPeriod",params); 
-			copyArg(msg,"CharacterSetName",params); 
-			copyArg(msg,"DatabaseName",params); 
-			copyArg(msg,"DBClusterIdentifier",params); 
-			copyArg(msg,"DBClusterParameterGroupName",params); 
-			copyArg(msg,"VpcSecurityGroupIds",params); 
-			copyArg(msg,"DBSubnetGroupName",params); 
-			copyArg(msg,"Engine",params); 
-			copyArg(msg,"EngineVersion",params); 
-			copyArg(msg,"Port",params); 
-			copyArg(msg,"MasterUsername",params); 
-			copyArg(msg,"MasterUserPassword",params); 
-			copyArg(msg,"OptionGroupName",params); 
-			copyArg(msg,"PreferredBackupWindow",params); 
-			copyArg(msg,"PreferredMaintenanceWindow",params); 
-			copyArg(msg,"Tags",params); 
-			copyArg(msg,"StorageEncrypted",params); 
-			copyArg(msg,"KmsKeyId",params); 
-			copyArg(msg,"EnableIAMDatabaseAuthentication",params); 
-			copyArg(msg,"SourceEngine",params); 
-			copyArg(msg,"SourceEngineVersion",params); 
-			copyArg(msg,"S3BucketName",params); 
-			copyArg(msg,"S3Prefix",params); 
-			copyArg(msg,"S3IngestionRoleArn",params); 
+			copyArg(msg,"AvailabilityZones",params,undefined,true); 
+			copyArg(msg,"BackupRetentionPeriod",params,undefined,false); 
+			copyArg(msg,"CharacterSetName",params,undefined,false); 
+			copyArg(msg,"DatabaseName",params,undefined,false); 
+			copyArg(msg,"DBClusterIdentifier",params,undefined,false); 
+			copyArg(msg,"DBClusterParameterGroupName",params,undefined,false); 
+			copyArg(msg,"VpcSecurityGroupIds",params,undefined,true); 
+			copyArg(msg,"DBSubnetGroupName",params,undefined,false); 
+			copyArg(msg,"Engine",params,undefined,false); 
+			copyArg(msg,"EngineVersion",params,undefined,false); 
+			copyArg(msg,"Port",params,undefined,false); 
+			copyArg(msg,"MasterUsername",params,undefined,false); 
+			copyArg(msg,"MasterUserPassword",params,undefined,false); 
+			copyArg(msg,"OptionGroupName",params,undefined,false); 
+			copyArg(msg,"PreferredBackupWindow",params,undefined,false); 
+			copyArg(msg,"PreferredMaintenanceWindow",params,undefined,false); 
+			copyArg(msg,"Tags",params,undefined,true); 
+			copyArg(msg,"StorageEncrypted",params,undefined,false); 
+			copyArg(msg,"KmsKeyId",params,undefined,false); 
+			copyArg(msg,"EnableIAMDatabaseAuthentication",params,undefined,false); 
+			copyArg(msg,"SourceEngine",params,undefined,false); 
+			copyArg(msg,"SourceEngineVersion",params,undefined,false); 
+			copyArg(msg,"S3BucketName",params,undefined,false); 
+			copyArg(msg,"S3Prefix",params,undefined,false); 
+			copyArg(msg,"S3IngestionRoleArn",params,undefined,false); 
 			
 
 			svc.restoreDBClusterFromS3(params,cb);
@@ -1552,23 +1561,23 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"DBClusterIdentifier",params); 
-			copyArg(n,"SnapshotIdentifier",params); 
-			copyArg(n,"Engine",params); 
+			copyArg(n,"DBClusterIdentifier",params,undefined,false); 
+			copyArg(n,"SnapshotIdentifier",params,undefined,false); 
+			copyArg(n,"Engine",params,undefined,false); 
 			
-			copyArg(msg,"AvailabilityZones",params); 
-			copyArg(msg,"DBClusterIdentifier",params); 
-			copyArg(msg,"SnapshotIdentifier",params); 
-			copyArg(msg,"Engine",params); 
-			copyArg(msg,"EngineVersion",params); 
-			copyArg(msg,"Port",params); 
-			copyArg(msg,"DBSubnetGroupName",params); 
-			copyArg(msg,"DatabaseName",params); 
-			copyArg(msg,"OptionGroupName",params); 
-			copyArg(msg,"VpcSecurityGroupIds",params); 
-			copyArg(msg,"Tags",params); 
-			copyArg(msg,"KmsKeyId",params); 
-			copyArg(msg,"EnableIAMDatabaseAuthentication",params); 
+			copyArg(msg,"AvailabilityZones",params,undefined,true); 
+			copyArg(msg,"DBClusterIdentifier",params,undefined,false); 
+			copyArg(msg,"SnapshotIdentifier",params,undefined,false); 
+			copyArg(msg,"Engine",params,undefined,false); 
+			copyArg(msg,"EngineVersion",params,undefined,false); 
+			copyArg(msg,"Port",params,undefined,false); 
+			copyArg(msg,"DBSubnetGroupName",params,undefined,false); 
+			copyArg(msg,"DatabaseName",params,undefined,false); 
+			copyArg(msg,"OptionGroupName",params,undefined,false); 
+			copyArg(msg,"VpcSecurityGroupIds",params,undefined,true); 
+			copyArg(msg,"Tags",params,undefined,true); 
+			copyArg(msg,"KmsKeyId",params,undefined,false); 
+			copyArg(msg,"EnableIAMDatabaseAuthentication",params,undefined,false); 
 			
 
 			svc.restoreDBClusterFromSnapshot(params,cb);
@@ -1579,21 +1588,21 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"DBClusterIdentifier",params); 
-			copyArg(n,"SourceDBClusterIdentifier",params); 
+			copyArg(n,"DBClusterIdentifier",params,undefined,false); 
+			copyArg(n,"SourceDBClusterIdentifier",params,undefined,false); 
 			
-			copyArg(msg,"DBClusterIdentifier",params); 
-			copyArg(msg,"RestoreType",params); 
-			copyArg(msg,"SourceDBClusterIdentifier",params); 
-			copyArg(msg,"RestoreToTime",params); 
-			copyArg(msg,"UseLatestRestorableTime",params); 
-			copyArg(msg,"Port",params); 
-			copyArg(msg,"DBSubnetGroupName",params); 
-			copyArg(msg,"OptionGroupName",params); 
-			copyArg(msg,"VpcSecurityGroupIds",params); 
-			copyArg(msg,"Tags",params); 
-			copyArg(msg,"KmsKeyId",params); 
-			copyArg(msg,"EnableIAMDatabaseAuthentication",params); 
+			copyArg(msg,"DBClusterIdentifier",params,undefined,false); 
+			copyArg(msg,"RestoreType",params,undefined,false); 
+			copyArg(msg,"SourceDBClusterIdentifier",params,undefined,false); 
+			copyArg(msg,"RestoreToTime",params,undefined,false); 
+			copyArg(msg,"UseLatestRestorableTime",params,undefined,false); 
+			copyArg(msg,"Port",params,undefined,false); 
+			copyArg(msg,"DBSubnetGroupName",params,undefined,false); 
+			copyArg(msg,"OptionGroupName",params,undefined,false); 
+			copyArg(msg,"VpcSecurityGroupIds",params,undefined,true); 
+			copyArg(msg,"Tags",params,undefined,true); 
+			copyArg(msg,"KmsKeyId",params,undefined,false); 
+			copyArg(msg,"EnableIAMDatabaseAuthentication",params,undefined,false); 
 			
 
 			svc.restoreDBClusterToPointInTime(params,cb);
@@ -1604,31 +1613,32 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"DBInstanceIdentifier",params); 
-			copyArg(n,"DBSnapshotIdentifier",params); 
+			copyArg(n,"DBInstanceIdentifier",params,undefined,false); 
+			copyArg(n,"DBSnapshotIdentifier",params,undefined,false); 
 			
-			copyArg(msg,"DBInstanceIdentifier",params); 
-			copyArg(msg,"DBSnapshotIdentifier",params); 
-			copyArg(msg,"DBInstanceClass",params); 
-			copyArg(msg,"Port",params); 
-			copyArg(msg,"AvailabilityZone",params); 
-			copyArg(msg,"DBSubnetGroupName",params); 
-			copyArg(msg,"MultiAZ",params); 
-			copyArg(msg,"PubliclyAccessible",params); 
-			copyArg(msg,"AutoMinorVersionUpgrade",params); 
-			copyArg(msg,"LicenseModel",params); 
-			copyArg(msg,"DBName",params); 
-			copyArg(msg,"Engine",params); 
-			copyArg(msg,"Iops",params); 
-			copyArg(msg,"OptionGroupName",params); 
-			copyArg(msg,"Tags",params); 
-			copyArg(msg,"StorageType",params); 
-			copyArg(msg,"TdeCredentialArn",params); 
-			copyArg(msg,"TdeCredentialPassword",params); 
-			copyArg(msg,"Domain",params); 
-			copyArg(msg,"CopyTagsToSnapshot",params); 
-			copyArg(msg,"DomainIAMRoleName",params); 
-			copyArg(msg,"EnableIAMDatabaseAuthentication",params); 
+			copyArg(msg,"DBInstanceIdentifier",params,undefined,false); 
+			copyArg(msg,"DBSnapshotIdentifier",params,undefined,false); 
+			copyArg(msg,"DBInstanceClass",params,undefined,false); 
+			copyArg(msg,"Port",params,undefined,false); 
+			copyArg(msg,"AvailabilityZone",params,undefined,false); 
+			copyArg(msg,"DBSubnetGroupName",params,undefined,false); 
+			copyArg(msg,"MultiAZ",params,undefined,false); 
+			copyArg(msg,"PubliclyAccessible",params,undefined,false); 
+			copyArg(msg,"AutoMinorVersionUpgrade",params,undefined,false); 
+			copyArg(msg,"LicenseModel",params,undefined,false); 
+			copyArg(msg,"DBName",params,undefined,false); 
+			copyArg(msg,"Engine",params,undefined,false); 
+			copyArg(msg,"Iops",params,undefined,false); 
+			copyArg(msg,"OptionGroupName",params,undefined,false); 
+			copyArg(msg,"Tags",params,undefined,true); 
+			copyArg(msg,"StorageType",params,undefined,false); 
+			copyArg(msg,"TdeCredentialArn",params,undefined,false); 
+			copyArg(msg,"TdeCredentialPassword",params,undefined,false); 
+			copyArg(msg,"Domain",params,undefined,false); 
+			copyArg(msg,"CopyTagsToSnapshot",params,undefined,false); 
+			copyArg(msg,"DomainIAMRoleName",params,undefined,false); 
+			copyArg(msg,"EnableIAMDatabaseAuthentication",params,undefined,false); 
+			copyArg(msg,"EnableCloudwatchLogsExports",params,undefined,true); 
 			
 
 			svc.restoreDBInstanceFromDBSnapshot(params,cb);
@@ -1639,52 +1649,53 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"DBInstanceIdentifier",params); 
-			copyArg(n,"DBInstanceClass",params); 
-			copyArg(n,"Engine",params); 
-			copyArg(n,"SourceEngine",params); 
-			copyArg(n,"SourceEngineVersion",params); 
-			copyArg(n,"S3BucketName",params); 
-			copyArg(n,"S3IngestionRoleArn",params); 
+			copyArg(n,"DBInstanceIdentifier",params,undefined,false); 
+			copyArg(n,"DBInstanceClass",params,undefined,false); 
+			copyArg(n,"Engine",params,undefined,false); 
+			copyArg(n,"SourceEngine",params,undefined,false); 
+			copyArg(n,"SourceEngineVersion",params,undefined,false); 
+			copyArg(n,"S3BucketName",params,undefined,false); 
+			copyArg(n,"S3IngestionRoleArn",params,undefined,false); 
 			
-			copyArg(msg,"DBName",params); 
-			copyArg(msg,"DBInstanceIdentifier",params); 
-			copyArg(msg,"AllocatedStorage",params); 
-			copyArg(msg,"DBInstanceClass",params); 
-			copyArg(msg,"Engine",params); 
-			copyArg(msg,"MasterUsername",params); 
-			copyArg(msg,"MasterUserPassword",params); 
-			copyArg(msg,"DBSecurityGroups",params); 
-			copyArg(msg,"VpcSecurityGroupIds",params); 
-			copyArg(msg,"AvailabilityZone",params); 
-			copyArg(msg,"DBSubnetGroupName",params); 
-			copyArg(msg,"PreferredMaintenanceWindow",params); 
-			copyArg(msg,"DBParameterGroupName",params); 
-			copyArg(msg,"BackupRetentionPeriod",params); 
-			copyArg(msg,"PreferredBackupWindow",params); 
-			copyArg(msg,"Port",params); 
-			copyArg(msg,"MultiAZ",params); 
-			copyArg(msg,"EngineVersion",params); 
-			copyArg(msg,"AutoMinorVersionUpgrade",params); 
-			copyArg(msg,"LicenseModel",params); 
-			copyArg(msg,"Iops",params); 
-			copyArg(msg,"OptionGroupName",params); 
-			copyArg(msg,"PubliclyAccessible",params); 
-			copyArg(msg,"Tags",params); 
-			copyArg(msg,"StorageType",params); 
-			copyArg(msg,"StorageEncrypted",params); 
-			copyArg(msg,"KmsKeyId",params); 
-			copyArg(msg,"CopyTagsToSnapshot",params); 
-			copyArg(msg,"MonitoringInterval",params); 
-			copyArg(msg,"MonitoringRoleArn",params); 
-			copyArg(msg,"EnableIAMDatabaseAuthentication",params); 
-			copyArg(msg,"SourceEngine",params); 
-			copyArg(msg,"SourceEngineVersion",params); 
-			copyArg(msg,"S3BucketName",params); 
-			copyArg(msg,"S3Prefix",params); 
-			copyArg(msg,"S3IngestionRoleArn",params); 
-			copyArg(msg,"EnablePerformanceInsights",params); 
-			copyArg(msg,"PerformanceInsightsKMSKeyId",params); 
+			copyArg(msg,"DBName",params,undefined,false); 
+			copyArg(msg,"DBInstanceIdentifier",params,undefined,false); 
+			copyArg(msg,"AllocatedStorage",params,undefined,false); 
+			copyArg(msg,"DBInstanceClass",params,undefined,false); 
+			copyArg(msg,"Engine",params,undefined,false); 
+			copyArg(msg,"MasterUsername",params,undefined,false); 
+			copyArg(msg,"MasterUserPassword",params,undefined,false); 
+			copyArg(msg,"DBSecurityGroups",params,undefined,true); 
+			copyArg(msg,"VpcSecurityGroupIds",params,undefined,true); 
+			copyArg(msg,"AvailabilityZone",params,undefined,false); 
+			copyArg(msg,"DBSubnetGroupName",params,undefined,false); 
+			copyArg(msg,"PreferredMaintenanceWindow",params,undefined,false); 
+			copyArg(msg,"DBParameterGroupName",params,undefined,false); 
+			copyArg(msg,"BackupRetentionPeriod",params,undefined,false); 
+			copyArg(msg,"PreferredBackupWindow",params,undefined,false); 
+			copyArg(msg,"Port",params,undefined,false); 
+			copyArg(msg,"MultiAZ",params,undefined,false); 
+			copyArg(msg,"EngineVersion",params,undefined,false); 
+			copyArg(msg,"AutoMinorVersionUpgrade",params,undefined,false); 
+			copyArg(msg,"LicenseModel",params,undefined,false); 
+			copyArg(msg,"Iops",params,undefined,false); 
+			copyArg(msg,"OptionGroupName",params,undefined,false); 
+			copyArg(msg,"PubliclyAccessible",params,undefined,false); 
+			copyArg(msg,"Tags",params,undefined,true); 
+			copyArg(msg,"StorageType",params,undefined,false); 
+			copyArg(msg,"StorageEncrypted",params,undefined,false); 
+			copyArg(msg,"KmsKeyId",params,undefined,false); 
+			copyArg(msg,"CopyTagsToSnapshot",params,undefined,false); 
+			copyArg(msg,"MonitoringInterval",params,undefined,false); 
+			copyArg(msg,"MonitoringRoleArn",params,undefined,false); 
+			copyArg(msg,"EnableIAMDatabaseAuthentication",params,undefined,false); 
+			copyArg(msg,"SourceEngine",params,undefined,false); 
+			copyArg(msg,"SourceEngineVersion",params,undefined,false); 
+			copyArg(msg,"S3BucketName",params,undefined,false); 
+			copyArg(msg,"S3Prefix",params,undefined,false); 
+			copyArg(msg,"S3IngestionRoleArn",params,undefined,false); 
+			copyArg(msg,"EnablePerformanceInsights",params,undefined,false); 
+			copyArg(msg,"PerformanceInsightsKMSKeyId",params,undefined,false); 
+			copyArg(msg,"EnableCloudwatchLogsExports",params,undefined,true); 
 			
 
 			svc.restoreDBInstanceFromS3(params,cb);
@@ -1695,33 +1706,34 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"SourceDBInstanceIdentifier",params); 
-			copyArg(n,"TargetDBInstanceIdentifier",params); 
+			copyArg(n,"SourceDBInstanceIdentifier",params,undefined,false); 
+			copyArg(n,"TargetDBInstanceIdentifier",params,undefined,false); 
 			
-			copyArg(msg,"SourceDBInstanceIdentifier",params); 
-			copyArg(msg,"TargetDBInstanceIdentifier",params); 
-			copyArg(msg,"RestoreTime",params); 
-			copyArg(msg,"UseLatestRestorableTime",params); 
-			copyArg(msg,"DBInstanceClass",params); 
-			copyArg(msg,"Port",params); 
-			copyArg(msg,"AvailabilityZone",params); 
-			copyArg(msg,"DBSubnetGroupName",params); 
-			copyArg(msg,"MultiAZ",params); 
-			copyArg(msg,"PubliclyAccessible",params); 
-			copyArg(msg,"AutoMinorVersionUpgrade",params); 
-			copyArg(msg,"LicenseModel",params); 
-			copyArg(msg,"DBName",params); 
-			copyArg(msg,"Engine",params); 
-			copyArg(msg,"Iops",params); 
-			copyArg(msg,"OptionGroupName",params); 
-			copyArg(msg,"CopyTagsToSnapshot",params); 
-			copyArg(msg,"Tags",params); 
-			copyArg(msg,"StorageType",params); 
-			copyArg(msg,"TdeCredentialArn",params); 
-			copyArg(msg,"TdeCredentialPassword",params); 
-			copyArg(msg,"Domain",params); 
-			copyArg(msg,"DomainIAMRoleName",params); 
-			copyArg(msg,"EnableIAMDatabaseAuthentication",params); 
+			copyArg(msg,"SourceDBInstanceIdentifier",params,undefined,false); 
+			copyArg(msg,"TargetDBInstanceIdentifier",params,undefined,false); 
+			copyArg(msg,"RestoreTime",params,undefined,false); 
+			copyArg(msg,"UseLatestRestorableTime",params,undefined,false); 
+			copyArg(msg,"DBInstanceClass",params,undefined,false); 
+			copyArg(msg,"Port",params,undefined,false); 
+			copyArg(msg,"AvailabilityZone",params,undefined,false); 
+			copyArg(msg,"DBSubnetGroupName",params,undefined,false); 
+			copyArg(msg,"MultiAZ",params,undefined,false); 
+			copyArg(msg,"PubliclyAccessible",params,undefined,false); 
+			copyArg(msg,"AutoMinorVersionUpgrade",params,undefined,false); 
+			copyArg(msg,"LicenseModel",params,undefined,false); 
+			copyArg(msg,"DBName",params,undefined,false); 
+			copyArg(msg,"Engine",params,undefined,false); 
+			copyArg(msg,"Iops",params,undefined,false); 
+			copyArg(msg,"OptionGroupName",params,undefined,false); 
+			copyArg(msg,"CopyTagsToSnapshot",params,undefined,false); 
+			copyArg(msg,"Tags",params,undefined,true); 
+			copyArg(msg,"StorageType",params,undefined,false); 
+			copyArg(msg,"TdeCredentialArn",params,undefined,false); 
+			copyArg(msg,"TdeCredentialPassword",params,undefined,false); 
+			copyArg(msg,"Domain",params,undefined,false); 
+			copyArg(msg,"DomainIAMRoleName",params,undefined,false); 
+			copyArg(msg,"EnableIAMDatabaseAuthentication",params,undefined,false); 
+			copyArg(msg,"EnableCloudwatchLogsExports",params,undefined,true); 
 			
 
 			svc.restoreDBInstanceToPointInTime(params,cb);
@@ -1732,13 +1744,13 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"DBSecurityGroupName",params); 
+			copyArg(n,"DBSecurityGroupName",params,undefined,false); 
 			
-			copyArg(msg,"DBSecurityGroupName",params); 
-			copyArg(msg,"CIDRIP",params); 
-			copyArg(msg,"EC2SecurityGroupName",params); 
-			copyArg(msg,"EC2SecurityGroupId",params); 
-			copyArg(msg,"EC2SecurityGroupOwnerId",params); 
+			copyArg(msg,"DBSecurityGroupName",params,undefined,false); 
+			copyArg(msg,"CIDRIP",params,undefined,false); 
+			copyArg(msg,"EC2SecurityGroupName",params,undefined,false); 
+			copyArg(msg,"EC2SecurityGroupId",params,undefined,false); 
+			copyArg(msg,"EC2SecurityGroupOwnerId",params,undefined,false); 
 			
 
 			svc.revokeDBSecurityGroupIngress(params,cb);
@@ -1749,9 +1761,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"DBInstanceIdentifier",params); 
+			copyArg(n,"DBInstanceIdentifier",params,undefined,false); 
 			
-			copyArg(msg,"DBInstanceIdentifier",params); 
+			copyArg(msg,"DBInstanceIdentifier",params,undefined,false); 
 			
 
 			svc.startDBInstance(params,cb);
@@ -1762,10 +1774,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"DBInstanceIdentifier",params); 
+			copyArg(n,"DBInstanceIdentifier",params,undefined,false); 
 			
-			copyArg(msg,"DBInstanceIdentifier",params); 
-			copyArg(msg,"DBSnapshotIdentifier",params); 
+			copyArg(msg,"DBInstanceIdentifier",params,undefined,false); 
+			copyArg(msg,"DBSnapshotIdentifier",params,undefined,false); 
 			
 
 			svc.stopDBInstance(params,cb);

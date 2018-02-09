@@ -67,13 +67,18 @@ module.exports = function(RED) {
 			}
 
 		});
-		var copyArg=function(src,arg,out,outArg){
+		var copyArg=function(src,arg,out,outArg,isObject){
+			var tmpValue=src[arg];
 			outArg = (typeof outArg !== 'undefined') ? outArg : arg;
+
 			if (typeof src[arg] !== 'undefined'){
-				out[outArg]=src[arg];
+				if (isObject && typeof src[arg]=="string" && src[arg] != "") { 
+					tmpValue=JSON.parse(src[arg]);
+				}
+				out[outArg]=tmpValue;
 			}
                         //AWS API takes 'Payload' not 'payload' (see Lambda)
-                        if (arg=="Payload" && typeof src[arg] == 'undefined'){
+                        if (arg=="Payload" && typeof tmpValue == 'undefined'){
                                 out[arg]=src["payload"];
                         }
 
@@ -86,9 +91,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"thingName",params); 
+			copyArg(n,"thingName",params,undefined,false); 
 			
-			copyArg(msg,"thingName",params); 
+			copyArg(msg,"thingName",params,undefined,false); 
 			
 
 			svc.deleteThingShadow(params,cb);
@@ -99,9 +104,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"thingName",params); 
+			copyArg(n,"thingName",params,undefined,false); 
 			
-			copyArg(msg,"thingName",params); 
+			copyArg(msg,"thingName",params,undefined,false); 
 			
 
 			svc.getThingShadow(params,cb);
@@ -112,11 +117,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"topic",params); 
+			copyArg(n,"topic",params,undefined,false); 
 			
-			copyArg(msg,"topic",params); 
-			copyArg(msg,"qos",params); 
-			copyArg(msg,"payload",params); 
+			copyArg(msg,"topic",params,undefined,false); 
+			copyArg(msg,"qos",params,undefined,false); 
+			copyArg(msg,"payload",params,undefined,false); 
 			
 
 			svc.publish(params,cb);
@@ -127,11 +132,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"thingName",params); 
-			copyArg(n,"payload",params); 
+			copyArg(n,"thingName",params,undefined,false); 
+			copyArg(n,"payload",params,undefined,false); 
 			
-			copyArg(msg,"thingName",params); 
-			copyArg(msg,"payload",params); 
+			copyArg(msg,"thingName",params,undefined,false); 
+			copyArg(msg,"payload",params,undefined,false); 
 			
 
 			svc.updateThingShadow(params,cb);

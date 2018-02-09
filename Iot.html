@@ -54,11 +54,15 @@
 		
 			<option value="CreateKeysAndCertificate">CreateKeysAndCertificate</option>
 		
+			<option value="CreateOTAUpdate">CreateOTAUpdate</option>
+		
 			<option value="CreatePolicy">CreatePolicy</option>
 		
 			<option value="CreatePolicyVersion">CreatePolicyVersion</option>
 		
 			<option value="CreateRoleAlias">CreateRoleAlias</option>
+		
+			<option value="CreateStream">CreateStream</option>
 		
 			<option value="CreateThing">CreateThing</option>
 		
@@ -74,6 +78,8 @@
 		
 			<option value="DeleteCertificate">DeleteCertificate</option>
 		
+			<option value="DeleteOTAUpdate">DeleteOTAUpdate</option>
+		
 			<option value="DeletePolicy">DeletePolicy</option>
 		
 			<option value="DeletePolicyVersion">DeletePolicyVersion</option>
@@ -81,6 +87,8 @@
 			<option value="DeleteRegistrationCode">DeleteRegistrationCode</option>
 		
 			<option value="DeleteRoleAlias">DeleteRoleAlias</option>
+		
+			<option value="DeleteStream">DeleteStream</option>
 		
 			<option value="DeleteThing">DeleteThing</option>
 		
@@ -114,6 +122,8 @@
 		
 			<option value="DescribeRoleAlias">DescribeRoleAlias</option>
 		
+			<option value="DescribeStream">DescribeStream</option>
+		
 			<option value="DescribeThing">DescribeThing</option>
 		
 			<option value="DescribeThingGroup">DescribeThingGroup</option>
@@ -139,6 +149,8 @@
 			<option value="GetJobDocument">GetJobDocument</option>
 		
 			<option value="GetLoggingOptions">GetLoggingOptions</option>
+		
+			<option value="GetOTAUpdate">GetOTAUpdate</option>
 		
 			<option value="GetPolicy">GetPolicy</option>
 		
@@ -168,6 +180,8 @@
 		
 			<option value="ListJobs">ListJobs</option>
 		
+			<option value="ListOTAUpdates">ListOTAUpdates</option>
+		
 			<option value="ListOutgoingCertificates">ListOutgoingCertificates</option>
 		
 			<option value="ListPolicies">ListPolicies</option>
@@ -181,6 +195,8 @@
 			<option value="ListPrincipalThings">ListPrincipalThings</option>
 		
 			<option value="ListRoleAliases">ListRoleAliases</option>
+		
+			<option value="ListStreams">ListStreams</option>
 		
 			<option value="ListTargetsForPolicy">ListTargetsForPolicy</option>
 		
@@ -250,6 +266,8 @@
 		
 			<option value="UpdateRoleAlias">UpdateRoleAlias</option>
 		
+			<option value="UpdateStream">UpdateStream</option>
+		
 			<option value="UpdateThing">UpdateThing</option>
 		
 			<option value="UpdateThingGroup">UpdateThingGroup</option>
@@ -313,6 +331,18 @@
 		<label for="node-input-certificateSigningRequest"><i class="fa fa-tag"></i>certificateSigningRequest</label>
 		<input type="text" id="node-input-certificateSigningRequest" placeholder="certificateSigningRequest"></input>
 	</div> 
+	<div class="form-row" id='otaUpdateIdAttr' class='hiddenAttrs'>
+		<label for="node-input-otaUpdateId"><i class="fa fa-tag"></i>otaUpdateId</label>
+		<input type="text" id="node-input-otaUpdateId" placeholder="otaUpdateId"></input>
+	</div> 
+	<div class="form-row" id='filesAttr' class='hiddenAttrs'>
+		<label for="node-input-files"><i class="fa fa-tag"></i>files</label>
+		<input type="text" id="node-input-files" placeholder="files"></input>
+	</div> 
+	<div class="form-row" id='roleArnAttr' class='hiddenAttrs'>
+		<label for="node-input-roleArn"><i class="fa fa-tag"></i>roleArn</label>
+		<input type="text" id="node-input-roleArn" placeholder="roleArn"></input>
+	</div> 
 	<div class="form-row" id='policyDocumentAttr' class='hiddenAttrs'>
 		<label for="node-input-policyDocument"><i class="fa fa-tag"></i>policyDocument</label>
 		<input type="text" id="node-input-policyDocument" placeholder="policyDocument"></input>
@@ -321,9 +351,9 @@
 		<label for="node-input-roleAlias"><i class="fa fa-tag"></i>roleAlias</label>
 		<input type="text" id="node-input-roleAlias" placeholder="roleAlias"></input>
 	</div> 
-	<div class="form-row" id='roleArnAttr' class='hiddenAttrs'>
-		<label for="node-input-roleArn"><i class="fa fa-tag"></i>roleArn</label>
-		<input type="text" id="node-input-roleArn" placeholder="roleArn"></input>
+	<div class="form-row" id='streamIdAttr' class='hiddenAttrs'>
+		<label for="node-input-streamId"><i class="fa fa-tag"></i>streamId</label>
+		<input type="text" id="node-input-streamId" placeholder="streamId"></input>
 	</div> 
 	<div class="form-row" id='thingGroupNameAttr' class='hiddenAttrs'>
 		<label for="node-input-thingGroupName"><i class="fa fa-tag"></i>thingGroupName</label>
@@ -477,6 +507,9 @@
 				CreateKeysAndCertificate:[
 					
 					],
+				CreateOTAUpdate:[
+					'#otaUpdateIdAttr','#targetsAttr','#filesAttr','#roleArnAttr'
+					],
 				CreatePolicy:[
 					'#policyNameAttr','#policyDocumentAttr'
 					],
@@ -485,6 +518,9 @@
 					],
 				CreateRoleAlias:[
 					'#roleAliasAttr','#roleArnAttr'
+					],
+				CreateStream:[
+					'#streamIdAttr','#filesAttr','#roleArnAttr'
 					],
 				CreateThing:[
 					'#thingNameAttr'
@@ -507,6 +543,9 @@
 				DeleteCertificate:[
 					'#certificateIdAttr'
 					],
+				DeleteOTAUpdate:[
+					'#otaUpdateIdAttr'
+					],
 				DeletePolicy:[
 					'#policyNameAttr'
 					],
@@ -518,6 +557,9 @@
 					],
 				DeleteRoleAlias:[
 					'#roleAliasAttr'
+					],
+				DeleteStream:[
+					'#streamIdAttr'
 					],
 				DeleteThing:[
 					'#thingNameAttr'
@@ -567,6 +609,9 @@
 				DescribeRoleAlias:[
 					'#roleAliasAttr'
 					],
+				DescribeStream:[
+					'#streamIdAttr'
+					],
 				DescribeThing:[
 					'#thingNameAttr'
 					],
@@ -605,6 +650,9 @@
 					],
 				GetLoggingOptions:[
 					
+					],
+				GetOTAUpdate:[
+					'#otaUpdateIdAttr'
 					],
 				GetPolicy:[
 					'#policyNameAttr'
@@ -648,6 +696,9 @@
 				ListJobs:[
 					
 					],
+				ListOTAUpdates:[
+					
+					],
 				ListOutgoingCertificates:[
 					
 					],
@@ -667,6 +718,9 @@
 					'#principalAttr'
 					],
 				ListRoleAliases:[
+					
+					],
+				ListStreams:[
 					
 					],
 				ListTargetsForPolicy:[
@@ -771,6 +825,9 @@
 				UpdateRoleAlias:[
 					'#roleAliasAttr'
 					],
+				UpdateStream:[
+					'#streamIdAttr'
+					],
 				UpdateThing:[
 					'#thingNameAttr'
 					],
@@ -823,9 +880,12 @@ NOTE: Parameters must be specified in the message, using the case specified in t
 				tokenKeyName: { value: ""} ,
 				tokenSigningPublicKeys: { value: ""} ,
 				certificateSigningRequest: { value: ""} ,
+				otaUpdateId: { value: ""} ,
+				files: { value: ""} ,
+				roleArn: { value: ""} ,
 				policyDocument: { value: ""} ,
 				roleAlias: { value: ""} ,
-				roleArn: { value: ""} ,
+				streamId: { value: ""} ,
 				thingGroupName: { value: ""} ,
 				thingTypeName: { value: ""} ,
 				ruleName: { value: ""} ,

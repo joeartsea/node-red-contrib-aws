@@ -67,13 +67,18 @@ module.exports = function(RED) {
 			}
 
 		});
-		var copyArg=function(src,arg,out,outArg){
+		var copyArg=function(src,arg,out,outArg,isObject){
+			var tmpValue=src[arg];
 			outArg = (typeof outArg !== 'undefined') ? outArg : arg;
+
 			if (typeof src[arg] !== 'undefined'){
-				out[outArg]=src[arg];
+				if (isObject && typeof src[arg]=="string" && src[arg] != "") { 
+					tmpValue=JSON.parse(src[arg]);
+				}
+				out[outArg]=tmpValue;
 			}
                         //AWS API takes 'Payload' not 'payload' (see Lambda)
-                        if (arg=="Payload" && typeof src[arg] == 'undefined'){
+                        if (arg=="Payload" && typeof tmpValue == 'undefined'){
                                 out[arg]=src["payload"];
                         }
 
@@ -86,12 +91,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"SourceImage",params); 
-			copyArg(n,"TargetImage",params); 
+			copyArg(n,"SourceImage",params,undefined,true); 
+			copyArg(n,"TargetImage",params,undefined,true); 
 			
-			copyArg(msg,"SourceImage",params); 
-			copyArg(msg,"TargetImage",params); 
-			copyArg(msg,"SimilarityThreshold",params); 
+			copyArg(msg,"SourceImage",params,undefined,true); 
+			copyArg(msg,"TargetImage",params,undefined,true); 
+			copyArg(msg,"SimilarityThreshold",params,undefined,false); 
 			
 
 			svc.compareFaces(params,cb);
@@ -102,9 +107,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"CollectionId",params); 
+			copyArg(n,"CollectionId",params,undefined,false); 
 			
-			copyArg(msg,"CollectionId",params); 
+			copyArg(msg,"CollectionId",params,undefined,false); 
 			
 
 			svc.createCollection(params,cb);
@@ -115,17 +120,17 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Input",params); 
-			copyArg(n,"Output",params); 
-			copyArg(n,"Name",params); 
-			copyArg(n,"Settings",params); 
-			copyArg(n,"RoleArn",params); 
+			copyArg(n,"Input",params,undefined,true); 
+			copyArg(n,"Output",params,undefined,true); 
+			copyArg(n,"Name",params,undefined,false); 
+			copyArg(n,"Settings",params,undefined,true); 
+			copyArg(n,"RoleArn",params,undefined,false); 
 			
-			copyArg(msg,"Input",params); 
-			copyArg(msg,"Output",params); 
-			copyArg(msg,"Name",params); 
-			copyArg(msg,"Settings",params); 
-			copyArg(msg,"RoleArn",params); 
+			copyArg(msg,"Input",params,undefined,true); 
+			copyArg(msg,"Output",params,undefined,true); 
+			copyArg(msg,"Name",params,undefined,false); 
+			copyArg(msg,"Settings",params,undefined,true); 
+			copyArg(msg,"RoleArn",params,undefined,false); 
 			
 
 			svc.createStreamProcessor(params,cb);
@@ -136,9 +141,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"CollectionId",params); 
+			copyArg(n,"CollectionId",params,undefined,false); 
 			
-			copyArg(msg,"CollectionId",params); 
+			copyArg(msg,"CollectionId",params,undefined,false); 
 			
 
 			svc.deleteCollection(params,cb);
@@ -149,11 +154,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"CollectionId",params); 
-			copyArg(n,"FaceIds",params); 
+			copyArg(n,"CollectionId",params,undefined,false); 
+			copyArg(n,"FaceIds",params,undefined,true); 
 			
-			copyArg(msg,"CollectionId",params); 
-			copyArg(msg,"FaceIds",params); 
+			copyArg(msg,"CollectionId",params,undefined,false); 
+			copyArg(msg,"FaceIds",params,undefined,true); 
 			
 
 			svc.deleteFaces(params,cb);
@@ -164,9 +169,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Name",params); 
+			copyArg(n,"Name",params,undefined,false); 
 			
-			copyArg(msg,"Name",params); 
+			copyArg(msg,"Name",params,undefined,false); 
 			
 
 			svc.deleteStreamProcessor(params,cb);
@@ -177,9 +182,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Name",params); 
+			copyArg(n,"Name",params,undefined,false); 
 			
-			copyArg(msg,"Name",params); 
+			copyArg(msg,"Name",params,undefined,false); 
 			
 
 			svc.describeStreamProcessor(params,cb);
@@ -190,10 +195,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Image",params); 
+			copyArg(n,"Image",params,undefined,true); 
 			
-			copyArg(msg,"Image",params); 
-			copyArg(msg,"Attributes",params); 
+			copyArg(msg,"Image",params,undefined,true); 
+			copyArg(msg,"Attributes",params,undefined,true); 
 			
 
 			svc.detectFaces(params,cb);
@@ -204,11 +209,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Image",params); 
+			copyArg(n,"Image",params,undefined,true); 
 			
-			copyArg(msg,"Image",params); 
-			copyArg(msg,"MaxLabels",params); 
-			copyArg(msg,"MinConfidence",params); 
+			copyArg(msg,"Image",params,undefined,true); 
+			copyArg(msg,"MaxLabels",params,undefined,false); 
+			copyArg(msg,"MinConfidence",params,undefined,false); 
 			
 
 			svc.detectLabels(params,cb);
@@ -219,10 +224,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Image",params); 
+			copyArg(n,"Image",params,undefined,true); 
 			
-			copyArg(msg,"Image",params); 
-			copyArg(msg,"MinConfidence",params); 
+			copyArg(msg,"Image",params,undefined,true); 
+			copyArg(msg,"MinConfidence",params,undefined,false); 
 			
 
 			svc.detectModerationLabels(params,cb);
@@ -233,9 +238,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Image",params); 
+			copyArg(n,"Image",params,undefined,true); 
 			
-			copyArg(msg,"Image",params); 
+			copyArg(msg,"Image",params,undefined,true); 
 			
 
 			svc.detectText(params,cb);
@@ -246,9 +251,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Id",params); 
+			copyArg(n,"Id",params,undefined,false); 
 			
-			copyArg(msg,"Id",params); 
+			copyArg(msg,"Id",params,undefined,false); 
 			
 
 			svc.getCelebrityInfo(params,cb);
@@ -259,12 +264,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"JobId",params); 
+			copyArg(n,"JobId",params,undefined,false); 
 			
-			copyArg(msg,"JobId",params); 
-			copyArg(msg,"MaxResults",params); 
-			copyArg(msg,"NextToken",params); 
-			copyArg(msg,"SortBy",params); 
+			copyArg(msg,"JobId",params,undefined,false); 
+			copyArg(msg,"MaxResults",params,undefined,false); 
+			copyArg(msg,"NextToken",params,undefined,false); 
+			copyArg(msg,"SortBy",params,undefined,false); 
 			
 
 			svc.getCelebrityRecognition(params,cb);
@@ -275,12 +280,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"JobId",params); 
+			copyArg(n,"JobId",params,undefined,false); 
 			
-			copyArg(msg,"JobId",params); 
-			copyArg(msg,"MaxResults",params); 
-			copyArg(msg,"NextToken",params); 
-			copyArg(msg,"SortBy",params); 
+			copyArg(msg,"JobId",params,undefined,false); 
+			copyArg(msg,"MaxResults",params,undefined,false); 
+			copyArg(msg,"NextToken",params,undefined,false); 
+			copyArg(msg,"SortBy",params,undefined,false); 
 			
 
 			svc.getContentModeration(params,cb);
@@ -291,11 +296,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"JobId",params); 
+			copyArg(n,"JobId",params,undefined,false); 
 			
-			copyArg(msg,"JobId",params); 
-			copyArg(msg,"MaxResults",params); 
-			copyArg(msg,"NextToken",params); 
+			copyArg(msg,"JobId",params,undefined,false); 
+			copyArg(msg,"MaxResults",params,undefined,false); 
+			copyArg(msg,"NextToken",params,undefined,false); 
 			
 
 			svc.getFaceDetection(params,cb);
@@ -306,12 +311,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"JobId",params); 
+			copyArg(n,"JobId",params,undefined,false); 
 			
-			copyArg(msg,"JobId",params); 
-			copyArg(msg,"MaxResults",params); 
-			copyArg(msg,"NextToken",params); 
-			copyArg(msg,"SortBy",params); 
+			copyArg(msg,"JobId",params,undefined,false); 
+			copyArg(msg,"MaxResults",params,undefined,false); 
+			copyArg(msg,"NextToken",params,undefined,false); 
+			copyArg(msg,"SortBy",params,undefined,false); 
 			
 
 			svc.getFaceSearch(params,cb);
@@ -322,12 +327,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"JobId",params); 
+			copyArg(n,"JobId",params,undefined,false); 
 			
-			copyArg(msg,"JobId",params); 
-			copyArg(msg,"MaxResults",params); 
-			copyArg(msg,"NextToken",params); 
-			copyArg(msg,"SortBy",params); 
+			copyArg(msg,"JobId",params,undefined,false); 
+			copyArg(msg,"MaxResults",params,undefined,false); 
+			copyArg(msg,"NextToken",params,undefined,false); 
+			copyArg(msg,"SortBy",params,undefined,false); 
 			
 
 			svc.getLabelDetection(params,cb);
@@ -338,12 +343,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"JobId",params); 
+			copyArg(n,"JobId",params,undefined,false); 
 			
-			copyArg(msg,"JobId",params); 
-			copyArg(msg,"MaxResults",params); 
-			copyArg(msg,"NextToken",params); 
-			copyArg(msg,"SortBy",params); 
+			copyArg(msg,"JobId",params,undefined,false); 
+			copyArg(msg,"MaxResults",params,undefined,false); 
+			copyArg(msg,"NextToken",params,undefined,false); 
+			copyArg(msg,"SortBy",params,undefined,false); 
 			
 
 			svc.getPersonTracking(params,cb);
@@ -354,13 +359,13 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"CollectionId",params); 
-			copyArg(n,"Image",params); 
+			copyArg(n,"CollectionId",params,undefined,false); 
+			copyArg(n,"Image",params,undefined,true); 
 			
-			copyArg(msg,"CollectionId",params); 
-			copyArg(msg,"Image",params); 
-			copyArg(msg,"ExternalImageId",params); 
-			copyArg(msg,"DetectionAttributes",params); 
+			copyArg(msg,"CollectionId",params,undefined,false); 
+			copyArg(msg,"Image",params,undefined,true); 
+			copyArg(msg,"ExternalImageId",params,undefined,false); 
+			copyArg(msg,"DetectionAttributes",params,undefined,true); 
 			
 
 			svc.indexFaces(params,cb);
@@ -372,8 +377,8 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"NextToken",params); 
-			copyArg(msg,"MaxResults",params); 
+			copyArg(msg,"NextToken",params,undefined,false); 
+			copyArg(msg,"MaxResults",params,undefined,false); 
 			
 
 			svc.listCollections(params,cb);
@@ -384,11 +389,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"CollectionId",params); 
+			copyArg(n,"CollectionId",params,undefined,false); 
 			
-			copyArg(msg,"CollectionId",params); 
-			copyArg(msg,"NextToken",params); 
-			copyArg(msg,"MaxResults",params); 
+			copyArg(msg,"CollectionId",params,undefined,false); 
+			copyArg(msg,"NextToken",params,undefined,false); 
+			copyArg(msg,"MaxResults",params,undefined,false); 
 			
 
 			svc.listFaces(params,cb);
@@ -400,8 +405,8 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"NextToken",params); 
-			copyArg(msg,"MaxResults",params); 
+			copyArg(msg,"NextToken",params,undefined,false); 
+			copyArg(msg,"MaxResults",params,undefined,false); 
 			
 
 			svc.listStreamProcessors(params,cb);
@@ -412,9 +417,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Image",params); 
+			copyArg(n,"Image",params,undefined,true); 
 			
-			copyArg(msg,"Image",params); 
+			copyArg(msg,"Image",params,undefined,true); 
 			
 
 			svc.recognizeCelebrities(params,cb);
@@ -425,13 +430,13 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"CollectionId",params); 
-			copyArg(n,"FaceId",params); 
+			copyArg(n,"CollectionId",params,undefined,false); 
+			copyArg(n,"FaceId",params,undefined,false); 
 			
-			copyArg(msg,"CollectionId",params); 
-			copyArg(msg,"FaceId",params); 
-			copyArg(msg,"MaxFaces",params); 
-			copyArg(msg,"FaceMatchThreshold",params); 
+			copyArg(msg,"CollectionId",params,undefined,false); 
+			copyArg(msg,"FaceId",params,undefined,false); 
+			copyArg(msg,"MaxFaces",params,undefined,false); 
+			copyArg(msg,"FaceMatchThreshold",params,undefined,false); 
 			
 
 			svc.searchFaces(params,cb);
@@ -442,13 +447,13 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"CollectionId",params); 
-			copyArg(n,"Image",params); 
+			copyArg(n,"CollectionId",params,undefined,false); 
+			copyArg(n,"Image",params,undefined,true); 
 			
-			copyArg(msg,"CollectionId",params); 
-			copyArg(msg,"Image",params); 
-			copyArg(msg,"MaxFaces",params); 
-			copyArg(msg,"FaceMatchThreshold",params); 
+			copyArg(msg,"CollectionId",params,undefined,false); 
+			copyArg(msg,"Image",params,undefined,true); 
+			copyArg(msg,"MaxFaces",params,undefined,false); 
+			copyArg(msg,"FaceMatchThreshold",params,undefined,false); 
 			
 
 			svc.searchFacesByImage(params,cb);
@@ -459,12 +464,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Video",params); 
+			copyArg(n,"Video",params,undefined,true); 
 			
-			copyArg(msg,"Video",params); 
-			copyArg(msg,"ClientRequestToken",params); 
-			copyArg(msg,"NotificationChannel",params); 
-			copyArg(msg,"JobTag",params); 
+			copyArg(msg,"Video",params,undefined,true); 
+			copyArg(msg,"ClientRequestToken",params,undefined,false); 
+			copyArg(msg,"NotificationChannel",params,undefined,true); 
+			copyArg(msg,"JobTag",params,undefined,false); 
 			
 
 			svc.startCelebrityRecognition(params,cb);
@@ -475,13 +480,13 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Video",params); 
+			copyArg(n,"Video",params,undefined,true); 
 			
-			copyArg(msg,"Video",params); 
-			copyArg(msg,"MinConfidence",params); 
-			copyArg(msg,"ClientRequestToken",params); 
-			copyArg(msg,"NotificationChannel",params); 
-			copyArg(msg,"JobTag",params); 
+			copyArg(msg,"Video",params,undefined,true); 
+			copyArg(msg,"MinConfidence",params,undefined,false); 
+			copyArg(msg,"ClientRequestToken",params,undefined,false); 
+			copyArg(msg,"NotificationChannel",params,undefined,true); 
+			copyArg(msg,"JobTag",params,undefined,false); 
 			
 
 			svc.startContentModeration(params,cb);
@@ -492,13 +497,13 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Video",params); 
+			copyArg(n,"Video",params,undefined,true); 
 			
-			copyArg(msg,"Video",params); 
-			copyArg(msg,"ClientRequestToken",params); 
-			copyArg(msg,"NotificationChannel",params); 
-			copyArg(msg,"FaceAttributes",params); 
-			copyArg(msg,"JobTag",params); 
+			copyArg(msg,"Video",params,undefined,true); 
+			copyArg(msg,"ClientRequestToken",params,undefined,false); 
+			copyArg(msg,"NotificationChannel",params,undefined,true); 
+			copyArg(msg,"FaceAttributes",params,undefined,false); 
+			copyArg(msg,"JobTag",params,undefined,false); 
 			
 
 			svc.startFaceDetection(params,cb);
@@ -509,15 +514,15 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Video",params); 
-			copyArg(n,"CollectionId",params); 
+			copyArg(n,"Video",params,undefined,true); 
+			copyArg(n,"CollectionId",params,undefined,false); 
 			
-			copyArg(msg,"Video",params); 
-			copyArg(msg,"ClientRequestToken",params); 
-			copyArg(msg,"FaceMatchThreshold",params); 
-			copyArg(msg,"CollectionId",params); 
-			copyArg(msg,"NotificationChannel",params); 
-			copyArg(msg,"JobTag",params); 
+			copyArg(msg,"Video",params,undefined,true); 
+			copyArg(msg,"ClientRequestToken",params,undefined,false); 
+			copyArg(msg,"FaceMatchThreshold",params,undefined,false); 
+			copyArg(msg,"CollectionId",params,undefined,false); 
+			copyArg(msg,"NotificationChannel",params,undefined,true); 
+			copyArg(msg,"JobTag",params,undefined,false); 
 			
 
 			svc.startFaceSearch(params,cb);
@@ -528,13 +533,13 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Video",params); 
+			copyArg(n,"Video",params,undefined,true); 
 			
-			copyArg(msg,"Video",params); 
-			copyArg(msg,"ClientRequestToken",params); 
-			copyArg(msg,"MinConfidence",params); 
-			copyArg(msg,"NotificationChannel",params); 
-			copyArg(msg,"JobTag",params); 
+			copyArg(msg,"Video",params,undefined,true); 
+			copyArg(msg,"ClientRequestToken",params,undefined,false); 
+			copyArg(msg,"MinConfidence",params,undefined,false); 
+			copyArg(msg,"NotificationChannel",params,undefined,true); 
+			copyArg(msg,"JobTag",params,undefined,false); 
 			
 
 			svc.startLabelDetection(params,cb);
@@ -545,12 +550,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Video",params); 
+			copyArg(n,"Video",params,undefined,true); 
 			
-			copyArg(msg,"Video",params); 
-			copyArg(msg,"ClientRequestToken",params); 
-			copyArg(msg,"NotificationChannel",params); 
-			copyArg(msg,"JobTag",params); 
+			copyArg(msg,"Video",params,undefined,true); 
+			copyArg(msg,"ClientRequestToken",params,undefined,false); 
+			copyArg(msg,"NotificationChannel",params,undefined,true); 
+			copyArg(msg,"JobTag",params,undefined,false); 
 			
 
 			svc.startPersonTracking(params,cb);
@@ -561,9 +566,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Name",params); 
+			copyArg(n,"Name",params,undefined,false); 
 			
-			copyArg(msg,"Name",params); 
+			copyArg(msg,"Name",params,undefined,false); 
 			
 
 			svc.startStreamProcessor(params,cb);
@@ -574,9 +579,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Name",params); 
+			copyArg(n,"Name",params,undefined,false); 
 			
-			copyArg(msg,"Name",params); 
+			copyArg(msg,"Name",params,undefined,false); 
 			
 
 			svc.stopStreamProcessor(params,cb);

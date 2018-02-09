@@ -67,13 +67,18 @@ module.exports = function(RED) {
 			}
 
 		});
-		var copyArg=function(src,arg,out,outArg){
+		var copyArg=function(src,arg,out,outArg,isObject){
+			var tmpValue=src[arg];
 			outArg = (typeof outArg !== 'undefined') ? outArg : arg;
+
 			if (typeof src[arg] !== 'undefined'){
-				out[outArg]=src[arg];
+				if (isObject && typeof src[arg]=="string" && src[arg] != "") { 
+					tmpValue=JSON.parse(src[arg]);
+				}
+				out[outArg]=tmpValue;
 			}
                         //AWS API takes 'Payload' not 'payload' (see Lambda)
-                        if (arg=="Payload" && typeof src[arg] == 'undefined'){
+                        if (arg=="Payload" && typeof tmpValue == 'undefined'){
                                 out[arg]=src["payload"];
                         }
 
@@ -86,13 +91,13 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"ApplicationName",params); 
-			copyArg(n,"CurrentApplicationVersionId",params); 
-			copyArg(n,"CloudWatchLoggingOption",params); 
+			copyArg(n,"ApplicationName",params,undefined,false); 
+			copyArg(n,"CurrentApplicationVersionId",params,undefined,false); 
+			copyArg(n,"CloudWatchLoggingOption",params,undefined,true); 
 			
-			copyArg(msg,"ApplicationName",params); 
-			copyArg(msg,"CurrentApplicationVersionId",params); 
-			copyArg(msg,"CloudWatchLoggingOption",params); 
+			copyArg(msg,"ApplicationName",params,undefined,false); 
+			copyArg(msg,"CurrentApplicationVersionId",params,undefined,false); 
+			copyArg(msg,"CloudWatchLoggingOption",params,undefined,true); 
 			
 
 			svc.addApplicationCloudWatchLoggingOption(params,cb);
@@ -103,13 +108,13 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"ApplicationName",params); 
-			copyArg(n,"CurrentApplicationVersionId",params); 
-			copyArg(n,"Input",params); 
+			copyArg(n,"ApplicationName",params,undefined,false); 
+			copyArg(n,"CurrentApplicationVersionId",params,undefined,false); 
+			copyArg(n,"Input",params,undefined,true); 
 			
-			copyArg(msg,"ApplicationName",params); 
-			copyArg(msg,"CurrentApplicationVersionId",params); 
-			copyArg(msg,"Input",params); 
+			copyArg(msg,"ApplicationName",params,undefined,false); 
+			copyArg(msg,"CurrentApplicationVersionId",params,undefined,false); 
+			copyArg(msg,"Input",params,undefined,true); 
 			
 
 			svc.addApplicationInput(params,cb);
@@ -120,15 +125,15 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"ApplicationName",params); 
-			copyArg(n,"CurrentApplicationVersionId",params); 
-			copyArg(n,"InputId",params); 
-			copyArg(n,"InputProcessingConfiguration",params); 
+			copyArg(n,"ApplicationName",params,undefined,false); 
+			copyArg(n,"CurrentApplicationVersionId",params,undefined,false); 
+			copyArg(n,"InputId",params,undefined,false); 
+			copyArg(n,"InputProcessingConfiguration",params,undefined,true); 
 			
-			copyArg(msg,"ApplicationName",params); 
-			copyArg(msg,"CurrentApplicationVersionId",params); 
-			copyArg(msg,"InputId",params); 
-			copyArg(msg,"InputProcessingConfiguration",params); 
+			copyArg(msg,"ApplicationName",params,undefined,false); 
+			copyArg(msg,"CurrentApplicationVersionId",params,undefined,false); 
+			copyArg(msg,"InputId",params,undefined,false); 
+			copyArg(msg,"InputProcessingConfiguration",params,undefined,true); 
 			
 
 			svc.addApplicationInputProcessingConfiguration(params,cb);
@@ -139,13 +144,13 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"ApplicationName",params); 
-			copyArg(n,"CurrentApplicationVersionId",params); 
-			copyArg(n,"Output",params); 
+			copyArg(n,"ApplicationName",params,undefined,false); 
+			copyArg(n,"CurrentApplicationVersionId",params,undefined,false); 
+			copyArg(n,"Output",params,undefined,true); 
 			
-			copyArg(msg,"ApplicationName",params); 
-			copyArg(msg,"CurrentApplicationVersionId",params); 
-			copyArg(msg,"Output",params); 
+			copyArg(msg,"ApplicationName",params,undefined,false); 
+			copyArg(msg,"CurrentApplicationVersionId",params,undefined,false); 
+			copyArg(msg,"Output",params,undefined,true); 
 			
 
 			svc.addApplicationOutput(params,cb);
@@ -156,13 +161,13 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"ApplicationName",params); 
-			copyArg(n,"CurrentApplicationVersionId",params); 
-			copyArg(n,"ReferenceDataSource",params); 
+			copyArg(n,"ApplicationName",params,undefined,false); 
+			copyArg(n,"CurrentApplicationVersionId",params,undefined,false); 
+			copyArg(n,"ReferenceDataSource",params,undefined,false); 
 			
-			copyArg(msg,"ApplicationName",params); 
-			copyArg(msg,"CurrentApplicationVersionId",params); 
-			copyArg(msg,"ReferenceDataSource",params); 
+			copyArg(msg,"ApplicationName",params,undefined,false); 
+			copyArg(msg,"CurrentApplicationVersionId",params,undefined,false); 
+			copyArg(msg,"ReferenceDataSource",params,undefined,false); 
 			
 
 			svc.addApplicationReferenceDataSource(params,cb);
@@ -173,14 +178,14 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"ApplicationName",params); 
+			copyArg(n,"ApplicationName",params,undefined,false); 
 			
-			copyArg(msg,"ApplicationName",params); 
-			copyArg(msg,"ApplicationDescription",params); 
-			copyArg(msg,"Inputs",params); 
-			copyArg(msg,"Outputs",params); 
-			copyArg(msg,"CloudWatchLoggingOptions",params); 
-			copyArg(msg,"ApplicationCode",params); 
+			copyArg(msg,"ApplicationName",params,undefined,false); 
+			copyArg(msg,"ApplicationDescription",params,undefined,false); 
+			copyArg(msg,"Inputs",params,undefined,false); 
+			copyArg(msg,"Outputs",params,undefined,false); 
+			copyArg(msg,"CloudWatchLoggingOptions",params,undefined,false); 
+			copyArg(msg,"ApplicationCode",params,undefined,false); 
 			
 
 			svc.createApplication(params,cb);
@@ -191,11 +196,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"ApplicationName",params); 
-			copyArg(n,"CreateTimestamp",params); 
+			copyArg(n,"ApplicationName",params,undefined,false); 
+			copyArg(n,"CreateTimestamp",params,undefined,false); 
 			
-			copyArg(msg,"ApplicationName",params); 
-			copyArg(msg,"CreateTimestamp",params); 
+			copyArg(msg,"ApplicationName",params,undefined,false); 
+			copyArg(msg,"CreateTimestamp",params,undefined,false); 
 			
 
 			svc.deleteApplication(params,cb);
@@ -206,13 +211,13 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"ApplicationName",params); 
-			copyArg(n,"CurrentApplicationVersionId",params); 
-			copyArg(n,"CloudWatchLoggingOptionId",params); 
+			copyArg(n,"ApplicationName",params,undefined,false); 
+			copyArg(n,"CurrentApplicationVersionId",params,undefined,false); 
+			copyArg(n,"CloudWatchLoggingOptionId",params,undefined,false); 
 			
-			copyArg(msg,"ApplicationName",params); 
-			copyArg(msg,"CurrentApplicationVersionId",params); 
-			copyArg(msg,"CloudWatchLoggingOptionId",params); 
+			copyArg(msg,"ApplicationName",params,undefined,false); 
+			copyArg(msg,"CurrentApplicationVersionId",params,undefined,false); 
+			copyArg(msg,"CloudWatchLoggingOptionId",params,undefined,false); 
 			
 
 			svc.deleteApplicationCloudWatchLoggingOption(params,cb);
@@ -223,13 +228,13 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"ApplicationName",params); 
-			copyArg(n,"CurrentApplicationVersionId",params); 
-			copyArg(n,"InputId",params); 
+			copyArg(n,"ApplicationName",params,undefined,false); 
+			copyArg(n,"CurrentApplicationVersionId",params,undefined,false); 
+			copyArg(n,"InputId",params,undefined,false); 
 			
-			copyArg(msg,"ApplicationName",params); 
-			copyArg(msg,"CurrentApplicationVersionId",params); 
-			copyArg(msg,"InputId",params); 
+			copyArg(msg,"ApplicationName",params,undefined,false); 
+			copyArg(msg,"CurrentApplicationVersionId",params,undefined,false); 
+			copyArg(msg,"InputId",params,undefined,false); 
 			
 
 			svc.deleteApplicationInputProcessingConfiguration(params,cb);
@@ -240,13 +245,13 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"ApplicationName",params); 
-			copyArg(n,"CurrentApplicationVersionId",params); 
-			copyArg(n,"OutputId",params); 
+			copyArg(n,"ApplicationName",params,undefined,false); 
+			copyArg(n,"CurrentApplicationVersionId",params,undefined,false); 
+			copyArg(n,"OutputId",params,undefined,false); 
 			
-			copyArg(msg,"ApplicationName",params); 
-			copyArg(msg,"CurrentApplicationVersionId",params); 
-			copyArg(msg,"OutputId",params); 
+			copyArg(msg,"ApplicationName",params,undefined,false); 
+			copyArg(msg,"CurrentApplicationVersionId",params,undefined,false); 
+			copyArg(msg,"OutputId",params,undefined,false); 
 			
 
 			svc.deleteApplicationOutput(params,cb);
@@ -257,13 +262,13 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"ApplicationName",params); 
-			copyArg(n,"CurrentApplicationVersionId",params); 
-			copyArg(n,"ReferenceId",params); 
+			copyArg(n,"ApplicationName",params,undefined,false); 
+			copyArg(n,"CurrentApplicationVersionId",params,undefined,false); 
+			copyArg(n,"ReferenceId",params,undefined,false); 
 			
-			copyArg(msg,"ApplicationName",params); 
-			copyArg(msg,"CurrentApplicationVersionId",params); 
-			copyArg(msg,"ReferenceId",params); 
+			copyArg(msg,"ApplicationName",params,undefined,false); 
+			copyArg(msg,"CurrentApplicationVersionId",params,undefined,false); 
+			copyArg(msg,"ReferenceId",params,undefined,false); 
 			
 
 			svc.deleteApplicationReferenceDataSource(params,cb);
@@ -274,9 +279,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"ApplicationName",params); 
+			copyArg(n,"ApplicationName",params,undefined,false); 
 			
-			copyArg(msg,"ApplicationName",params); 
+			copyArg(msg,"ApplicationName",params,undefined,false); 
 			
 
 			svc.describeApplication(params,cb);
@@ -288,11 +293,11 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"ResourceARN",params); 
-			copyArg(msg,"RoleARN",params); 
-			copyArg(msg,"InputStartingPositionConfiguration",params); 
-			copyArg(msg,"S3Configuration",params); 
-			copyArg(msg,"InputProcessingConfiguration",params); 
+			copyArg(msg,"ResourceARN",params,undefined,false); 
+			copyArg(msg,"RoleARN",params,undefined,false); 
+			copyArg(msg,"InputStartingPositionConfiguration",params,undefined,true); 
+			copyArg(msg,"S3Configuration",params,undefined,false); 
+			copyArg(msg,"InputProcessingConfiguration",params,undefined,true); 
 			
 
 			svc.discoverInputSchema(params,cb);
@@ -304,8 +309,8 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"Limit",params); 
-			copyArg(msg,"ExclusiveStartApplicationName",params); 
+			copyArg(msg,"Limit",params,undefined,false); 
+			copyArg(msg,"ExclusiveStartApplicationName",params,undefined,false); 
 			
 
 			svc.listApplications(params,cb);
@@ -316,11 +321,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"ApplicationName",params); 
-			copyArg(n,"InputConfigurations",params); 
+			copyArg(n,"ApplicationName",params,undefined,false); 
+			copyArg(n,"InputConfigurations",params,undefined,false); 
 			
-			copyArg(msg,"ApplicationName",params); 
-			copyArg(msg,"InputConfigurations",params); 
+			copyArg(msg,"ApplicationName",params,undefined,false); 
+			copyArg(msg,"InputConfigurations",params,undefined,false); 
 			
 
 			svc.startApplication(params,cb);
@@ -331,9 +336,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"ApplicationName",params); 
+			copyArg(n,"ApplicationName",params,undefined,false); 
 			
-			copyArg(msg,"ApplicationName",params); 
+			copyArg(msg,"ApplicationName",params,undefined,false); 
 			
 
 			svc.stopApplication(params,cb);
@@ -344,13 +349,13 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"ApplicationName",params); 
-			copyArg(n,"CurrentApplicationVersionId",params); 
-			copyArg(n,"ApplicationUpdate",params); 
+			copyArg(n,"ApplicationName",params,undefined,false); 
+			copyArg(n,"CurrentApplicationVersionId",params,undefined,false); 
+			copyArg(n,"ApplicationUpdate",params,undefined,false); 
 			
-			copyArg(msg,"ApplicationName",params); 
-			copyArg(msg,"CurrentApplicationVersionId",params); 
-			copyArg(msg,"ApplicationUpdate",params); 
+			copyArg(msg,"ApplicationName",params,undefined,false); 
+			copyArg(msg,"CurrentApplicationVersionId",params,undefined,false); 
+			copyArg(msg,"ApplicationUpdate",params,undefined,false); 
 			
 
 			svc.updateApplication(params,cb);

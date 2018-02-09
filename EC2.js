@@ -67,13 +67,18 @@ module.exports = function(RED) {
 			}
 
 		});
-		var copyArg=function(src,arg,out,outArg){
+		var copyArg=function(src,arg,out,outArg,isObject){
+			var tmpValue=src[arg];
 			outArg = (typeof outArg !== 'undefined') ? outArg : arg;
+
 			if (typeof src[arg] !== 'undefined'){
-				out[outArg]=src[arg];
+				if (isObject && typeof src[arg]=="string" && src[arg] != "") { 
+					tmpValue=JSON.parse(src[arg]);
+				}
+				out[outArg]=tmpValue;
 			}
                         //AWS API takes 'Payload' not 'payload' (see Lambda)
-                        if (arg=="Payload" && typeof src[arg] == 'undefined'){
+                        if (arg=="Payload" && typeof tmpValue == 'undefined'){
                                 out[arg]=src["payload"];
                         }
 
@@ -86,11 +91,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"ReservedInstanceIds",params); 
+			copyArg(n,"ReservedInstanceIds",params,undefined,true); 
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"ReservedInstanceIds",params); 
-			copyArg(msg,"TargetConfigurations",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"ReservedInstanceIds",params,undefined,true); 
+			copyArg(msg,"TargetConfigurations",params,undefined,true); 
 			
 
 			svc.acceptReservedInstancesExchangeQuote(params,cb);
@@ -101,12 +106,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"ServiceId",params); 
-			copyArg(n,"VpcEndpointIds",params); 
+			copyArg(n,"ServiceId",params,undefined,false); 
+			copyArg(n,"VpcEndpointIds",params,undefined,true); 
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"ServiceId",params); 
-			copyArg(msg,"VpcEndpointIds",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"ServiceId",params,undefined,false); 
+			copyArg(msg,"VpcEndpointIds",params,undefined,true); 
 			
 
 			svc.acceptVpcEndpointConnections(params,cb);
@@ -118,8 +123,8 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"VpcPeeringConnectionId",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"VpcPeeringConnectionId",params,undefined,false); 
 			
 
 			svc.acceptVpcPeeringConnection(params,cb);
@@ -131,9 +136,9 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"Domain",params); 
-			copyArg(msg,"Address",params); 
-			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"Domain",params,undefined,false); 
+			copyArg(msg,"Address",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
 			
 
 			svc.allocateAddress(params,cb);
@@ -144,15 +149,15 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"AvailabilityZone",params); 
-			copyArg(n,"InstanceType",params); 
-			copyArg(n,"Quantity",params); 
+			copyArg(n,"AvailabilityZone",params,undefined,false); 
+			copyArg(n,"InstanceType",params,undefined,false); 
+			copyArg(n,"Quantity",params,undefined,false); 
 			
-			copyArg(msg,"AutoPlacement",params); 
-			copyArg(msg,"AvailabilityZone",params); 
-			copyArg(msg,"ClientToken",params); 
-			copyArg(msg,"InstanceType",params); 
-			copyArg(msg,"Quantity",params); 
+			copyArg(msg,"AutoPlacement",params,undefined,false); 
+			copyArg(msg,"AvailabilityZone",params,undefined,false); 
+			copyArg(msg,"ClientToken",params,undefined,false); 
+			copyArg(msg,"InstanceType",params,undefined,false); 
+			copyArg(msg,"Quantity",params,undefined,false); 
 			
 
 			svc.allocateHosts(params,cb);
@@ -163,11 +168,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"NetworkInterfaceId",params); 
+			copyArg(n,"NetworkInterfaceId",params,undefined,false); 
 			
-			copyArg(msg,"Ipv6AddressCount",params); 
-			copyArg(msg,"Ipv6Addresses",params); 
-			copyArg(msg,"NetworkInterfaceId",params); 
+			copyArg(msg,"Ipv6AddressCount",params,undefined,false); 
+			copyArg(msg,"Ipv6Addresses",params,undefined,true); 
+			copyArg(msg,"NetworkInterfaceId",params,undefined,false); 
 			
 
 			svc.assignIpv6Addresses(params,cb);
@@ -178,12 +183,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"NetworkInterfaceId",params); 
+			copyArg(n,"NetworkInterfaceId",params,undefined,false); 
 			
-			copyArg(msg,"AllowReassignment",params); 
-			copyArg(msg,"NetworkInterfaceId",params); 
-			copyArg(msg,"PrivateIpAddresses",params); 
-			copyArg(msg,"SecondaryPrivateIpAddressCount",params); 
+			copyArg(msg,"AllowReassignment",params,undefined,false); 
+			copyArg(msg,"NetworkInterfaceId",params,undefined,false); 
+			copyArg(msg,"PrivateIpAddresses",params,undefined,true); 
+			copyArg(msg,"SecondaryPrivateIpAddressCount",params,undefined,false); 
 			
 
 			svc.assignPrivateIpAddresses(params,cb);
@@ -195,13 +200,13 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"AllocationId",params); 
-			copyArg(msg,"InstanceId",params); 
-			copyArg(msg,"PublicIp",params); 
-			copyArg(msg,"AllowReassociation",params); 
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"NetworkInterfaceId",params); 
-			copyArg(msg,"PrivateIpAddress",params); 
+			copyArg(msg,"AllocationId",params,undefined,false); 
+			copyArg(msg,"InstanceId",params,undefined,false); 
+			copyArg(msg,"PublicIp",params,undefined,false); 
+			copyArg(msg,"AllowReassociation",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"NetworkInterfaceId",params,undefined,false); 
+			copyArg(msg,"PrivateIpAddress",params,undefined,false); 
 			
 
 			svc.associateAddress(params,cb);
@@ -212,12 +217,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"DhcpOptionsId",params); 
-			copyArg(n,"VpcId",params); 
+			copyArg(n,"DhcpOptionsId",params,undefined,false); 
+			copyArg(n,"VpcId",params,undefined,false); 
 			
-			copyArg(msg,"DhcpOptionsId",params); 
-			copyArg(msg,"VpcId",params); 
-			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"DhcpOptionsId",params,undefined,false); 
+			copyArg(msg,"VpcId",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
 			
 
 			svc.associateDhcpOptions(params,cb);
@@ -228,11 +233,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"IamInstanceProfile",params); 
-			copyArg(n,"InstanceId",params); 
+			copyArg(n,"IamInstanceProfile",params,undefined,true); 
+			copyArg(n,"InstanceId",params,undefined,false); 
 			
-			copyArg(msg,"IamInstanceProfile",params); 
-			copyArg(msg,"InstanceId",params); 
+			copyArg(msg,"IamInstanceProfile",params,undefined,true); 
+			copyArg(msg,"InstanceId",params,undefined,false); 
 			
 
 			svc.associateIamInstanceProfile(params,cb);
@@ -243,12 +248,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"RouteTableId",params); 
-			copyArg(n,"SubnetId",params); 
+			copyArg(n,"RouteTableId",params,undefined,false); 
+			copyArg(n,"SubnetId",params,undefined,false); 
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"RouteTableId",params); 
-			copyArg(msg,"SubnetId",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"RouteTableId",params,undefined,false); 
+			copyArg(msg,"SubnetId",params,undefined,false); 
 			
 
 			svc.associateRouteTable(params,cb);
@@ -259,11 +264,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Ipv6CidrBlock",params); 
-			copyArg(n,"SubnetId",params); 
+			copyArg(n,"Ipv6CidrBlock",params,undefined,false); 
+			copyArg(n,"SubnetId",params,undefined,false); 
 			
-			copyArg(msg,"Ipv6CidrBlock",params); 
-			copyArg(msg,"SubnetId",params); 
+			copyArg(msg,"Ipv6CidrBlock",params,undefined,false); 
+			copyArg(msg,"SubnetId",params,undefined,false); 
 			
 
 			svc.associateSubnetCidrBlock(params,cb);
@@ -274,11 +279,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"VpcId",params); 
+			copyArg(n,"VpcId",params,undefined,false); 
 			
-			copyArg(msg,"AmazonProvidedIpv6CidrBlock",params); 
-			copyArg(msg,"CidrBlock",params); 
-			copyArg(msg,"VpcId",params); 
+			copyArg(msg,"AmazonProvidedIpv6CidrBlock",params,undefined,false); 
+			copyArg(msg,"CidrBlock",params,undefined,false); 
+			copyArg(msg,"VpcId",params,undefined,false); 
 			
 
 			svc.associateVpcCidrBlock(params,cb);
@@ -289,14 +294,14 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Groups",params); 
-			copyArg(n,"InstanceId",params); 
-			copyArg(n,"VpcId",params); 
+			copyArg(n,"Groups",params,undefined,true); 
+			copyArg(n,"InstanceId",params,undefined,false); 
+			copyArg(n,"VpcId",params,undefined,false); 
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"Groups",params); 
-			copyArg(msg,"InstanceId",params); 
-			copyArg(msg,"VpcId",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"Groups",params,undefined,true); 
+			copyArg(msg,"InstanceId",params,undefined,false); 
+			copyArg(msg,"VpcId",params,undefined,false); 
 			
 
 			svc.attachClassicLinkVpc(params,cb);
@@ -307,12 +312,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"InternetGatewayId",params); 
-			copyArg(n,"VpcId",params); 
+			copyArg(n,"InternetGatewayId",params,undefined,false); 
+			copyArg(n,"VpcId",params,undefined,false); 
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"InternetGatewayId",params); 
-			copyArg(msg,"VpcId",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"InternetGatewayId",params,undefined,false); 
+			copyArg(msg,"VpcId",params,undefined,false); 
 			
 
 			svc.attachInternetGateway(params,cb);
@@ -323,14 +328,14 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"DeviceIndex",params); 
-			copyArg(n,"InstanceId",params); 
-			copyArg(n,"NetworkInterfaceId",params); 
+			copyArg(n,"DeviceIndex",params,undefined,false); 
+			copyArg(n,"InstanceId",params,undefined,false); 
+			copyArg(n,"NetworkInterfaceId",params,undefined,false); 
 			
-			copyArg(msg,"DeviceIndex",params); 
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"InstanceId",params); 
-			copyArg(msg,"NetworkInterfaceId",params); 
+			copyArg(msg,"DeviceIndex",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"InstanceId",params,undefined,false); 
+			copyArg(msg,"NetworkInterfaceId",params,undefined,false); 
 			
 
 			svc.attachNetworkInterface(params,cb);
@@ -341,14 +346,14 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Device",params); 
-			copyArg(n,"InstanceId",params); 
-			copyArg(n,"VolumeId",params); 
+			copyArg(n,"Device",params,undefined,false); 
+			copyArg(n,"InstanceId",params,undefined,false); 
+			copyArg(n,"VolumeId",params,undefined,false); 
 			
-			copyArg(msg,"Device",params); 
-			copyArg(msg,"InstanceId",params); 
-			copyArg(msg,"VolumeId",params); 
-			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"Device",params,undefined,false); 
+			copyArg(msg,"InstanceId",params,undefined,false); 
+			copyArg(msg,"VolumeId",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
 			
 
 			svc.attachVolume(params,cb);
@@ -359,12 +364,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"VpcId",params); 
-			copyArg(n,"VpnGatewayId",params); 
+			copyArg(n,"VpcId",params,undefined,false); 
+			copyArg(n,"VpnGatewayId",params,undefined,false); 
 			
-			copyArg(msg,"VpcId",params); 
-			copyArg(msg,"VpnGatewayId",params); 
-			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"VpcId",params,undefined,false); 
+			copyArg(msg,"VpnGatewayId",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
 			
 
 			svc.attachVpnGateway(params,cb);
@@ -375,17 +380,17 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"GroupId",params); 
+			copyArg(n,"GroupId",params,undefined,false); 
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"GroupId",params); 
-			copyArg(msg,"IpPermissions",params); 
-			copyArg(msg,"CidrIp",params); 
-			copyArg(msg,"FromPort",params); 
-			copyArg(msg,"IpProtocol",params); 
-			copyArg(msg,"ToPort",params); 
-			copyArg(msg,"SourceSecurityGroupName",params); 
-			copyArg(msg,"SourceSecurityGroupOwnerId",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"GroupId",params,undefined,false); 
+			copyArg(msg,"IpPermissions",params,undefined,true); 
+			copyArg(msg,"CidrIp",params,undefined,false); 
+			copyArg(msg,"FromPort",params,undefined,false); 
+			copyArg(msg,"IpProtocol",params,undefined,false); 
+			copyArg(msg,"ToPort",params,undefined,false); 
+			copyArg(msg,"SourceSecurityGroupName",params,undefined,false); 
+			copyArg(msg,"SourceSecurityGroupOwnerId",params,undefined,false); 
 			
 
 			svc.authorizeSecurityGroupEgress(params,cb);
@@ -397,16 +402,16 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"CidrIp",params); 
-			copyArg(msg,"FromPort",params); 
-			copyArg(msg,"GroupId",params); 
-			copyArg(msg,"GroupName",params); 
-			copyArg(msg,"IpPermissions",params); 
-			copyArg(msg,"IpProtocol",params); 
-			copyArg(msg,"SourceSecurityGroupName",params); 
-			copyArg(msg,"SourceSecurityGroupOwnerId",params); 
-			copyArg(msg,"ToPort",params); 
-			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"CidrIp",params,undefined,false); 
+			copyArg(msg,"FromPort",params,undefined,false); 
+			copyArg(msg,"GroupId",params,undefined,false); 
+			copyArg(msg,"GroupName",params,undefined,false); 
+			copyArg(msg,"IpPermissions",params,undefined,true); 
+			copyArg(msg,"IpProtocol",params,undefined,false); 
+			copyArg(msg,"SourceSecurityGroupName",params,undefined,false); 
+			copyArg(msg,"SourceSecurityGroupOwnerId",params,undefined,false); 
+			copyArg(msg,"ToPort",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
 			
 
 			svc.authorizeSecurityGroupIngress(params,cb);
@@ -417,12 +422,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"InstanceId",params); 
-			copyArg(n,"Storage",params); 
+			copyArg(n,"InstanceId",params,undefined,false); 
+			copyArg(n,"Storage",params,undefined,true); 
 			
-			copyArg(msg,"InstanceId",params); 
-			copyArg(msg,"Storage",params); 
-			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"InstanceId",params,undefined,false); 
+			copyArg(msg,"Storage",params,undefined,true); 
+			copyArg(msg,"DryRun",params,undefined,false); 
 			
 
 			svc.bundleInstance(params,cb);
@@ -433,10 +438,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"BundleId",params); 
+			copyArg(n,"BundleId",params,undefined,false); 
 			
-			copyArg(msg,"BundleId",params); 
-			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"BundleId",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
 			
 
 			svc.cancelBundleTask(params,cb);
@@ -447,11 +452,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"ConversionTaskId",params); 
+			copyArg(n,"ConversionTaskId",params,undefined,false); 
 			
-			copyArg(msg,"ConversionTaskId",params); 
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"ReasonMessage",params); 
+			copyArg(msg,"ConversionTaskId",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"ReasonMessage",params,undefined,false); 
 			
 
 			svc.cancelConversionTask(params,cb);
@@ -462,9 +467,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"ExportTaskId",params); 
+			copyArg(n,"ExportTaskId",params,undefined,false); 
 			
-			copyArg(msg,"ExportTaskId",params); 
+			copyArg(msg,"ExportTaskId",params,undefined,false); 
 			
 
 			svc.cancelExportTask(params,cb);
@@ -476,9 +481,9 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"CancelReason",params); 
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"ImportTaskId",params); 
+			copyArg(msg,"CancelReason",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"ImportTaskId",params,undefined,false); 
 			
 
 			svc.cancelImportTask(params,cb);
@@ -489,9 +494,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"ReservedInstancesListingId",params); 
+			copyArg(n,"ReservedInstancesListingId",params,undefined,false); 
 			
-			copyArg(msg,"ReservedInstancesListingId",params); 
+			copyArg(msg,"ReservedInstancesListingId",params,undefined,false); 
 			
 
 			svc.cancelReservedInstancesListing(params,cb);
@@ -502,12 +507,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"SpotFleetRequestIds",params); 
-			copyArg(n,"TerminateInstances",params); 
+			copyArg(n,"SpotFleetRequestIds",params,undefined,true); 
+			copyArg(n,"TerminateInstances",params,undefined,false); 
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"SpotFleetRequestIds",params); 
-			copyArg(msg,"TerminateInstances",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"SpotFleetRequestIds",params,undefined,true); 
+			copyArg(msg,"TerminateInstances",params,undefined,false); 
 			
 
 			svc.cancelSpotFleetRequests(params,cb);
@@ -518,10 +523,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"SpotInstanceRequestIds",params); 
+			copyArg(n,"SpotInstanceRequestIds",params,undefined,true); 
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"SpotInstanceRequestIds",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"SpotInstanceRequestIds",params,undefined,true); 
 			
 
 			svc.cancelSpotInstanceRequests(params,cb);
@@ -532,12 +537,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"InstanceId",params); 
-			copyArg(n,"ProductCode",params); 
+			copyArg(n,"InstanceId",params,undefined,false); 
+			copyArg(n,"ProductCode",params,undefined,false); 
 			
-			copyArg(msg,"InstanceId",params); 
-			copyArg(msg,"ProductCode",params); 
-			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"InstanceId",params,undefined,false); 
+			copyArg(msg,"ProductCode",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
 			
 
 			svc.confirmProductInstance(params,cb);
@@ -548,15 +553,15 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"SourceFpgaImageId",params); 
-			copyArg(n,"SourceRegion",params); 
+			copyArg(n,"SourceFpgaImageId",params,undefined,false); 
+			copyArg(n,"SourceRegion",params,undefined,false); 
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"SourceFpgaImageId",params); 
-			copyArg(msg,"Description",params); 
-			copyArg(msg,"Name",params); 
-			copyArg(msg,"SourceRegion",params); 
-			copyArg(msg,"ClientToken",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"SourceFpgaImageId",params,undefined,false); 
+			copyArg(msg,"Description",params,undefined,false); 
+			copyArg(msg,"Name",params,undefined,false); 
+			copyArg(msg,"SourceRegion",params,undefined,false); 
+			copyArg(msg,"ClientToken",params,undefined,false); 
 			
 
 			svc.copyFpgaImage(params,cb);
@@ -567,18 +572,18 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Name",params); 
-			copyArg(n,"SourceImageId",params); 
-			copyArg(n,"SourceRegion",params); 
+			copyArg(n,"Name",params,undefined,false); 
+			copyArg(n,"SourceImageId",params,undefined,false); 
+			copyArg(n,"SourceRegion",params,undefined,false); 
 			
-			copyArg(msg,"ClientToken",params); 
-			copyArg(msg,"Description",params); 
-			copyArg(msg,"Encrypted",params); 
-			copyArg(msg,"KmsKeyId",params); 
-			copyArg(msg,"Name",params); 
-			copyArg(msg,"SourceImageId",params); 
-			copyArg(msg,"SourceRegion",params); 
-			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"ClientToken",params,undefined,false); 
+			copyArg(msg,"Description",params,undefined,false); 
+			copyArg(msg,"Encrypted",params,undefined,false); 
+			copyArg(msg,"KmsKeyId",params,undefined,false); 
+			copyArg(msg,"Name",params,undefined,false); 
+			copyArg(msg,"SourceImageId",params,undefined,false); 
+			copyArg(msg,"SourceRegion",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
 			
 
 			svc.copyImage(params,cb);
@@ -589,17 +594,17 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"SourceRegion",params); 
-			copyArg(n,"SourceSnapshotId",params); 
+			copyArg(n,"SourceRegion",params,undefined,false); 
+			copyArg(n,"SourceSnapshotId",params,undefined,false); 
 			
-			copyArg(msg,"Description",params); 
-			copyArg(msg,"DestinationRegion",params); 
-			copyArg(msg,"Encrypted",params); 
-			copyArg(msg,"KmsKeyId",params); 
-			copyArg(msg,"PresignedUrl",params); 
-			copyArg(msg,"SourceRegion",params); 
-			copyArg(msg,"SourceSnapshotId",params); 
-			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"Description",params,undefined,false); 
+			copyArg(msg,"DestinationRegion",params,undefined,false); 
+			copyArg(msg,"Encrypted",params,undefined,false); 
+			copyArg(msg,"KmsKeyId",params,undefined,false); 
+			copyArg(msg,"PresignedUrl",params,undefined,false); 
+			copyArg(msg,"SourceRegion",params,undefined,false); 
+			copyArg(msg,"SourceSnapshotId",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
 			
 
 			svc.copySnapshot(params,cb);
@@ -610,14 +615,14 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"BgpAsn",params); 
-			copyArg(n,"PublicIp",params); 
-			copyArg(n,"Type",params); 
+			copyArg(n,"BgpAsn",params,undefined,false); 
+			copyArg(n,"PublicIp",params,undefined,false); 
+			copyArg(n,"Type",params,undefined,false); 
 			
-			copyArg(msg,"BgpAsn",params); 
-			copyArg(msg,"PublicIp",params); 
-			copyArg(msg,"Type",params); 
-			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"BgpAsn",params,undefined,false); 
+			copyArg(msg,"PublicIp",params,undefined,false); 
+			copyArg(msg,"Type",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
 			
 
 			svc.createCustomerGateway(params,cb);
@@ -628,10 +633,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"AvailabilityZone",params); 
+			copyArg(n,"AvailabilityZone",params,undefined,false); 
 			
-			copyArg(msg,"AvailabilityZone",params); 
-			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"AvailabilityZone",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
 			
 
 			svc.createDefaultSubnet(params,cb);
@@ -643,7 +648,7 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
 			
 
 			svc.createDefaultVpc(params,cb);
@@ -654,10 +659,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"DhcpConfigurations",params); 
+			copyArg(n,"DhcpConfigurations",params,undefined,false); 
 			
-			copyArg(msg,"DhcpConfigurations",params); 
-			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"DhcpConfigurations",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
 			
 
 			svc.createDhcpOptions(params,cb);
@@ -668,11 +673,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"VpcId",params); 
+			copyArg(n,"VpcId",params,undefined,false); 
 			
-			copyArg(msg,"ClientToken",params); 
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"VpcId",params); 
+			copyArg(msg,"ClientToken",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"VpcId",params,undefined,false); 
 			
 
 			svc.createEgressOnlyInternetGateway(params,cb);
@@ -683,18 +688,18 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"DeliverLogsPermissionArn",params); 
-			copyArg(n,"LogGroupName",params); 
-			copyArg(n,"ResourceIds",params); 
-			copyArg(n,"ResourceType",params); 
-			copyArg(n,"TrafficType",params); 
+			copyArg(n,"DeliverLogsPermissionArn",params,undefined,false); 
+			copyArg(n,"LogGroupName",params,undefined,false); 
+			copyArg(n,"ResourceIds",params,undefined,true); 
+			copyArg(n,"ResourceType",params,undefined,false); 
+			copyArg(n,"TrafficType",params,undefined,false); 
 			
-			copyArg(msg,"ClientToken",params); 
-			copyArg(msg,"DeliverLogsPermissionArn",params); 
-			copyArg(msg,"LogGroupName",params); 
-			copyArg(msg,"ResourceIds",params); 
-			copyArg(msg,"ResourceType",params); 
-			copyArg(msg,"TrafficType",params); 
+			copyArg(msg,"ClientToken",params,undefined,false); 
+			copyArg(msg,"DeliverLogsPermissionArn",params,undefined,false); 
+			copyArg(msg,"LogGroupName",params,undefined,false); 
+			copyArg(msg,"ResourceIds",params,undefined,true); 
+			copyArg(msg,"ResourceType",params,undefined,false); 
+			copyArg(msg,"TrafficType",params,undefined,false); 
 			
 
 			svc.createFlowLogs(params,cb);
@@ -705,14 +710,14 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"InputStorageLocation",params); 
+			copyArg(n,"InputStorageLocation",params,undefined,true); 
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"InputStorageLocation",params); 
-			copyArg(msg,"LogsStorageLocation",params); 
-			copyArg(msg,"Description",params); 
-			copyArg(msg,"Name",params); 
-			copyArg(msg,"ClientToken",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"InputStorageLocation",params,undefined,true); 
+			copyArg(msg,"LogsStorageLocation",params,undefined,true); 
+			copyArg(msg,"Description",params,undefined,false); 
+			copyArg(msg,"Name",params,undefined,false); 
+			copyArg(msg,"ClientToken",params,undefined,false); 
 			
 
 			svc.createFpgaImage(params,cb);
@@ -723,15 +728,15 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"InstanceId",params); 
-			copyArg(n,"Name",params); 
+			copyArg(n,"InstanceId",params,undefined,false); 
+			copyArg(n,"Name",params,undefined,false); 
 			
-			copyArg(msg,"BlockDeviceMappings",params); 
-			copyArg(msg,"Description",params); 
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"InstanceId",params); 
-			copyArg(msg,"Name",params); 
-			copyArg(msg,"NoReboot",params); 
+			copyArg(msg,"BlockDeviceMappings",params,undefined,true); 
+			copyArg(msg,"Description",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"InstanceId",params,undefined,false); 
+			copyArg(msg,"Name",params,undefined,false); 
+			copyArg(msg,"NoReboot",params,undefined,false); 
 			
 
 			svc.createImage(params,cb);
@@ -742,12 +747,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"InstanceId",params); 
+			copyArg(n,"InstanceId",params,undefined,false); 
 			
-			copyArg(msg,"Description",params); 
-			copyArg(msg,"ExportToS3Task",params); 
-			copyArg(msg,"InstanceId",params); 
-			copyArg(msg,"TargetEnvironment",params); 
+			copyArg(msg,"Description",params,undefined,false); 
+			copyArg(msg,"ExportToS3Task",params,undefined,false); 
+			copyArg(msg,"InstanceId",params,undefined,false); 
+			copyArg(msg,"TargetEnvironment",params,undefined,false); 
 			
 
 			svc.createInstanceExportTask(params,cb);
@@ -759,7 +764,7 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
 			
 
 			svc.createInternetGateway(params,cb);
@@ -770,10 +775,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"KeyName",params); 
+			copyArg(n,"KeyName",params,undefined,false); 
 			
-			copyArg(msg,"KeyName",params); 
-			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"KeyName",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
 			
 
 			svc.createKeyPair(params,cb);
@@ -784,14 +789,14 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"LaunchTemplateName",params); 
-			copyArg(n,"LaunchTemplateData",params); 
+			copyArg(n,"LaunchTemplateName",params,undefined,false); 
+			copyArg(n,"LaunchTemplateData",params,undefined,true); 
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"ClientToken",params); 
-			copyArg(msg,"LaunchTemplateName",params); 
-			copyArg(msg,"VersionDescription",params); 
-			copyArg(msg,"LaunchTemplateData",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"ClientToken",params,undefined,false); 
+			copyArg(msg,"LaunchTemplateName",params,undefined,false); 
+			copyArg(msg,"VersionDescription",params,undefined,false); 
+			copyArg(msg,"LaunchTemplateData",params,undefined,true); 
 			
 
 			svc.createLaunchTemplate(params,cb);
@@ -802,15 +807,15 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"LaunchTemplateData",params); 
+			copyArg(n,"LaunchTemplateData",params,undefined,true); 
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"ClientToken",params); 
-			copyArg(msg,"LaunchTemplateId",params); 
-			copyArg(msg,"LaunchTemplateName",params); 
-			copyArg(msg,"SourceVersion",params); 
-			copyArg(msg,"VersionDescription",params); 
-			copyArg(msg,"LaunchTemplateData",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"ClientToken",params,undefined,false); 
+			copyArg(msg,"LaunchTemplateId",params,undefined,false); 
+			copyArg(msg,"LaunchTemplateName",params,undefined,false); 
+			copyArg(msg,"SourceVersion",params,undefined,false); 
+			copyArg(msg,"VersionDescription",params,undefined,false); 
+			copyArg(msg,"LaunchTemplateData",params,undefined,true); 
 			
 
 			svc.createLaunchTemplateVersion(params,cb);
@@ -821,12 +826,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"AllocationId",params); 
-			copyArg(n,"SubnetId",params); 
+			copyArg(n,"AllocationId",params,undefined,false); 
+			copyArg(n,"SubnetId",params,undefined,false); 
 			
-			copyArg(msg,"AllocationId",params); 
-			copyArg(msg,"ClientToken",params); 
-			copyArg(msg,"SubnetId",params); 
+			copyArg(msg,"AllocationId",params,undefined,false); 
+			copyArg(msg,"ClientToken",params,undefined,false); 
+			copyArg(msg,"SubnetId",params,undefined,false); 
 			
 
 			svc.createNatGateway(params,cb);
@@ -837,10 +842,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"VpcId",params); 
+			copyArg(n,"VpcId",params,undefined,false); 
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"VpcId",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"VpcId",params,undefined,false); 
 			
 
 			svc.createNetworkAcl(params,cb);
@@ -851,22 +856,22 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Egress",params); 
-			copyArg(n,"NetworkAclId",params); 
-			copyArg(n,"Protocol",params); 
-			copyArg(n,"RuleAction",params); 
-			copyArg(n,"RuleNumber",params); 
+			copyArg(n,"Egress",params,undefined,false); 
+			copyArg(n,"NetworkAclId",params,undefined,false); 
+			copyArg(n,"Protocol",params,undefined,false); 
+			copyArg(n,"RuleAction",params,undefined,false); 
+			copyArg(n,"RuleNumber",params,undefined,false); 
 			
-			copyArg(msg,"CidrBlock",params); 
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"Egress",params); 
-			copyArg(msg,"IcmpTypeCode",params); 
-			copyArg(msg,"Ipv6CidrBlock",params); 
-			copyArg(msg,"NetworkAclId",params); 
-			copyArg(msg,"PortRange",params); 
-			copyArg(msg,"Protocol",params); 
-			copyArg(msg,"RuleAction",params); 
-			copyArg(msg,"RuleNumber",params); 
+			copyArg(msg,"CidrBlock",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"Egress",params,undefined,false); 
+			copyArg(msg,"IcmpTypeCode",params,undefined,true); 
+			copyArg(msg,"Ipv6CidrBlock",params,undefined,false); 
+			copyArg(msg,"NetworkAclId",params,undefined,false); 
+			copyArg(msg,"PortRange",params,undefined,true); 
+			copyArg(msg,"Protocol",params,undefined,false); 
+			copyArg(msg,"RuleAction",params,undefined,false); 
+			copyArg(msg,"RuleNumber",params,undefined,false); 
 			
 
 			svc.createNetworkAclEntry(params,cb);
@@ -877,17 +882,17 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"SubnetId",params); 
+			copyArg(n,"SubnetId",params,undefined,false); 
 			
-			copyArg(msg,"Description",params); 
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"Groups",params); 
-			copyArg(msg,"Ipv6AddressCount",params); 
-			copyArg(msg,"Ipv6Addresses",params); 
-			copyArg(msg,"PrivateIpAddress",params); 
-			copyArg(msg,"PrivateIpAddresses",params); 
-			copyArg(msg,"SecondaryPrivateIpAddressCount",params); 
-			copyArg(msg,"SubnetId",params); 
+			copyArg(msg,"Description",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"Groups",params,undefined,true); 
+			copyArg(msg,"Ipv6AddressCount",params,undefined,false); 
+			copyArg(msg,"Ipv6Addresses",params,undefined,true); 
+			copyArg(msg,"PrivateIpAddress",params,undefined,false); 
+			copyArg(msg,"PrivateIpAddresses",params,undefined,true); 
+			copyArg(msg,"SecondaryPrivateIpAddressCount",params,undefined,false); 
+			copyArg(msg,"SubnetId",params,undefined,false); 
 			
 
 			svc.createNetworkInterface(params,cb);
@@ -898,14 +903,14 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"NetworkInterfaceId",params); 
-			copyArg(n,"Permission",params); 
+			copyArg(n,"NetworkInterfaceId",params,undefined,false); 
+			copyArg(n,"Permission",params,undefined,false); 
 			
-			copyArg(msg,"NetworkInterfaceId",params); 
-			copyArg(msg,"AwsAccountId",params); 
-			copyArg(msg,"AwsService",params); 
-			copyArg(msg,"Permission",params); 
-			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"NetworkInterfaceId",params,undefined,false); 
+			copyArg(msg,"AwsAccountId",params,undefined,false); 
+			copyArg(msg,"AwsService",params,undefined,false); 
+			copyArg(msg,"Permission",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
 			
 
 			svc.createNetworkInterfacePermission(params,cb);
@@ -916,12 +921,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"GroupName",params); 
-			copyArg(n,"Strategy",params); 
+			copyArg(n,"GroupName",params,undefined,false); 
+			copyArg(n,"Strategy",params,undefined,false); 
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"GroupName",params); 
-			copyArg(msg,"Strategy",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"GroupName",params,undefined,false); 
+			copyArg(msg,"Strategy",params,undefined,false); 
 			
 
 			svc.createPlacementGroup(params,cb);
@@ -932,15 +937,15 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"ClientToken",params); 
-			copyArg(n,"InstanceCount",params); 
-			copyArg(n,"PriceSchedules",params); 
-			copyArg(n,"ReservedInstancesId",params); 
+			copyArg(n,"ClientToken",params,undefined,false); 
+			copyArg(n,"InstanceCount",params,undefined,false); 
+			copyArg(n,"PriceSchedules",params,undefined,false); 
+			copyArg(n,"ReservedInstancesId",params,undefined,false); 
 			
-			copyArg(msg,"ClientToken",params); 
-			copyArg(msg,"InstanceCount",params); 
-			copyArg(msg,"PriceSchedules",params); 
-			copyArg(msg,"ReservedInstancesId",params); 
+			copyArg(msg,"ClientToken",params,undefined,false); 
+			copyArg(msg,"InstanceCount",params,undefined,false); 
+			copyArg(msg,"PriceSchedules",params,undefined,false); 
+			copyArg(msg,"ReservedInstancesId",params,undefined,false); 
 			
 
 			svc.createReservedInstancesListing(params,cb);
@@ -951,18 +956,18 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"RouteTableId",params); 
+			copyArg(n,"RouteTableId",params,undefined,false); 
 			
-			copyArg(msg,"DestinationCidrBlock",params); 
-			copyArg(msg,"DestinationIpv6CidrBlock",params); 
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"EgressOnlyInternetGatewayId",params); 
-			copyArg(msg,"GatewayId",params); 
-			copyArg(msg,"InstanceId",params); 
-			copyArg(msg,"NatGatewayId",params); 
-			copyArg(msg,"NetworkInterfaceId",params); 
-			copyArg(msg,"RouteTableId",params); 
-			copyArg(msg,"VpcPeeringConnectionId",params); 
+			copyArg(msg,"DestinationCidrBlock",params,undefined,false); 
+			copyArg(msg,"DestinationIpv6CidrBlock",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"EgressOnlyInternetGatewayId",params,undefined,false); 
+			copyArg(msg,"GatewayId",params,undefined,false); 
+			copyArg(msg,"InstanceId",params,undefined,false); 
+			copyArg(msg,"NatGatewayId",params,undefined,false); 
+			copyArg(msg,"NetworkInterfaceId",params,undefined,false); 
+			copyArg(msg,"RouteTableId",params,undefined,false); 
+			copyArg(msg,"VpcPeeringConnectionId",params,undefined,false); 
 			
 
 			svc.createRoute(params,cb);
@@ -973,10 +978,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"VpcId",params); 
+			copyArg(n,"VpcId",params,undefined,false); 
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"VpcId",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"VpcId",params,undefined,false); 
 			
 
 			svc.createRouteTable(params,cb);
@@ -987,13 +992,13 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Description",params); 
-			copyArg(n,"GroupName",params); 
+			copyArg(n,"Description",params,undefined,false); 
+			copyArg(n,"GroupName",params,undefined,false); 
 			
-			copyArg(msg,"Description",params); 
-			copyArg(msg,"GroupName",params); 
-			copyArg(msg,"VpcId",params); 
-			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"Description",params,undefined,false); 
+			copyArg(msg,"GroupName",params,undefined,false); 
+			copyArg(msg,"VpcId",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
 			
 
 			svc.createSecurityGroup(params,cb);
@@ -1004,11 +1009,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"VolumeId",params); 
+			copyArg(n,"VolumeId",params,undefined,false); 
 			
-			copyArg(msg,"Description",params); 
-			copyArg(msg,"VolumeId",params); 
-			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"Description",params,undefined,false); 
+			copyArg(msg,"VolumeId",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
 			
 
 			svc.createSnapshot(params,cb);
@@ -1019,11 +1024,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Bucket",params); 
+			copyArg(n,"Bucket",params,undefined,false); 
 			
-			copyArg(msg,"Bucket",params); 
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"Prefix",params); 
+			copyArg(msg,"Bucket",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"Prefix",params,undefined,false); 
 			
 
 			svc.createSpotDatafeedSubscription(params,cb);
@@ -1034,14 +1039,14 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"CidrBlock",params); 
-			copyArg(n,"VpcId",params); 
+			copyArg(n,"CidrBlock",params,undefined,false); 
+			copyArg(n,"VpcId",params,undefined,false); 
 			
-			copyArg(msg,"AvailabilityZone",params); 
-			copyArg(msg,"CidrBlock",params); 
-			copyArg(msg,"Ipv6CidrBlock",params); 
-			copyArg(msg,"VpcId",params); 
-			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"AvailabilityZone",params,undefined,false); 
+			copyArg(msg,"CidrBlock",params,undefined,false); 
+			copyArg(msg,"Ipv6CidrBlock",params,undefined,false); 
+			copyArg(msg,"VpcId",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
 			
 
 			svc.createSubnet(params,cb);
@@ -1052,12 +1057,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Resources",params); 
-			copyArg(n,"Tags",params); 
+			copyArg(n,"Resources",params,undefined,true); 
+			copyArg(n,"Tags",params,undefined,true); 
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"Resources",params); 
-			copyArg(msg,"Tags",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"Resources",params,undefined,true); 
+			copyArg(msg,"Tags",params,undefined,true); 
 			
 
 			svc.createTags(params,cb);
@@ -1068,17 +1073,17 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"AvailabilityZone",params); 
+			copyArg(n,"AvailabilityZone",params,undefined,false); 
 			
-			copyArg(msg,"AvailabilityZone",params); 
-			copyArg(msg,"Encrypted",params); 
-			copyArg(msg,"Iops",params); 
-			copyArg(msg,"KmsKeyId",params); 
-			copyArg(msg,"Size",params); 
-			copyArg(msg,"SnapshotId",params); 
-			copyArg(msg,"VolumeType",params); 
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"TagSpecifications",params); 
+			copyArg(msg,"AvailabilityZone",params,undefined,false); 
+			copyArg(msg,"Encrypted",params,undefined,false); 
+			copyArg(msg,"Iops",params,undefined,false); 
+			copyArg(msg,"KmsKeyId",params,undefined,false); 
+			copyArg(msg,"Size",params,undefined,false); 
+			copyArg(msg,"SnapshotId",params,undefined,false); 
+			copyArg(msg,"VolumeType",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"TagSpecifications",params,undefined,true); 
 			
 
 			svc.createVolume(params,cb);
@@ -1089,12 +1094,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"CidrBlock",params); 
+			copyArg(n,"CidrBlock",params,undefined,false); 
 			
-			copyArg(msg,"CidrBlock",params); 
-			copyArg(msg,"AmazonProvidedIpv6CidrBlock",params); 
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"InstanceTenancy",params); 
+			copyArg(msg,"CidrBlock",params,undefined,false); 
+			copyArg(msg,"AmazonProvidedIpv6CidrBlock",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"InstanceTenancy",params,undefined,false); 
 			
 
 			svc.createVpc(params,cb);
@@ -1105,19 +1110,19 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"VpcId",params); 
-			copyArg(n,"ServiceName",params); 
+			copyArg(n,"VpcId",params,undefined,false); 
+			copyArg(n,"ServiceName",params,undefined,false); 
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"VpcEndpointType",params); 
-			copyArg(msg,"VpcId",params); 
-			copyArg(msg,"ServiceName",params); 
-			copyArg(msg,"PolicyDocument",params); 
-			copyArg(msg,"RouteTableIds",params); 
-			copyArg(msg,"SubnetIds",params); 
-			copyArg(msg,"SecurityGroupIds",params); 
-			copyArg(msg,"ClientToken",params); 
-			copyArg(msg,"PrivateDnsEnabled",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"VpcEndpointType",params,undefined,false); 
+			copyArg(msg,"VpcId",params,undefined,false); 
+			copyArg(msg,"ServiceName",params,undefined,false); 
+			copyArg(msg,"PolicyDocument",params,undefined,false); 
+			copyArg(msg,"RouteTableIds",params,undefined,true); 
+			copyArg(msg,"SubnetIds",params,undefined,true); 
+			copyArg(msg,"SecurityGroupIds",params,undefined,true); 
+			copyArg(msg,"ClientToken",params,undefined,false); 
+			copyArg(msg,"PrivateDnsEnabled",params,undefined,false); 
 			
 
 			svc.createVpcEndpoint(params,cb);
@@ -1128,15 +1133,15 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"ConnectionNotificationArn",params); 
-			copyArg(n,"ConnectionEvents",params); 
+			copyArg(n,"ConnectionNotificationArn",params,undefined,false); 
+			copyArg(n,"ConnectionEvents",params,undefined,true); 
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"ServiceId",params); 
-			copyArg(msg,"VpcEndpointId",params); 
-			copyArg(msg,"ConnectionNotificationArn",params); 
-			copyArg(msg,"ConnectionEvents",params); 
-			copyArg(msg,"ClientToken",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"ServiceId",params,undefined,false); 
+			copyArg(msg,"VpcEndpointId",params,undefined,false); 
+			copyArg(msg,"ConnectionNotificationArn",params,undefined,false); 
+			copyArg(msg,"ConnectionEvents",params,undefined,true); 
+			copyArg(msg,"ClientToken",params,undefined,false); 
 			
 
 			svc.createVpcEndpointConnectionNotification(params,cb);
@@ -1147,12 +1152,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"NetworkLoadBalancerArns",params); 
+			copyArg(n,"NetworkLoadBalancerArns",params,undefined,true); 
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"AcceptanceRequired",params); 
-			copyArg(msg,"NetworkLoadBalancerArns",params); 
-			copyArg(msg,"ClientToken",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"AcceptanceRequired",params,undefined,false); 
+			copyArg(msg,"NetworkLoadBalancerArns",params,undefined,true); 
+			copyArg(msg,"ClientToken",params,undefined,false); 
 			
 
 			svc.createVpcEndpointServiceConfiguration(params,cb);
@@ -1164,11 +1169,11 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"PeerOwnerId",params); 
-			copyArg(msg,"PeerVpcId",params); 
-			copyArg(msg,"VpcId",params); 
-			copyArg(msg,"PeerRegion",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"PeerOwnerId",params,undefined,false); 
+			copyArg(msg,"PeerVpcId",params,undefined,false); 
+			copyArg(msg,"VpcId",params,undefined,false); 
+			copyArg(msg,"PeerRegion",params,undefined,false); 
 			
 
 			svc.createVpcPeeringConnection(params,cb);
@@ -1179,15 +1184,15 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"CustomerGatewayId",params); 
-			copyArg(n,"Type",params); 
-			copyArg(n,"VpnGatewayId",params); 
+			copyArg(n,"CustomerGatewayId",params,undefined,false); 
+			copyArg(n,"Type",params,undefined,false); 
+			copyArg(n,"VpnGatewayId",params,undefined,false); 
 			
-			copyArg(msg,"CustomerGatewayId",params); 
-			copyArg(msg,"Type",params); 
-			copyArg(msg,"VpnGatewayId",params); 
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"Options",params); 
+			copyArg(msg,"CustomerGatewayId",params,undefined,false); 
+			copyArg(msg,"Type",params,undefined,false); 
+			copyArg(msg,"VpnGatewayId",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"Options",params,undefined,false); 
 			
 
 			svc.createVpnConnection(params,cb);
@@ -1198,11 +1203,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"DestinationCidrBlock",params); 
-			copyArg(n,"VpnConnectionId",params); 
+			copyArg(n,"DestinationCidrBlock",params,undefined,false); 
+			copyArg(n,"VpnConnectionId",params,undefined,false); 
 			
-			copyArg(msg,"DestinationCidrBlock",params); 
-			copyArg(msg,"VpnConnectionId",params); 
+			copyArg(msg,"DestinationCidrBlock",params,undefined,false); 
+			copyArg(msg,"VpnConnectionId",params,undefined,false); 
 			
 
 			svc.createVpnConnectionRoute(params,cb);
@@ -1213,12 +1218,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Type",params); 
+			copyArg(n,"Type",params,undefined,false); 
 			
-			copyArg(msg,"AvailabilityZone",params); 
-			copyArg(msg,"Type",params); 
-			copyArg(msg,"AmazonSideAsn",params); 
-			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"AvailabilityZone",params,undefined,false); 
+			copyArg(msg,"Type",params,undefined,false); 
+			copyArg(msg,"AmazonSideAsn",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
 			
 
 			svc.createVpnGateway(params,cb);
@@ -1229,10 +1234,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"CustomerGatewayId",params); 
+			copyArg(n,"CustomerGatewayId",params,undefined,false); 
 			
-			copyArg(msg,"CustomerGatewayId",params); 
-			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"CustomerGatewayId",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
 			
 
 			svc.deleteCustomerGateway(params,cb);
@@ -1243,10 +1248,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"DhcpOptionsId",params); 
+			copyArg(n,"DhcpOptionsId",params,undefined,false); 
 			
-			copyArg(msg,"DhcpOptionsId",params); 
-			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"DhcpOptionsId",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
 			
 
 			svc.deleteDhcpOptions(params,cb);
@@ -1257,10 +1262,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"EgressOnlyInternetGatewayId",params); 
+			copyArg(n,"EgressOnlyInternetGatewayId",params,undefined,false); 
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"EgressOnlyInternetGatewayId",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"EgressOnlyInternetGatewayId",params,undefined,false); 
 			
 
 			svc.deleteEgressOnlyInternetGateway(params,cb);
@@ -1271,9 +1276,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"FlowLogIds",params); 
+			copyArg(n,"FlowLogIds",params,undefined,true); 
 			
-			copyArg(msg,"FlowLogIds",params); 
+			copyArg(msg,"FlowLogIds",params,undefined,true); 
 			
 
 			svc.deleteFlowLogs(params,cb);
@@ -1284,10 +1289,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"FpgaImageId",params); 
+			copyArg(n,"FpgaImageId",params,undefined,false); 
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"FpgaImageId",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"FpgaImageId",params,undefined,false); 
 			
 
 			svc.deleteFpgaImage(params,cb);
@@ -1298,10 +1303,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"InternetGatewayId",params); 
+			copyArg(n,"InternetGatewayId",params,undefined,false); 
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"InternetGatewayId",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"InternetGatewayId",params,undefined,false); 
 			
 
 			svc.deleteInternetGateway(params,cb);
@@ -1312,10 +1317,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"KeyName",params); 
+			copyArg(n,"KeyName",params,undefined,false); 
 			
-			copyArg(msg,"KeyName",params); 
-			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"KeyName",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
 			
 
 			svc.deleteKeyPair(params,cb);
@@ -1327,9 +1332,9 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"LaunchTemplateId",params); 
-			copyArg(msg,"LaunchTemplateName",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"LaunchTemplateId",params,undefined,false); 
+			copyArg(msg,"LaunchTemplateName",params,undefined,false); 
 			
 
 			svc.deleteLaunchTemplate(params,cb);
@@ -1340,12 +1345,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Versions",params); 
+			copyArg(n,"Versions",params,undefined,true); 
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"LaunchTemplateId",params); 
-			copyArg(msg,"LaunchTemplateName",params); 
-			copyArg(msg,"Versions",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"LaunchTemplateId",params,undefined,false); 
+			copyArg(msg,"LaunchTemplateName",params,undefined,false); 
+			copyArg(msg,"Versions",params,undefined,true); 
 			
 
 			svc.deleteLaunchTemplateVersions(params,cb);
@@ -1356,9 +1361,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"NatGatewayId",params); 
+			copyArg(n,"NatGatewayId",params,undefined,false); 
 			
-			copyArg(msg,"NatGatewayId",params); 
+			copyArg(msg,"NatGatewayId",params,undefined,false); 
 			
 
 			svc.deleteNatGateway(params,cb);
@@ -1369,10 +1374,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"NetworkAclId",params); 
+			copyArg(n,"NetworkAclId",params,undefined,false); 
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"NetworkAclId",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"NetworkAclId",params,undefined,false); 
 			
 
 			svc.deleteNetworkAcl(params,cb);
@@ -1383,14 +1388,14 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Egress",params); 
-			copyArg(n,"NetworkAclId",params); 
-			copyArg(n,"RuleNumber",params); 
+			copyArg(n,"Egress",params,undefined,false); 
+			copyArg(n,"NetworkAclId",params,undefined,false); 
+			copyArg(n,"RuleNumber",params,undefined,false); 
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"Egress",params); 
-			copyArg(msg,"NetworkAclId",params); 
-			copyArg(msg,"RuleNumber",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"Egress",params,undefined,false); 
+			copyArg(msg,"NetworkAclId",params,undefined,false); 
+			copyArg(msg,"RuleNumber",params,undefined,false); 
 			
 
 			svc.deleteNetworkAclEntry(params,cb);
@@ -1401,10 +1406,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"NetworkInterfaceId",params); 
+			copyArg(n,"NetworkInterfaceId",params,undefined,false); 
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"NetworkInterfaceId",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"NetworkInterfaceId",params,undefined,false); 
 			
 
 			svc.deleteNetworkInterface(params,cb);
@@ -1415,11 +1420,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"NetworkInterfacePermissionId",params); 
+			copyArg(n,"NetworkInterfacePermissionId",params,undefined,false); 
 			
-			copyArg(msg,"NetworkInterfacePermissionId",params); 
-			copyArg(msg,"Force",params); 
-			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"NetworkInterfacePermissionId",params,undefined,false); 
+			copyArg(msg,"Force",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
 			
 
 			svc.deleteNetworkInterfacePermission(params,cb);
@@ -1430,10 +1435,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"GroupName",params); 
+			copyArg(n,"GroupName",params,undefined,false); 
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"GroupName",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"GroupName",params,undefined,false); 
 			
 
 			svc.deletePlacementGroup(params,cb);
@@ -1444,12 +1449,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"RouteTableId",params); 
+			copyArg(n,"RouteTableId",params,undefined,false); 
 			
-			copyArg(msg,"DestinationCidrBlock",params); 
-			copyArg(msg,"DestinationIpv6CidrBlock",params); 
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"RouteTableId",params); 
+			copyArg(msg,"DestinationCidrBlock",params,undefined,false); 
+			copyArg(msg,"DestinationIpv6CidrBlock",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"RouteTableId",params,undefined,false); 
 			
 
 			svc.deleteRoute(params,cb);
@@ -1460,10 +1465,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"RouteTableId",params); 
+			copyArg(n,"RouteTableId",params,undefined,false); 
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"RouteTableId",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"RouteTableId",params,undefined,false); 
 			
 
 			svc.deleteRouteTable(params,cb);
@@ -1475,9 +1480,9 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"GroupId",params); 
-			copyArg(msg,"GroupName",params); 
-			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"GroupId",params,undefined,false); 
+			copyArg(msg,"GroupName",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
 			
 
 			svc.deleteSecurityGroup(params,cb);
@@ -1488,10 +1493,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"SnapshotId",params); 
+			copyArg(n,"SnapshotId",params,undefined,false); 
 			
-			copyArg(msg,"SnapshotId",params); 
-			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"SnapshotId",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
 			
 
 			svc.deleteSnapshot(params,cb);
@@ -1503,7 +1508,7 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
 			
 
 			svc.deleteSpotDatafeedSubscription(params,cb);
@@ -1514,10 +1519,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"SubnetId",params); 
+			copyArg(n,"SubnetId",params,undefined,false); 
 			
-			copyArg(msg,"SubnetId",params); 
-			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"SubnetId",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
 			
 
 			svc.deleteSubnet(params,cb);
@@ -1528,11 +1533,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Resources",params); 
+			copyArg(n,"Resources",params,undefined,true); 
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"Resources",params); 
-			copyArg(msg,"Tags",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"Resources",params,undefined,true); 
+			copyArg(msg,"Tags",params,undefined,true); 
 			
 
 			svc.deleteTags(params,cb);
@@ -1543,10 +1548,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"VolumeId",params); 
+			copyArg(n,"VolumeId",params,undefined,false); 
 			
-			copyArg(msg,"VolumeId",params); 
-			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"VolumeId",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
 			
 
 			svc.deleteVolume(params,cb);
@@ -1557,10 +1562,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"VpcId",params); 
+			copyArg(n,"VpcId",params,undefined,false); 
 			
-			copyArg(msg,"VpcId",params); 
-			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"VpcId",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
 			
 
 			svc.deleteVpc(params,cb);
@@ -1571,10 +1576,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"ConnectionNotificationIds",params); 
+			copyArg(n,"ConnectionNotificationIds",params,undefined,true); 
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"ConnectionNotificationIds",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"ConnectionNotificationIds",params,undefined,true); 
 			
 
 			svc.deleteVpcEndpointConnectionNotifications(params,cb);
@@ -1585,10 +1590,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"ServiceIds",params); 
+			copyArg(n,"ServiceIds",params,undefined,true); 
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"ServiceIds",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"ServiceIds",params,undefined,true); 
 			
 
 			svc.deleteVpcEndpointServiceConfigurations(params,cb);
@@ -1599,10 +1604,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"VpcEndpointIds",params); 
+			copyArg(n,"VpcEndpointIds",params,undefined,true); 
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"VpcEndpointIds",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"VpcEndpointIds",params,undefined,true); 
 			
 
 			svc.deleteVpcEndpoints(params,cb);
@@ -1613,10 +1618,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"VpcPeeringConnectionId",params); 
+			copyArg(n,"VpcPeeringConnectionId",params,undefined,false); 
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"VpcPeeringConnectionId",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"VpcPeeringConnectionId",params,undefined,false); 
 			
 
 			svc.deleteVpcPeeringConnection(params,cb);
@@ -1627,10 +1632,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"VpnConnectionId",params); 
+			copyArg(n,"VpnConnectionId",params,undefined,false); 
 			
-			copyArg(msg,"VpnConnectionId",params); 
-			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"VpnConnectionId",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
 			
 
 			svc.deleteVpnConnection(params,cb);
@@ -1641,11 +1646,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"DestinationCidrBlock",params); 
-			copyArg(n,"VpnConnectionId",params); 
+			copyArg(n,"DestinationCidrBlock",params,undefined,false); 
+			copyArg(n,"VpnConnectionId",params,undefined,false); 
 			
-			copyArg(msg,"DestinationCidrBlock",params); 
-			copyArg(msg,"VpnConnectionId",params); 
+			copyArg(msg,"DestinationCidrBlock",params,undefined,false); 
+			copyArg(msg,"VpnConnectionId",params,undefined,false); 
 			
 
 			svc.deleteVpnConnectionRoute(params,cb);
@@ -1656,10 +1661,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"VpnGatewayId",params); 
+			copyArg(n,"VpnGatewayId",params,undefined,false); 
 			
-			copyArg(msg,"VpnGatewayId",params); 
-			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"VpnGatewayId",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
 			
 
 			svc.deleteVpnGateway(params,cb);
@@ -1670,10 +1675,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"ImageId",params); 
+			copyArg(n,"ImageId",params,undefined,false); 
 			
-			copyArg(msg,"ImageId",params); 
-			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"ImageId",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
 			
 
 			svc.deregisterImage(params,cb);
@@ -1685,8 +1690,8 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"AttributeNames",params); 
-			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"AttributeNames",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
 			
 
 			svc.describeAccountAttributes(params,cb);
@@ -1698,10 +1703,10 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"Filters",params); 
-			copyArg(msg,"PublicIps",params); 
-			copyArg(msg,"AllocationIds",params); 
-			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"Filters",params,undefined,true); 
+			copyArg(msg,"PublicIps",params,undefined,false); 
+			copyArg(msg,"AllocationIds",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
 			
 
 			svc.describeAddresses(params,cb);
@@ -1713,9 +1718,9 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"Filters",params); 
-			copyArg(msg,"ZoneNames",params); 
-			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"Filters",params,undefined,true); 
+			copyArg(msg,"ZoneNames",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
 			
 
 			svc.describeAvailabilityZones(params,cb);
@@ -1727,9 +1732,9 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"BundleIds",params); 
-			copyArg(msg,"Filters",params); 
-			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"BundleIds",params,undefined,false); 
+			copyArg(msg,"Filters",params,undefined,true); 
+			copyArg(msg,"DryRun",params,undefined,false); 
 			
 
 			svc.describeBundleTasks(params,cb);
@@ -1741,11 +1746,11 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"Filters",params); 
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"InstanceIds",params); 
-			copyArg(msg,"MaxResults",params); 
-			copyArg(msg,"NextToken",params); 
+			copyArg(msg,"Filters",params,undefined,true); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"InstanceIds",params,undefined,true); 
+			copyArg(msg,"MaxResults",params,undefined,false); 
+			copyArg(msg,"NextToken",params,undefined,false); 
 			
 
 			svc.describeClassicLinkInstances(params,cb);
@@ -1757,8 +1762,8 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"ConversionTaskIds",params); 
-			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"ConversionTaskIds",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
 			
 
 			svc.describeConversionTasks(params,cb);
@@ -1770,9 +1775,9 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"CustomerGatewayIds",params); 
-			copyArg(msg,"Filters",params); 
-			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"CustomerGatewayIds",params,undefined,false); 
+			copyArg(msg,"Filters",params,undefined,true); 
+			copyArg(msg,"DryRun",params,undefined,false); 
 			
 
 			svc.describeCustomerGateways(params,cb);
@@ -1784,9 +1789,9 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"DhcpOptionsIds",params); 
-			copyArg(msg,"Filters",params); 
-			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"DhcpOptionsIds",params,undefined,false); 
+			copyArg(msg,"Filters",params,undefined,true); 
+			copyArg(msg,"DryRun",params,undefined,false); 
 			
 
 			svc.describeDhcpOptions(params,cb);
@@ -1798,10 +1803,10 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"EgressOnlyInternetGatewayIds",params); 
-			copyArg(msg,"MaxResults",params); 
-			copyArg(msg,"NextToken",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"EgressOnlyInternetGatewayIds",params,undefined,false); 
+			copyArg(msg,"MaxResults",params,undefined,false); 
+			copyArg(msg,"NextToken",params,undefined,false); 
 			
 
 			svc.describeEgressOnlyInternetGateways(params,cb);
@@ -1813,11 +1818,11 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"ElasticGpuIds",params); 
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"Filters",params); 
-			copyArg(msg,"MaxResults",params); 
-			copyArg(msg,"NextToken",params); 
+			copyArg(msg,"ElasticGpuIds",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"Filters",params,undefined,true); 
+			copyArg(msg,"MaxResults",params,undefined,false); 
+			copyArg(msg,"NextToken",params,undefined,false); 
 			
 
 			svc.describeElasticGpus(params,cb);
@@ -1829,7 +1834,7 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"ExportTaskIds",params); 
+			copyArg(msg,"ExportTaskIds",params,undefined,false); 
 			
 
 			svc.describeExportTasks(params,cb);
@@ -1841,10 +1846,10 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"Filter",params); 
-			copyArg(msg,"FlowLogIds",params); 
-			copyArg(msg,"MaxResults",params); 
-			copyArg(msg,"NextToken",params); 
+			copyArg(msg,"Filter",params,undefined,true); 
+			copyArg(msg,"FlowLogIds",params,undefined,true); 
+			copyArg(msg,"MaxResults",params,undefined,false); 
+			copyArg(msg,"NextToken",params,undefined,false); 
 			
 
 			svc.describeFlowLogs(params,cb);
@@ -1855,12 +1860,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"FpgaImageId",params); 
-			copyArg(n,"Attribute",params); 
+			copyArg(n,"FpgaImageId",params,undefined,false); 
+			copyArg(n,"Attribute",params,undefined,false); 
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"FpgaImageId",params); 
-			copyArg(msg,"Attribute",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"FpgaImageId",params,undefined,false); 
+			copyArg(msg,"Attribute",params,undefined,false); 
 			
 
 			svc.describeFpgaImageAttribute(params,cb);
@@ -1872,12 +1877,12 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"FpgaImageIds",params); 
-			copyArg(msg,"Owners",params); 
-			copyArg(msg,"Filters",params); 
-			copyArg(msg,"NextToken",params); 
-			copyArg(msg,"MaxResults",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"FpgaImageIds",params,undefined,false); 
+			copyArg(msg,"Owners",params,undefined,true); 
+			copyArg(msg,"Filters",params,undefined,true); 
+			copyArg(msg,"NextToken",params,undefined,false); 
+			copyArg(msg,"MaxResults",params,undefined,false); 
 			
 
 			svc.describeFpgaImages(params,cb);
@@ -1889,12 +1894,12 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"Filter",params); 
-			copyArg(msg,"MaxDuration",params); 
-			copyArg(msg,"MaxResults",params); 
-			copyArg(msg,"MinDuration",params); 
-			copyArg(msg,"NextToken",params); 
-			copyArg(msg,"OfferingId",params); 
+			copyArg(msg,"Filter",params,undefined,true); 
+			copyArg(msg,"MaxDuration",params,undefined,false); 
+			copyArg(msg,"MaxResults",params,undefined,false); 
+			copyArg(msg,"MinDuration",params,undefined,false); 
+			copyArg(msg,"NextToken",params,undefined,false); 
+			copyArg(msg,"OfferingId",params,undefined,false); 
 			
 
 			svc.describeHostReservationOfferings(params,cb);
@@ -1906,10 +1911,10 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"Filter",params); 
-			copyArg(msg,"HostReservationIdSet",params); 
-			copyArg(msg,"MaxResults",params); 
-			copyArg(msg,"NextToken",params); 
+			copyArg(msg,"Filter",params,undefined,true); 
+			copyArg(msg,"HostReservationIdSet",params,undefined,false); 
+			copyArg(msg,"MaxResults",params,undefined,false); 
+			copyArg(msg,"NextToken",params,undefined,false); 
 			
 
 			svc.describeHostReservations(params,cb);
@@ -1921,10 +1926,10 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"Filter",params); 
-			copyArg(msg,"HostIds",params); 
-			copyArg(msg,"MaxResults",params); 
-			copyArg(msg,"NextToken",params); 
+			copyArg(msg,"Filter",params,undefined,true); 
+			copyArg(msg,"HostIds",params,undefined,true); 
+			copyArg(msg,"MaxResults",params,undefined,false); 
+			copyArg(msg,"NextToken",params,undefined,false); 
 			
 
 			svc.describeHosts(params,cb);
@@ -1936,10 +1941,10 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"AssociationIds",params); 
-			copyArg(msg,"Filters",params); 
-			copyArg(msg,"MaxResults",params); 
-			copyArg(msg,"NextToken",params); 
+			copyArg(msg,"AssociationIds",params,undefined,false); 
+			copyArg(msg,"Filters",params,undefined,true); 
+			copyArg(msg,"MaxResults",params,undefined,false); 
+			copyArg(msg,"NextToken",params,undefined,false); 
 			
 
 			svc.describeIamInstanceProfileAssociations(params,cb);
@@ -1951,7 +1956,7 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"Resource",params); 
+			copyArg(msg,"Resource",params,undefined,false); 
 			
 
 			svc.describeIdFormat(params,cb);
@@ -1962,10 +1967,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"PrincipalArn",params); 
+			copyArg(n,"PrincipalArn",params,undefined,false); 
 			
-			copyArg(msg,"PrincipalArn",params); 
-			copyArg(msg,"Resource",params); 
+			copyArg(msg,"PrincipalArn",params,undefined,false); 
+			copyArg(msg,"Resource",params,undefined,false); 
 			
 
 			svc.describeIdentityIdFormat(params,cb);
@@ -1976,12 +1981,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Attribute",params); 
-			copyArg(n,"ImageId",params); 
+			copyArg(n,"Attribute",params,undefined,false); 
+			copyArg(n,"ImageId",params,undefined,false); 
 			
-			copyArg(msg,"Attribute",params); 
-			copyArg(msg,"ImageId",params); 
-			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"Attribute",params,undefined,false); 
+			copyArg(msg,"ImageId",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
 			
 
 			svc.describeImageAttribute(params,cb);
@@ -1993,11 +1998,11 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"ExecutableUsers",params); 
-			copyArg(msg,"Filters",params); 
-			copyArg(msg,"ImageIds",params); 
-			copyArg(msg,"Owners",params); 
-			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"ExecutableUsers",params,undefined,false); 
+			copyArg(msg,"Filters",params,undefined,true); 
+			copyArg(msg,"ImageIds",params,undefined,false); 
+			copyArg(msg,"Owners",params,undefined,true); 
+			copyArg(msg,"DryRun",params,undefined,false); 
 			
 
 			svc.describeImages(params,cb);
@@ -2009,11 +2014,11 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"Filters",params); 
-			copyArg(msg,"ImportTaskIds",params); 
-			copyArg(msg,"MaxResults",params); 
-			copyArg(msg,"NextToken",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"Filters",params,undefined,true); 
+			copyArg(msg,"ImportTaskIds",params,undefined,true); 
+			copyArg(msg,"MaxResults",params,undefined,false); 
+			copyArg(msg,"NextToken",params,undefined,false); 
 			
 
 			svc.describeImportImageTasks(params,cb);
@@ -2025,11 +2030,11 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"Filters",params); 
-			copyArg(msg,"ImportTaskIds",params); 
-			copyArg(msg,"MaxResults",params); 
-			copyArg(msg,"NextToken",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"Filters",params,undefined,true); 
+			copyArg(msg,"ImportTaskIds",params,undefined,true); 
+			copyArg(msg,"MaxResults",params,undefined,false); 
+			copyArg(msg,"NextToken",params,undefined,false); 
 			
 
 			svc.describeImportSnapshotTasks(params,cb);
@@ -2040,12 +2045,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Attribute",params); 
-			copyArg(n,"InstanceId",params); 
+			copyArg(n,"Attribute",params,undefined,false); 
+			copyArg(n,"InstanceId",params,undefined,false); 
 			
-			copyArg(msg,"Attribute",params); 
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"InstanceId",params); 
+			copyArg(msg,"Attribute",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"InstanceId",params,undefined,false); 
 			
 
 			svc.describeInstanceAttribute(params,cb);
@@ -2057,11 +2062,11 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"Filters",params); 
-			copyArg(msg,"InstanceIds",params); 
-			copyArg(msg,"MaxResults",params); 
-			copyArg(msg,"NextToken",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"Filters",params,undefined,true); 
+			copyArg(msg,"InstanceIds",params,undefined,true); 
+			copyArg(msg,"MaxResults",params,undefined,false); 
+			copyArg(msg,"NextToken",params,undefined,false); 
 			
 
 			svc.describeInstanceCreditSpecifications(params,cb);
@@ -2073,12 +2078,12 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"Filters",params); 
-			copyArg(msg,"InstanceIds",params); 
-			copyArg(msg,"MaxResults",params); 
-			copyArg(msg,"NextToken",params); 
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"IncludeAllInstances",params); 
+			copyArg(msg,"Filters",params,undefined,true); 
+			copyArg(msg,"InstanceIds",params,undefined,true); 
+			copyArg(msg,"MaxResults",params,undefined,false); 
+			copyArg(msg,"NextToken",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"IncludeAllInstances",params,undefined,false); 
 			
 
 			svc.describeInstanceStatus(params,cb);
@@ -2090,11 +2095,11 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"Filters",params); 
-			copyArg(msg,"InstanceIds",params); 
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"MaxResults",params); 
-			copyArg(msg,"NextToken",params); 
+			copyArg(msg,"Filters",params,undefined,true); 
+			copyArg(msg,"InstanceIds",params,undefined,true); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"MaxResults",params,undefined,false); 
+			copyArg(msg,"NextToken",params,undefined,false); 
 			
 
 			svc.describeInstances(params,cb);
@@ -2106,9 +2111,9 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"Filters",params); 
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"InternetGatewayIds",params); 
+			copyArg(msg,"Filters",params,undefined,true); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"InternetGatewayIds",params,undefined,true); 
 			
 
 			svc.describeInternetGateways(params,cb);
@@ -2120,9 +2125,9 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"Filters",params); 
-			copyArg(msg,"KeyNames",params); 
-			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"Filters",params,undefined,true); 
+			copyArg(msg,"KeyNames",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
 			
 
 			svc.describeKeyPairs(params,cb);
@@ -2134,15 +2139,15 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"LaunchTemplateId",params); 
-			copyArg(msg,"LaunchTemplateName",params); 
-			copyArg(msg,"Versions",params); 
-			copyArg(msg,"MinVersion",params); 
-			copyArg(msg,"MaxVersion",params); 
-			copyArg(msg,"NextToken",params); 
-			copyArg(msg,"MaxResults",params); 
-			copyArg(msg,"Filters",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"LaunchTemplateId",params,undefined,false); 
+			copyArg(msg,"LaunchTemplateName",params,undefined,false); 
+			copyArg(msg,"Versions",params,undefined,true); 
+			copyArg(msg,"MinVersion",params,undefined,false); 
+			copyArg(msg,"MaxVersion",params,undefined,false); 
+			copyArg(msg,"NextToken",params,undefined,false); 
+			copyArg(msg,"MaxResults",params,undefined,false); 
+			copyArg(msg,"Filters",params,undefined,true); 
 			
 
 			svc.describeLaunchTemplateVersions(params,cb);
@@ -2154,12 +2159,12 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"LaunchTemplateIds",params); 
-			copyArg(msg,"LaunchTemplateNames",params); 
-			copyArg(msg,"Filters",params); 
-			copyArg(msg,"NextToken",params); 
-			copyArg(msg,"MaxResults",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"LaunchTemplateIds",params,undefined,true); 
+			copyArg(msg,"LaunchTemplateNames",params,undefined,false); 
+			copyArg(msg,"Filters",params,undefined,true); 
+			copyArg(msg,"NextToken",params,undefined,false); 
+			copyArg(msg,"MaxResults",params,undefined,false); 
 			
 
 			svc.describeLaunchTemplates(params,cb);
@@ -2171,11 +2176,11 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"Filters",params); 
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"MaxResults",params); 
-			copyArg(msg,"NextToken",params); 
-			copyArg(msg,"PublicIps",params); 
+			copyArg(msg,"Filters",params,undefined,true); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"MaxResults",params,undefined,false); 
+			copyArg(msg,"NextToken",params,undefined,false); 
+			copyArg(msg,"PublicIps",params,undefined,true); 
 			
 
 			svc.describeMovingAddresses(params,cb);
@@ -2187,10 +2192,10 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"Filter",params); 
-			copyArg(msg,"MaxResults",params); 
-			copyArg(msg,"NatGatewayIds",params); 
-			copyArg(msg,"NextToken",params); 
+			copyArg(msg,"Filter",params,undefined,true); 
+			copyArg(msg,"MaxResults",params,undefined,false); 
+			copyArg(msg,"NatGatewayIds",params,undefined,true); 
+			copyArg(msg,"NextToken",params,undefined,false); 
 			
 
 			svc.describeNatGateways(params,cb);
@@ -2202,9 +2207,9 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"Filters",params); 
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"NetworkAclIds",params); 
+			copyArg(msg,"Filters",params,undefined,true); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"NetworkAclIds",params,undefined,true); 
 			
 
 			svc.describeNetworkAcls(params,cb);
@@ -2215,11 +2220,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"NetworkInterfaceId",params); 
+			copyArg(n,"NetworkInterfaceId",params,undefined,false); 
 			
-			copyArg(msg,"Attribute",params); 
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"NetworkInterfaceId",params); 
+			copyArg(msg,"Attribute",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"NetworkInterfaceId",params,undefined,false); 
 			
 
 			svc.describeNetworkInterfaceAttribute(params,cb);
@@ -2231,10 +2236,10 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"NetworkInterfacePermissionIds",params); 
-			copyArg(msg,"Filters",params); 
-			copyArg(msg,"NextToken",params); 
-			copyArg(msg,"MaxResults",params); 
+			copyArg(msg,"NetworkInterfacePermissionIds",params,undefined,false); 
+			copyArg(msg,"Filters",params,undefined,true); 
+			copyArg(msg,"NextToken",params,undefined,false); 
+			copyArg(msg,"MaxResults",params,undefined,false); 
 			
 
 			svc.describeNetworkInterfacePermissions(params,cb);
@@ -2246,9 +2251,9 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"Filters",params); 
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"NetworkInterfaceIds",params); 
+			copyArg(msg,"Filters",params,undefined,true); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"NetworkInterfaceIds",params,undefined,false); 
 			
 
 			svc.describeNetworkInterfaces(params,cb);
@@ -2260,9 +2265,9 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"Filters",params); 
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"GroupNames",params); 
+			copyArg(msg,"Filters",params,undefined,true); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"GroupNames",params,undefined,false); 
 			
 
 			svc.describePlacementGroups(params,cb);
@@ -2274,11 +2279,11 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"Filters",params); 
-			copyArg(msg,"MaxResults",params); 
-			copyArg(msg,"NextToken",params); 
-			copyArg(msg,"PrefixListIds",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"Filters",params,undefined,true); 
+			copyArg(msg,"MaxResults",params,undefined,false); 
+			copyArg(msg,"NextToken",params,undefined,false); 
+			copyArg(msg,"PrefixListIds",params,undefined,true); 
 			
 
 			svc.describePrefixLists(params,cb);
@@ -2290,9 +2295,9 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"Filters",params); 
-			copyArg(msg,"RegionNames",params); 
-			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"Filters",params,undefined,true); 
+			copyArg(msg,"RegionNames",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
 			
 
 			svc.describeRegions(params,cb);
@@ -2304,11 +2309,11 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"Filters",params); 
-			copyArg(msg,"OfferingClass",params); 
-			copyArg(msg,"ReservedInstancesIds",params); 
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"OfferingType",params); 
+			copyArg(msg,"Filters",params,undefined,true); 
+			copyArg(msg,"OfferingClass",params,undefined,false); 
+			copyArg(msg,"ReservedInstancesIds",params,undefined,true); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"OfferingType",params,undefined,false); 
 			
 
 			svc.describeReservedInstances(params,cb);
@@ -2320,9 +2325,9 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"Filters",params); 
-			copyArg(msg,"ReservedInstancesId",params); 
-			copyArg(msg,"ReservedInstancesListingId",params); 
+			copyArg(msg,"Filters",params,undefined,true); 
+			copyArg(msg,"ReservedInstancesId",params,undefined,false); 
+			copyArg(msg,"ReservedInstancesListingId",params,undefined,false); 
 			
 
 			svc.describeReservedInstancesListings(params,cb);
@@ -2334,9 +2339,9 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"Filters",params); 
-			copyArg(msg,"ReservedInstancesModificationIds",params); 
-			copyArg(msg,"NextToken",params); 
+			copyArg(msg,"Filters",params,undefined,true); 
+			copyArg(msg,"ReservedInstancesModificationIds",params,undefined,false); 
+			copyArg(msg,"NextToken",params,undefined,false); 
 			
 
 			svc.describeReservedInstancesModifications(params,cb);
@@ -2348,21 +2353,21 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"AvailabilityZone",params); 
-			copyArg(msg,"Filters",params); 
-			copyArg(msg,"IncludeMarketplace",params); 
-			copyArg(msg,"InstanceType",params); 
-			copyArg(msg,"MaxDuration",params); 
-			copyArg(msg,"MaxInstanceCount",params); 
-			copyArg(msg,"MinDuration",params); 
-			copyArg(msg,"OfferingClass",params); 
-			copyArg(msg,"ProductDescription",params); 
-			copyArg(msg,"ReservedInstancesOfferingIds",params); 
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"InstanceTenancy",params); 
-			copyArg(msg,"MaxResults",params); 
-			copyArg(msg,"NextToken",params); 
-			copyArg(msg,"OfferingType",params); 
+			copyArg(msg,"AvailabilityZone",params,undefined,false); 
+			copyArg(msg,"Filters",params,undefined,true); 
+			copyArg(msg,"IncludeMarketplace",params,undefined,false); 
+			copyArg(msg,"InstanceType",params,undefined,false); 
+			copyArg(msg,"MaxDuration",params,undefined,false); 
+			copyArg(msg,"MaxInstanceCount",params,undefined,false); 
+			copyArg(msg,"MinDuration",params,undefined,false); 
+			copyArg(msg,"OfferingClass",params,undefined,false); 
+			copyArg(msg,"ProductDescription",params,undefined,false); 
+			copyArg(msg,"ReservedInstancesOfferingIds",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"InstanceTenancy",params,undefined,false); 
+			copyArg(msg,"MaxResults",params,undefined,false); 
+			copyArg(msg,"NextToken",params,undefined,false); 
+			copyArg(msg,"OfferingType",params,undefined,false); 
 			
 
 			svc.describeReservedInstancesOfferings(params,cb);
@@ -2374,9 +2379,9 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"Filters",params); 
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"RouteTableIds",params); 
+			copyArg(msg,"Filters",params,undefined,true); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"RouteTableIds",params,undefined,true); 
 			
 
 			svc.describeRouteTables(params,cb);
@@ -2387,17 +2392,17 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"FirstSlotStartTimeRange",params); 
-			copyArg(n,"Recurrence",params); 
+			copyArg(n,"FirstSlotStartTimeRange",params,undefined,false); 
+			copyArg(n,"Recurrence",params,undefined,false); 
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"Filters",params); 
-			copyArg(msg,"FirstSlotStartTimeRange",params); 
-			copyArg(msg,"MaxResults",params); 
-			copyArg(msg,"MaxSlotDurationInHours",params); 
-			copyArg(msg,"MinSlotDurationInHours",params); 
-			copyArg(msg,"NextToken",params); 
-			copyArg(msg,"Recurrence",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"Filters",params,undefined,true); 
+			copyArg(msg,"FirstSlotStartTimeRange",params,undefined,false); 
+			copyArg(msg,"MaxResults",params,undefined,false); 
+			copyArg(msg,"MaxSlotDurationInHours",params,undefined,false); 
+			copyArg(msg,"MinSlotDurationInHours",params,undefined,false); 
+			copyArg(msg,"NextToken",params,undefined,false); 
+			copyArg(msg,"Recurrence",params,undefined,false); 
 			
 
 			svc.describeScheduledInstanceAvailability(params,cb);
@@ -2409,12 +2414,12 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"Filters",params); 
-			copyArg(msg,"MaxResults",params); 
-			copyArg(msg,"NextToken",params); 
-			copyArg(msg,"ScheduledInstanceIds",params); 
-			copyArg(msg,"SlotStartTimeRange",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"Filters",params,undefined,true); 
+			copyArg(msg,"MaxResults",params,undefined,false); 
+			copyArg(msg,"NextToken",params,undefined,false); 
+			copyArg(msg,"ScheduledInstanceIds",params,undefined,false); 
+			copyArg(msg,"SlotStartTimeRange",params,undefined,false); 
 			
 
 			svc.describeScheduledInstances(params,cb);
@@ -2425,10 +2430,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"GroupId",params); 
+			copyArg(n,"GroupId",params,undefined,false); 
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"GroupId",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"GroupId",params,undefined,false); 
 			
 
 			svc.describeSecurityGroupReferences(params,cb);
@@ -2440,12 +2445,12 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"Filters",params); 
-			copyArg(msg,"GroupIds",params); 
-			copyArg(msg,"GroupNames",params); 
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"NextToken",params); 
-			copyArg(msg,"MaxResults",params); 
+			copyArg(msg,"Filters",params,undefined,true); 
+			copyArg(msg,"GroupIds",params,undefined,true); 
+			copyArg(msg,"GroupNames",params,undefined,true); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"NextToken",params,undefined,false); 
+			copyArg(msg,"MaxResults",params,undefined,false); 
 			
 
 			svc.describeSecurityGroups(params,cb);
@@ -2456,12 +2461,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Attribute",params); 
-			copyArg(n,"SnapshotId",params); 
+			copyArg(n,"Attribute",params,undefined,false); 
+			copyArg(n,"SnapshotId",params,undefined,false); 
 			
-			copyArg(msg,"Attribute",params); 
-			copyArg(msg,"SnapshotId",params); 
-			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"Attribute",params,undefined,false); 
+			copyArg(msg,"SnapshotId",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
 			
 
 			svc.describeSnapshotAttribute(params,cb);
@@ -2473,13 +2478,13 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"Filters",params); 
-			copyArg(msg,"MaxResults",params); 
-			copyArg(msg,"NextToken",params); 
-			copyArg(msg,"OwnerIds",params); 
-			copyArg(msg,"RestorableByUserIds",params); 
-			copyArg(msg,"SnapshotIds",params); 
-			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"Filters",params,undefined,true); 
+			copyArg(msg,"MaxResults",params,undefined,false); 
+			copyArg(msg,"NextToken",params,undefined,false); 
+			copyArg(msg,"OwnerIds",params,undefined,true); 
+			copyArg(msg,"RestorableByUserIds",params,undefined,false); 
+			copyArg(msg,"SnapshotIds",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
 			
 
 			svc.describeSnapshots(params,cb);
@@ -2491,7 +2496,7 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
 			
 
 			svc.describeSpotDatafeedSubscription(params,cb);
@@ -2502,12 +2507,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"SpotFleetRequestId",params); 
+			copyArg(n,"SpotFleetRequestId",params,undefined,false); 
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"MaxResults",params); 
-			copyArg(msg,"NextToken",params); 
-			copyArg(msg,"SpotFleetRequestId",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"MaxResults",params,undefined,false); 
+			copyArg(msg,"NextToken",params,undefined,false); 
+			copyArg(msg,"SpotFleetRequestId",params,undefined,false); 
 			
 
 			svc.describeSpotFleetInstances(params,cb);
@@ -2518,15 +2523,15 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"SpotFleetRequestId",params); 
-			copyArg(n,"StartTime",params); 
+			copyArg(n,"SpotFleetRequestId",params,undefined,false); 
+			copyArg(n,"StartTime",params,undefined,false); 
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"EventType",params); 
-			copyArg(msg,"MaxResults",params); 
-			copyArg(msg,"NextToken",params); 
-			copyArg(msg,"SpotFleetRequestId",params); 
-			copyArg(msg,"StartTime",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"EventType",params,undefined,false); 
+			copyArg(msg,"MaxResults",params,undefined,false); 
+			copyArg(msg,"NextToken",params,undefined,false); 
+			copyArg(msg,"SpotFleetRequestId",params,undefined,false); 
+			copyArg(msg,"StartTime",params,undefined,false); 
 			
 
 			svc.describeSpotFleetRequestHistory(params,cb);
@@ -2538,10 +2543,10 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"MaxResults",params); 
-			copyArg(msg,"NextToken",params); 
-			copyArg(msg,"SpotFleetRequestIds",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"MaxResults",params,undefined,false); 
+			copyArg(msg,"NextToken",params,undefined,false); 
+			copyArg(msg,"SpotFleetRequestIds",params,undefined,true); 
 			
 
 			svc.describeSpotFleetRequests(params,cb);
@@ -2553,9 +2558,9 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"Filters",params); 
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"SpotInstanceRequestIds",params); 
+			copyArg(msg,"Filters",params,undefined,true); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"SpotInstanceRequestIds",params,undefined,true); 
 			
 
 			svc.describeSpotInstanceRequests(params,cb);
@@ -2567,15 +2572,15 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"Filters",params); 
-			copyArg(msg,"AvailabilityZone",params); 
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"EndTime",params); 
-			copyArg(msg,"InstanceTypes",params); 
-			copyArg(msg,"MaxResults",params); 
-			copyArg(msg,"NextToken",params); 
-			copyArg(msg,"ProductDescriptions",params); 
-			copyArg(msg,"StartTime",params); 
+			copyArg(msg,"Filters",params,undefined,true); 
+			copyArg(msg,"AvailabilityZone",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"EndTime",params,undefined,false); 
+			copyArg(msg,"InstanceTypes",params,undefined,false); 
+			copyArg(msg,"MaxResults",params,undefined,false); 
+			copyArg(msg,"NextToken",params,undefined,false); 
+			copyArg(msg,"ProductDescriptions",params,undefined,false); 
+			copyArg(msg,"StartTime",params,undefined,false); 
 			
 
 			svc.describeSpotPriceHistory(params,cb);
@@ -2586,12 +2591,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"VpcId",params); 
+			copyArg(n,"VpcId",params,undefined,false); 
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"MaxResults",params); 
-			copyArg(msg,"NextToken",params); 
-			copyArg(msg,"VpcId",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"MaxResults",params,undefined,false); 
+			copyArg(msg,"NextToken",params,undefined,false); 
+			copyArg(msg,"VpcId",params,undefined,false); 
 			
 
 			svc.describeStaleSecurityGroups(params,cb);
@@ -2603,9 +2608,9 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"Filters",params); 
-			copyArg(msg,"SubnetIds",params); 
-			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"Filters",params,undefined,true); 
+			copyArg(msg,"SubnetIds",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
 			
 
 			svc.describeSubnets(params,cb);
@@ -2617,10 +2622,10 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"Filters",params); 
-			copyArg(msg,"MaxResults",params); 
-			copyArg(msg,"NextToken",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"Filters",params,undefined,true); 
+			copyArg(msg,"MaxResults",params,undefined,false); 
+			copyArg(msg,"NextToken",params,undefined,false); 
 			
 
 			svc.describeTags(params,cb);
@@ -2631,11 +2636,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"VolumeId",params); 
+			copyArg(n,"VolumeId",params,undefined,false); 
 			
-			copyArg(msg,"Attribute",params); 
-			copyArg(msg,"VolumeId",params); 
-			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"Attribute",params,undefined,false); 
+			copyArg(msg,"VolumeId",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
 			
 
 			svc.describeVolumeAttribute(params,cb);
@@ -2647,11 +2652,11 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"Filters",params); 
-			copyArg(msg,"MaxResults",params); 
-			copyArg(msg,"NextToken",params); 
-			copyArg(msg,"VolumeIds",params); 
-			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"Filters",params,undefined,true); 
+			copyArg(msg,"MaxResults",params,undefined,false); 
+			copyArg(msg,"NextToken",params,undefined,false); 
+			copyArg(msg,"VolumeIds",params,undefined,true); 
+			copyArg(msg,"DryRun",params,undefined,false); 
 			
 
 			svc.describeVolumeStatus(params,cb);
@@ -2663,11 +2668,11 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"Filters",params); 
-			copyArg(msg,"VolumeIds",params); 
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"MaxResults",params); 
-			copyArg(msg,"NextToken",params); 
+			copyArg(msg,"Filters",params,undefined,true); 
+			copyArg(msg,"VolumeIds",params,undefined,true); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"MaxResults",params,undefined,false); 
+			copyArg(msg,"NextToken",params,undefined,false); 
 			
 
 			svc.describeVolumes(params,cb);
@@ -2679,11 +2684,11 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"VolumeIds",params); 
-			copyArg(msg,"Filters",params); 
-			copyArg(msg,"NextToken",params); 
-			copyArg(msg,"MaxResults",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"VolumeIds",params,undefined,true); 
+			copyArg(msg,"Filters",params,undefined,true); 
+			copyArg(msg,"NextToken",params,undefined,false); 
+			copyArg(msg,"MaxResults",params,undefined,false); 
 			
 
 			svc.describeVolumesModifications(params,cb);
@@ -2694,12 +2699,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Attribute",params); 
-			copyArg(n,"VpcId",params); 
+			copyArg(n,"Attribute",params,undefined,false); 
+			copyArg(n,"VpcId",params,undefined,false); 
 			
-			copyArg(msg,"Attribute",params); 
-			copyArg(msg,"VpcId",params); 
-			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"Attribute",params,undefined,false); 
+			copyArg(msg,"VpcId",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
 			
 
 			svc.describeVpcAttribute(params,cb);
@@ -2711,9 +2716,9 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"Filters",params); 
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"VpcIds",params); 
+			copyArg(msg,"Filters",params,undefined,true); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"VpcIds",params,undefined,true); 
 			
 
 			svc.describeVpcClassicLink(params,cb);
@@ -2725,9 +2730,9 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"MaxResults",params); 
-			copyArg(msg,"NextToken",params); 
-			copyArg(msg,"VpcIds",params); 
+			copyArg(msg,"MaxResults",params,undefined,false); 
+			copyArg(msg,"NextToken",params,undefined,false); 
+			copyArg(msg,"VpcIds",params,undefined,true); 
 			
 
 			svc.describeVpcClassicLinkDnsSupport(params,cb);
@@ -2739,11 +2744,11 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"ConnectionNotificationId",params); 
-			copyArg(msg,"Filters",params); 
-			copyArg(msg,"MaxResults",params); 
-			copyArg(msg,"NextToken",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"ConnectionNotificationId",params,undefined,false); 
+			copyArg(msg,"Filters",params,undefined,true); 
+			copyArg(msg,"MaxResults",params,undefined,false); 
+			copyArg(msg,"NextToken",params,undefined,false); 
 			
 
 			svc.describeVpcEndpointConnectionNotifications(params,cb);
@@ -2755,10 +2760,10 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"Filters",params); 
-			copyArg(msg,"MaxResults",params); 
-			copyArg(msg,"NextToken",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"Filters",params,undefined,true); 
+			copyArg(msg,"MaxResults",params,undefined,false); 
+			copyArg(msg,"NextToken",params,undefined,false); 
 			
 
 			svc.describeVpcEndpointConnections(params,cb);
@@ -2770,11 +2775,11 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"ServiceIds",params); 
-			copyArg(msg,"Filters",params); 
-			copyArg(msg,"MaxResults",params); 
-			copyArg(msg,"NextToken",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"ServiceIds",params,undefined,true); 
+			copyArg(msg,"Filters",params,undefined,true); 
+			copyArg(msg,"MaxResults",params,undefined,false); 
+			copyArg(msg,"NextToken",params,undefined,false); 
 			
 
 			svc.describeVpcEndpointServiceConfigurations(params,cb);
@@ -2785,13 +2790,13 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"ServiceId",params); 
+			copyArg(n,"ServiceId",params,undefined,false); 
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"ServiceId",params); 
-			copyArg(msg,"Filters",params); 
-			copyArg(msg,"MaxResults",params); 
-			copyArg(msg,"NextToken",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"ServiceId",params,undefined,false); 
+			copyArg(msg,"Filters",params,undefined,true); 
+			copyArg(msg,"MaxResults",params,undefined,false); 
+			copyArg(msg,"NextToken",params,undefined,false); 
 			
 
 			svc.describeVpcEndpointServicePermissions(params,cb);
@@ -2803,11 +2808,11 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"ServiceNames",params); 
-			copyArg(msg,"Filters",params); 
-			copyArg(msg,"MaxResults",params); 
-			copyArg(msg,"NextToken",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"ServiceNames",params,undefined,true); 
+			copyArg(msg,"Filters",params,undefined,true); 
+			copyArg(msg,"MaxResults",params,undefined,false); 
+			copyArg(msg,"NextToken",params,undefined,false); 
 			
 
 			svc.describeVpcEndpointServices(params,cb);
@@ -2819,11 +2824,11 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"VpcEndpointIds",params); 
-			copyArg(msg,"Filters",params); 
-			copyArg(msg,"MaxResults",params); 
-			copyArg(msg,"NextToken",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"VpcEndpointIds",params,undefined,true); 
+			copyArg(msg,"Filters",params,undefined,true); 
+			copyArg(msg,"MaxResults",params,undefined,false); 
+			copyArg(msg,"NextToken",params,undefined,false); 
 			
 
 			svc.describeVpcEndpoints(params,cb);
@@ -2835,9 +2840,9 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"Filters",params); 
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"VpcPeeringConnectionIds",params); 
+			copyArg(msg,"Filters",params,undefined,true); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"VpcPeeringConnectionIds",params,undefined,true); 
 			
 
 			svc.describeVpcPeeringConnections(params,cb);
@@ -2849,9 +2854,9 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"Filters",params); 
-			copyArg(msg,"VpcIds",params); 
-			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"Filters",params,undefined,true); 
+			copyArg(msg,"VpcIds",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
 			
 
 			svc.describeVpcs(params,cb);
@@ -2863,9 +2868,9 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"Filters",params); 
-			copyArg(msg,"VpnConnectionIds",params); 
-			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"Filters",params,undefined,true); 
+			copyArg(msg,"VpnConnectionIds",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
 			
 
 			svc.describeVpnConnections(params,cb);
@@ -2877,9 +2882,9 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"Filters",params); 
-			copyArg(msg,"VpnGatewayIds",params); 
-			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"Filters",params,undefined,true); 
+			copyArg(msg,"VpnGatewayIds",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
 			
 
 			svc.describeVpnGateways(params,cb);
@@ -2890,12 +2895,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"InstanceId",params); 
-			copyArg(n,"VpcId",params); 
+			copyArg(n,"InstanceId",params,undefined,false); 
+			copyArg(n,"VpcId",params,undefined,false); 
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"InstanceId",params); 
-			copyArg(msg,"VpcId",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"InstanceId",params,undefined,false); 
+			copyArg(msg,"VpcId",params,undefined,false); 
 			
 
 			svc.detachClassicLinkVpc(params,cb);
@@ -2906,12 +2911,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"InternetGatewayId",params); 
-			copyArg(n,"VpcId",params); 
+			copyArg(n,"InternetGatewayId",params,undefined,false); 
+			copyArg(n,"VpcId",params,undefined,false); 
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"InternetGatewayId",params); 
-			copyArg(msg,"VpcId",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"InternetGatewayId",params,undefined,false); 
+			copyArg(msg,"VpcId",params,undefined,false); 
 			
 
 			svc.detachInternetGateway(params,cb);
@@ -2922,11 +2927,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"AttachmentId",params); 
+			copyArg(n,"AttachmentId",params,undefined,false); 
 			
-			copyArg(msg,"AttachmentId",params); 
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"Force",params); 
+			copyArg(msg,"AttachmentId",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"Force",params,undefined,false); 
 			
 
 			svc.detachNetworkInterface(params,cb);
@@ -2937,13 +2942,13 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"VolumeId",params); 
+			copyArg(n,"VolumeId",params,undefined,false); 
 			
-			copyArg(msg,"Device",params); 
-			copyArg(msg,"Force",params); 
-			copyArg(msg,"InstanceId",params); 
-			copyArg(msg,"VolumeId",params); 
-			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"Device",params,undefined,false); 
+			copyArg(msg,"Force",params,undefined,false); 
+			copyArg(msg,"InstanceId",params,undefined,false); 
+			copyArg(msg,"VolumeId",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
 			
 
 			svc.detachVolume(params,cb);
@@ -2954,12 +2959,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"VpcId",params); 
-			copyArg(n,"VpnGatewayId",params); 
+			copyArg(n,"VpcId",params,undefined,false); 
+			copyArg(n,"VpnGatewayId",params,undefined,false); 
 			
-			copyArg(msg,"VpcId",params); 
-			copyArg(msg,"VpnGatewayId",params); 
-			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"VpcId",params,undefined,false); 
+			copyArg(msg,"VpnGatewayId",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
 			
 
 			svc.detachVpnGateway(params,cb);
@@ -2970,11 +2975,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"GatewayId",params); 
-			copyArg(n,"RouteTableId",params); 
+			copyArg(n,"GatewayId",params,undefined,false); 
+			copyArg(n,"RouteTableId",params,undefined,false); 
 			
-			copyArg(msg,"GatewayId",params); 
-			copyArg(msg,"RouteTableId",params); 
+			copyArg(msg,"GatewayId",params,undefined,false); 
+			copyArg(msg,"RouteTableId",params,undefined,false); 
 			
 
 			svc.disableVgwRoutePropagation(params,cb);
@@ -2985,10 +2990,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"VpcId",params); 
+			copyArg(n,"VpcId",params,undefined,false); 
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"VpcId",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"VpcId",params,undefined,false); 
 			
 
 			svc.disableVpcClassicLink(params,cb);
@@ -3000,7 +3005,7 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"VpcId",params); 
+			copyArg(msg,"VpcId",params,undefined,false); 
 			
 
 			svc.disableVpcClassicLinkDnsSupport(params,cb);
@@ -3012,9 +3017,9 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"AssociationId",params); 
-			copyArg(msg,"PublicIp",params); 
-			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"AssociationId",params,undefined,false); 
+			copyArg(msg,"PublicIp",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
 			
 
 			svc.disassociateAddress(params,cb);
@@ -3025,9 +3030,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"AssociationId",params); 
+			copyArg(n,"AssociationId",params,undefined,false); 
 			
-			copyArg(msg,"AssociationId",params); 
+			copyArg(msg,"AssociationId",params,undefined,false); 
 			
 
 			svc.disassociateIamInstanceProfile(params,cb);
@@ -3038,10 +3043,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"AssociationId",params); 
+			copyArg(n,"AssociationId",params,undefined,false); 
 			
-			copyArg(msg,"AssociationId",params); 
-			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"AssociationId",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
 			
 
 			svc.disassociateRouteTable(params,cb);
@@ -3052,9 +3057,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"AssociationId",params); 
+			copyArg(n,"AssociationId",params,undefined,false); 
 			
-			copyArg(msg,"AssociationId",params); 
+			copyArg(msg,"AssociationId",params,undefined,false); 
 			
 
 			svc.disassociateSubnetCidrBlock(params,cb);
@@ -3065,9 +3070,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"AssociationId",params); 
+			copyArg(n,"AssociationId",params,undefined,false); 
 			
-			copyArg(msg,"AssociationId",params); 
+			copyArg(msg,"AssociationId",params,undefined,false); 
 			
 
 			svc.disassociateVpcCidrBlock(params,cb);
@@ -3078,11 +3083,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"GatewayId",params); 
-			copyArg(n,"RouteTableId",params); 
+			copyArg(n,"GatewayId",params,undefined,false); 
+			copyArg(n,"RouteTableId",params,undefined,false); 
 			
-			copyArg(msg,"GatewayId",params); 
-			copyArg(msg,"RouteTableId",params); 
+			copyArg(msg,"GatewayId",params,undefined,false); 
+			copyArg(msg,"RouteTableId",params,undefined,false); 
 			
 
 			svc.enableVgwRoutePropagation(params,cb);
@@ -3093,10 +3098,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"VolumeId",params); 
+			copyArg(n,"VolumeId",params,undefined,false); 
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"VolumeId",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"VolumeId",params,undefined,false); 
 			
 
 			svc.enableVolumeIO(params,cb);
@@ -3107,10 +3112,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"VpcId",params); 
+			copyArg(n,"VpcId",params,undefined,false); 
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"VpcId",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"VpcId",params,undefined,false); 
 			
 
 			svc.enableVpcClassicLink(params,cb);
@@ -3122,7 +3127,7 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"VpcId",params); 
+			copyArg(msg,"VpcId",params,undefined,false); 
 			
 
 			svc.enableVpcClassicLinkDnsSupport(params,cb);
@@ -3133,10 +3138,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"InstanceId",params); 
+			copyArg(n,"InstanceId",params,undefined,false); 
 			
-			copyArg(msg,"InstanceId",params); 
-			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"InstanceId",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
 			
 
 			svc.getConsoleOutput(params,cb);
@@ -3147,11 +3152,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"InstanceId",params); 
+			copyArg(n,"InstanceId",params,undefined,false); 
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"InstanceId",params); 
-			copyArg(msg,"WakeUp",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"InstanceId",params,undefined,false); 
+			copyArg(msg,"WakeUp",params,undefined,false); 
 			
 
 			svc.getConsoleScreenshot(params,cb);
@@ -3162,11 +3167,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"HostIdSet",params); 
-			copyArg(n,"OfferingId",params); 
+			copyArg(n,"HostIdSet",params,undefined,true); 
+			copyArg(n,"OfferingId",params,undefined,false); 
 			
-			copyArg(msg,"HostIdSet",params); 
-			copyArg(msg,"OfferingId",params); 
+			copyArg(msg,"HostIdSet",params,undefined,true); 
+			copyArg(msg,"OfferingId",params,undefined,false); 
 			
 
 			svc.getHostReservationPurchasePreview(params,cb);
@@ -3177,10 +3182,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"InstanceId",params); 
+			copyArg(n,"InstanceId",params,undefined,false); 
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"InstanceId",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"InstanceId",params,undefined,false); 
 			
 
 			svc.getLaunchTemplateData(params,cb);
@@ -3191,10 +3196,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"InstanceId",params); 
+			copyArg(n,"InstanceId",params,undefined,false); 
 			
-			copyArg(msg,"InstanceId",params); 
-			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"InstanceId",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
 			
 
 			svc.getPasswordData(params,cb);
@@ -3205,11 +3210,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"ReservedInstanceIds",params); 
+			copyArg(n,"ReservedInstanceIds",params,undefined,true); 
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"ReservedInstanceIds",params); 
-			copyArg(msg,"TargetConfigurations",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"ReservedInstanceIds",params,undefined,true); 
+			copyArg(msg,"TargetConfigurations",params,undefined,true); 
 			
 
 			svc.getReservedInstancesExchangeQuote(params,cb);
@@ -3221,16 +3226,16 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"Architecture",params); 
-			copyArg(msg,"ClientData",params); 
-			copyArg(msg,"ClientToken",params); 
-			copyArg(msg,"Description",params); 
-			copyArg(msg,"DiskContainers",params); 
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"Hypervisor",params); 
-			copyArg(msg,"LicenseType",params); 
-			copyArg(msg,"Platform",params); 
-			copyArg(msg,"RoleName",params); 
+			copyArg(msg,"Architecture",params,undefined,false); 
+			copyArg(msg,"ClientData",params,undefined,true); 
+			copyArg(msg,"ClientToken",params,undefined,false); 
+			copyArg(msg,"Description",params,undefined,false); 
+			copyArg(msg,"DiskContainers",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"Hypervisor",params,undefined,false); 
+			copyArg(msg,"LicenseType",params,undefined,false); 
+			copyArg(msg,"Platform",params,undefined,false); 
+			copyArg(msg,"RoleName",params,undefined,false); 
 			
 
 			svc.importImage(params,cb);
@@ -3241,13 +3246,13 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Platform",params); 
+			copyArg(n,"Platform",params,undefined,false); 
 			
-			copyArg(msg,"Description",params); 
-			copyArg(msg,"DiskImages",params); 
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"LaunchSpecification",params); 
-			copyArg(msg,"Platform",params); 
+			copyArg(msg,"Description",params,undefined,false); 
+			copyArg(msg,"DiskImages",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"LaunchSpecification",params,undefined,false); 
+			copyArg(msg,"Platform",params,undefined,false); 
 			
 
 			svc.importInstance(params,cb);
@@ -3258,12 +3263,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"KeyName",params); 
-			copyArg(n,"PublicKeyMaterial",params); 
+			copyArg(n,"KeyName",params,undefined,false); 
+			copyArg(n,"PublicKeyMaterial",params,undefined,false); 
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"KeyName",params); 
-			copyArg(msg,"PublicKeyMaterial",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"KeyName",params,undefined,false); 
+			copyArg(msg,"PublicKeyMaterial",params,undefined,false); 
 			
 
 			svc.importKeyPair(params,cb);
@@ -3275,12 +3280,12 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"ClientData",params); 
-			copyArg(msg,"ClientToken",params); 
-			copyArg(msg,"Description",params); 
-			copyArg(msg,"DiskContainer",params); 
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"RoleName",params); 
+			copyArg(msg,"ClientData",params,undefined,true); 
+			copyArg(msg,"ClientToken",params,undefined,false); 
+			copyArg(msg,"Description",params,undefined,false); 
+			copyArg(msg,"DiskContainer",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"RoleName",params,undefined,false); 
 			
 
 			svc.importSnapshot(params,cb);
@@ -3291,15 +3296,15 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"AvailabilityZone",params); 
-			copyArg(n,"Image",params); 
-			copyArg(n,"Volume",params); 
+			copyArg(n,"AvailabilityZone",params,undefined,false); 
+			copyArg(n,"Image",params,undefined,true); 
+			copyArg(n,"Volume",params,undefined,true); 
 			
-			copyArg(msg,"AvailabilityZone",params); 
-			copyArg(msg,"Description",params); 
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"Image",params); 
-			copyArg(msg,"Volume",params); 
+			copyArg(msg,"AvailabilityZone",params,undefined,false); 
+			copyArg(msg,"Description",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"Image",params,undefined,true); 
+			copyArg(msg,"Volume",params,undefined,true); 
 			
 
 			svc.importVolume(params,cb);
@@ -3310,18 +3315,18 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"FpgaImageId",params); 
+			copyArg(n,"FpgaImageId",params,undefined,false); 
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"FpgaImageId",params); 
-			copyArg(msg,"Attribute",params); 
-			copyArg(msg,"OperationType",params); 
-			copyArg(msg,"UserIds",params); 
-			copyArg(msg,"UserGroups",params); 
-			copyArg(msg,"ProductCodes",params); 
-			copyArg(msg,"LoadPermission",params); 
-			copyArg(msg,"Description",params); 
-			copyArg(msg,"Name",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"FpgaImageId",params,undefined,false); 
+			copyArg(msg,"Attribute",params,undefined,false); 
+			copyArg(msg,"OperationType",params,undefined,false); 
+			copyArg(msg,"UserIds",params,undefined,true); 
+			copyArg(msg,"UserGroups",params,undefined,true); 
+			copyArg(msg,"ProductCodes",params,undefined,true); 
+			copyArg(msg,"LoadPermission",params,undefined,false); 
+			copyArg(msg,"Description",params,undefined,false); 
+			copyArg(msg,"Name",params,undefined,false); 
 			
 
 			svc.modifyFpgaImageAttribute(params,cb);
@@ -3332,11 +3337,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"AutoPlacement",params); 
-			copyArg(n,"HostIds",params); 
+			copyArg(n,"AutoPlacement",params,undefined,false); 
+			copyArg(n,"HostIds",params,undefined,true); 
 			
-			copyArg(msg,"AutoPlacement",params); 
-			copyArg(msg,"HostIds",params); 
+			copyArg(msg,"AutoPlacement",params,undefined,false); 
+			copyArg(msg,"HostIds",params,undefined,true); 
 			
 
 			svc.modifyHosts(params,cb);
@@ -3347,11 +3352,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Resource",params); 
-			copyArg(n,"UseLongIds",params); 
+			copyArg(n,"Resource",params,undefined,false); 
+			copyArg(n,"UseLongIds",params,undefined,false); 
 			
-			copyArg(msg,"Resource",params); 
-			copyArg(msg,"UseLongIds",params); 
+			copyArg(msg,"Resource",params,undefined,false); 
+			copyArg(msg,"UseLongIds",params,undefined,false); 
 			
 
 			svc.modifyIdFormat(params,cb);
@@ -3362,13 +3367,13 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"PrincipalArn",params); 
-			copyArg(n,"Resource",params); 
-			copyArg(n,"UseLongIds",params); 
+			copyArg(n,"PrincipalArn",params,undefined,false); 
+			copyArg(n,"Resource",params,undefined,false); 
+			copyArg(n,"UseLongIds",params,undefined,false); 
 			
-			copyArg(msg,"PrincipalArn",params); 
-			copyArg(msg,"Resource",params); 
-			copyArg(msg,"UseLongIds",params); 
+			copyArg(msg,"PrincipalArn",params,undefined,false); 
+			copyArg(msg,"Resource",params,undefined,false); 
+			copyArg(msg,"UseLongIds",params,undefined,false); 
 			
 
 			svc.modifyIdentityIdFormat(params,cb);
@@ -3379,18 +3384,18 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"ImageId",params); 
+			copyArg(n,"ImageId",params,undefined,false); 
 			
-			copyArg(msg,"Attribute",params); 
-			copyArg(msg,"Description",params); 
-			copyArg(msg,"ImageId",params); 
-			copyArg(msg,"LaunchPermission",params); 
-			copyArg(msg,"OperationType",params); 
-			copyArg(msg,"ProductCodes",params); 
-			copyArg(msg,"UserGroups",params); 
-			copyArg(msg,"UserIds",params); 
-			copyArg(msg,"Value",params); 
-			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"Attribute",params,undefined,false); 
+			copyArg(msg,"Description",params,undefined,true); 
+			copyArg(msg,"ImageId",params,undefined,false); 
+			copyArg(msg,"LaunchPermission",params,undefined,false); 
+			copyArg(msg,"OperationType",params,undefined,false); 
+			copyArg(msg,"ProductCodes",params,undefined,true); 
+			copyArg(msg,"UserGroups",params,undefined,true); 
+			copyArg(msg,"UserIds",params,undefined,true); 
+			copyArg(msg,"Value",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
 			
 
 			svc.modifyImageAttribute(params,cb);
@@ -3401,24 +3406,24 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"InstanceId",params); 
+			copyArg(n,"InstanceId",params,undefined,false); 
 			
-			copyArg(msg,"SourceDestCheck",params); 
-			copyArg(msg,"Attribute",params); 
-			copyArg(msg,"BlockDeviceMappings",params); 
-			copyArg(msg,"DisableApiTermination",params); 
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"EbsOptimized",params); 
-			copyArg(msg,"EnaSupport",params); 
-			copyArg(msg,"Groups",params); 
-			copyArg(msg,"InstanceId",params); 
-			copyArg(msg,"InstanceInitiatedShutdownBehavior",params); 
-			copyArg(msg,"InstanceType",params); 
-			copyArg(msg,"Kernel",params); 
-			copyArg(msg,"Ramdisk",params); 
-			copyArg(msg,"SriovNetSupport",params); 
-			copyArg(msg,"UserData",params); 
-			copyArg(msg,"Value",params); 
+			copyArg(msg,"SourceDestCheck",params,undefined,true); 
+			copyArg(msg,"Attribute",params,undefined,false); 
+			copyArg(msg,"BlockDeviceMappings",params,undefined,false); 
+			copyArg(msg,"DisableApiTermination",params,undefined,true); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"EbsOptimized",params,undefined,true); 
+			copyArg(msg,"EnaSupport",params,undefined,true); 
+			copyArg(msg,"Groups",params,undefined,true); 
+			copyArg(msg,"InstanceId",params,undefined,false); 
+			copyArg(msg,"InstanceInitiatedShutdownBehavior",params,undefined,true); 
+			copyArg(msg,"InstanceType",params,undefined,true); 
+			copyArg(msg,"Kernel",params,undefined,true); 
+			copyArg(msg,"Ramdisk",params,undefined,true); 
+			copyArg(msg,"SriovNetSupport",params,undefined,true); 
+			copyArg(msg,"UserData",params,undefined,false); 
+			copyArg(msg,"Value",params,undefined,false); 
 			
 
 			svc.modifyInstanceAttribute(params,cb);
@@ -3429,11 +3434,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"InstanceCreditSpecifications",params); 
+			copyArg(n,"InstanceCreditSpecifications",params,undefined,false); 
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"ClientToken",params); 
-			copyArg(msg,"InstanceCreditSpecifications",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"ClientToken",params,undefined,false); 
+			copyArg(msg,"InstanceCreditSpecifications",params,undefined,false); 
 			
 
 			svc.modifyInstanceCreditSpecification(params,cb);
@@ -3444,12 +3449,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"InstanceId",params); 
+			copyArg(n,"InstanceId",params,undefined,false); 
 			
-			copyArg(msg,"Affinity",params); 
-			copyArg(msg,"HostId",params); 
-			copyArg(msg,"InstanceId",params); 
-			copyArg(msg,"Tenancy",params); 
+			copyArg(msg,"Affinity",params,undefined,false); 
+			copyArg(msg,"HostId",params,undefined,false); 
+			copyArg(msg,"InstanceId",params,undefined,false); 
+			copyArg(msg,"Tenancy",params,undefined,false); 
 			
 
 			svc.modifyInstancePlacement(params,cb);
@@ -3461,11 +3466,11 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"ClientToken",params); 
-			copyArg(msg,"LaunchTemplateId",params); 
-			copyArg(msg,"LaunchTemplateName",params); 
-			copyArg(msg,"DefaultVersion",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"ClientToken",params,undefined,false); 
+			copyArg(msg,"LaunchTemplateId",params,undefined,false); 
+			copyArg(msg,"LaunchTemplateName",params,undefined,false); 
+			copyArg(msg,"DefaultVersion",params,undefined,false); 
 			
 
 			svc.modifyLaunchTemplate(params,cb);
@@ -3476,14 +3481,14 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"NetworkInterfaceId",params); 
+			copyArg(n,"NetworkInterfaceId",params,undefined,false); 
 			
-			copyArg(msg,"Attachment",params); 
-			copyArg(msg,"Description",params); 
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"Groups",params); 
-			copyArg(msg,"NetworkInterfaceId",params); 
-			copyArg(msg,"SourceDestCheck",params); 
+			copyArg(msg,"Attachment",params,undefined,false); 
+			copyArg(msg,"Description",params,undefined,true); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"Groups",params,undefined,true); 
+			copyArg(msg,"NetworkInterfaceId",params,undefined,false); 
+			copyArg(msg,"SourceDestCheck",params,undefined,true); 
 			
 
 			svc.modifyNetworkInterfaceAttribute(params,cb);
@@ -3494,12 +3499,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"ReservedInstancesIds",params); 
-			copyArg(n,"TargetConfigurations",params); 
+			copyArg(n,"ReservedInstancesIds",params,undefined,true); 
+			copyArg(n,"TargetConfigurations",params,undefined,false); 
 			
-			copyArg(msg,"ReservedInstancesIds",params); 
-			copyArg(msg,"ClientToken",params); 
-			copyArg(msg,"TargetConfigurations",params); 
+			copyArg(msg,"ReservedInstancesIds",params,undefined,true); 
+			copyArg(msg,"ClientToken",params,undefined,false); 
+			copyArg(msg,"TargetConfigurations",params,undefined,false); 
 			
 
 			svc.modifyReservedInstances(params,cb);
@@ -3510,15 +3515,15 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"SnapshotId",params); 
+			copyArg(n,"SnapshotId",params,undefined,false); 
 			
-			copyArg(msg,"Attribute",params); 
-			copyArg(msg,"CreateVolumePermission",params); 
-			copyArg(msg,"GroupNames",params); 
-			copyArg(msg,"OperationType",params); 
-			copyArg(msg,"SnapshotId",params); 
-			copyArg(msg,"UserIds",params); 
-			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"Attribute",params,undefined,false); 
+			copyArg(msg,"CreateVolumePermission",params,undefined,false); 
+			copyArg(msg,"GroupNames",params,undefined,true); 
+			copyArg(msg,"OperationType",params,undefined,false); 
+			copyArg(msg,"SnapshotId",params,undefined,false); 
+			copyArg(msg,"UserIds",params,undefined,true); 
+			copyArg(msg,"DryRun",params,undefined,false); 
 			
 
 			svc.modifySnapshotAttribute(params,cb);
@@ -3529,11 +3534,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"SpotFleetRequestId",params); 
+			copyArg(n,"SpotFleetRequestId",params,undefined,false); 
 			
-			copyArg(msg,"ExcessCapacityTerminationPolicy",params); 
-			copyArg(msg,"SpotFleetRequestId",params); 
-			copyArg(msg,"TargetCapacity",params); 
+			copyArg(msg,"ExcessCapacityTerminationPolicy",params,undefined,false); 
+			copyArg(msg,"SpotFleetRequestId",params,undefined,false); 
+			copyArg(msg,"TargetCapacity",params,undefined,false); 
 			
 
 			svc.modifySpotFleetRequest(params,cb);
@@ -3544,11 +3549,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"SubnetId",params); 
+			copyArg(n,"SubnetId",params,undefined,false); 
 			
-			copyArg(msg,"AssignIpv6AddressOnCreation",params); 
-			copyArg(msg,"MapPublicIpOnLaunch",params); 
-			copyArg(msg,"SubnetId",params); 
+			copyArg(msg,"AssignIpv6AddressOnCreation",params,undefined,true); 
+			copyArg(msg,"MapPublicIpOnLaunch",params,undefined,true); 
+			copyArg(msg,"SubnetId",params,undefined,false); 
 			
 
 			svc.modifySubnetAttribute(params,cb);
@@ -3559,13 +3564,13 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"VolumeId",params); 
+			copyArg(n,"VolumeId",params,undefined,false); 
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"VolumeId",params); 
-			copyArg(msg,"Size",params); 
-			copyArg(msg,"VolumeType",params); 
-			copyArg(msg,"Iops",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"VolumeId",params,undefined,false); 
+			copyArg(msg,"Size",params,undefined,false); 
+			copyArg(msg,"VolumeType",params,undefined,false); 
+			copyArg(msg,"Iops",params,undefined,false); 
 			
 
 			svc.modifyVolume(params,cb);
@@ -3576,11 +3581,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"VolumeId",params); 
+			copyArg(n,"VolumeId",params,undefined,false); 
 			
-			copyArg(msg,"AutoEnableIO",params); 
-			copyArg(msg,"VolumeId",params); 
-			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"AutoEnableIO",params,undefined,true); 
+			copyArg(msg,"VolumeId",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
 			
 
 			svc.modifyVolumeAttribute(params,cb);
@@ -3591,11 +3596,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"VpcId",params); 
+			copyArg(n,"VpcId",params,undefined,false); 
 			
-			copyArg(msg,"EnableDnsHostnames",params); 
-			copyArg(msg,"EnableDnsSupport",params); 
-			copyArg(msg,"VpcId",params); 
+			copyArg(msg,"EnableDnsHostnames",params,undefined,true); 
+			copyArg(msg,"EnableDnsSupport",params,undefined,true); 
+			copyArg(msg,"VpcId",params,undefined,false); 
 			
 
 			svc.modifyVpcAttribute(params,cb);
@@ -3606,19 +3611,19 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"VpcEndpointId",params); 
+			copyArg(n,"VpcEndpointId",params,undefined,false); 
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"VpcEndpointId",params); 
-			copyArg(msg,"ResetPolicy",params); 
-			copyArg(msg,"PolicyDocument",params); 
-			copyArg(msg,"AddRouteTableIds",params); 
-			copyArg(msg,"RemoveRouteTableIds",params); 
-			copyArg(msg,"AddSubnetIds",params); 
-			copyArg(msg,"RemoveSubnetIds",params); 
-			copyArg(msg,"AddSecurityGroupIds",params); 
-			copyArg(msg,"RemoveSecurityGroupIds",params); 
-			copyArg(msg,"PrivateDnsEnabled",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"VpcEndpointId",params,undefined,false); 
+			copyArg(msg,"ResetPolicy",params,undefined,false); 
+			copyArg(msg,"PolicyDocument",params,undefined,false); 
+			copyArg(msg,"AddRouteTableIds",params,undefined,true); 
+			copyArg(msg,"RemoveRouteTableIds",params,undefined,true); 
+			copyArg(msg,"AddSubnetIds",params,undefined,true); 
+			copyArg(msg,"RemoveSubnetIds",params,undefined,true); 
+			copyArg(msg,"AddSecurityGroupIds",params,undefined,true); 
+			copyArg(msg,"RemoveSecurityGroupIds",params,undefined,true); 
+			copyArg(msg,"PrivateDnsEnabled",params,undefined,false); 
 			
 
 			svc.modifyVpcEndpoint(params,cb);
@@ -3629,12 +3634,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"ConnectionNotificationId",params); 
+			copyArg(n,"ConnectionNotificationId",params,undefined,false); 
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"ConnectionNotificationId",params); 
-			copyArg(msg,"ConnectionNotificationArn",params); 
-			copyArg(msg,"ConnectionEvents",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"ConnectionNotificationId",params,undefined,false); 
+			copyArg(msg,"ConnectionNotificationArn",params,undefined,false); 
+			copyArg(msg,"ConnectionEvents",params,undefined,true); 
 			
 
 			svc.modifyVpcEndpointConnectionNotification(params,cb);
@@ -3645,13 +3650,13 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"ServiceId",params); 
+			copyArg(n,"ServiceId",params,undefined,false); 
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"ServiceId",params); 
-			copyArg(msg,"AcceptanceRequired",params); 
-			copyArg(msg,"AddNetworkLoadBalancerArns",params); 
-			copyArg(msg,"RemoveNetworkLoadBalancerArns",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"ServiceId",params,undefined,false); 
+			copyArg(msg,"AcceptanceRequired",params,undefined,false); 
+			copyArg(msg,"AddNetworkLoadBalancerArns",params,undefined,true); 
+			copyArg(msg,"RemoveNetworkLoadBalancerArns",params,undefined,true); 
 			
 
 			svc.modifyVpcEndpointServiceConfiguration(params,cb);
@@ -3662,12 +3667,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"ServiceId",params); 
+			copyArg(n,"ServiceId",params,undefined,false); 
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"ServiceId",params); 
-			copyArg(msg,"AddAllowedPrincipals",params); 
-			copyArg(msg,"RemoveAllowedPrincipals",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"ServiceId",params,undefined,false); 
+			copyArg(msg,"AddAllowedPrincipals",params,undefined,true); 
+			copyArg(msg,"RemoveAllowedPrincipals",params,undefined,true); 
 			
 
 			svc.modifyVpcEndpointServicePermissions(params,cb);
@@ -3678,12 +3683,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"VpcPeeringConnectionId",params); 
+			copyArg(n,"VpcPeeringConnectionId",params,undefined,false); 
 			
-			copyArg(msg,"AccepterPeeringConnectionOptions",params); 
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"RequesterPeeringConnectionOptions",params); 
-			copyArg(msg,"VpcPeeringConnectionId",params); 
+			copyArg(msg,"AccepterPeeringConnectionOptions",params,undefined,true); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"RequesterPeeringConnectionOptions",params,undefined,true); 
+			copyArg(msg,"VpcPeeringConnectionId",params,undefined,false); 
 			
 
 			svc.modifyVpcPeeringConnectionOptions(params,cb);
@@ -3694,12 +3699,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"VpcId",params); 
-			copyArg(n,"InstanceTenancy",params); 
+			copyArg(n,"VpcId",params,undefined,false); 
+			copyArg(n,"InstanceTenancy",params,undefined,false); 
 			
-			copyArg(msg,"VpcId",params); 
-			copyArg(msg,"InstanceTenancy",params); 
-			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"VpcId",params,undefined,false); 
+			copyArg(msg,"InstanceTenancy",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
 			
 
 			svc.modifyVpcTenancy(params,cb);
@@ -3710,10 +3715,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"InstanceIds",params); 
+			copyArg(n,"InstanceIds",params,undefined,true); 
 			
-			copyArg(msg,"InstanceIds",params); 
-			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"InstanceIds",params,undefined,true); 
+			copyArg(msg,"DryRun",params,undefined,false); 
 			
 
 			svc.monitorInstances(params,cb);
@@ -3724,10 +3729,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"PublicIp",params); 
+			copyArg(n,"PublicIp",params,undefined,false); 
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"PublicIp",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"PublicIp",params,undefined,false); 
 			
 
 			svc.moveAddressToVpc(params,cb);
@@ -3738,14 +3743,14 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"HostIdSet",params); 
-			copyArg(n,"OfferingId",params); 
+			copyArg(n,"HostIdSet",params,undefined,true); 
+			copyArg(n,"OfferingId",params,undefined,false); 
 			
-			copyArg(msg,"ClientToken",params); 
-			copyArg(msg,"CurrencyCode",params); 
-			copyArg(msg,"HostIdSet",params); 
-			copyArg(msg,"LimitPrice",params); 
-			copyArg(msg,"OfferingId",params); 
+			copyArg(msg,"ClientToken",params,undefined,false); 
+			copyArg(msg,"CurrencyCode",params,undefined,false); 
+			copyArg(msg,"HostIdSet",params,undefined,true); 
+			copyArg(msg,"LimitPrice",params,undefined,false); 
+			copyArg(msg,"OfferingId",params,undefined,false); 
 			
 
 			svc.purchaseHostReservation(params,cb);
@@ -3756,13 +3761,13 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"InstanceCount",params); 
-			copyArg(n,"ReservedInstancesOfferingId",params); 
+			copyArg(n,"InstanceCount",params,undefined,false); 
+			copyArg(n,"ReservedInstancesOfferingId",params,undefined,false); 
 			
-			copyArg(msg,"InstanceCount",params); 
-			copyArg(msg,"ReservedInstancesOfferingId",params); 
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"LimitPrice",params); 
+			copyArg(msg,"InstanceCount",params,undefined,false); 
+			copyArg(msg,"ReservedInstancesOfferingId",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"LimitPrice",params,undefined,false); 
 			
 
 			svc.purchaseReservedInstancesOffering(params,cb);
@@ -3773,11 +3778,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"PurchaseRequests",params); 
+			copyArg(n,"PurchaseRequests",params,undefined,false); 
 			
-			copyArg(msg,"ClientToken",params); 
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"PurchaseRequests",params); 
+			copyArg(msg,"ClientToken",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"PurchaseRequests",params,undefined,false); 
 			
 
 			svc.purchaseScheduledInstances(params,cb);
@@ -3788,10 +3793,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"InstanceIds",params); 
+			copyArg(n,"InstanceIds",params,undefined,true); 
 			
-			copyArg(msg,"InstanceIds",params); 
-			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"InstanceIds",params,undefined,true); 
+			copyArg(msg,"DryRun",params,undefined,false); 
 			
 
 			svc.rebootInstances(params,cb);
@@ -3802,21 +3807,21 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Name",params); 
+			copyArg(n,"Name",params,undefined,false); 
 			
-			copyArg(msg,"ImageLocation",params); 
-			copyArg(msg,"Architecture",params); 
-			copyArg(msg,"BlockDeviceMappings",params); 
-			copyArg(msg,"Description",params); 
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"EnaSupport",params); 
-			copyArg(msg,"KernelId",params); 
-			copyArg(msg,"Name",params); 
-			copyArg(msg,"BillingProducts",params); 
-			copyArg(msg,"RamdiskId",params); 
-			copyArg(msg,"RootDeviceName",params); 
-			copyArg(msg,"SriovNetSupport",params); 
-			copyArg(msg,"VirtualizationType",params); 
+			copyArg(msg,"ImageLocation",params,undefined,false); 
+			copyArg(msg,"Architecture",params,undefined,false); 
+			copyArg(msg,"BlockDeviceMappings",params,undefined,true); 
+			copyArg(msg,"Description",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"EnaSupport",params,undefined,false); 
+			copyArg(msg,"KernelId",params,undefined,false); 
+			copyArg(msg,"Name",params,undefined,false); 
+			copyArg(msg,"BillingProducts",params,undefined,false); 
+			copyArg(msg,"RamdiskId",params,undefined,false); 
+			copyArg(msg,"RootDeviceName",params,undefined,false); 
+			copyArg(msg,"SriovNetSupport",params,undefined,false); 
+			copyArg(msg,"VirtualizationType",params,undefined,false); 
 			
 
 			svc.registerImage(params,cb);
@@ -3827,12 +3832,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"ServiceId",params); 
-			copyArg(n,"VpcEndpointIds",params); 
+			copyArg(n,"ServiceId",params,undefined,false); 
+			copyArg(n,"VpcEndpointIds",params,undefined,true); 
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"ServiceId",params); 
-			copyArg(msg,"VpcEndpointIds",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"ServiceId",params,undefined,false); 
+			copyArg(msg,"VpcEndpointIds",params,undefined,true); 
 			
 
 			svc.rejectVpcEndpointConnections(params,cb);
@@ -3843,10 +3848,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"VpcPeeringConnectionId",params); 
+			copyArg(n,"VpcPeeringConnectionId",params,undefined,false); 
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"VpcPeeringConnectionId",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"VpcPeeringConnectionId",params,undefined,false); 
 			
 
 			svc.rejectVpcPeeringConnection(params,cb);
@@ -3858,9 +3863,9 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"AllocationId",params); 
-			copyArg(msg,"PublicIp",params); 
-			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"AllocationId",params,undefined,false); 
+			copyArg(msg,"PublicIp",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
 			
 
 			svc.releaseAddress(params,cb);
@@ -3871,9 +3876,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"HostIds",params); 
+			copyArg(n,"HostIds",params,undefined,true); 
 			
-			copyArg(msg,"HostIds",params); 
+			copyArg(msg,"HostIds",params,undefined,true); 
 			
 
 			svc.releaseHosts(params,cb);
@@ -3884,11 +3889,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"IamInstanceProfile",params); 
-			copyArg(n,"AssociationId",params); 
+			copyArg(n,"IamInstanceProfile",params,undefined,true); 
+			copyArg(n,"AssociationId",params,undefined,false); 
 			
-			copyArg(msg,"IamInstanceProfile",params); 
-			copyArg(msg,"AssociationId",params); 
+			copyArg(msg,"IamInstanceProfile",params,undefined,true); 
+			copyArg(msg,"AssociationId",params,undefined,false); 
 			
 
 			svc.replaceIamInstanceProfileAssociation(params,cb);
@@ -3899,12 +3904,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"AssociationId",params); 
-			copyArg(n,"NetworkAclId",params); 
+			copyArg(n,"AssociationId",params,undefined,false); 
+			copyArg(n,"NetworkAclId",params,undefined,false); 
 			
-			copyArg(msg,"AssociationId",params); 
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"NetworkAclId",params); 
+			copyArg(msg,"AssociationId",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"NetworkAclId",params,undefined,false); 
 			
 
 			svc.replaceNetworkAclAssociation(params,cb);
@@ -3915,22 +3920,22 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Egress",params); 
-			copyArg(n,"NetworkAclId",params); 
-			copyArg(n,"Protocol",params); 
-			copyArg(n,"RuleAction",params); 
-			copyArg(n,"RuleNumber",params); 
+			copyArg(n,"Egress",params,undefined,false); 
+			copyArg(n,"NetworkAclId",params,undefined,false); 
+			copyArg(n,"Protocol",params,undefined,false); 
+			copyArg(n,"RuleAction",params,undefined,false); 
+			copyArg(n,"RuleNumber",params,undefined,false); 
 			
-			copyArg(msg,"CidrBlock",params); 
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"Egress",params); 
-			copyArg(msg,"IcmpTypeCode",params); 
-			copyArg(msg,"Ipv6CidrBlock",params); 
-			copyArg(msg,"NetworkAclId",params); 
-			copyArg(msg,"PortRange",params); 
-			copyArg(msg,"Protocol",params); 
-			copyArg(msg,"RuleAction",params); 
-			copyArg(msg,"RuleNumber",params); 
+			copyArg(msg,"CidrBlock",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"Egress",params,undefined,false); 
+			copyArg(msg,"IcmpTypeCode",params,undefined,true); 
+			copyArg(msg,"Ipv6CidrBlock",params,undefined,false); 
+			copyArg(msg,"NetworkAclId",params,undefined,false); 
+			copyArg(msg,"PortRange",params,undefined,true); 
+			copyArg(msg,"Protocol",params,undefined,false); 
+			copyArg(msg,"RuleAction",params,undefined,false); 
+			copyArg(msg,"RuleNumber",params,undefined,false); 
 			
 
 			svc.replaceNetworkAclEntry(params,cb);
@@ -3941,18 +3946,18 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"RouteTableId",params); 
+			copyArg(n,"RouteTableId",params,undefined,false); 
 			
-			copyArg(msg,"DestinationCidrBlock",params); 
-			copyArg(msg,"DestinationIpv6CidrBlock",params); 
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"EgressOnlyInternetGatewayId",params); 
-			copyArg(msg,"GatewayId",params); 
-			copyArg(msg,"InstanceId",params); 
-			copyArg(msg,"NatGatewayId",params); 
-			copyArg(msg,"NetworkInterfaceId",params); 
-			copyArg(msg,"RouteTableId",params); 
-			copyArg(msg,"VpcPeeringConnectionId",params); 
+			copyArg(msg,"DestinationCidrBlock",params,undefined,false); 
+			copyArg(msg,"DestinationIpv6CidrBlock",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"EgressOnlyInternetGatewayId",params,undefined,false); 
+			copyArg(msg,"GatewayId",params,undefined,false); 
+			copyArg(msg,"InstanceId",params,undefined,false); 
+			copyArg(msg,"NatGatewayId",params,undefined,false); 
+			copyArg(msg,"NetworkInterfaceId",params,undefined,false); 
+			copyArg(msg,"RouteTableId",params,undefined,false); 
+			copyArg(msg,"VpcPeeringConnectionId",params,undefined,false); 
 			
 
 			svc.replaceRoute(params,cb);
@@ -3963,12 +3968,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"AssociationId",params); 
-			copyArg(n,"RouteTableId",params); 
+			copyArg(n,"AssociationId",params,undefined,false); 
+			copyArg(n,"RouteTableId",params,undefined,false); 
 			
-			copyArg(msg,"AssociationId",params); 
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"RouteTableId",params); 
+			copyArg(msg,"AssociationId",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"RouteTableId",params,undefined,false); 
 			
 
 			svc.replaceRouteTableAssociation(params,cb);
@@ -3979,17 +3984,17 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Instances",params); 
-			copyArg(n,"ReasonCodes",params); 
-			copyArg(n,"Status",params); 
+			copyArg(n,"Instances",params,undefined,true); 
+			copyArg(n,"ReasonCodes",params,undefined,false); 
+			copyArg(n,"Status",params,undefined,false); 
 			
-			copyArg(msg,"Description",params); 
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"EndTime",params); 
-			copyArg(msg,"Instances",params); 
-			copyArg(msg,"ReasonCodes",params); 
-			copyArg(msg,"StartTime",params); 
-			copyArg(msg,"Status",params); 
+			copyArg(msg,"Description",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"EndTime",params,undefined,false); 
+			copyArg(msg,"Instances",params,undefined,true); 
+			copyArg(msg,"ReasonCodes",params,undefined,false); 
+			copyArg(msg,"StartTime",params,undefined,false); 
+			copyArg(msg,"Status",params,undefined,false); 
 			
 
 			svc.reportInstanceStatus(params,cb);
@@ -4000,10 +4005,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"SpotFleetRequestConfig",params); 
+			copyArg(n,"SpotFleetRequestConfig",params,undefined,true); 
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"SpotFleetRequestConfig",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"SpotFleetRequestConfig",params,undefined,true); 
 			
 
 			svc.requestSpotFleet(params,cb);
@@ -4015,18 +4020,18 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"AvailabilityZoneGroup",params); 
-			copyArg(msg,"BlockDurationMinutes",params); 
-			copyArg(msg,"ClientToken",params); 
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"InstanceCount",params); 
-			copyArg(msg,"LaunchGroup",params); 
-			copyArg(msg,"LaunchSpecification",params); 
-			copyArg(msg,"SpotPrice",params); 
-			copyArg(msg,"Type",params); 
-			copyArg(msg,"ValidFrom",params); 
-			copyArg(msg,"ValidUntil",params); 
-			copyArg(msg,"InstanceInterruptionBehavior",params); 
+			copyArg(msg,"AvailabilityZoneGroup",params,undefined,false); 
+			copyArg(msg,"BlockDurationMinutes",params,undefined,false); 
+			copyArg(msg,"ClientToken",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"InstanceCount",params,undefined,false); 
+			copyArg(msg,"LaunchGroup",params,undefined,false); 
+			copyArg(msg,"LaunchSpecification",params,undefined,false); 
+			copyArg(msg,"SpotPrice",params,undefined,false); 
+			copyArg(msg,"Type",params,undefined,false); 
+			copyArg(msg,"ValidFrom",params,undefined,false); 
+			copyArg(msg,"ValidUntil",params,undefined,false); 
+			copyArg(msg,"InstanceInterruptionBehavior",params,undefined,false); 
 			
 
 			svc.requestSpotInstances(params,cb);
@@ -4037,11 +4042,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"FpgaImageId",params); 
+			copyArg(n,"FpgaImageId",params,undefined,false); 
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"FpgaImageId",params); 
-			copyArg(msg,"Attribute",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"FpgaImageId",params,undefined,false); 
+			copyArg(msg,"Attribute",params,undefined,false); 
 			
 
 			svc.resetFpgaImageAttribute(params,cb);
@@ -4052,12 +4057,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Attribute",params); 
-			copyArg(n,"ImageId",params); 
+			copyArg(n,"Attribute",params,undefined,false); 
+			copyArg(n,"ImageId",params,undefined,false); 
 			
-			copyArg(msg,"Attribute",params); 
-			copyArg(msg,"ImageId",params); 
-			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"Attribute",params,undefined,false); 
+			copyArg(msg,"ImageId",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
 			
 
 			svc.resetImageAttribute(params,cb);
@@ -4068,12 +4073,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Attribute",params); 
-			copyArg(n,"InstanceId",params); 
+			copyArg(n,"Attribute",params,undefined,false); 
+			copyArg(n,"InstanceId",params,undefined,false); 
 			
-			copyArg(msg,"Attribute",params); 
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"InstanceId",params); 
+			copyArg(msg,"Attribute",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"InstanceId",params,undefined,false); 
 			
 
 			svc.resetInstanceAttribute(params,cb);
@@ -4084,11 +4089,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"NetworkInterfaceId",params); 
+			copyArg(n,"NetworkInterfaceId",params,undefined,false); 
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"NetworkInterfaceId",params); 
-			copyArg(msg,"SourceDestCheck",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"NetworkInterfaceId",params,undefined,false); 
+			copyArg(msg,"SourceDestCheck",params,undefined,false); 
 			
 
 			svc.resetNetworkInterfaceAttribute(params,cb);
@@ -4099,12 +4104,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Attribute",params); 
-			copyArg(n,"SnapshotId",params); 
+			copyArg(n,"Attribute",params,undefined,false); 
+			copyArg(n,"SnapshotId",params,undefined,false); 
 			
-			copyArg(msg,"Attribute",params); 
-			copyArg(msg,"SnapshotId",params); 
-			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"Attribute",params,undefined,false); 
+			copyArg(msg,"SnapshotId",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
 			
 
 			svc.resetSnapshotAttribute(params,cb);
@@ -4115,10 +4120,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"PublicIp",params); 
+			copyArg(n,"PublicIp",params,undefined,false); 
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"PublicIp",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"PublicIp",params,undefined,false); 
 			
 
 			svc.restoreAddressToClassic(params,cb);
@@ -4129,17 +4134,17 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"GroupId",params); 
+			copyArg(n,"GroupId",params,undefined,false); 
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"GroupId",params); 
-			copyArg(msg,"IpPermissions",params); 
-			copyArg(msg,"CidrIp",params); 
-			copyArg(msg,"FromPort",params); 
-			copyArg(msg,"IpProtocol",params); 
-			copyArg(msg,"ToPort",params); 
-			copyArg(msg,"SourceSecurityGroupName",params); 
-			copyArg(msg,"SourceSecurityGroupOwnerId",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"GroupId",params,undefined,false); 
+			copyArg(msg,"IpPermissions",params,undefined,true); 
+			copyArg(msg,"CidrIp",params,undefined,false); 
+			copyArg(msg,"FromPort",params,undefined,false); 
+			copyArg(msg,"IpProtocol",params,undefined,false); 
+			copyArg(msg,"ToPort",params,undefined,false); 
+			copyArg(msg,"SourceSecurityGroupName",params,undefined,false); 
+			copyArg(msg,"SourceSecurityGroupOwnerId",params,undefined,false); 
 			
 
 			svc.revokeSecurityGroupEgress(params,cb);
@@ -4151,16 +4156,16 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"CidrIp",params); 
-			copyArg(msg,"FromPort",params); 
-			copyArg(msg,"GroupId",params); 
-			copyArg(msg,"GroupName",params); 
-			copyArg(msg,"IpPermissions",params); 
-			copyArg(msg,"IpProtocol",params); 
-			copyArg(msg,"SourceSecurityGroupName",params); 
-			copyArg(msg,"SourceSecurityGroupOwnerId",params); 
-			copyArg(msg,"ToPort",params); 
-			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"CidrIp",params,undefined,false); 
+			copyArg(msg,"FromPort",params,undefined,false); 
+			copyArg(msg,"GroupId",params,undefined,false); 
+			copyArg(msg,"GroupName",params,undefined,false); 
+			copyArg(msg,"IpPermissions",params,undefined,true); 
+			copyArg(msg,"IpProtocol",params,undefined,false); 
+			copyArg(msg,"SourceSecurityGroupName",params,undefined,false); 
+			copyArg(msg,"SourceSecurityGroupOwnerId",params,undefined,false); 
+			copyArg(msg,"ToPort",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
 			
 
 			svc.revokeSecurityGroupIngress(params,cb);
@@ -4171,39 +4176,39 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"MaxCount",params); 
-			copyArg(n,"MinCount",params); 
+			copyArg(n,"MaxCount",params,undefined,false); 
+			copyArg(n,"MinCount",params,undefined,false); 
 			
-			copyArg(msg,"BlockDeviceMappings",params); 
-			copyArg(msg,"ImageId",params); 
-			copyArg(msg,"InstanceType",params); 
-			copyArg(msg,"Ipv6AddressCount",params); 
-			copyArg(msg,"Ipv6Addresses",params); 
-			copyArg(msg,"KernelId",params); 
-			copyArg(msg,"KeyName",params); 
-			copyArg(msg,"MaxCount",params); 
-			copyArg(msg,"MinCount",params); 
-			copyArg(msg,"Monitoring",params); 
-			copyArg(msg,"Placement",params); 
-			copyArg(msg,"RamdiskId",params); 
-			copyArg(msg,"SecurityGroupIds",params); 
-			copyArg(msg,"SecurityGroups",params); 
-			copyArg(msg,"SubnetId",params); 
-			copyArg(msg,"UserData",params); 
-			copyArg(msg,"AdditionalInfo",params); 
-			copyArg(msg,"ClientToken",params); 
-			copyArg(msg,"DisableApiTermination",params); 
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"EbsOptimized",params); 
-			copyArg(msg,"IamInstanceProfile",params); 
-			copyArg(msg,"InstanceInitiatedShutdownBehavior",params); 
-			copyArg(msg,"NetworkInterfaces",params); 
-			copyArg(msg,"PrivateIpAddress",params); 
-			copyArg(msg,"ElasticGpuSpecification",params); 
-			copyArg(msg,"TagSpecifications",params); 
-			copyArg(msg,"LaunchTemplate",params); 
-			copyArg(msg,"InstanceMarketOptions",params); 
-			copyArg(msg,"CreditSpecification",params); 
+			copyArg(msg,"BlockDeviceMappings",params,undefined,true); 
+			copyArg(msg,"ImageId",params,undefined,false); 
+			copyArg(msg,"InstanceType",params,undefined,false); 
+			copyArg(msg,"Ipv6AddressCount",params,undefined,false); 
+			copyArg(msg,"Ipv6Addresses",params,undefined,true); 
+			copyArg(msg,"KernelId",params,undefined,false); 
+			copyArg(msg,"KeyName",params,undefined,false); 
+			copyArg(msg,"MaxCount",params,undefined,false); 
+			copyArg(msg,"MinCount",params,undefined,false); 
+			copyArg(msg,"Monitoring",params,undefined,true); 
+			copyArg(msg,"Placement",params,undefined,true); 
+			copyArg(msg,"RamdiskId",params,undefined,false); 
+			copyArg(msg,"SecurityGroupIds",params,undefined,true); 
+			copyArg(msg,"SecurityGroups",params,undefined,true); 
+			copyArg(msg,"SubnetId",params,undefined,false); 
+			copyArg(msg,"UserData",params,undefined,false); 
+			copyArg(msg,"AdditionalInfo",params,undefined,false); 
+			copyArg(msg,"ClientToken",params,undefined,false); 
+			copyArg(msg,"DisableApiTermination",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"EbsOptimized",params,undefined,false); 
+			copyArg(msg,"IamInstanceProfile",params,undefined,true); 
+			copyArg(msg,"InstanceInitiatedShutdownBehavior",params,undefined,false); 
+			copyArg(msg,"NetworkInterfaces",params,undefined,true); 
+			copyArg(msg,"PrivateIpAddress",params,undefined,false); 
+			copyArg(msg,"ElasticGpuSpecification",params,undefined,false); 
+			copyArg(msg,"TagSpecifications",params,undefined,true); 
+			copyArg(msg,"LaunchTemplate",params,undefined,false); 
+			copyArg(msg,"InstanceMarketOptions",params,undefined,false); 
+			copyArg(msg,"CreditSpecification",params,undefined,true); 
 			
 
 			svc.runInstances(params,cb);
@@ -4214,14 +4219,14 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"LaunchSpecification",params); 
-			copyArg(n,"ScheduledInstanceId",params); 
+			copyArg(n,"LaunchSpecification",params,undefined,false); 
+			copyArg(n,"ScheduledInstanceId",params,undefined,false); 
 			
-			copyArg(msg,"ClientToken",params); 
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"InstanceCount",params); 
-			copyArg(msg,"LaunchSpecification",params); 
-			copyArg(msg,"ScheduledInstanceId",params); 
+			copyArg(msg,"ClientToken",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"InstanceCount",params,undefined,false); 
+			copyArg(msg,"LaunchSpecification",params,undefined,false); 
+			copyArg(msg,"ScheduledInstanceId",params,undefined,false); 
 			
 
 			svc.runScheduledInstances(params,cb);
@@ -4232,11 +4237,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"InstanceIds",params); 
+			copyArg(n,"InstanceIds",params,undefined,true); 
 			
-			copyArg(msg,"InstanceIds",params); 
-			copyArg(msg,"AdditionalInfo",params); 
-			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"InstanceIds",params,undefined,true); 
+			copyArg(msg,"AdditionalInfo",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
 			
 
 			svc.startInstances(params,cb);
@@ -4247,11 +4252,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"InstanceIds",params); 
+			copyArg(n,"InstanceIds",params,undefined,true); 
 			
-			copyArg(msg,"InstanceIds",params); 
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"Force",params); 
+			copyArg(msg,"InstanceIds",params,undefined,true); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"Force",params,undefined,false); 
 			
 
 			svc.stopInstances(params,cb);
@@ -4262,10 +4267,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"InstanceIds",params); 
+			copyArg(n,"InstanceIds",params,undefined,true); 
 			
-			copyArg(msg,"InstanceIds",params); 
-			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"InstanceIds",params,undefined,true); 
+			copyArg(msg,"DryRun",params,undefined,false); 
 			
 
 			svc.terminateInstances(params,cb);
@@ -4276,11 +4281,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Ipv6Addresses",params); 
-			copyArg(n,"NetworkInterfaceId",params); 
+			copyArg(n,"Ipv6Addresses",params,undefined,true); 
+			copyArg(n,"NetworkInterfaceId",params,undefined,false); 
 			
-			copyArg(msg,"Ipv6Addresses",params); 
-			copyArg(msg,"NetworkInterfaceId",params); 
+			copyArg(msg,"Ipv6Addresses",params,undefined,true); 
+			copyArg(msg,"NetworkInterfaceId",params,undefined,false); 
 			
 
 			svc.unassignIpv6Addresses(params,cb);
@@ -4291,11 +4296,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"NetworkInterfaceId",params); 
-			copyArg(n,"PrivateIpAddresses",params); 
+			copyArg(n,"NetworkInterfaceId",params,undefined,false); 
+			copyArg(n,"PrivateIpAddresses",params,undefined,true); 
 			
-			copyArg(msg,"NetworkInterfaceId",params); 
-			copyArg(msg,"PrivateIpAddresses",params); 
+			copyArg(msg,"NetworkInterfaceId",params,undefined,false); 
+			copyArg(msg,"PrivateIpAddresses",params,undefined,true); 
 			
 
 			svc.unassignPrivateIpAddresses(params,cb);
@@ -4306,10 +4311,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"InstanceIds",params); 
+			copyArg(n,"InstanceIds",params,undefined,true); 
 			
-			copyArg(msg,"InstanceIds",params); 
-			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"InstanceIds",params,undefined,true); 
+			copyArg(msg,"DryRun",params,undefined,false); 
 			
 
 			svc.unmonitorInstances(params,cb);
@@ -4320,12 +4325,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"IpPermissions",params); 
+			copyArg(n,"IpPermissions",params,undefined,true); 
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"GroupId",params); 
-			copyArg(msg,"GroupName",params); 
-			copyArg(msg,"IpPermissions",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"GroupId",params,undefined,false); 
+			copyArg(msg,"GroupName",params,undefined,false); 
+			copyArg(msg,"IpPermissions",params,undefined,true); 
 			
 
 			svc.updateSecurityGroupRuleDescriptionsEgress(params,cb);
@@ -4336,12 +4341,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"IpPermissions",params); 
+			copyArg(n,"IpPermissions",params,undefined,true); 
 			
-			copyArg(msg,"DryRun",params); 
-			copyArg(msg,"GroupId",params); 
-			copyArg(msg,"GroupName",params); 
-			copyArg(msg,"IpPermissions",params); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"GroupId",params,undefined,false); 
+			copyArg(msg,"GroupName",params,undefined,false); 
+			copyArg(msg,"IpPermissions",params,undefined,true); 
 			
 
 			svc.updateSecurityGroupRuleDescriptionsIngress(params,cb);

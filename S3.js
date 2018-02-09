@@ -67,13 +67,18 @@ module.exports = function(RED) {
 			}
 
 		});
-		var copyArg=function(src,arg,out,outArg){
+		var copyArg=function(src,arg,out,outArg,isObject){
+			var tmpValue=src[arg];
 			outArg = (typeof outArg !== 'undefined') ? outArg : arg;
+
 			if (typeof src[arg] !== 'undefined'){
-				out[outArg]=src[arg];
+				if (isObject && typeof src[arg]=="string" && src[arg] != "") { 
+					tmpValue=JSON.parse(src[arg]);
+				}
+				out[outArg]=tmpValue;
 			}
                         //AWS API takes 'Payload' not 'payload' (see Lambda)
-                        if (arg=="Payload" && typeof src[arg] == 'undefined'){
+                        if (arg=="Payload" && typeof tmpValue == 'undefined'){
                                 out[arg]=src["payload"];
                         }
 
@@ -86,14 +91,14 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Bucket",params); 
-			copyArg(n,"Key",params); 
-			copyArg(n,"UploadId",params); 
+			copyArg(n,"Bucket",params,undefined,false); 
+			copyArg(n,"Key",params,undefined,false); 
+			copyArg(n,"UploadId",params,undefined,false); 
 			
-			copyArg(msg,"Bucket",params); 
-			copyArg(msg,"Key",params); 
-			copyArg(msg,"UploadId",params); 
-			copyArg(msg,"RequestPayer",params); 
+			copyArg(msg,"Bucket",params,undefined,false); 
+			copyArg(msg,"Key",params,undefined,false); 
+			copyArg(msg,"UploadId",params,undefined,false); 
+			copyArg(msg,"RequestPayer",params,undefined,false); 
 			
 
 			svc.abortMultipartUpload(params,cb);
@@ -104,15 +109,15 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Bucket",params); 
-			copyArg(n,"Key",params); 
-			copyArg(n,"UploadId",params); 
+			copyArg(n,"Bucket",params,undefined,false); 
+			copyArg(n,"Key",params,undefined,false); 
+			copyArg(n,"UploadId",params,undefined,false); 
 			
-			copyArg(msg,"Bucket",params); 
-			copyArg(msg,"Key",params); 
-			copyArg(msg,"MultipartUpload",params); 
-			copyArg(msg,"UploadId",params); 
-			copyArg(msg,"RequestPayer",params); 
+			copyArg(msg,"Bucket",params,undefined,false); 
+			copyArg(msg,"Key",params,undefined,false); 
+			copyArg(msg,"MultipartUpload",params,undefined,false); 
+			copyArg(msg,"UploadId",params,undefined,false); 
+			copyArg(msg,"RequestPayer",params,undefined,false); 
 			
 
 			svc.completeMultipartUpload(params,cb);
@@ -123,43 +128,43 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Bucket",params); 
-			copyArg(n,"CopySource",params); 
-			copyArg(n,"Key",params); 
+			copyArg(n,"Bucket",params,undefined,false); 
+			copyArg(n,"CopySource",params,undefined,false); 
+			copyArg(n,"Key",params,undefined,false); 
 			
-			copyArg(msg,"ACL",params); 
-			copyArg(msg,"Bucket",params); 
-			copyArg(msg,"CacheControl",params); 
-			copyArg(msg,"ContentDisposition",params); 
-			copyArg(msg,"ContentEncoding",params); 
-			copyArg(msg,"ContentLanguage",params); 
-			copyArg(msg,"ContentType",params); 
-			copyArg(msg,"CopySource",params); 
-			copyArg(msg,"CopySourceIfMatch",params); 
-			copyArg(msg,"CopySourceIfModifiedSince",params); 
-			copyArg(msg,"CopySourceIfNoneMatch",params); 
-			copyArg(msg,"CopySourceIfUnmodifiedSince",params); 
-			copyArg(msg,"Expires",params); 
-			copyArg(msg,"GrantFullControl",params); 
-			copyArg(msg,"GrantRead",params); 
-			copyArg(msg,"GrantReadACP",params); 
-			copyArg(msg,"GrantWriteACP",params); 
-			copyArg(msg,"Key",params); 
-			copyArg(msg,"Metadata",params); 
-			copyArg(msg,"MetadataDirective",params); 
-			copyArg(msg,"TaggingDirective",params); 
-			copyArg(msg,"ServerSideEncryption",params); 
-			copyArg(msg,"StorageClass",params); 
-			copyArg(msg,"WebsiteRedirectLocation",params); 
-			copyArg(msg,"SSECustomerAlgorithm",params); 
-			copyArg(msg,"SSECustomerKey",params); 
-			copyArg(msg,"SSECustomerKeyMD5",params); 
-			copyArg(msg,"SSEKMSKeyId",params); 
-			copyArg(msg,"CopySourceSSECustomerAlgorithm",params); 
-			copyArg(msg,"CopySourceSSECustomerKey",params); 
-			copyArg(msg,"CopySourceSSECustomerKeyMD5",params); 
-			copyArg(msg,"RequestPayer",params); 
-			copyArg(msg,"Tagging",params); 
+			copyArg(msg,"ACL",params,undefined,false); 
+			copyArg(msg,"Bucket",params,undefined,false); 
+			copyArg(msg,"CacheControl",params,undefined,false); 
+			copyArg(msg,"ContentDisposition",params,undefined,false); 
+			copyArg(msg,"ContentEncoding",params,undefined,false); 
+			copyArg(msg,"ContentLanguage",params,undefined,false); 
+			copyArg(msg,"ContentType",params,undefined,false); 
+			copyArg(msg,"CopySource",params,undefined,false); 
+			copyArg(msg,"CopySourceIfMatch",params,undefined,false); 
+			copyArg(msg,"CopySourceIfModifiedSince",params,undefined,false); 
+			copyArg(msg,"CopySourceIfNoneMatch",params,undefined,false); 
+			copyArg(msg,"CopySourceIfUnmodifiedSince",params,undefined,false); 
+			copyArg(msg,"Expires",params,undefined,false); 
+			copyArg(msg,"GrantFullControl",params,undefined,false); 
+			copyArg(msg,"GrantRead",params,undefined,false); 
+			copyArg(msg,"GrantReadACP",params,undefined,false); 
+			copyArg(msg,"GrantWriteACP",params,undefined,false); 
+			copyArg(msg,"Key",params,undefined,false); 
+			copyArg(msg,"Metadata",params,undefined,true); 
+			copyArg(msg,"MetadataDirective",params,undefined,false); 
+			copyArg(msg,"TaggingDirective",params,undefined,false); 
+			copyArg(msg,"ServerSideEncryption",params,undefined,false); 
+			copyArg(msg,"StorageClass",params,undefined,false); 
+			copyArg(msg,"WebsiteRedirectLocation",params,undefined,false); 
+			copyArg(msg,"SSECustomerAlgorithm",params,undefined,false); 
+			copyArg(msg,"SSECustomerKey",params,undefined,true); 
+			copyArg(msg,"SSECustomerKeyMD5",params,undefined,false); 
+			copyArg(msg,"SSEKMSKeyId",params,undefined,true); 
+			copyArg(msg,"CopySourceSSECustomerAlgorithm",params,undefined,false); 
+			copyArg(msg,"CopySourceSSECustomerKey",params,undefined,true); 
+			copyArg(msg,"CopySourceSSECustomerKeyMD5",params,undefined,false); 
+			copyArg(msg,"RequestPayer",params,undefined,false); 
+			copyArg(msg,"Tagging",params,undefined,false); 
 			
 
 			svc.copyObject(params,cb);
@@ -170,16 +175,16 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Bucket",params); 
+			copyArg(n,"Bucket",params,undefined,false); 
 			
-			copyArg(msg,"ACL",params); 
-			copyArg(msg,"Bucket",params); 
-			copyArg(msg,"CreateBucketConfiguration",params); 
-			copyArg(msg,"GrantFullControl",params); 
-			copyArg(msg,"GrantRead",params); 
-			copyArg(msg,"GrantReadACP",params); 
-			copyArg(msg,"GrantWrite",params); 
-			copyArg(msg,"GrantWriteACP",params); 
+			copyArg(msg,"ACL",params,undefined,false); 
+			copyArg(msg,"Bucket",params,undefined,false); 
+			copyArg(msg,"CreateBucketConfiguration",params,undefined,false); 
+			copyArg(msg,"GrantFullControl",params,undefined,false); 
+			copyArg(msg,"GrantRead",params,undefined,false); 
+			copyArg(msg,"GrantReadACP",params,undefined,false); 
+			copyArg(msg,"GrantWrite",params,undefined,false); 
+			copyArg(msg,"GrantWriteACP",params,undefined,false); 
 			
 
 			svc.createBucket(params,cb);
@@ -190,32 +195,32 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Bucket",params); 
-			copyArg(n,"Key",params); 
+			copyArg(n,"Bucket",params,undefined,false); 
+			copyArg(n,"Key",params,undefined,false); 
 			
-			copyArg(msg,"ACL",params); 
-			copyArg(msg,"Bucket",params); 
-			copyArg(msg,"CacheControl",params); 
-			copyArg(msg,"ContentDisposition",params); 
-			copyArg(msg,"ContentEncoding",params); 
-			copyArg(msg,"ContentLanguage",params); 
-			copyArg(msg,"ContentType",params); 
-			copyArg(msg,"Expires",params); 
-			copyArg(msg,"GrantFullControl",params); 
-			copyArg(msg,"GrantRead",params); 
-			copyArg(msg,"GrantReadACP",params); 
-			copyArg(msg,"GrantWriteACP",params); 
-			copyArg(msg,"Key",params); 
-			copyArg(msg,"Metadata",params); 
-			copyArg(msg,"ServerSideEncryption",params); 
-			copyArg(msg,"StorageClass",params); 
-			copyArg(msg,"WebsiteRedirectLocation",params); 
-			copyArg(msg,"SSECustomerAlgorithm",params); 
-			copyArg(msg,"SSECustomerKey",params); 
-			copyArg(msg,"SSECustomerKeyMD5",params); 
-			copyArg(msg,"SSEKMSKeyId",params); 
-			copyArg(msg,"RequestPayer",params); 
-			copyArg(msg,"Tagging",params); 
+			copyArg(msg,"ACL",params,undefined,false); 
+			copyArg(msg,"Bucket",params,undefined,false); 
+			copyArg(msg,"CacheControl",params,undefined,false); 
+			copyArg(msg,"ContentDisposition",params,undefined,false); 
+			copyArg(msg,"ContentEncoding",params,undefined,false); 
+			copyArg(msg,"ContentLanguage",params,undefined,false); 
+			copyArg(msg,"ContentType",params,undefined,false); 
+			copyArg(msg,"Expires",params,undefined,false); 
+			copyArg(msg,"GrantFullControl",params,undefined,false); 
+			copyArg(msg,"GrantRead",params,undefined,false); 
+			copyArg(msg,"GrantReadACP",params,undefined,false); 
+			copyArg(msg,"GrantWriteACP",params,undefined,false); 
+			copyArg(msg,"Key",params,undefined,false); 
+			copyArg(msg,"Metadata",params,undefined,true); 
+			copyArg(msg,"ServerSideEncryption",params,undefined,false); 
+			copyArg(msg,"StorageClass",params,undefined,false); 
+			copyArg(msg,"WebsiteRedirectLocation",params,undefined,false); 
+			copyArg(msg,"SSECustomerAlgorithm",params,undefined,false); 
+			copyArg(msg,"SSECustomerKey",params,undefined,true); 
+			copyArg(msg,"SSECustomerKeyMD5",params,undefined,false); 
+			copyArg(msg,"SSEKMSKeyId",params,undefined,true); 
+			copyArg(msg,"RequestPayer",params,undefined,false); 
+			copyArg(msg,"Tagging",params,undefined,false); 
 			
 
 			svc.createMultipartUpload(params,cb);
@@ -226,9 +231,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Bucket",params); 
+			copyArg(n,"Bucket",params,undefined,false); 
 			
-			copyArg(msg,"Bucket",params); 
+			copyArg(msg,"Bucket",params,undefined,false); 
 			
 
 			svc.deleteBucket(params,cb);
@@ -239,11 +244,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Bucket",params); 
-			copyArg(n,"Id",params); 
+			copyArg(n,"Bucket",params,undefined,false); 
+			copyArg(n,"Id",params,undefined,false); 
 			
-			copyArg(msg,"Bucket",params); 
-			copyArg(msg,"Id",params); 
+			copyArg(msg,"Bucket",params,undefined,false); 
+			copyArg(msg,"Id",params,undefined,false); 
 			
 
 			svc.deleteBucketAnalyticsConfiguration(params,cb);
@@ -254,9 +259,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Bucket",params); 
+			copyArg(n,"Bucket",params,undefined,false); 
 			
-			copyArg(msg,"Bucket",params); 
+			copyArg(msg,"Bucket",params,undefined,false); 
 			
 
 			svc.deleteBucketCors(params,cb);
@@ -267,9 +272,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Bucket",params); 
+			copyArg(n,"Bucket",params,undefined,false); 
 			
-			copyArg(msg,"Bucket",params); 
+			copyArg(msg,"Bucket",params,undefined,false); 
 			
 
 			svc.deleteBucketEncryption(params,cb);
@@ -280,11 +285,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Bucket",params); 
-			copyArg(n,"Id",params); 
+			copyArg(n,"Bucket",params,undefined,false); 
+			copyArg(n,"Id",params,undefined,false); 
 			
-			copyArg(msg,"Bucket",params); 
-			copyArg(msg,"Id",params); 
+			copyArg(msg,"Bucket",params,undefined,false); 
+			copyArg(msg,"Id",params,undefined,false); 
 			
 
 			svc.deleteBucketInventoryConfiguration(params,cb);
@@ -295,9 +300,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Bucket",params); 
+			copyArg(n,"Bucket",params,undefined,false); 
 			
-			copyArg(msg,"Bucket",params); 
+			copyArg(msg,"Bucket",params,undefined,false); 
 			
 
 			svc.deleteBucketLifecycle(params,cb);
@@ -308,11 +313,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Bucket",params); 
-			copyArg(n,"Id",params); 
+			copyArg(n,"Bucket",params,undefined,false); 
+			copyArg(n,"Id",params,undefined,false); 
 			
-			copyArg(msg,"Bucket",params); 
-			copyArg(msg,"Id",params); 
+			copyArg(msg,"Bucket",params,undefined,false); 
+			copyArg(msg,"Id",params,undefined,false); 
 			
 
 			svc.deleteBucketMetricsConfiguration(params,cb);
@@ -323,9 +328,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Bucket",params); 
+			copyArg(n,"Bucket",params,undefined,false); 
 			
-			copyArg(msg,"Bucket",params); 
+			copyArg(msg,"Bucket",params,undefined,false); 
 			
 
 			svc.deleteBucketPolicy(params,cb);
@@ -336,9 +341,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Bucket",params); 
+			copyArg(n,"Bucket",params,undefined,false); 
 			
-			copyArg(msg,"Bucket",params); 
+			copyArg(msg,"Bucket",params,undefined,false); 
 			
 
 			svc.deleteBucketReplication(params,cb);
@@ -349,9 +354,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Bucket",params); 
+			copyArg(n,"Bucket",params,undefined,false); 
 			
-			copyArg(msg,"Bucket",params); 
+			copyArg(msg,"Bucket",params,undefined,false); 
 			
 
 			svc.deleteBucketTagging(params,cb);
@@ -362,9 +367,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Bucket",params); 
+			copyArg(n,"Bucket",params,undefined,false); 
 			
-			copyArg(msg,"Bucket",params); 
+			copyArg(msg,"Bucket",params,undefined,false); 
 			
 
 			svc.deleteBucketWebsite(params,cb);
@@ -375,14 +380,14 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Bucket",params); 
-			copyArg(n,"Key",params); 
+			copyArg(n,"Bucket",params,undefined,false); 
+			copyArg(n,"Key",params,undefined,false); 
 			
-			copyArg(msg,"Bucket",params); 
-			copyArg(msg,"Key",params); 
-			copyArg(msg,"MFA",params); 
-			copyArg(msg,"VersionId",params); 
-			copyArg(msg,"RequestPayer",params); 
+			copyArg(msg,"Bucket",params,undefined,false); 
+			copyArg(msg,"Key",params,undefined,false); 
+			copyArg(msg,"MFA",params,undefined,false); 
+			copyArg(msg,"VersionId",params,undefined,false); 
+			copyArg(msg,"RequestPayer",params,undefined,false); 
 			
 
 			svc.deleteObject(params,cb);
@@ -393,12 +398,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Bucket",params); 
-			copyArg(n,"Key",params); 
+			copyArg(n,"Bucket",params,undefined,false); 
+			copyArg(n,"Key",params,undefined,false); 
 			
-			copyArg(msg,"Bucket",params); 
-			copyArg(msg,"Key",params); 
-			copyArg(msg,"VersionId",params); 
+			copyArg(msg,"Bucket",params,undefined,false); 
+			copyArg(msg,"Key",params,undefined,false); 
+			copyArg(msg,"VersionId",params,undefined,false); 
 			
 
 			svc.deleteObjectTagging(params,cb);
@@ -409,13 +414,13 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Bucket",params); 
-			copyArg(n,"Delete",params); 
+			copyArg(n,"Bucket",params,undefined,false); 
+			copyArg(n,"Delete",params,undefined,false); 
 			
-			copyArg(msg,"Bucket",params); 
-			copyArg(msg,"Delete",params); 
-			copyArg(msg,"MFA",params); 
-			copyArg(msg,"RequestPayer",params); 
+			copyArg(msg,"Bucket",params,undefined,false); 
+			copyArg(msg,"Delete",params,undefined,false); 
+			copyArg(msg,"MFA",params,undefined,false); 
+			copyArg(msg,"RequestPayer",params,undefined,false); 
 			
 
 			svc.deleteObjects(params,cb);
@@ -426,9 +431,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Bucket",params); 
+			copyArg(n,"Bucket",params,undefined,false); 
 			
-			copyArg(msg,"Bucket",params); 
+			copyArg(msg,"Bucket",params,undefined,false); 
 			
 
 			svc.getBucketAccelerateConfiguration(params,cb);
@@ -439,9 +444,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Bucket",params); 
+			copyArg(n,"Bucket",params,undefined,false); 
 			
-			copyArg(msg,"Bucket",params); 
+			copyArg(msg,"Bucket",params,undefined,false); 
 			
 
 			svc.getBucketAcl(params,cb);
@@ -452,11 +457,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Bucket",params); 
-			copyArg(n,"Id",params); 
+			copyArg(n,"Bucket",params,undefined,false); 
+			copyArg(n,"Id",params,undefined,false); 
 			
-			copyArg(msg,"Bucket",params); 
-			copyArg(msg,"Id",params); 
+			copyArg(msg,"Bucket",params,undefined,false); 
+			copyArg(msg,"Id",params,undefined,false); 
 			
 
 			svc.getBucketAnalyticsConfiguration(params,cb);
@@ -467,9 +472,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Bucket",params); 
+			copyArg(n,"Bucket",params,undefined,false); 
 			
-			copyArg(msg,"Bucket",params); 
+			copyArg(msg,"Bucket",params,undefined,false); 
 			
 
 			svc.getBucketCors(params,cb);
@@ -480,9 +485,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Bucket",params); 
+			copyArg(n,"Bucket",params,undefined,false); 
 			
-			copyArg(msg,"Bucket",params); 
+			copyArg(msg,"Bucket",params,undefined,false); 
 			
 
 			svc.getBucketEncryption(params,cb);
@@ -493,11 +498,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Bucket",params); 
-			copyArg(n,"Id",params); 
+			copyArg(n,"Bucket",params,undefined,false); 
+			copyArg(n,"Id",params,undefined,false); 
 			
-			copyArg(msg,"Bucket",params); 
-			copyArg(msg,"Id",params); 
+			copyArg(msg,"Bucket",params,undefined,false); 
+			copyArg(msg,"Id",params,undefined,false); 
 			
 
 			svc.getBucketInventoryConfiguration(params,cb);
@@ -508,9 +513,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Bucket",params); 
+			copyArg(n,"Bucket",params,undefined,false); 
 			
-			copyArg(msg,"Bucket",params); 
+			copyArg(msg,"Bucket",params,undefined,false); 
 			
 
 			svc.getBucketLifecycle(params,cb);
@@ -521,9 +526,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Bucket",params); 
+			copyArg(n,"Bucket",params,undefined,false); 
 			
-			copyArg(msg,"Bucket",params); 
+			copyArg(msg,"Bucket",params,undefined,false); 
 			
 
 			svc.getBucketLifecycleConfiguration(params,cb);
@@ -534,9 +539,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Bucket",params); 
+			copyArg(n,"Bucket",params,undefined,false); 
 			
-			copyArg(msg,"Bucket",params); 
+			copyArg(msg,"Bucket",params,undefined,false); 
 			
 
 			svc.getBucketLocation(params,cb);
@@ -547,9 +552,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Bucket",params); 
+			copyArg(n,"Bucket",params,undefined,false); 
 			
-			copyArg(msg,"Bucket",params); 
+			copyArg(msg,"Bucket",params,undefined,false); 
 			
 
 			svc.getBucketLogging(params,cb);
@@ -560,11 +565,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Bucket",params); 
-			copyArg(n,"Id",params); 
+			copyArg(n,"Bucket",params,undefined,false); 
+			copyArg(n,"Id",params,undefined,false); 
 			
-			copyArg(msg,"Bucket",params); 
-			copyArg(msg,"Id",params); 
+			copyArg(msg,"Bucket",params,undefined,false); 
+			copyArg(msg,"Id",params,undefined,false); 
 			
 
 			svc.getBucketMetricsConfiguration(params,cb);
@@ -577,7 +582,7 @@ module.exports = function(RED) {
 			
 			
 			
-			copyArg(msg,"Bucket",params); 
+			copyArg(msg,"Bucket",params,undefined,true); 
 
 			svc.getBucketNotification(params,cb);
 		}
@@ -589,7 +594,7 @@ module.exports = function(RED) {
 			
 			
 			
-			copyArg(msg,"Bucket",params); 
+			copyArg(msg,"Bucket",params,undefined,true); 
 
 			svc.getBucketNotificationConfiguration(params,cb);
 		}
@@ -599,9 +604,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Bucket",params); 
+			copyArg(n,"Bucket",params,undefined,false); 
 			
-			copyArg(msg,"Bucket",params); 
+			copyArg(msg,"Bucket",params,undefined,false); 
 			
 
 			svc.getBucketPolicy(params,cb);
@@ -612,9 +617,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Bucket",params); 
+			copyArg(n,"Bucket",params,undefined,false); 
 			
-			copyArg(msg,"Bucket",params); 
+			copyArg(msg,"Bucket",params,undefined,false); 
 			
 
 			svc.getBucketReplication(params,cb);
@@ -625,9 +630,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Bucket",params); 
+			copyArg(n,"Bucket",params,undefined,false); 
 			
-			copyArg(msg,"Bucket",params); 
+			copyArg(msg,"Bucket",params,undefined,false); 
 			
 
 			svc.getBucketRequestPayment(params,cb);
@@ -638,9 +643,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Bucket",params); 
+			copyArg(n,"Bucket",params,undefined,false); 
 			
-			copyArg(msg,"Bucket",params); 
+			copyArg(msg,"Bucket",params,undefined,false); 
 			
 
 			svc.getBucketTagging(params,cb);
@@ -651,9 +656,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Bucket",params); 
+			copyArg(n,"Bucket",params,undefined,false); 
 			
-			copyArg(msg,"Bucket",params); 
+			copyArg(msg,"Bucket",params,undefined,false); 
 			
 
 			svc.getBucketVersioning(params,cb);
@@ -664,9 +669,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Bucket",params); 
+			copyArg(n,"Bucket",params,undefined,false); 
 			
-			copyArg(msg,"Bucket",params); 
+			copyArg(msg,"Bucket",params,undefined,false); 
 			
 
 			svc.getBucketWebsite(params,cb);
@@ -677,28 +682,28 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Bucket",params); 
-			copyArg(n,"Key",params); 
+			copyArg(n,"Bucket",params,undefined,false); 
+			copyArg(n,"Key",params,undefined,false); 
 			
-			copyArg(msg,"Bucket",params); 
-			copyArg(msg,"IfMatch",params); 
-			copyArg(msg,"IfModifiedSince",params); 
-			copyArg(msg,"IfNoneMatch",params); 
-			copyArg(msg,"IfUnmodifiedSince",params); 
-			copyArg(msg,"Key",params); 
-			copyArg(msg,"Range",params); 
-			copyArg(msg,"ResponseCacheControl",params); 
-			copyArg(msg,"ResponseContentDisposition",params); 
-			copyArg(msg,"ResponseContentEncoding",params); 
-			copyArg(msg,"ResponseContentLanguage",params); 
-			copyArg(msg,"ResponseContentType",params); 
-			copyArg(msg,"ResponseExpires",params); 
-			copyArg(msg,"VersionId",params); 
-			copyArg(msg,"SSECustomerAlgorithm",params); 
-			copyArg(msg,"SSECustomerKey",params); 
-			copyArg(msg,"SSECustomerKeyMD5",params); 
-			copyArg(msg,"RequestPayer",params); 
-			copyArg(msg,"PartNumber",params); 
+			copyArg(msg,"Bucket",params,undefined,false); 
+			copyArg(msg,"IfMatch",params,undefined,false); 
+			copyArg(msg,"IfModifiedSince",params,undefined,false); 
+			copyArg(msg,"IfNoneMatch",params,undefined,false); 
+			copyArg(msg,"IfUnmodifiedSince",params,undefined,false); 
+			copyArg(msg,"Key",params,undefined,false); 
+			copyArg(msg,"Range",params,undefined,false); 
+			copyArg(msg,"ResponseCacheControl",params,undefined,false); 
+			copyArg(msg,"ResponseContentDisposition",params,undefined,false); 
+			copyArg(msg,"ResponseContentEncoding",params,undefined,false); 
+			copyArg(msg,"ResponseContentLanguage",params,undefined,false); 
+			copyArg(msg,"ResponseContentType",params,undefined,false); 
+			copyArg(msg,"ResponseExpires",params,undefined,false); 
+			copyArg(msg,"VersionId",params,undefined,false); 
+			copyArg(msg,"SSECustomerAlgorithm",params,undefined,false); 
+			copyArg(msg,"SSECustomerKey",params,undefined,true); 
+			copyArg(msg,"SSECustomerKeyMD5",params,undefined,false); 
+			copyArg(msg,"RequestPayer",params,undefined,false); 
+			copyArg(msg,"PartNumber",params,undefined,false); 
 			
 
 			svc.getObject(params,cb);
@@ -709,13 +714,13 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Bucket",params); 
-			copyArg(n,"Key",params); 
+			copyArg(n,"Bucket",params,undefined,false); 
+			copyArg(n,"Key",params,undefined,false); 
 			
-			copyArg(msg,"Bucket",params); 
-			copyArg(msg,"Key",params); 
-			copyArg(msg,"VersionId",params); 
-			copyArg(msg,"RequestPayer",params); 
+			copyArg(msg,"Bucket",params,undefined,false); 
+			copyArg(msg,"Key",params,undefined,false); 
+			copyArg(msg,"VersionId",params,undefined,false); 
+			copyArg(msg,"RequestPayer",params,undefined,false); 
 			
 
 			svc.getObjectAcl(params,cb);
@@ -726,12 +731,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Bucket",params); 
-			copyArg(n,"Key",params); 
+			copyArg(n,"Bucket",params,undefined,false); 
+			copyArg(n,"Key",params,undefined,false); 
 			
-			copyArg(msg,"Bucket",params); 
-			copyArg(msg,"Key",params); 
-			copyArg(msg,"VersionId",params); 
+			copyArg(msg,"Bucket",params,undefined,false); 
+			copyArg(msg,"Key",params,undefined,false); 
+			copyArg(msg,"VersionId",params,undefined,false); 
 			
 
 			svc.getObjectTagging(params,cb);
@@ -742,12 +747,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Bucket",params); 
-			copyArg(n,"Key",params); 
+			copyArg(n,"Bucket",params,undefined,false); 
+			copyArg(n,"Key",params,undefined,false); 
 			
-			copyArg(msg,"Bucket",params); 
-			copyArg(msg,"Key",params); 
-			copyArg(msg,"RequestPayer",params); 
+			copyArg(msg,"Bucket",params,undefined,false); 
+			copyArg(msg,"Key",params,undefined,false); 
+			copyArg(msg,"RequestPayer",params,undefined,false); 
 			
 
 			svc.getObjectTorrent(params,cb);
@@ -758,9 +763,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Bucket",params); 
+			copyArg(n,"Bucket",params,undefined,false); 
 			
-			copyArg(msg,"Bucket",params); 
+			copyArg(msg,"Bucket",params,undefined,false); 
 			
 
 			svc.headBucket(params,cb);
@@ -771,22 +776,22 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Bucket",params); 
-			copyArg(n,"Key",params); 
+			copyArg(n,"Bucket",params,undefined,false); 
+			copyArg(n,"Key",params,undefined,false); 
 			
-			copyArg(msg,"Bucket",params); 
-			copyArg(msg,"IfMatch",params); 
-			copyArg(msg,"IfModifiedSince",params); 
-			copyArg(msg,"IfNoneMatch",params); 
-			copyArg(msg,"IfUnmodifiedSince",params); 
-			copyArg(msg,"Key",params); 
-			copyArg(msg,"Range",params); 
-			copyArg(msg,"VersionId",params); 
-			copyArg(msg,"SSECustomerAlgorithm",params); 
-			copyArg(msg,"SSECustomerKey",params); 
-			copyArg(msg,"SSECustomerKeyMD5",params); 
-			copyArg(msg,"RequestPayer",params); 
-			copyArg(msg,"PartNumber",params); 
+			copyArg(msg,"Bucket",params,undefined,false); 
+			copyArg(msg,"IfMatch",params,undefined,false); 
+			copyArg(msg,"IfModifiedSince",params,undefined,false); 
+			copyArg(msg,"IfNoneMatch",params,undefined,false); 
+			copyArg(msg,"IfUnmodifiedSince",params,undefined,false); 
+			copyArg(msg,"Key",params,undefined,false); 
+			copyArg(msg,"Range",params,undefined,false); 
+			copyArg(msg,"VersionId",params,undefined,false); 
+			copyArg(msg,"SSECustomerAlgorithm",params,undefined,false); 
+			copyArg(msg,"SSECustomerKey",params,undefined,true); 
+			copyArg(msg,"SSECustomerKeyMD5",params,undefined,false); 
+			copyArg(msg,"RequestPayer",params,undefined,false); 
+			copyArg(msg,"PartNumber",params,undefined,false); 
 			
 
 			svc.headObject(params,cb);
@@ -797,10 +802,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Bucket",params); 
+			copyArg(n,"Bucket",params,undefined,false); 
 			
-			copyArg(msg,"Bucket",params); 
-			copyArg(msg,"ContinuationToken",params); 
+			copyArg(msg,"Bucket",params,undefined,false); 
+			copyArg(msg,"ContinuationToken",params,undefined,false); 
 			
 
 			svc.listBucketAnalyticsConfigurations(params,cb);
@@ -811,10 +816,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Bucket",params); 
+			copyArg(n,"Bucket",params,undefined,false); 
 			
-			copyArg(msg,"Bucket",params); 
-			copyArg(msg,"ContinuationToken",params); 
+			copyArg(msg,"Bucket",params,undefined,false); 
+			copyArg(msg,"ContinuationToken",params,undefined,false); 
 			
 
 			svc.listBucketInventoryConfigurations(params,cb);
@@ -825,10 +830,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Bucket",params); 
+			copyArg(n,"Bucket",params,undefined,false); 
 			
-			copyArg(msg,"Bucket",params); 
-			copyArg(msg,"ContinuationToken",params); 
+			copyArg(msg,"Bucket",params,undefined,false); 
+			copyArg(msg,"ContinuationToken",params,undefined,false); 
 			
 
 			svc.listBucketMetricsConfigurations(params,cb);
@@ -850,15 +855,15 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Bucket",params); 
+			copyArg(n,"Bucket",params,undefined,false); 
 			
-			copyArg(msg,"Bucket",params); 
-			copyArg(msg,"Delimiter",params); 
-			copyArg(msg,"EncodingType",params); 
-			copyArg(msg,"KeyMarker",params); 
-			copyArg(msg,"MaxUploads",params); 
-			copyArg(msg,"Prefix",params); 
-			copyArg(msg,"UploadIdMarker",params); 
+			copyArg(msg,"Bucket",params,undefined,false); 
+			copyArg(msg,"Delimiter",params,undefined,false); 
+			copyArg(msg,"EncodingType",params,undefined,false); 
+			copyArg(msg,"KeyMarker",params,undefined,false); 
+			copyArg(msg,"MaxUploads",params,undefined,false); 
+			copyArg(msg,"Prefix",params,undefined,false); 
+			copyArg(msg,"UploadIdMarker",params,undefined,false); 
 			
 
 			svc.listMultipartUploads(params,cb);
@@ -869,15 +874,15 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Bucket",params); 
+			copyArg(n,"Bucket",params,undefined,false); 
 			
-			copyArg(msg,"Bucket",params); 
-			copyArg(msg,"Delimiter",params); 
-			copyArg(msg,"EncodingType",params); 
-			copyArg(msg,"KeyMarker",params); 
-			copyArg(msg,"MaxKeys",params); 
-			copyArg(msg,"Prefix",params); 
-			copyArg(msg,"VersionIdMarker",params); 
+			copyArg(msg,"Bucket",params,undefined,false); 
+			copyArg(msg,"Delimiter",params,undefined,false); 
+			copyArg(msg,"EncodingType",params,undefined,false); 
+			copyArg(msg,"KeyMarker",params,undefined,false); 
+			copyArg(msg,"MaxKeys",params,undefined,false); 
+			copyArg(msg,"Prefix",params,undefined,false); 
+			copyArg(msg,"VersionIdMarker",params,undefined,false); 
 			
 
 			svc.listObjectVersions(params,cb);
@@ -888,15 +893,15 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Bucket",params); 
+			copyArg(n,"Bucket",params,undefined,false); 
 			
-			copyArg(msg,"Bucket",params); 
-			copyArg(msg,"Delimiter",params); 
-			copyArg(msg,"EncodingType",params); 
-			copyArg(msg,"Marker",params); 
-			copyArg(msg,"MaxKeys",params); 
-			copyArg(msg,"Prefix",params); 
-			copyArg(msg,"RequestPayer",params); 
+			copyArg(msg,"Bucket",params,undefined,false); 
+			copyArg(msg,"Delimiter",params,undefined,false); 
+			copyArg(msg,"EncodingType",params,undefined,false); 
+			copyArg(msg,"Marker",params,undefined,false); 
+			copyArg(msg,"MaxKeys",params,undefined,false); 
+			copyArg(msg,"Prefix",params,undefined,false); 
+			copyArg(msg,"RequestPayer",params,undefined,false); 
 			
 
 			svc.listObjects(params,cb);
@@ -907,17 +912,17 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Bucket",params); 
+			copyArg(n,"Bucket",params,undefined,false); 
 			
-			copyArg(msg,"Bucket",params); 
-			copyArg(msg,"Delimiter",params); 
-			copyArg(msg,"EncodingType",params); 
-			copyArg(msg,"MaxKeys",params); 
-			copyArg(msg,"Prefix",params); 
-			copyArg(msg,"ContinuationToken",params); 
-			copyArg(msg,"FetchOwner",params); 
-			copyArg(msg,"StartAfter",params); 
-			copyArg(msg,"RequestPayer",params); 
+			copyArg(msg,"Bucket",params,undefined,false); 
+			copyArg(msg,"Delimiter",params,undefined,false); 
+			copyArg(msg,"EncodingType",params,undefined,false); 
+			copyArg(msg,"MaxKeys",params,undefined,false); 
+			copyArg(msg,"Prefix",params,undefined,false); 
+			copyArg(msg,"ContinuationToken",params,undefined,false); 
+			copyArg(msg,"FetchOwner",params,undefined,false); 
+			copyArg(msg,"StartAfter",params,undefined,false); 
+			copyArg(msg,"RequestPayer",params,undefined,false); 
 			
 
 			svc.listObjectsV2(params,cb);
@@ -928,16 +933,16 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Bucket",params); 
-			copyArg(n,"Key",params); 
-			copyArg(n,"UploadId",params); 
+			copyArg(n,"Bucket",params,undefined,false); 
+			copyArg(n,"Key",params,undefined,false); 
+			copyArg(n,"UploadId",params,undefined,false); 
 			
-			copyArg(msg,"Bucket",params); 
-			copyArg(msg,"Key",params); 
-			copyArg(msg,"MaxParts",params); 
-			copyArg(msg,"PartNumberMarker",params); 
-			copyArg(msg,"UploadId",params); 
-			copyArg(msg,"RequestPayer",params); 
+			copyArg(msg,"Bucket",params,undefined,false); 
+			copyArg(msg,"Key",params,undefined,false); 
+			copyArg(msg,"MaxParts",params,undefined,false); 
+			copyArg(msg,"PartNumberMarker",params,undefined,false); 
+			copyArg(msg,"UploadId",params,undefined,false); 
+			copyArg(msg,"RequestPayer",params,undefined,false); 
 			
 
 			svc.listParts(params,cb);
@@ -948,11 +953,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Bucket",params); 
-			copyArg(n,"AccelerateConfiguration",params); 
+			copyArg(n,"Bucket",params,undefined,false); 
+			copyArg(n,"AccelerateConfiguration",params,undefined,false); 
 			
-			copyArg(msg,"Bucket",params); 
-			copyArg(msg,"AccelerateConfiguration",params); 
+			copyArg(msg,"Bucket",params,undefined,false); 
+			copyArg(msg,"AccelerateConfiguration",params,undefined,false); 
 			
 
 			svc.putBucketAccelerateConfiguration(params,cb);
@@ -963,17 +968,17 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Bucket",params); 
+			copyArg(n,"Bucket",params,undefined,false); 
 			
-			copyArg(msg,"ACL",params); 
-			copyArg(msg,"AccessControlPolicy",params); 
-			copyArg(msg,"Bucket",params); 
-			copyArg(msg,"ContentMD5",params); 
-			copyArg(msg,"GrantFullControl",params); 
-			copyArg(msg,"GrantRead",params); 
-			copyArg(msg,"GrantReadACP",params); 
-			copyArg(msg,"GrantWrite",params); 
-			copyArg(msg,"GrantWriteACP",params); 
+			copyArg(msg,"ACL",params,undefined,false); 
+			copyArg(msg,"AccessControlPolicy",params,undefined,true); 
+			copyArg(msg,"Bucket",params,undefined,false); 
+			copyArg(msg,"ContentMD5",params,undefined,false); 
+			copyArg(msg,"GrantFullControl",params,undefined,false); 
+			copyArg(msg,"GrantRead",params,undefined,false); 
+			copyArg(msg,"GrantReadACP",params,undefined,false); 
+			copyArg(msg,"GrantWrite",params,undefined,false); 
+			copyArg(msg,"GrantWriteACP",params,undefined,false); 
 			
 
 			svc.putBucketAcl(params,cb);
@@ -984,13 +989,13 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Bucket",params); 
-			copyArg(n,"Id",params); 
-			copyArg(n,"AnalyticsConfiguration",params); 
+			copyArg(n,"Bucket",params,undefined,false); 
+			copyArg(n,"Id",params,undefined,false); 
+			copyArg(n,"AnalyticsConfiguration",params,undefined,true); 
 			
-			copyArg(msg,"Bucket",params); 
-			copyArg(msg,"Id",params); 
-			copyArg(msg,"AnalyticsConfiguration",params); 
+			copyArg(msg,"Bucket",params,undefined,false); 
+			copyArg(msg,"Id",params,undefined,false); 
+			copyArg(msg,"AnalyticsConfiguration",params,undefined,true); 
 			
 
 			svc.putBucketAnalyticsConfiguration(params,cb);
@@ -1001,12 +1006,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Bucket",params); 
-			copyArg(n,"CORSConfiguration",params); 
+			copyArg(n,"Bucket",params,undefined,false); 
+			copyArg(n,"CORSConfiguration",params,undefined,false); 
 			
-			copyArg(msg,"Bucket",params); 
-			copyArg(msg,"CORSConfiguration",params); 
-			copyArg(msg,"ContentMD5",params); 
+			copyArg(msg,"Bucket",params,undefined,false); 
+			copyArg(msg,"CORSConfiguration",params,undefined,false); 
+			copyArg(msg,"ContentMD5",params,undefined,false); 
 			
 
 			svc.putBucketCors(params,cb);
@@ -1017,12 +1022,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Bucket",params); 
-			copyArg(n,"ServerSideEncryptionConfiguration",params); 
+			copyArg(n,"Bucket",params,undefined,false); 
+			copyArg(n,"ServerSideEncryptionConfiguration",params,undefined,true); 
 			
-			copyArg(msg,"Bucket",params); 
-			copyArg(msg,"ContentMD5",params); 
-			copyArg(msg,"ServerSideEncryptionConfiguration",params); 
+			copyArg(msg,"Bucket",params,undefined,false); 
+			copyArg(msg,"ContentMD5",params,undefined,false); 
+			copyArg(msg,"ServerSideEncryptionConfiguration",params,undefined,true); 
 			
 
 			svc.putBucketEncryption(params,cb);
@@ -1033,13 +1038,13 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Bucket",params); 
-			copyArg(n,"Id",params); 
-			copyArg(n,"InventoryConfiguration",params); 
+			copyArg(n,"Bucket",params,undefined,false); 
+			copyArg(n,"Id",params,undefined,false); 
+			copyArg(n,"InventoryConfiguration",params,undefined,true); 
 			
-			copyArg(msg,"Bucket",params); 
-			copyArg(msg,"Id",params); 
-			copyArg(msg,"InventoryConfiguration",params); 
+			copyArg(msg,"Bucket",params,undefined,false); 
+			copyArg(msg,"Id",params,undefined,false); 
+			copyArg(msg,"InventoryConfiguration",params,undefined,true); 
 			
 
 			svc.putBucketInventoryConfiguration(params,cb);
@@ -1050,11 +1055,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Bucket",params); 
+			copyArg(n,"Bucket",params,undefined,false); 
 			
-			copyArg(msg,"Bucket",params); 
-			copyArg(msg,"ContentMD5",params); 
-			copyArg(msg,"LifecycleConfiguration",params); 
+			copyArg(msg,"Bucket",params,undefined,false); 
+			copyArg(msg,"ContentMD5",params,undefined,false); 
+			copyArg(msg,"LifecycleConfiguration",params,undefined,false); 
 			
 
 			svc.putBucketLifecycle(params,cb);
@@ -1065,10 +1070,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Bucket",params); 
+			copyArg(n,"Bucket",params,undefined,false); 
 			
-			copyArg(msg,"Bucket",params); 
-			copyArg(msg,"LifecycleConfiguration",params); 
+			copyArg(msg,"Bucket",params,undefined,false); 
+			copyArg(msg,"LifecycleConfiguration",params,undefined,false); 
 			
 
 			svc.putBucketLifecycleConfiguration(params,cb);
@@ -1079,12 +1084,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Bucket",params); 
-			copyArg(n,"BucketLoggingStatus",params); 
+			copyArg(n,"Bucket",params,undefined,false); 
+			copyArg(n,"BucketLoggingStatus",params,undefined,false); 
 			
-			copyArg(msg,"Bucket",params); 
-			copyArg(msg,"BucketLoggingStatus",params); 
-			copyArg(msg,"ContentMD5",params); 
+			copyArg(msg,"Bucket",params,undefined,false); 
+			copyArg(msg,"BucketLoggingStatus",params,undefined,false); 
+			copyArg(msg,"ContentMD5",params,undefined,false); 
 			
 
 			svc.putBucketLogging(params,cb);
@@ -1095,13 +1100,13 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Bucket",params); 
-			copyArg(n,"Id",params); 
-			copyArg(n,"MetricsConfiguration",params); 
+			copyArg(n,"Bucket",params,undefined,false); 
+			copyArg(n,"Id",params,undefined,false); 
+			copyArg(n,"MetricsConfiguration",params,undefined,true); 
 			
-			copyArg(msg,"Bucket",params); 
-			copyArg(msg,"Id",params); 
-			copyArg(msg,"MetricsConfiguration",params); 
+			copyArg(msg,"Bucket",params,undefined,false); 
+			copyArg(msg,"Id",params,undefined,false); 
+			copyArg(msg,"MetricsConfiguration",params,undefined,true); 
 			
 
 			svc.putBucketMetricsConfiguration(params,cb);
@@ -1112,12 +1117,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Bucket",params); 
-			copyArg(n,"NotificationConfiguration",params); 
+			copyArg(n,"Bucket",params,undefined,false); 
+			copyArg(n,"NotificationConfiguration",params,undefined,true); 
 			
-			copyArg(msg,"Bucket",params); 
-			copyArg(msg,"ContentMD5",params); 
-			copyArg(msg,"NotificationConfiguration",params); 
+			copyArg(msg,"Bucket",params,undefined,false); 
+			copyArg(msg,"ContentMD5",params,undefined,false); 
+			copyArg(msg,"NotificationConfiguration",params,undefined,true); 
 			
 
 			svc.putBucketNotification(params,cb);
@@ -1128,11 +1133,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Bucket",params); 
-			copyArg(n,"NotificationConfiguration",params); 
+			copyArg(n,"Bucket",params,undefined,false); 
+			copyArg(n,"NotificationConfiguration",params,undefined,true); 
 			
-			copyArg(msg,"Bucket",params); 
-			copyArg(msg,"NotificationConfiguration",params); 
+			copyArg(msg,"Bucket",params,undefined,false); 
+			copyArg(msg,"NotificationConfiguration",params,undefined,true); 
 			
 
 			svc.putBucketNotificationConfiguration(params,cb);
@@ -1143,13 +1148,13 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Bucket",params); 
-			copyArg(n,"Policy",params); 
+			copyArg(n,"Bucket",params,undefined,false); 
+			copyArg(n,"Policy",params,undefined,false); 
 			
-			copyArg(msg,"Bucket",params); 
-			copyArg(msg,"ContentMD5",params); 
-			copyArg(msg,"ConfirmRemoveSelfBucketAccess",params); 
-			copyArg(msg,"Policy",params); 
+			copyArg(msg,"Bucket",params,undefined,false); 
+			copyArg(msg,"ContentMD5",params,undefined,false); 
+			copyArg(msg,"ConfirmRemoveSelfBucketAccess",params,undefined,false); 
+			copyArg(msg,"Policy",params,undefined,false); 
 			
 
 			svc.putBucketPolicy(params,cb);
@@ -1160,12 +1165,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Bucket",params); 
-			copyArg(n,"ReplicationConfiguration",params); 
+			copyArg(n,"Bucket",params,undefined,false); 
+			copyArg(n,"ReplicationConfiguration",params,undefined,true); 
 			
-			copyArg(msg,"Bucket",params); 
-			copyArg(msg,"ContentMD5",params); 
-			copyArg(msg,"ReplicationConfiguration",params); 
+			copyArg(msg,"Bucket",params,undefined,false); 
+			copyArg(msg,"ContentMD5",params,undefined,false); 
+			copyArg(msg,"ReplicationConfiguration",params,undefined,true); 
 			
 
 			svc.putBucketReplication(params,cb);
@@ -1176,12 +1181,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Bucket",params); 
-			copyArg(n,"RequestPaymentConfiguration",params); 
+			copyArg(n,"Bucket",params,undefined,false); 
+			copyArg(n,"RequestPaymentConfiguration",params,undefined,false); 
 			
-			copyArg(msg,"Bucket",params); 
-			copyArg(msg,"ContentMD5",params); 
-			copyArg(msg,"RequestPaymentConfiguration",params); 
+			copyArg(msg,"Bucket",params,undefined,false); 
+			copyArg(msg,"ContentMD5",params,undefined,false); 
+			copyArg(msg,"RequestPaymentConfiguration",params,undefined,false); 
 			
 
 			svc.putBucketRequestPayment(params,cb);
@@ -1192,12 +1197,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Bucket",params); 
-			copyArg(n,"Tagging",params); 
+			copyArg(n,"Bucket",params,undefined,false); 
+			copyArg(n,"Tagging",params,undefined,true); 
 			
-			copyArg(msg,"Bucket",params); 
-			copyArg(msg,"ContentMD5",params); 
-			copyArg(msg,"Tagging",params); 
+			copyArg(msg,"Bucket",params,undefined,false); 
+			copyArg(msg,"ContentMD5",params,undefined,false); 
+			copyArg(msg,"Tagging",params,undefined,true); 
 			
 
 			svc.putBucketTagging(params,cb);
@@ -1208,13 +1213,13 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Bucket",params); 
-			copyArg(n,"VersioningConfiguration",params); 
+			copyArg(n,"Bucket",params,undefined,false); 
+			copyArg(n,"VersioningConfiguration",params,undefined,false); 
 			
-			copyArg(msg,"Bucket",params); 
-			copyArg(msg,"ContentMD5",params); 
-			copyArg(msg,"MFA",params); 
-			copyArg(msg,"VersioningConfiguration",params); 
+			copyArg(msg,"Bucket",params,undefined,false); 
+			copyArg(msg,"ContentMD5",params,undefined,false); 
+			copyArg(msg,"MFA",params,undefined,false); 
+			copyArg(msg,"VersioningConfiguration",params,undefined,false); 
 			
 
 			svc.putBucketVersioning(params,cb);
@@ -1225,12 +1230,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Bucket",params); 
-			copyArg(n,"WebsiteConfiguration",params); 
+			copyArg(n,"Bucket",params,undefined,false); 
+			copyArg(n,"WebsiteConfiguration",params,undefined,false); 
 			
-			copyArg(msg,"Bucket",params); 
-			copyArg(msg,"ContentMD5",params); 
-			copyArg(msg,"WebsiteConfiguration",params); 
+			copyArg(msg,"Bucket",params,undefined,false); 
+			copyArg(msg,"ContentMD5",params,undefined,false); 
+			copyArg(msg,"WebsiteConfiguration",params,undefined,false); 
 			
 
 			svc.putBucketWebsite(params,cb);
@@ -1241,35 +1246,35 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Bucket",params); 
-			copyArg(n,"Key",params); 
+			copyArg(n,"Bucket",params,undefined,false); 
+			copyArg(n,"Key",params,undefined,false); 
 			
-			copyArg(msg,"ACL",params); 
-			copyArg(msg,"Body",params); 
-			copyArg(msg,"Bucket",params); 
-			copyArg(msg,"CacheControl",params); 
-			copyArg(msg,"ContentDisposition",params); 
-			copyArg(msg,"ContentEncoding",params); 
-			copyArg(msg,"ContentLanguage",params); 
-			copyArg(msg,"ContentLength",params); 
-			copyArg(msg,"ContentMD5",params); 
-			copyArg(msg,"ContentType",params); 
-			copyArg(msg,"Expires",params); 
-			copyArg(msg,"GrantFullControl",params); 
-			copyArg(msg,"GrantRead",params); 
-			copyArg(msg,"GrantReadACP",params); 
-			copyArg(msg,"GrantWriteACP",params); 
-			copyArg(msg,"Key",params); 
-			copyArg(msg,"Metadata",params); 
-			copyArg(msg,"ServerSideEncryption",params); 
-			copyArg(msg,"StorageClass",params); 
-			copyArg(msg,"WebsiteRedirectLocation",params); 
-			copyArg(msg,"SSECustomerAlgorithm",params); 
-			copyArg(msg,"SSECustomerKey",params); 
-			copyArg(msg,"SSECustomerKeyMD5",params); 
-			copyArg(msg,"SSEKMSKeyId",params); 
-			copyArg(msg,"RequestPayer",params); 
-			copyArg(msg,"Tagging",params); 
+			copyArg(msg,"ACL",params,undefined,false); 
+			copyArg(msg,"Body",params,undefined,false); 
+			copyArg(msg,"Bucket",params,undefined,false); 
+			copyArg(msg,"CacheControl",params,undefined,false); 
+			copyArg(msg,"ContentDisposition",params,undefined,false); 
+			copyArg(msg,"ContentEncoding",params,undefined,false); 
+			copyArg(msg,"ContentLanguage",params,undefined,false); 
+			copyArg(msg,"ContentLength",params,undefined,false); 
+			copyArg(msg,"ContentMD5",params,undefined,false); 
+			copyArg(msg,"ContentType",params,undefined,false); 
+			copyArg(msg,"Expires",params,undefined,false); 
+			copyArg(msg,"GrantFullControl",params,undefined,false); 
+			copyArg(msg,"GrantRead",params,undefined,false); 
+			copyArg(msg,"GrantReadACP",params,undefined,false); 
+			copyArg(msg,"GrantWriteACP",params,undefined,false); 
+			copyArg(msg,"Key",params,undefined,false); 
+			copyArg(msg,"Metadata",params,undefined,true); 
+			copyArg(msg,"ServerSideEncryption",params,undefined,false); 
+			copyArg(msg,"StorageClass",params,undefined,false); 
+			copyArg(msg,"WebsiteRedirectLocation",params,undefined,false); 
+			copyArg(msg,"SSECustomerAlgorithm",params,undefined,false); 
+			copyArg(msg,"SSECustomerKey",params,undefined,true); 
+			copyArg(msg,"SSECustomerKeyMD5",params,undefined,false); 
+			copyArg(msg,"SSEKMSKeyId",params,undefined,true); 
+			copyArg(msg,"RequestPayer",params,undefined,false); 
+			copyArg(msg,"Tagging",params,undefined,false); 
 			
 
 			svc.putObject(params,cb);
@@ -1280,21 +1285,21 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Bucket",params); 
-			copyArg(n,"Key",params); 
+			copyArg(n,"Bucket",params,undefined,false); 
+			copyArg(n,"Key",params,undefined,false); 
 			
-			copyArg(msg,"ACL",params); 
-			copyArg(msg,"AccessControlPolicy",params); 
-			copyArg(msg,"Bucket",params); 
-			copyArg(msg,"ContentMD5",params); 
-			copyArg(msg,"GrantFullControl",params); 
-			copyArg(msg,"GrantRead",params); 
-			copyArg(msg,"GrantReadACP",params); 
-			copyArg(msg,"GrantWrite",params); 
-			copyArg(msg,"GrantWriteACP",params); 
-			copyArg(msg,"Key",params); 
-			copyArg(msg,"RequestPayer",params); 
-			copyArg(msg,"VersionId",params); 
+			copyArg(msg,"ACL",params,undefined,false); 
+			copyArg(msg,"AccessControlPolicy",params,undefined,true); 
+			copyArg(msg,"Bucket",params,undefined,false); 
+			copyArg(msg,"ContentMD5",params,undefined,false); 
+			copyArg(msg,"GrantFullControl",params,undefined,false); 
+			copyArg(msg,"GrantRead",params,undefined,false); 
+			copyArg(msg,"GrantReadACP",params,undefined,false); 
+			copyArg(msg,"GrantWrite",params,undefined,false); 
+			copyArg(msg,"GrantWriteACP",params,undefined,false); 
+			copyArg(msg,"Key",params,undefined,false); 
+			copyArg(msg,"RequestPayer",params,undefined,false); 
+			copyArg(msg,"VersionId",params,undefined,false); 
 			
 
 			svc.putObjectAcl(params,cb);
@@ -1305,15 +1310,15 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Bucket",params); 
-			copyArg(n,"Key",params); 
-			copyArg(n,"Tagging",params); 
+			copyArg(n,"Bucket",params,undefined,false); 
+			copyArg(n,"Key",params,undefined,false); 
+			copyArg(n,"Tagging",params,undefined,true); 
 			
-			copyArg(msg,"Bucket",params); 
-			copyArg(msg,"Key",params); 
-			copyArg(msg,"VersionId",params); 
-			copyArg(msg,"ContentMD5",params); 
-			copyArg(msg,"Tagging",params); 
+			copyArg(msg,"Bucket",params,undefined,false); 
+			copyArg(msg,"Key",params,undefined,false); 
+			copyArg(msg,"VersionId",params,undefined,false); 
+			copyArg(msg,"ContentMD5",params,undefined,false); 
+			copyArg(msg,"Tagging",params,undefined,true); 
 			
 
 			svc.putObjectTagging(params,cb);
@@ -1324,14 +1329,14 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Bucket",params); 
-			copyArg(n,"Key",params); 
+			copyArg(n,"Bucket",params,undefined,false); 
+			copyArg(n,"Key",params,undefined,false); 
 			
-			copyArg(msg,"Bucket",params); 
-			copyArg(msg,"Key",params); 
-			copyArg(msg,"VersionId",params); 
-			copyArg(msg,"RestoreRequest",params); 
-			copyArg(msg,"RequestPayer",params); 
+			copyArg(msg,"Bucket",params,undefined,false); 
+			copyArg(msg,"Key",params,undefined,false); 
+			copyArg(msg,"VersionId",params,undefined,false); 
+			copyArg(msg,"RestoreRequest",params,undefined,false); 
+			copyArg(msg,"RequestPayer",params,undefined,false); 
 			
 
 			svc.restoreObject(params,cb);
@@ -1342,22 +1347,22 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Bucket",params); 
-			copyArg(n,"Key",params); 
-			copyArg(n,"PartNumber",params); 
-			copyArg(n,"UploadId",params); 
+			copyArg(n,"Bucket",params,undefined,false); 
+			copyArg(n,"Key",params,undefined,false); 
+			copyArg(n,"PartNumber",params,undefined,false); 
+			copyArg(n,"UploadId",params,undefined,false); 
 			
-			copyArg(msg,"Body",params); 
-			copyArg(msg,"Bucket",params); 
-			copyArg(msg,"ContentLength",params); 
-			copyArg(msg,"ContentMD5",params); 
-			copyArg(msg,"Key",params); 
-			copyArg(msg,"PartNumber",params); 
-			copyArg(msg,"UploadId",params); 
-			copyArg(msg,"SSECustomerAlgorithm",params); 
-			copyArg(msg,"SSECustomerKey",params); 
-			copyArg(msg,"SSECustomerKeyMD5",params); 
-			copyArg(msg,"RequestPayer",params); 
+			copyArg(msg,"Body",params,undefined,false); 
+			copyArg(msg,"Bucket",params,undefined,false); 
+			copyArg(msg,"ContentLength",params,undefined,false); 
+			copyArg(msg,"ContentMD5",params,undefined,false); 
+			copyArg(msg,"Key",params,undefined,false); 
+			copyArg(msg,"PartNumber",params,undefined,false); 
+			copyArg(msg,"UploadId",params,undefined,false); 
+			copyArg(msg,"SSECustomerAlgorithm",params,undefined,false); 
+			copyArg(msg,"SSECustomerKey",params,undefined,true); 
+			copyArg(msg,"SSECustomerKeyMD5",params,undefined,false); 
+			copyArg(msg,"RequestPayer",params,undefined,false); 
 			
 
 			svc.uploadPart(params,cb);
@@ -1368,29 +1373,29 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Bucket",params); 
-			copyArg(n,"CopySource",params); 
-			copyArg(n,"Key",params); 
-			copyArg(n,"PartNumber",params); 
-			copyArg(n,"UploadId",params); 
+			copyArg(n,"Bucket",params,undefined,false); 
+			copyArg(n,"CopySource",params,undefined,false); 
+			copyArg(n,"Key",params,undefined,false); 
+			copyArg(n,"PartNumber",params,undefined,false); 
+			copyArg(n,"UploadId",params,undefined,false); 
 			
-			copyArg(msg,"Bucket",params); 
-			copyArg(msg,"CopySource",params); 
-			copyArg(msg,"CopySourceIfMatch",params); 
-			copyArg(msg,"CopySourceIfModifiedSince",params); 
-			copyArg(msg,"CopySourceIfNoneMatch",params); 
-			copyArg(msg,"CopySourceIfUnmodifiedSince",params); 
-			copyArg(msg,"CopySourceRange",params); 
-			copyArg(msg,"Key",params); 
-			copyArg(msg,"PartNumber",params); 
-			copyArg(msg,"UploadId",params); 
-			copyArg(msg,"SSECustomerAlgorithm",params); 
-			copyArg(msg,"SSECustomerKey",params); 
-			copyArg(msg,"SSECustomerKeyMD5",params); 
-			copyArg(msg,"CopySourceSSECustomerAlgorithm",params); 
-			copyArg(msg,"CopySourceSSECustomerKey",params); 
-			copyArg(msg,"CopySourceSSECustomerKeyMD5",params); 
-			copyArg(msg,"RequestPayer",params); 
+			copyArg(msg,"Bucket",params,undefined,false); 
+			copyArg(msg,"CopySource",params,undefined,false); 
+			copyArg(msg,"CopySourceIfMatch",params,undefined,false); 
+			copyArg(msg,"CopySourceIfModifiedSince",params,undefined,false); 
+			copyArg(msg,"CopySourceIfNoneMatch",params,undefined,false); 
+			copyArg(msg,"CopySourceIfUnmodifiedSince",params,undefined,false); 
+			copyArg(msg,"CopySourceRange",params,undefined,false); 
+			copyArg(msg,"Key",params,undefined,false); 
+			copyArg(msg,"PartNumber",params,undefined,false); 
+			copyArg(msg,"UploadId",params,undefined,false); 
+			copyArg(msg,"SSECustomerAlgorithm",params,undefined,false); 
+			copyArg(msg,"SSECustomerKey",params,undefined,true); 
+			copyArg(msg,"SSECustomerKeyMD5",params,undefined,false); 
+			copyArg(msg,"CopySourceSSECustomerAlgorithm",params,undefined,false); 
+			copyArg(msg,"CopySourceSSECustomerKey",params,undefined,true); 
+			copyArg(msg,"CopySourceSSECustomerKeyMD5",params,undefined,false); 
+			copyArg(msg,"RequestPayer",params,undefined,false); 
 			
 
 			svc.uploadPartCopy(params,cb);

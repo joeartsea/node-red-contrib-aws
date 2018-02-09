@@ -67,13 +67,18 @@ module.exports = function(RED) {
 			}
 
 		});
-		var copyArg=function(src,arg,out,outArg){
+		var copyArg=function(src,arg,out,outArg,isObject){
+			var tmpValue=src[arg];
 			outArg = (typeof outArg !== 'undefined') ? outArg : arg;
+
 			if (typeof src[arg] !== 'undefined'){
-				out[outArg]=src[arg];
+				if (isObject && typeof src[arg]=="string" && src[arg] != "") { 
+					tmpValue=JSON.parse(src[arg]);
+				}
+				out[outArg]=tmpValue;
 			}
                         //AWS API takes 'Payload' not 'payload' (see Lambda)
-                        if (arg=="Payload" && typeof src[arg] == 'undefined'){
+                        if (arg=="Payload" && typeof tmpValue == 'undefined'){
                                 out[arg]=src["payload"];
                         }
 
@@ -86,11 +91,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"ARN",params); 
-			copyArg(n,"TagList",params); 
+			copyArg(n,"ARN",params,undefined,false); 
+			copyArg(n,"TagList",params,undefined,true); 
 			
-			copyArg(msg,"ARN",params); 
-			copyArg(msg,"TagList",params); 
+			copyArg(msg,"ARN",params,undefined,false); 
+			copyArg(msg,"TagList",params,undefined,true); 
 			
 
 			svc.addTags(params,cb);
@@ -101,18 +106,18 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"DomainName",params); 
+			copyArg(n,"DomainName",params,undefined,false); 
 			
-			copyArg(msg,"DomainName",params); 
-			copyArg(msg,"ElasticsearchVersion",params); 
-			copyArg(msg,"ElasticsearchClusterConfig",params); 
-			copyArg(msg,"EBSOptions",params); 
-			copyArg(msg,"AccessPolicies",params); 
-			copyArg(msg,"SnapshotOptions",params); 
-			copyArg(msg,"VPCOptions",params); 
-			copyArg(msg,"EncryptionAtRestOptions",params); 
-			copyArg(msg,"AdvancedOptions",params); 
-			copyArg(msg,"LogPublishingOptions",params); 
+			copyArg(msg,"DomainName",params,undefined,false); 
+			copyArg(msg,"ElasticsearchVersion",params,undefined,false); 
+			copyArg(msg,"ElasticsearchClusterConfig",params,undefined,true); 
+			copyArg(msg,"EBSOptions",params,undefined,true); 
+			copyArg(msg,"AccessPolicies",params,undefined,false); 
+			copyArg(msg,"SnapshotOptions",params,undefined,true); 
+			copyArg(msg,"VPCOptions",params,undefined,true); 
+			copyArg(msg,"EncryptionAtRestOptions",params,undefined,true); 
+			copyArg(msg,"AdvancedOptions",params,undefined,true); 
+			copyArg(msg,"LogPublishingOptions",params,undefined,true); 
 			
 
 			svc.createElasticsearchDomain(params,cb);
@@ -123,9 +128,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"DomainName",params); 
+			copyArg(n,"DomainName",params,undefined,false); 
 			
-			copyArg(msg,"DomainName",params); 
+			copyArg(msg,"DomainName",params,undefined,false); 
 			
 
 			svc.deleteElasticsearchDomain(params,cb);
@@ -147,9 +152,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"DomainName",params); 
+			copyArg(n,"DomainName",params,undefined,false); 
 			
-			copyArg(msg,"DomainName",params); 
+			copyArg(msg,"DomainName",params,undefined,false); 
 			
 
 			svc.describeElasticsearchDomain(params,cb);
@@ -160,9 +165,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"DomainName",params); 
+			copyArg(n,"DomainName",params,undefined,false); 
 			
-			copyArg(msg,"DomainName",params); 
+			copyArg(msg,"DomainName",params,undefined,false); 
 			
 
 			svc.describeElasticsearchDomainConfig(params,cb);
@@ -173,9 +178,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"DomainNames",params); 
+			copyArg(n,"DomainNames",params,undefined,false); 
 			
-			copyArg(msg,"DomainNames",params); 
+			copyArg(msg,"DomainNames",params,undefined,false); 
 			
 
 			svc.describeElasticsearchDomains(params,cb);
@@ -186,12 +191,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"InstanceType",params); 
-			copyArg(n,"ElasticsearchVersion",params); 
+			copyArg(n,"InstanceType",params,undefined,false); 
+			copyArg(n,"ElasticsearchVersion",params,undefined,false); 
 			
-			copyArg(msg,"DomainName",params); 
-			copyArg(msg,"InstanceType",params); 
-			copyArg(msg,"ElasticsearchVersion",params); 
+			copyArg(msg,"DomainName",params,undefined,false); 
+			copyArg(msg,"InstanceType",params,undefined,false); 
+			copyArg(msg,"ElasticsearchVersion",params,undefined,false); 
 			
 
 			svc.describeElasticsearchInstanceTypeLimits(params,cb);
@@ -213,12 +218,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"ElasticsearchVersion",params); 
+			copyArg(n,"ElasticsearchVersion",params,undefined,false); 
 			
-			copyArg(msg,"ElasticsearchVersion",params); 
-			copyArg(msg,"DomainName",params); 
-			copyArg(msg,"MaxResults",params); 
-			copyArg(msg,"NextToken",params); 
+			copyArg(msg,"ElasticsearchVersion",params,undefined,false); 
+			copyArg(msg,"DomainName",params,undefined,false); 
+			copyArg(msg,"MaxResults",params,undefined,false); 
+			copyArg(msg,"NextToken",params,undefined,false); 
 			
 
 			svc.listElasticsearchInstanceTypes(params,cb);
@@ -230,8 +235,8 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"MaxResults",params); 
-			copyArg(msg,"NextToken",params); 
+			copyArg(msg,"MaxResults",params,undefined,false); 
+			copyArg(msg,"NextToken",params,undefined,false); 
 			
 
 			svc.listElasticsearchVersions(params,cb);
@@ -242,9 +247,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"ARN",params); 
+			copyArg(n,"ARN",params,undefined,false); 
 			
-			copyArg(msg,"ARN",params); 
+			copyArg(msg,"ARN",params,undefined,false); 
 			
 
 			svc.listTags(params,cb);
@@ -255,11 +260,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"ARN",params); 
-			copyArg(n,"TagKeys",params); 
+			copyArg(n,"ARN",params,undefined,false); 
+			copyArg(n,"TagKeys",params,undefined,true); 
 			
-			copyArg(msg,"ARN",params); 
-			copyArg(msg,"TagKeys",params); 
+			copyArg(msg,"ARN",params,undefined,false); 
+			copyArg(msg,"TagKeys",params,undefined,true); 
 			
 
 			svc.removeTags(params,cb);
@@ -270,16 +275,16 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"DomainName",params); 
+			copyArg(n,"DomainName",params,undefined,false); 
 			
-			copyArg(msg,"DomainName",params); 
-			copyArg(msg,"ElasticsearchClusterConfig",params); 
-			copyArg(msg,"EBSOptions",params); 
-			copyArg(msg,"SnapshotOptions",params); 
-			copyArg(msg,"VPCOptions",params); 
-			copyArg(msg,"AdvancedOptions",params); 
-			copyArg(msg,"AccessPolicies",params); 
-			copyArg(msg,"LogPublishingOptions",params); 
+			copyArg(msg,"DomainName",params,undefined,false); 
+			copyArg(msg,"ElasticsearchClusterConfig",params,undefined,true); 
+			copyArg(msg,"EBSOptions",params,undefined,true); 
+			copyArg(msg,"SnapshotOptions",params,undefined,true); 
+			copyArg(msg,"VPCOptions",params,undefined,true); 
+			copyArg(msg,"AdvancedOptions",params,undefined,true); 
+			copyArg(msg,"AccessPolicies",params,undefined,false); 
+			copyArg(msg,"LogPublishingOptions",params,undefined,true); 
 			
 
 			svc.updateElasticsearchDomainConfig(params,cb);

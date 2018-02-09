@@ -40,7 +40,7 @@ module.exports = function(RED) {
 			return;
 		}
 
-		var awsService = new AWS.DynamoDB( { 'region': node.region } );
+		var awsService = new AWS.Dynamodb( { 'region': node.region } );
 
 		node.on("input", function(msg) {
 			node.sendMsg = function (err, data) {
@@ -67,13 +67,18 @@ module.exports = function(RED) {
 			}
 
 		});
-		var copyArg=function(src,arg,out,outArg){
+		var copyArg=function(src,arg,out,outArg,isObject){
+			var tmpValue=src[arg];
 			outArg = (typeof outArg !== 'undefined') ? outArg : arg;
+
 			if (typeof src[arg] !== 'undefined'){
-				out[outArg]=src[arg];
+				if (isObject && typeof src[arg]=="string" && src[arg] != "") { 
+					tmpValue=JSON.parse(src[arg]);
+				}
+				out[outArg]=tmpValue;
 			}
                         //AWS API takes 'Payload' not 'payload' (see Lambda)
-                        if (arg=="Payload" && typeof src[arg] == 'undefined'){
+                        if (arg=="Payload" && typeof tmpValue == 'undefined'){
                                 out[arg]=src["payload"];
                         }
 
@@ -86,10 +91,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"RequestItems",params); 
+			copyArg(n,"RequestItems",params,undefined,true); 
 			
-			copyArg(msg,"RequestItems",params); 
-			copyArg(msg,"ReturnConsumedCapacity",params); 
+			copyArg(msg,"RequestItems",params,undefined,true); 
+			copyArg(msg,"ReturnConsumedCapacity",params,undefined,false); 
 			
 
 			svc.batchGetItem(params,cb);
@@ -100,11 +105,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"RequestItems",params); 
+			copyArg(n,"RequestItems",params,undefined,true); 
 			
-			copyArg(msg,"RequestItems",params); 
-			copyArg(msg,"ReturnConsumedCapacity",params); 
-			copyArg(msg,"ReturnItemCollectionMetrics",params); 
+			copyArg(msg,"RequestItems",params,undefined,true); 
+			copyArg(msg,"ReturnConsumedCapacity",params,undefined,false); 
+			copyArg(msg,"ReturnItemCollectionMetrics",params,undefined,false); 
 			
 
 			svc.batchWriteItem(params,cb);
@@ -115,11 +120,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"TableName",params); 
-			copyArg(n,"BackupName",params); 
+			copyArg(n,"TableName",params,undefined,false); 
+			copyArg(n,"BackupName",params,undefined,false); 
 			
-			copyArg(msg,"TableName",params); 
-			copyArg(msg,"BackupName",params); 
+			copyArg(msg,"TableName",params,undefined,false); 
+			copyArg(msg,"BackupName",params,undefined,false); 
 			
 
 			svc.createBackup(params,cb);
@@ -130,11 +135,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"GlobalTableName",params); 
-			copyArg(n,"ReplicationGroup",params); 
+			copyArg(n,"GlobalTableName",params,undefined,false); 
+			copyArg(n,"ReplicationGroup",params,undefined,true); 
 			
-			copyArg(msg,"GlobalTableName",params); 
-			copyArg(msg,"ReplicationGroup",params); 
+			copyArg(msg,"GlobalTableName",params,undefined,false); 
+			copyArg(msg,"ReplicationGroup",params,undefined,true); 
 			
 
 			svc.createGlobalTable(params,cb);
@@ -145,18 +150,18 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"AttributeDefinitions",params); 
-			copyArg(n,"TableName",params); 
-			copyArg(n,"KeySchema",params); 
-			copyArg(n,"ProvisionedThroughput",params); 
+			copyArg(n,"AttributeDefinitions",params,undefined,true); 
+			copyArg(n,"TableName",params,undefined,false); 
+			copyArg(n,"KeySchema",params,undefined,true); 
+			copyArg(n,"ProvisionedThroughput",params,undefined,true); 
 			
-			copyArg(msg,"AttributeDefinitions",params); 
-			copyArg(msg,"TableName",params); 
-			copyArg(msg,"KeySchema",params); 
-			copyArg(msg,"LocalSecondaryIndexes",params); 
-			copyArg(msg,"GlobalSecondaryIndexes",params); 
-			copyArg(msg,"ProvisionedThroughput",params); 
-			copyArg(msg,"StreamSpecification",params); 
+			copyArg(msg,"AttributeDefinitions",params,undefined,true); 
+			copyArg(msg,"TableName",params,undefined,false); 
+			copyArg(msg,"KeySchema",params,undefined,true); 
+			copyArg(msg,"LocalSecondaryIndexes",params,undefined,false); 
+			copyArg(msg,"GlobalSecondaryIndexes",params,undefined,false); 
+			copyArg(msg,"ProvisionedThroughput",params,undefined,true); 
+			copyArg(msg,"StreamSpecification",params,undefined,true); 
 			
 
 			svc.createTable(params,cb);
@@ -167,9 +172,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"BackupArn",params); 
+			copyArg(n,"BackupArn",params,undefined,false); 
 			
-			copyArg(msg,"BackupArn",params); 
+			copyArg(msg,"BackupArn",params,undefined,false); 
 			
 
 			svc.deleteBackup(params,cb);
@@ -180,19 +185,19 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"TableName",params); 
-			copyArg(n,"Key",params); 
+			copyArg(n,"TableName",params,undefined,false); 
+			copyArg(n,"Key",params,undefined,true); 
 			
-			copyArg(msg,"TableName",params); 
-			copyArg(msg,"Key",params); 
-			copyArg(msg,"Expected",params); 
-			copyArg(msg,"ConditionalOperator",params); 
-			copyArg(msg,"ReturnValues",params); 
-			copyArg(msg,"ReturnConsumedCapacity",params); 
-			copyArg(msg,"ReturnItemCollectionMetrics",params); 
-			copyArg(msg,"ConditionExpression",params); 
-			copyArg(msg,"ExpressionAttributeNames",params); 
-			copyArg(msg,"ExpressionAttributeValues",params); 
+			copyArg(msg,"TableName",params,undefined,false); 
+			copyArg(msg,"Key",params,undefined,true); 
+			copyArg(msg,"Expected",params,undefined,true); 
+			copyArg(msg,"ConditionalOperator",params,undefined,false); 
+			copyArg(msg,"ReturnValues",params,undefined,false); 
+			copyArg(msg,"ReturnConsumedCapacity",params,undefined,false); 
+			copyArg(msg,"ReturnItemCollectionMetrics",params,undefined,false); 
+			copyArg(msg,"ConditionExpression",params,undefined,false); 
+			copyArg(msg,"ExpressionAttributeNames",params,undefined,true); 
+			copyArg(msg,"ExpressionAttributeValues",params,undefined,true); 
 			
 
 			svc.deleteItem(params,cb);
@@ -203,9 +208,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"TableName",params); 
+			copyArg(n,"TableName",params,undefined,false); 
 			
-			copyArg(msg,"TableName",params); 
+			copyArg(msg,"TableName",params,undefined,false); 
 			
 
 			svc.deleteTable(params,cb);
@@ -216,9 +221,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"BackupArn",params); 
+			copyArg(n,"BackupArn",params,undefined,false); 
 			
-			copyArg(msg,"BackupArn",params); 
+			copyArg(msg,"BackupArn",params,undefined,false); 
 			
 
 			svc.describeBackup(params,cb);
@@ -229,9 +234,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"TableName",params); 
+			copyArg(n,"TableName",params,undefined,false); 
 			
-			copyArg(msg,"TableName",params); 
+			copyArg(msg,"TableName",params,undefined,false); 
 			
 
 			svc.describeContinuousBackups(params,cb);
@@ -242,9 +247,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"GlobalTableName",params); 
+			copyArg(n,"GlobalTableName",params,undefined,false); 
 			
-			copyArg(msg,"GlobalTableName",params); 
+			copyArg(msg,"GlobalTableName",params,undefined,false); 
 			
 
 			svc.describeGlobalTable(params,cb);
@@ -266,9 +271,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"TableName",params); 
+			copyArg(n,"TableName",params,undefined,false); 
 			
-			copyArg(msg,"TableName",params); 
+			copyArg(msg,"TableName",params,undefined,false); 
 			
 
 			svc.describeTable(params,cb);
@@ -279,9 +284,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"TableName",params); 
+			copyArg(n,"TableName",params,undefined,false); 
 			
-			copyArg(msg,"TableName",params); 
+			copyArg(msg,"TableName",params,undefined,false); 
 			
 
 			svc.describeTimeToLive(params,cb);
@@ -292,16 +297,16 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"TableName",params); 
-			copyArg(n,"Key",params); 
+			copyArg(n,"TableName",params,undefined,false); 
+			copyArg(n,"Key",params,undefined,true); 
 			
-			copyArg(msg,"TableName",params); 
-			copyArg(msg,"Key",params); 
-			copyArg(msg,"AttributesToGet",params); 
-			copyArg(msg,"ConsistentRead",params); 
-			copyArg(msg,"ReturnConsumedCapacity",params); 
-			copyArg(msg,"ProjectionExpression",params); 
-			copyArg(msg,"ExpressionAttributeNames",params); 
+			copyArg(msg,"TableName",params,undefined,false); 
+			copyArg(msg,"Key",params,undefined,true); 
+			copyArg(msg,"AttributesToGet",params,undefined,true); 
+			copyArg(msg,"ConsistentRead",params,undefined,false); 
+			copyArg(msg,"ReturnConsumedCapacity",params,undefined,false); 
+			copyArg(msg,"ProjectionExpression",params,undefined,false); 
+			copyArg(msg,"ExpressionAttributeNames",params,undefined,true); 
 			
 
 			svc.getItem(params,cb);
@@ -313,11 +318,11 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"TableName",params); 
-			copyArg(msg,"Limit",params); 
-			copyArg(msg,"TimeRangeLowerBound",params); 
-			copyArg(msg,"TimeRangeUpperBound",params); 
-			copyArg(msg,"ExclusiveStartBackupArn",params); 
+			copyArg(msg,"TableName",params,undefined,false); 
+			copyArg(msg,"Limit",params,undefined,false); 
+			copyArg(msg,"TimeRangeLowerBound",params,undefined,false); 
+			copyArg(msg,"TimeRangeUpperBound",params,undefined,false); 
+			copyArg(msg,"ExclusiveStartBackupArn",params,undefined,false); 
 			
 
 			svc.listBackups(params,cb);
@@ -329,9 +334,9 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"ExclusiveStartGlobalTableName",params); 
-			copyArg(msg,"Limit",params); 
-			copyArg(msg,"RegionName",params); 
+			copyArg(msg,"ExclusiveStartGlobalTableName",params,undefined,false); 
+			copyArg(msg,"Limit",params,undefined,false); 
+			copyArg(msg,"RegionName",params,undefined,false); 
 			
 
 			svc.listGlobalTables(params,cb);
@@ -343,8 +348,8 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"ExclusiveStartTableName",params); 
-			copyArg(msg,"Limit",params); 
+			copyArg(msg,"ExclusiveStartTableName",params,undefined,false); 
+			copyArg(msg,"Limit",params,undefined,false); 
 			
 
 			svc.listTables(params,cb);
@@ -355,10 +360,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"ResourceArn",params); 
+			copyArg(n,"ResourceArn",params,undefined,false); 
 			
-			copyArg(msg,"ResourceArn",params); 
-			copyArg(msg,"NextToken",params); 
+			copyArg(msg,"ResourceArn",params,undefined,false); 
+			copyArg(msg,"NextToken",params,undefined,false); 
 			
 
 			svc.listTagsOfResource(params,cb);
@@ -369,19 +374,19 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"TableName",params); 
-			copyArg(n,"Item",params); 
+			copyArg(n,"TableName",params,undefined,false); 
+			copyArg(n,"Item",params,undefined,true); 
 			
-			copyArg(msg,"TableName",params); 
-			copyArg(msg,"Item",params); 
-			copyArg(msg,"Expected",params); 
-			copyArg(msg,"ReturnValues",params); 
-			copyArg(msg,"ReturnConsumedCapacity",params); 
-			copyArg(msg,"ReturnItemCollectionMetrics",params); 
-			copyArg(msg,"ConditionalOperator",params); 
-			copyArg(msg,"ConditionExpression",params); 
-			copyArg(msg,"ExpressionAttributeNames",params); 
-			copyArg(msg,"ExpressionAttributeValues",params); 
+			copyArg(msg,"TableName",params,undefined,false); 
+			copyArg(msg,"Item",params,undefined,true); 
+			copyArg(msg,"Expected",params,undefined,true); 
+			copyArg(msg,"ReturnValues",params,undefined,false); 
+			copyArg(msg,"ReturnConsumedCapacity",params,undefined,false); 
+			copyArg(msg,"ReturnItemCollectionMetrics",params,undefined,false); 
+			copyArg(msg,"ConditionalOperator",params,undefined,false); 
+			copyArg(msg,"ConditionExpression",params,undefined,false); 
+			copyArg(msg,"ExpressionAttributeNames",params,undefined,true); 
+			copyArg(msg,"ExpressionAttributeValues",params,undefined,true); 
 			
 
 			svc.putItem(params,cb);
@@ -392,25 +397,25 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"TableName",params); 
+			copyArg(n,"TableName",params,undefined,false); 
 			
-			copyArg(msg,"TableName",params); 
-			copyArg(msg,"IndexName",params); 
-			copyArg(msg,"Select",params); 
-			copyArg(msg,"AttributesToGet",params); 
-			copyArg(msg,"Limit",params); 
-			copyArg(msg,"ConsistentRead",params); 
-			copyArg(msg,"KeyConditions",params); 
-			copyArg(msg,"QueryFilter",params); 
-			copyArg(msg,"ConditionalOperator",params); 
-			copyArg(msg,"ScanIndexForward",params); 
-			copyArg(msg,"ExclusiveStartKey",params); 
-			copyArg(msg,"ReturnConsumedCapacity",params); 
-			copyArg(msg,"ProjectionExpression",params); 
-			copyArg(msg,"FilterExpression",params); 
-			copyArg(msg,"KeyConditionExpression",params); 
-			copyArg(msg,"ExpressionAttributeNames",params); 
-			copyArg(msg,"ExpressionAttributeValues",params); 
+			copyArg(msg,"TableName",params,undefined,false); 
+			copyArg(msg,"IndexName",params,undefined,false); 
+			copyArg(msg,"Select",params,undefined,false); 
+			copyArg(msg,"AttributesToGet",params,undefined,true); 
+			copyArg(msg,"Limit",params,undefined,false); 
+			copyArg(msg,"ConsistentRead",params,undefined,false); 
+			copyArg(msg,"KeyConditions",params,undefined,false); 
+			copyArg(msg,"QueryFilter",params,undefined,true); 
+			copyArg(msg,"ConditionalOperator",params,undefined,false); 
+			copyArg(msg,"ScanIndexForward",params,undefined,false); 
+			copyArg(msg,"ExclusiveStartKey",params,undefined,true); 
+			copyArg(msg,"ReturnConsumedCapacity",params,undefined,false); 
+			copyArg(msg,"ProjectionExpression",params,undefined,false); 
+			copyArg(msg,"FilterExpression",params,undefined,false); 
+			copyArg(msg,"KeyConditionExpression",params,undefined,false); 
+			copyArg(msg,"ExpressionAttributeNames",params,undefined,true); 
+			copyArg(msg,"ExpressionAttributeValues",params,undefined,true); 
 			
 
 			svc.query(params,cb);
@@ -421,11 +426,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"TargetTableName",params); 
-			copyArg(n,"BackupArn",params); 
+			copyArg(n,"TargetTableName",params,undefined,false); 
+			copyArg(n,"BackupArn",params,undefined,false); 
 			
-			copyArg(msg,"TargetTableName",params); 
-			copyArg(msg,"BackupArn",params); 
+			copyArg(msg,"TargetTableName",params,undefined,false); 
+			copyArg(msg,"BackupArn",params,undefined,false); 
 			
 
 			svc.restoreTableFromBackup(params,cb);
@@ -436,24 +441,24 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"TableName",params); 
+			copyArg(n,"TableName",params,undefined,false); 
 			
-			copyArg(msg,"TableName",params); 
-			copyArg(msg,"IndexName",params); 
-			copyArg(msg,"AttributesToGet",params); 
-			copyArg(msg,"Limit",params); 
-			copyArg(msg,"Select",params); 
-			copyArg(msg,"ScanFilter",params); 
-			copyArg(msg,"ConditionalOperator",params); 
-			copyArg(msg,"ExclusiveStartKey",params); 
-			copyArg(msg,"ReturnConsumedCapacity",params); 
-			copyArg(msg,"TotalSegments",params); 
-			copyArg(msg,"Segment",params); 
-			copyArg(msg,"ProjectionExpression",params); 
-			copyArg(msg,"FilterExpression",params); 
-			copyArg(msg,"ExpressionAttributeNames",params); 
-			copyArg(msg,"ExpressionAttributeValues",params); 
-			copyArg(msg,"ConsistentRead",params); 
+			copyArg(msg,"TableName",params,undefined,false); 
+			copyArg(msg,"IndexName",params,undefined,false); 
+			copyArg(msg,"AttributesToGet",params,undefined,true); 
+			copyArg(msg,"Limit",params,undefined,false); 
+			copyArg(msg,"Select",params,undefined,false); 
+			copyArg(msg,"ScanFilter",params,undefined,true); 
+			copyArg(msg,"ConditionalOperator",params,undefined,false); 
+			copyArg(msg,"ExclusiveStartKey",params,undefined,true); 
+			copyArg(msg,"ReturnConsumedCapacity",params,undefined,false); 
+			copyArg(msg,"TotalSegments",params,undefined,false); 
+			copyArg(msg,"Segment",params,undefined,false); 
+			copyArg(msg,"ProjectionExpression",params,undefined,false); 
+			copyArg(msg,"FilterExpression",params,undefined,false); 
+			copyArg(msg,"ExpressionAttributeNames",params,undefined,true); 
+			copyArg(msg,"ExpressionAttributeValues",params,undefined,true); 
+			copyArg(msg,"ConsistentRead",params,undefined,false); 
 			
 
 			svc.scan(params,cb);
@@ -464,11 +469,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"ResourceArn",params); 
-			copyArg(n,"Tags",params); 
+			copyArg(n,"ResourceArn",params,undefined,false); 
+			copyArg(n,"Tags",params,undefined,true); 
 			
-			copyArg(msg,"ResourceArn",params); 
-			copyArg(msg,"Tags",params); 
+			copyArg(msg,"ResourceArn",params,undefined,false); 
+			copyArg(msg,"Tags",params,undefined,true); 
 			
 
 			svc.tagResource(params,cb);
@@ -479,11 +484,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"ResourceArn",params); 
-			copyArg(n,"TagKeys",params); 
+			copyArg(n,"ResourceArn",params,undefined,false); 
+			copyArg(n,"TagKeys",params,undefined,false); 
 			
-			copyArg(msg,"ResourceArn",params); 
-			copyArg(msg,"TagKeys",params); 
+			copyArg(msg,"ResourceArn",params,undefined,false); 
+			copyArg(msg,"TagKeys",params,undefined,false); 
 			
 
 			svc.untagResource(params,cb);
@@ -494,11 +499,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"GlobalTableName",params); 
-			copyArg(n,"ReplicaUpdates",params); 
+			copyArg(n,"GlobalTableName",params,undefined,false); 
+			copyArg(n,"ReplicaUpdates",params,undefined,false); 
 			
-			copyArg(msg,"GlobalTableName",params); 
-			copyArg(msg,"ReplicaUpdates",params); 
+			copyArg(msg,"GlobalTableName",params,undefined,false); 
+			copyArg(msg,"ReplicaUpdates",params,undefined,false); 
 			
 
 			svc.updateGlobalTable(params,cb);
@@ -509,21 +514,21 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"TableName",params); 
-			copyArg(n,"Key",params); 
+			copyArg(n,"TableName",params,undefined,false); 
+			copyArg(n,"Key",params,undefined,true); 
 			
-			copyArg(msg,"TableName",params); 
-			copyArg(msg,"Key",params); 
-			copyArg(msg,"AttributeUpdates",params); 
-			copyArg(msg,"Expected",params); 
-			copyArg(msg,"ConditionalOperator",params); 
-			copyArg(msg,"ReturnValues",params); 
-			copyArg(msg,"ReturnConsumedCapacity",params); 
-			copyArg(msg,"ReturnItemCollectionMetrics",params); 
-			copyArg(msg,"UpdateExpression",params); 
-			copyArg(msg,"ConditionExpression",params); 
-			copyArg(msg,"ExpressionAttributeNames",params); 
-			copyArg(msg,"ExpressionAttributeValues",params); 
+			copyArg(msg,"TableName",params,undefined,false); 
+			copyArg(msg,"Key",params,undefined,true); 
+			copyArg(msg,"AttributeUpdates",params,undefined,false); 
+			copyArg(msg,"Expected",params,undefined,true); 
+			copyArg(msg,"ConditionalOperator",params,undefined,false); 
+			copyArg(msg,"ReturnValues",params,undefined,false); 
+			copyArg(msg,"ReturnConsumedCapacity",params,undefined,false); 
+			copyArg(msg,"ReturnItemCollectionMetrics",params,undefined,false); 
+			copyArg(msg,"UpdateExpression",params,undefined,false); 
+			copyArg(msg,"ConditionExpression",params,undefined,false); 
+			copyArg(msg,"ExpressionAttributeNames",params,undefined,true); 
+			copyArg(msg,"ExpressionAttributeValues",params,undefined,true); 
 			
 
 			svc.updateItem(params,cb);
@@ -534,13 +539,13 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"TableName",params); 
+			copyArg(n,"TableName",params,undefined,false); 
 			
-			copyArg(msg,"AttributeDefinitions",params); 
-			copyArg(msg,"TableName",params); 
-			copyArg(msg,"ProvisionedThroughput",params); 
-			copyArg(msg,"GlobalSecondaryIndexUpdates",params); 
-			copyArg(msg,"StreamSpecification",params); 
+			copyArg(msg,"AttributeDefinitions",params,undefined,true); 
+			copyArg(msg,"TableName",params,undefined,false); 
+			copyArg(msg,"ProvisionedThroughput",params,undefined,true); 
+			copyArg(msg,"GlobalSecondaryIndexUpdates",params,undefined,false); 
+			copyArg(msg,"StreamSpecification",params,undefined,true); 
 			
 
 			svc.updateTable(params,cb);
@@ -551,11 +556,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"TableName",params); 
-			copyArg(n,"TimeToLiveSpecification",params); 
+			copyArg(n,"TableName",params,undefined,false); 
+			copyArg(n,"TimeToLiveSpecification",params,undefined,true); 
 			
-			copyArg(msg,"TableName",params); 
-			copyArg(msg,"TimeToLiveSpecification",params); 
+			copyArg(msg,"TableName",params,undefined,false); 
+			copyArg(msg,"TimeToLiveSpecification",params,undefined,true); 
 			
 
 			svc.updateTimeToLive(params,cb);

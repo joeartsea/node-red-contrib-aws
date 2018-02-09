@@ -67,13 +67,18 @@ module.exports = function(RED) {
 			}
 
 		});
-		var copyArg=function(src,arg,out,outArg){
+		var copyArg=function(src,arg,out,outArg,isObject){
+			var tmpValue=src[arg];
 			outArg = (typeof outArg !== 'undefined') ? outArg : arg;
+
 			if (typeof src[arg] !== 'undefined'){
-				out[outArg]=src[arg];
+				if (isObject && typeof src[arg]=="string" && src[arg] != "") { 
+					tmpValue=JSON.parse(src[arg]);
+				}
+				out[outArg]=tmpValue;
 			}
                         //AWS API takes 'Payload' not 'payload' (see Lambda)
-                        if (arg=="Payload" && typeof src[arg] == 'undefined'){
+                        if (arg=="Payload" && typeof tmpValue == 'undefined'){
                                 out[arg]=src["payload"];
                         }
 
@@ -86,9 +91,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"KeyId",params); 
+			copyArg(n,"KeyId",params,undefined,false); 
 			
-			copyArg(msg,"KeyId",params); 
+			copyArg(msg,"KeyId",params,undefined,false); 
 			
 
 			svc.cancelKeyDeletion(params,cb);
@@ -99,11 +104,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"AliasName",params); 
-			copyArg(n,"TargetKeyId",params); 
+			copyArg(n,"AliasName",params,undefined,false); 
+			copyArg(n,"TargetKeyId",params,undefined,false); 
 			
-			copyArg(msg,"AliasName",params); 
-			copyArg(msg,"TargetKeyId",params); 
+			copyArg(msg,"AliasName",params,undefined,false); 
+			copyArg(msg,"TargetKeyId",params,undefined,false); 
 			
 
 			svc.createAlias(params,cb);
@@ -114,17 +119,17 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"KeyId",params); 
-			copyArg(n,"GranteePrincipal",params); 
-			copyArg(n,"Operations",params); 
+			copyArg(n,"KeyId",params,undefined,false); 
+			copyArg(n,"GranteePrincipal",params,undefined,false); 
+			copyArg(n,"Operations",params,undefined,true); 
 			
-			copyArg(msg,"KeyId",params); 
-			copyArg(msg,"GranteePrincipal",params); 
-			copyArg(msg,"RetiringPrincipal",params); 
-			copyArg(msg,"Operations",params); 
-			copyArg(msg,"Constraints",params); 
-			copyArg(msg,"GrantTokens",params); 
-			copyArg(msg,"Name",params); 
+			copyArg(msg,"KeyId",params,undefined,false); 
+			copyArg(msg,"GranteePrincipal",params,undefined,false); 
+			copyArg(msg,"RetiringPrincipal",params,undefined,false); 
+			copyArg(msg,"Operations",params,undefined,true); 
+			copyArg(msg,"Constraints",params,undefined,true); 
+			copyArg(msg,"GrantTokens",params,undefined,true); 
+			copyArg(msg,"Name",params,undefined,false); 
 			
 
 			svc.createGrant(params,cb);
@@ -136,12 +141,12 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"Policy",params); 
-			copyArg(msg,"Description",params); 
-			copyArg(msg,"KeyUsage",params); 
-			copyArg(msg,"Origin",params); 
-			copyArg(msg,"BypassPolicyLockoutSafetyCheck",params); 
-			copyArg(msg,"Tags",params); 
+			copyArg(msg,"Policy",params,undefined,false); 
+			copyArg(msg,"Description",params,undefined,false); 
+			copyArg(msg,"KeyUsage",params,undefined,false); 
+			copyArg(msg,"Origin",params,undefined,false); 
+			copyArg(msg,"BypassPolicyLockoutSafetyCheck",params,undefined,false); 
+			copyArg(msg,"Tags",params,undefined,true); 
 			
 
 			svc.createKey(params,cb);
@@ -152,11 +157,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"CiphertextBlob",params); 
+			copyArg(n,"CiphertextBlob",params,undefined,false); 
 			
-			copyArg(msg,"CiphertextBlob",params); 
-			copyArg(msg,"EncryptionContext",params); 
-			copyArg(msg,"GrantTokens",params); 
+			copyArg(msg,"CiphertextBlob",params,undefined,false); 
+			copyArg(msg,"EncryptionContext",params,undefined,true); 
+			copyArg(msg,"GrantTokens",params,undefined,true); 
 			
 
 			svc.decrypt(params,cb);
@@ -167,9 +172,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"AliasName",params); 
+			copyArg(n,"AliasName",params,undefined,false); 
 			
-			copyArg(msg,"AliasName",params); 
+			copyArg(msg,"AliasName",params,undefined,false); 
 			
 
 			svc.deleteAlias(params,cb);
@@ -180,9 +185,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"KeyId",params); 
+			copyArg(n,"KeyId",params,undefined,false); 
 			
-			copyArg(msg,"KeyId",params); 
+			copyArg(msg,"KeyId",params,undefined,false); 
 			
 
 			svc.deleteImportedKeyMaterial(params,cb);
@@ -193,10 +198,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"KeyId",params); 
+			copyArg(n,"KeyId",params,undefined,false); 
 			
-			copyArg(msg,"KeyId",params); 
-			copyArg(msg,"GrantTokens",params); 
+			copyArg(msg,"KeyId",params,undefined,false); 
+			copyArg(msg,"GrantTokens",params,undefined,true); 
 			
 
 			svc.describeKey(params,cb);
@@ -207,9 +212,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"KeyId",params); 
+			copyArg(n,"KeyId",params,undefined,false); 
 			
-			copyArg(msg,"KeyId",params); 
+			copyArg(msg,"KeyId",params,undefined,false); 
 			
 
 			svc.disableKey(params,cb);
@@ -220,9 +225,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"KeyId",params); 
+			copyArg(n,"KeyId",params,undefined,false); 
 			
-			copyArg(msg,"KeyId",params); 
+			copyArg(msg,"KeyId",params,undefined,false); 
 			
 
 			svc.disableKeyRotation(params,cb);
@@ -233,9 +238,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"KeyId",params); 
+			copyArg(n,"KeyId",params,undefined,false); 
 			
-			copyArg(msg,"KeyId",params); 
+			copyArg(msg,"KeyId",params,undefined,false); 
 			
 
 			svc.enableKey(params,cb);
@@ -246,9 +251,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"KeyId",params); 
+			copyArg(n,"KeyId",params,undefined,false); 
 			
-			copyArg(msg,"KeyId",params); 
+			copyArg(msg,"KeyId",params,undefined,false); 
 			
 
 			svc.enableKeyRotation(params,cb);
@@ -259,13 +264,13 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"KeyId",params); 
-			copyArg(n,"Plaintext",params); 
+			copyArg(n,"KeyId",params,undefined,false); 
+			copyArg(n,"Plaintext",params,undefined,true); 
 			
-			copyArg(msg,"KeyId",params); 
-			copyArg(msg,"Plaintext",params); 
-			copyArg(msg,"EncryptionContext",params); 
-			copyArg(msg,"GrantTokens",params); 
+			copyArg(msg,"KeyId",params,undefined,false); 
+			copyArg(msg,"Plaintext",params,undefined,true); 
+			copyArg(msg,"EncryptionContext",params,undefined,true); 
+			copyArg(msg,"GrantTokens",params,undefined,true); 
 			
 
 			svc.encrypt(params,cb);
@@ -276,13 +281,13 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"KeyId",params); 
+			copyArg(n,"KeyId",params,undefined,false); 
 			
-			copyArg(msg,"KeyId",params); 
-			copyArg(msg,"EncryptionContext",params); 
-			copyArg(msg,"NumberOfBytes",params); 
-			copyArg(msg,"KeySpec",params); 
-			copyArg(msg,"GrantTokens",params); 
+			copyArg(msg,"KeyId",params,undefined,false); 
+			copyArg(msg,"EncryptionContext",params,undefined,true); 
+			copyArg(msg,"NumberOfBytes",params,undefined,false); 
+			copyArg(msg,"KeySpec",params,undefined,false); 
+			copyArg(msg,"GrantTokens",params,undefined,true); 
 			
 
 			svc.generateDataKey(params,cb);
@@ -293,13 +298,13 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"KeyId",params); 
+			copyArg(n,"KeyId",params,undefined,false); 
 			
-			copyArg(msg,"KeyId",params); 
-			copyArg(msg,"EncryptionContext",params); 
-			copyArg(msg,"KeySpec",params); 
-			copyArg(msg,"NumberOfBytes",params); 
-			copyArg(msg,"GrantTokens",params); 
+			copyArg(msg,"KeyId",params,undefined,false); 
+			copyArg(msg,"EncryptionContext",params,undefined,true); 
+			copyArg(msg,"KeySpec",params,undefined,false); 
+			copyArg(msg,"NumberOfBytes",params,undefined,false); 
+			copyArg(msg,"GrantTokens",params,undefined,true); 
 			
 
 			svc.generateDataKeyWithoutPlaintext(params,cb);
@@ -311,7 +316,7 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"NumberOfBytes",params); 
+			copyArg(msg,"NumberOfBytes",params,undefined,false); 
 			
 
 			svc.generateRandom(params,cb);
@@ -322,11 +327,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"KeyId",params); 
-			copyArg(n,"PolicyName",params); 
+			copyArg(n,"KeyId",params,undefined,false); 
+			copyArg(n,"PolicyName",params,undefined,false); 
 			
-			copyArg(msg,"KeyId",params); 
-			copyArg(msg,"PolicyName",params); 
+			copyArg(msg,"KeyId",params,undefined,false); 
+			copyArg(msg,"PolicyName",params,undefined,false); 
 			
 
 			svc.getKeyPolicy(params,cb);
@@ -337,9 +342,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"KeyId",params); 
+			copyArg(n,"KeyId",params,undefined,false); 
 			
-			copyArg(msg,"KeyId",params); 
+			copyArg(msg,"KeyId",params,undefined,false); 
 			
 
 			svc.getKeyRotationStatus(params,cb);
@@ -350,13 +355,13 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"KeyId",params); 
-			copyArg(n,"WrappingAlgorithm",params); 
-			copyArg(n,"WrappingKeySpec",params); 
+			copyArg(n,"KeyId",params,undefined,false); 
+			copyArg(n,"WrappingAlgorithm",params,undefined,false); 
+			copyArg(n,"WrappingKeySpec",params,undefined,false); 
 			
-			copyArg(msg,"KeyId",params); 
-			copyArg(msg,"WrappingAlgorithm",params); 
-			copyArg(msg,"WrappingKeySpec",params); 
+			copyArg(msg,"KeyId",params,undefined,false); 
+			copyArg(msg,"WrappingAlgorithm",params,undefined,false); 
+			copyArg(msg,"WrappingKeySpec",params,undefined,false); 
 			
 
 			svc.getParametersForImport(params,cb);
@@ -367,15 +372,15 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"KeyId",params); 
-			copyArg(n,"ImportToken",params); 
-			copyArg(n,"EncryptedKeyMaterial",params); 
+			copyArg(n,"KeyId",params,undefined,false); 
+			copyArg(n,"ImportToken",params,undefined,false); 
+			copyArg(n,"EncryptedKeyMaterial",params,undefined,false); 
 			
-			copyArg(msg,"KeyId",params); 
-			copyArg(msg,"ImportToken",params); 
-			copyArg(msg,"EncryptedKeyMaterial",params); 
-			copyArg(msg,"ValidTo",params); 
-			copyArg(msg,"ExpirationModel",params); 
+			copyArg(msg,"KeyId",params,undefined,false); 
+			copyArg(msg,"ImportToken",params,undefined,false); 
+			copyArg(msg,"EncryptedKeyMaterial",params,undefined,false); 
+			copyArg(msg,"ValidTo",params,undefined,false); 
+			copyArg(msg,"ExpirationModel",params,undefined,false); 
 			
 
 			svc.importKeyMaterial(params,cb);
@@ -387,8 +392,8 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"Limit",params); 
-			copyArg(msg,"Marker",params); 
+			copyArg(msg,"Limit",params,undefined,false); 
+			copyArg(msg,"Marker",params,undefined,false); 
 			
 
 			svc.listAliases(params,cb);
@@ -399,11 +404,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"KeyId",params); 
+			copyArg(n,"KeyId",params,undefined,false); 
 			
-			copyArg(msg,"Limit",params); 
-			copyArg(msg,"Marker",params); 
-			copyArg(msg,"KeyId",params); 
+			copyArg(msg,"Limit",params,undefined,false); 
+			copyArg(msg,"Marker",params,undefined,false); 
+			copyArg(msg,"KeyId",params,undefined,false); 
 			
 
 			svc.listGrants(params,cb);
@@ -414,11 +419,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"KeyId",params); 
+			copyArg(n,"KeyId",params,undefined,false); 
 			
-			copyArg(msg,"KeyId",params); 
-			copyArg(msg,"Limit",params); 
-			copyArg(msg,"Marker",params); 
+			copyArg(msg,"KeyId",params,undefined,false); 
+			copyArg(msg,"Limit",params,undefined,false); 
+			copyArg(msg,"Marker",params,undefined,false); 
 			
 
 			svc.listKeyPolicies(params,cb);
@@ -430,8 +435,8 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"Limit",params); 
-			copyArg(msg,"Marker",params); 
+			copyArg(msg,"Limit",params,undefined,false); 
+			copyArg(msg,"Marker",params,undefined,false); 
 			
 
 			svc.listKeys(params,cb);
@@ -442,11 +447,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"KeyId",params); 
+			copyArg(n,"KeyId",params,undefined,false); 
 			
-			copyArg(msg,"KeyId",params); 
-			copyArg(msg,"Limit",params); 
-			copyArg(msg,"Marker",params); 
+			copyArg(msg,"KeyId",params,undefined,false); 
+			copyArg(msg,"Limit",params,undefined,false); 
+			copyArg(msg,"Marker",params,undefined,false); 
 			
 
 			svc.listResourceTags(params,cb);
@@ -457,11 +462,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"RetiringPrincipal",params); 
+			copyArg(n,"RetiringPrincipal",params,undefined,false); 
 			
-			copyArg(msg,"Limit",params); 
-			copyArg(msg,"Marker",params); 
-			copyArg(msg,"RetiringPrincipal",params); 
+			copyArg(msg,"Limit",params,undefined,false); 
+			copyArg(msg,"Marker",params,undefined,false); 
+			copyArg(msg,"RetiringPrincipal",params,undefined,false); 
 			
 
 			svc.listRetirableGrants(params,cb);
@@ -472,14 +477,14 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"KeyId",params); 
-			copyArg(n,"PolicyName",params); 
-			copyArg(n,"Policy",params); 
+			copyArg(n,"KeyId",params,undefined,false); 
+			copyArg(n,"PolicyName",params,undefined,false); 
+			copyArg(n,"Policy",params,undefined,false); 
 			
-			copyArg(msg,"KeyId",params); 
-			copyArg(msg,"PolicyName",params); 
-			copyArg(msg,"Policy",params); 
-			copyArg(msg,"BypassPolicyLockoutSafetyCheck",params); 
+			copyArg(msg,"KeyId",params,undefined,false); 
+			copyArg(msg,"PolicyName",params,undefined,false); 
+			copyArg(msg,"Policy",params,undefined,false); 
+			copyArg(msg,"BypassPolicyLockoutSafetyCheck",params,undefined,false); 
 			
 
 			svc.putKeyPolicy(params,cb);
@@ -490,14 +495,14 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"CiphertextBlob",params); 
-			copyArg(n,"DestinationKeyId",params); 
+			copyArg(n,"CiphertextBlob",params,undefined,false); 
+			copyArg(n,"DestinationKeyId",params,undefined,false); 
 			
-			copyArg(msg,"CiphertextBlob",params); 
-			copyArg(msg,"SourceEncryptionContext",params); 
-			copyArg(msg,"DestinationKeyId",params); 
-			copyArg(msg,"DestinationEncryptionContext",params); 
-			copyArg(msg,"GrantTokens",params); 
+			copyArg(msg,"CiphertextBlob",params,undefined,false); 
+			copyArg(msg,"SourceEncryptionContext",params,undefined,true); 
+			copyArg(msg,"DestinationKeyId",params,undefined,false); 
+			copyArg(msg,"DestinationEncryptionContext",params,undefined,true); 
+			copyArg(msg,"GrantTokens",params,undefined,true); 
 			
 
 			svc.reEncrypt(params,cb);
@@ -509,9 +514,9 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"GrantToken",params); 
-			copyArg(msg,"KeyId",params); 
-			copyArg(msg,"GrantId",params); 
+			copyArg(msg,"GrantToken",params,undefined,false); 
+			copyArg(msg,"KeyId",params,undefined,false); 
+			copyArg(msg,"GrantId",params,undefined,false); 
 			
 
 			svc.retireGrant(params,cb);
@@ -522,11 +527,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"KeyId",params); 
-			copyArg(n,"GrantId",params); 
+			copyArg(n,"KeyId",params,undefined,false); 
+			copyArg(n,"GrantId",params,undefined,false); 
 			
-			copyArg(msg,"KeyId",params); 
-			copyArg(msg,"GrantId",params); 
+			copyArg(msg,"KeyId",params,undefined,false); 
+			copyArg(msg,"GrantId",params,undefined,false); 
 			
 
 			svc.revokeGrant(params,cb);
@@ -537,10 +542,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"KeyId",params); 
+			copyArg(n,"KeyId",params,undefined,false); 
 			
-			copyArg(msg,"KeyId",params); 
-			copyArg(msg,"PendingWindowInDays",params); 
+			copyArg(msg,"KeyId",params,undefined,false); 
+			copyArg(msg,"PendingWindowInDays",params,undefined,false); 
 			
 
 			svc.scheduleKeyDeletion(params,cb);
@@ -551,11 +556,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"KeyId",params); 
-			copyArg(n,"Tags",params); 
+			copyArg(n,"KeyId",params,undefined,false); 
+			copyArg(n,"Tags",params,undefined,true); 
 			
-			copyArg(msg,"KeyId",params); 
-			copyArg(msg,"Tags",params); 
+			copyArg(msg,"KeyId",params,undefined,false); 
+			copyArg(msg,"Tags",params,undefined,true); 
 			
 
 			svc.tagResource(params,cb);
@@ -566,11 +571,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"KeyId",params); 
-			copyArg(n,"TagKeys",params); 
+			copyArg(n,"KeyId",params,undefined,false); 
+			copyArg(n,"TagKeys",params,undefined,false); 
 			
-			copyArg(msg,"KeyId",params); 
-			copyArg(msg,"TagKeys",params); 
+			copyArg(msg,"KeyId",params,undefined,false); 
+			copyArg(msg,"TagKeys",params,undefined,false); 
 			
 
 			svc.untagResource(params,cb);
@@ -581,11 +586,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"AliasName",params); 
-			copyArg(n,"TargetKeyId",params); 
+			copyArg(n,"AliasName",params,undefined,false); 
+			copyArg(n,"TargetKeyId",params,undefined,false); 
 			
-			copyArg(msg,"AliasName",params); 
-			copyArg(msg,"TargetKeyId",params); 
+			copyArg(msg,"AliasName",params,undefined,false); 
+			copyArg(msg,"TargetKeyId",params,undefined,false); 
 			
 
 			svc.updateAlias(params,cb);
@@ -596,11 +601,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"KeyId",params); 
-			copyArg(n,"Description",params); 
+			copyArg(n,"KeyId",params,undefined,false); 
+			copyArg(n,"Description",params,undefined,false); 
 			
-			copyArg(msg,"KeyId",params); 
-			copyArg(msg,"Description",params); 
+			copyArg(msg,"KeyId",params,undefined,false); 
+			copyArg(msg,"Description",params,undefined,false); 
 			
 
 			svc.updateKeyDescription(params,cb);

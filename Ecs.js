@@ -67,13 +67,18 @@ module.exports = function(RED) {
 			}
 
 		});
-		var copyArg=function(src,arg,out,outArg){
+		var copyArg=function(src,arg,out,outArg,isObject){
+			var tmpValue=src[arg];
 			outArg = (typeof outArg !== 'undefined') ? outArg : arg;
+
 			if (typeof src[arg] !== 'undefined'){
-				out[outArg]=src[arg];
+				if (isObject && typeof src[arg]=="string" && src[arg] != "") { 
+					tmpValue=JSON.parse(src[arg]);
+				}
+				out[outArg]=tmpValue;
 			}
                         //AWS API takes 'Payload' not 'payload' (see Lambda)
-                        if (arg=="Payload" && typeof src[arg] == 'undefined'){
+                        if (arg=="Payload" && typeof tmpValue == 'undefined'){
                                 out[arg]=src["payload"];
                         }
 
@@ -87,7 +92,7 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"clusterName",params); 
+			copyArg(msg,"clusterName",params,undefined,false); 
 			
 
 			svc.createCluster(params,cb);
@@ -98,23 +103,24 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"serviceName",params); 
-			copyArg(n,"taskDefinition",params); 
-			copyArg(n,"desiredCount",params); 
+			copyArg(n,"serviceName",params,undefined,false); 
+			copyArg(n,"taskDefinition",params,undefined,false); 
+			copyArg(n,"desiredCount",params,undefined,false); 
 			
-			copyArg(msg,"cluster",params); 
-			copyArg(msg,"serviceName",params); 
-			copyArg(msg,"taskDefinition",params); 
-			copyArg(msg,"loadBalancers",params); 
-			copyArg(msg,"desiredCount",params); 
-			copyArg(msg,"clientToken",params); 
-			copyArg(msg,"launchType",params); 
-			copyArg(msg,"platformVersion",params); 
-			copyArg(msg,"role",params); 
-			copyArg(msg,"deploymentConfiguration",params); 
-			copyArg(msg,"placementConstraints",params); 
-			copyArg(msg,"placementStrategy",params); 
-			copyArg(msg,"networkConfiguration",params); 
+			copyArg(msg,"cluster",params,undefined,false); 
+			copyArg(msg,"serviceName",params,undefined,false); 
+			copyArg(msg,"taskDefinition",params,undefined,false); 
+			copyArg(msg,"loadBalancers",params,undefined,true); 
+			copyArg(msg,"desiredCount",params,undefined,false); 
+			copyArg(msg,"clientToken",params,undefined,false); 
+			copyArg(msg,"launchType",params,undefined,false); 
+			copyArg(msg,"platformVersion",params,undefined,false); 
+			copyArg(msg,"role",params,undefined,false); 
+			copyArg(msg,"deploymentConfiguration",params,undefined,true); 
+			copyArg(msg,"placementConstraints",params,undefined,true); 
+			copyArg(msg,"placementStrategy",params,undefined,true); 
+			copyArg(msg,"networkConfiguration",params,undefined,true); 
+			copyArg(msg,"healthCheckGracePeriodSeconds",params,undefined,false); 
 			
 
 			svc.createService(params,cb);
@@ -125,10 +131,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"attributes",params); 
+			copyArg(n,"attributes",params,undefined,true); 
 			
-			copyArg(msg,"cluster",params); 
-			copyArg(msg,"attributes",params); 
+			copyArg(msg,"cluster",params,undefined,false); 
+			copyArg(msg,"attributes",params,undefined,true); 
 			
 
 			svc.deleteAttributes(params,cb);
@@ -139,9 +145,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"cluster",params); 
+			copyArg(n,"cluster",params,undefined,false); 
 			
-			copyArg(msg,"cluster",params); 
+			copyArg(msg,"cluster",params,undefined,false); 
 			
 
 			svc.deleteCluster(params,cb);
@@ -152,10 +158,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"service",params); 
+			copyArg(n,"service",params,undefined,false); 
 			
-			copyArg(msg,"cluster",params); 
-			copyArg(msg,"service",params); 
+			copyArg(msg,"cluster",params,undefined,false); 
+			copyArg(msg,"service",params,undefined,false); 
 			
 
 			svc.deleteService(params,cb);
@@ -166,11 +172,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"containerInstance",params); 
+			copyArg(n,"containerInstance",params,undefined,false); 
 			
-			copyArg(msg,"cluster",params); 
-			copyArg(msg,"containerInstance",params); 
-			copyArg(msg,"force",params); 
+			copyArg(msg,"cluster",params,undefined,false); 
+			copyArg(msg,"containerInstance",params,undefined,false); 
+			copyArg(msg,"force",params,undefined,false); 
 			
 
 			svc.deregisterContainerInstance(params,cb);
@@ -181,9 +187,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"taskDefinition",params); 
+			copyArg(n,"taskDefinition",params,undefined,false); 
 			
-			copyArg(msg,"taskDefinition",params); 
+			copyArg(msg,"taskDefinition",params,undefined,false); 
 			
 
 			svc.deregisterTaskDefinition(params,cb);
@@ -195,8 +201,8 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"clusters",params); 
-			copyArg(msg,"include",params); 
+			copyArg(msg,"clusters",params,undefined,true); 
+			copyArg(msg,"include",params,undefined,false); 
 			
 
 			svc.describeClusters(params,cb);
@@ -207,10 +213,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"containerInstances",params); 
+			copyArg(n,"containerInstances",params,undefined,true); 
 			
-			copyArg(msg,"cluster",params); 
-			copyArg(msg,"containerInstances",params); 
+			copyArg(msg,"cluster",params,undefined,false); 
+			copyArg(msg,"containerInstances",params,undefined,true); 
 			
 
 			svc.describeContainerInstances(params,cb);
@@ -221,10 +227,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"services",params); 
+			copyArg(n,"services",params,undefined,true); 
 			
-			copyArg(msg,"cluster",params); 
-			copyArg(msg,"services",params); 
+			copyArg(msg,"cluster",params,undefined,false); 
+			copyArg(msg,"services",params,undefined,true); 
 			
 
 			svc.describeServices(params,cb);
@@ -235,9 +241,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"taskDefinition",params); 
+			copyArg(n,"taskDefinition",params,undefined,false); 
 			
-			copyArg(msg,"taskDefinition",params); 
+			copyArg(msg,"taskDefinition",params,undefined,false); 
 			
 
 			svc.describeTaskDefinition(params,cb);
@@ -248,10 +254,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"tasks",params); 
+			copyArg(n,"tasks",params,undefined,true); 
 			
-			copyArg(msg,"cluster",params); 
-			copyArg(msg,"tasks",params); 
+			copyArg(msg,"cluster",params,undefined,false); 
+			copyArg(msg,"tasks",params,undefined,true); 
 			
 
 			svc.describeTasks(params,cb);
@@ -263,8 +269,8 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"containerInstance",params); 
-			copyArg(msg,"cluster",params); 
+			copyArg(msg,"containerInstance",params,undefined,false); 
+			copyArg(msg,"cluster",params,undefined,false); 
 			
 
 			svc.discoverPollEndpoint(params,cb);
@@ -275,14 +281,14 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"targetType",params); 
+			copyArg(n,"targetType",params,undefined,false); 
 			
-			copyArg(msg,"cluster",params); 
-			copyArg(msg,"targetType",params); 
-			copyArg(msg,"attributeName",params); 
-			copyArg(msg,"attributeValue",params); 
-			copyArg(msg,"nextToken",params); 
-			copyArg(msg,"maxResults",params); 
+			copyArg(msg,"cluster",params,undefined,false); 
+			copyArg(msg,"targetType",params,undefined,false); 
+			copyArg(msg,"attributeName",params,undefined,false); 
+			copyArg(msg,"attributeValue",params,undefined,false); 
+			copyArg(msg,"nextToken",params,undefined,false); 
+			copyArg(msg,"maxResults",params,undefined,false); 
 			
 
 			svc.listAttributes(params,cb);
@@ -294,8 +300,8 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"nextToken",params); 
-			copyArg(msg,"maxResults",params); 
+			copyArg(msg,"nextToken",params,undefined,false); 
+			copyArg(msg,"maxResults",params,undefined,false); 
 			
 
 			svc.listClusters(params,cb);
@@ -307,11 +313,11 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"cluster",params); 
-			copyArg(msg,"filter",params); 
-			copyArg(msg,"nextToken",params); 
-			copyArg(msg,"maxResults",params); 
-			copyArg(msg,"status",params); 
+			copyArg(msg,"cluster",params,undefined,false); 
+			copyArg(msg,"filter",params,undefined,false); 
+			copyArg(msg,"nextToken",params,undefined,false); 
+			copyArg(msg,"maxResults",params,undefined,false); 
+			copyArg(msg,"status",params,undefined,false); 
 			
 
 			svc.listContainerInstances(params,cb);
@@ -323,10 +329,10 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"cluster",params); 
-			copyArg(msg,"nextToken",params); 
-			copyArg(msg,"maxResults",params); 
-			copyArg(msg,"launchType",params); 
+			copyArg(msg,"cluster",params,undefined,false); 
+			copyArg(msg,"nextToken",params,undefined,false); 
+			copyArg(msg,"maxResults",params,undefined,false); 
+			copyArg(msg,"launchType",params,undefined,false); 
 			
 
 			svc.listServices(params,cb);
@@ -338,10 +344,10 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"familyPrefix",params); 
-			copyArg(msg,"status",params); 
-			copyArg(msg,"nextToken",params); 
-			copyArg(msg,"maxResults",params); 
+			copyArg(msg,"familyPrefix",params,undefined,false); 
+			copyArg(msg,"status",params,undefined,false); 
+			copyArg(msg,"nextToken",params,undefined,false); 
+			copyArg(msg,"maxResults",params,undefined,false); 
 			
 
 			svc.listTaskDefinitionFamilies(params,cb);
@@ -353,11 +359,11 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"familyPrefix",params); 
-			copyArg(msg,"status",params); 
-			copyArg(msg,"sort",params); 
-			copyArg(msg,"nextToken",params); 
-			copyArg(msg,"maxResults",params); 
+			copyArg(msg,"familyPrefix",params,undefined,false); 
+			copyArg(msg,"status",params,undefined,false); 
+			copyArg(msg,"sort",params,undefined,false); 
+			copyArg(msg,"nextToken",params,undefined,false); 
+			copyArg(msg,"maxResults",params,undefined,false); 
 			
 
 			svc.listTaskDefinitions(params,cb);
@@ -369,15 +375,15 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"cluster",params); 
-			copyArg(msg,"containerInstance",params); 
-			copyArg(msg,"family",params); 
-			copyArg(msg,"nextToken",params); 
-			copyArg(msg,"maxResults",params); 
-			copyArg(msg,"startedBy",params); 
-			copyArg(msg,"serviceName",params); 
-			copyArg(msg,"desiredStatus",params); 
-			copyArg(msg,"launchType",params); 
+			copyArg(msg,"cluster",params,undefined,false); 
+			copyArg(msg,"containerInstance",params,undefined,false); 
+			copyArg(msg,"family",params,undefined,false); 
+			copyArg(msg,"nextToken",params,undefined,false); 
+			copyArg(msg,"maxResults",params,undefined,false); 
+			copyArg(msg,"startedBy",params,undefined,false); 
+			copyArg(msg,"serviceName",params,undefined,false); 
+			copyArg(msg,"desiredStatus",params,undefined,false); 
+			copyArg(msg,"launchType",params,undefined,false); 
 			
 
 			svc.listTasks(params,cb);
@@ -388,10 +394,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"attributes",params); 
+			copyArg(n,"attributes",params,undefined,true); 
 			
-			copyArg(msg,"cluster",params); 
-			copyArg(msg,"attributes",params); 
+			copyArg(msg,"cluster",params,undefined,false); 
+			copyArg(msg,"attributes",params,undefined,true); 
 			
 
 			svc.putAttributes(params,cb);
@@ -403,13 +409,13 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"cluster",params); 
-			copyArg(msg,"instanceIdentityDocument",params); 
-			copyArg(msg,"instanceIdentityDocumentSignature",params); 
-			copyArg(msg,"totalResources",params); 
-			copyArg(msg,"versionInfo",params); 
-			copyArg(msg,"containerInstanceArn",params); 
-			copyArg(msg,"attributes",params); 
+			copyArg(msg,"cluster",params,undefined,false); 
+			copyArg(msg,"instanceIdentityDocument",params,undefined,false); 
+			copyArg(msg,"instanceIdentityDocumentSignature",params,undefined,false); 
+			copyArg(msg,"totalResources",params,undefined,true); 
+			copyArg(msg,"versionInfo",params,undefined,true); 
+			copyArg(msg,"containerInstanceArn",params,undefined,false); 
+			copyArg(msg,"attributes",params,undefined,true); 
 			
 
 			svc.registerContainerInstance(params,cb);
@@ -420,19 +426,19 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"family",params); 
-			copyArg(n,"containerDefinitions",params); 
+			copyArg(n,"family",params,undefined,false); 
+			copyArg(n,"containerDefinitions",params,undefined,true); 
 			
-			copyArg(msg,"family",params); 
-			copyArg(msg,"taskRoleArn",params); 
-			copyArg(msg,"executionRoleArn",params); 
-			copyArg(msg,"networkMode",params); 
-			copyArg(msg,"containerDefinitions",params); 
-			copyArg(msg,"volumes",params); 
-			copyArg(msg,"placementConstraints",params); 
-			copyArg(msg,"requiresCompatibilities",params); 
-			copyArg(msg,"cpu",params); 
-			copyArg(msg,"memory",params); 
+			copyArg(msg,"family",params,undefined,false); 
+			copyArg(msg,"taskRoleArn",params,undefined,false); 
+			copyArg(msg,"executionRoleArn",params,undefined,false); 
+			copyArg(msg,"networkMode",params,undefined,false); 
+			copyArg(msg,"containerDefinitions",params,undefined,true); 
+			copyArg(msg,"volumes",params,undefined,true); 
+			copyArg(msg,"placementConstraints",params,undefined,true); 
+			copyArg(msg,"requiresCompatibilities",params,undefined,true); 
+			copyArg(msg,"cpu",params,undefined,false); 
+			copyArg(msg,"memory",params,undefined,false); 
 			
 
 			svc.registerTaskDefinition(params,cb);
@@ -443,19 +449,19 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"taskDefinition",params); 
+			copyArg(n,"taskDefinition",params,undefined,false); 
 			
-			copyArg(msg,"cluster",params); 
-			copyArg(msg,"taskDefinition",params); 
-			copyArg(msg,"overrides",params); 
-			copyArg(msg,"count",params); 
-			copyArg(msg,"startedBy",params); 
-			copyArg(msg,"group",params); 
-			copyArg(msg,"placementConstraints",params); 
-			copyArg(msg,"placementStrategy",params); 
-			copyArg(msg,"launchType",params); 
-			copyArg(msg,"platformVersion",params); 
-			copyArg(msg,"networkConfiguration",params); 
+			copyArg(msg,"cluster",params,undefined,false); 
+			copyArg(msg,"taskDefinition",params,undefined,false); 
+			copyArg(msg,"overrides",params,undefined,true); 
+			copyArg(msg,"count",params,undefined,false); 
+			copyArg(msg,"startedBy",params,undefined,false); 
+			copyArg(msg,"group",params,undefined,false); 
+			copyArg(msg,"placementConstraints",params,undefined,true); 
+			copyArg(msg,"placementStrategy",params,undefined,true); 
+			copyArg(msg,"launchType",params,undefined,false); 
+			copyArg(msg,"platformVersion",params,undefined,false); 
+			copyArg(msg,"networkConfiguration",params,undefined,true); 
 			
 
 			svc.runTask(params,cb);
@@ -466,16 +472,16 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"taskDefinition",params); 
-			copyArg(n,"containerInstances",params); 
+			copyArg(n,"taskDefinition",params,undefined,false); 
+			copyArg(n,"containerInstances",params,undefined,true); 
 			
-			copyArg(msg,"cluster",params); 
-			copyArg(msg,"taskDefinition",params); 
-			copyArg(msg,"overrides",params); 
-			copyArg(msg,"containerInstances",params); 
-			copyArg(msg,"startedBy",params); 
-			copyArg(msg,"group",params); 
-			copyArg(msg,"networkConfiguration",params); 
+			copyArg(msg,"cluster",params,undefined,false); 
+			copyArg(msg,"taskDefinition",params,undefined,false); 
+			copyArg(msg,"overrides",params,undefined,true); 
+			copyArg(msg,"containerInstances",params,undefined,true); 
+			copyArg(msg,"startedBy",params,undefined,false); 
+			copyArg(msg,"group",params,undefined,false); 
+			copyArg(msg,"networkConfiguration",params,undefined,true); 
 			
 
 			svc.startTask(params,cb);
@@ -486,11 +492,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"task",params); 
+			copyArg(n,"task",params,undefined,false); 
 			
-			copyArg(msg,"cluster",params); 
-			copyArg(msg,"task",params); 
-			copyArg(msg,"reason",params); 
+			copyArg(msg,"cluster",params,undefined,false); 
+			copyArg(msg,"task",params,undefined,false); 
+			copyArg(msg,"reason",params,undefined,false); 
 			
 
 			svc.stopTask(params,cb);
@@ -502,13 +508,13 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"cluster",params); 
-			copyArg(msg,"task",params); 
-			copyArg(msg,"containerName",params); 
-			copyArg(msg,"status",params); 
-			copyArg(msg,"exitCode",params); 
-			copyArg(msg,"reason",params); 
-			copyArg(msg,"networkBindings",params); 
+			copyArg(msg,"cluster",params,undefined,false); 
+			copyArg(msg,"task",params,undefined,false); 
+			copyArg(msg,"containerName",params,undefined,false); 
+			copyArg(msg,"status",params,undefined,false); 
+			copyArg(msg,"exitCode",params,undefined,false); 
+			copyArg(msg,"reason",params,undefined,false); 
+			copyArg(msg,"networkBindings",params,undefined,true); 
 			
 
 			svc.submitContainerStateChange(params,cb);
@@ -520,15 +526,15 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"cluster",params); 
-			copyArg(msg,"task",params); 
-			copyArg(msg,"status",params); 
-			copyArg(msg,"reason",params); 
-			copyArg(msg,"containers",params); 
-			copyArg(msg,"attachments",params); 
-			copyArg(msg,"pullStartedAt",params); 
-			copyArg(msg,"pullStoppedAt",params); 
-			copyArg(msg,"executionStoppedAt",params); 
+			copyArg(msg,"cluster",params,undefined,false); 
+			copyArg(msg,"task",params,undefined,false); 
+			copyArg(msg,"status",params,undefined,false); 
+			copyArg(msg,"reason",params,undefined,false); 
+			copyArg(msg,"containers",params,undefined,false); 
+			copyArg(msg,"attachments",params,undefined,false); 
+			copyArg(msg,"pullStartedAt",params,undefined,false); 
+			copyArg(msg,"pullStoppedAt",params,undefined,false); 
+			copyArg(msg,"executionStoppedAt",params,undefined,false); 
 			
 
 			svc.submitTaskStateChange(params,cb);
@@ -539,10 +545,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"containerInstance",params); 
+			copyArg(n,"containerInstance",params,undefined,false); 
 			
-			copyArg(msg,"cluster",params); 
-			copyArg(msg,"containerInstance",params); 
+			copyArg(msg,"cluster",params,undefined,false); 
+			copyArg(msg,"containerInstance",params,undefined,false); 
 			
 
 			svc.updateContainerAgent(params,cb);
@@ -553,12 +559,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"containerInstances",params); 
-			copyArg(n,"status",params); 
+			copyArg(n,"containerInstances",params,undefined,true); 
+			copyArg(n,"status",params,undefined,false); 
 			
-			copyArg(msg,"cluster",params); 
-			copyArg(msg,"containerInstances",params); 
-			copyArg(msg,"status",params); 
+			copyArg(msg,"cluster",params,undefined,false); 
+			copyArg(msg,"containerInstances",params,undefined,true); 
+			copyArg(msg,"status",params,undefined,false); 
 			
 
 			svc.updateContainerInstancesState(params,cb);
@@ -569,16 +575,17 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"service",params); 
+			copyArg(n,"service",params,undefined,false); 
 			
-			copyArg(msg,"cluster",params); 
-			copyArg(msg,"service",params); 
-			copyArg(msg,"desiredCount",params); 
-			copyArg(msg,"taskDefinition",params); 
-			copyArg(msg,"deploymentConfiguration",params); 
-			copyArg(msg,"networkConfiguration",params); 
-			copyArg(msg,"platformVersion",params); 
-			copyArg(msg,"forceNewDeployment",params); 
+			copyArg(msg,"cluster",params,undefined,false); 
+			copyArg(msg,"service",params,undefined,false); 
+			copyArg(msg,"desiredCount",params,undefined,false); 
+			copyArg(msg,"taskDefinition",params,undefined,false); 
+			copyArg(msg,"deploymentConfiguration",params,undefined,true); 
+			copyArg(msg,"networkConfiguration",params,undefined,true); 
+			copyArg(msg,"platformVersion",params,undefined,false); 
+			copyArg(msg,"forceNewDeployment",params,undefined,false); 
+			copyArg(msg,"healthCheckGracePeriodSeconds",params,undefined,false); 
 			
 
 			svc.updateService(params,cb);

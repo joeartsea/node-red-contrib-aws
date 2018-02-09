@@ -67,13 +67,18 @@ module.exports = function(RED) {
 			}
 
 		});
-		var copyArg=function(src,arg,out,outArg){
+		var copyArg=function(src,arg,out,outArg,isObject){
+			var tmpValue=src[arg];
 			outArg = (typeof outArg !== 'undefined') ? outArg : arg;
+
 			if (typeof src[arg] !== 'undefined'){
-				out[outArg]=src[arg];
+				if (isObject && typeof src[arg]=="string" && src[arg] != "") { 
+					tmpValue=JSON.parse(src[arg]);
+				}
+				out[outArg]=tmpValue;
 			}
                         //AWS API takes 'Payload' not 'payload' (see Lambda)
-                        if (arg=="Payload" && typeof src[arg] == 'undefined'){
+                        if (arg=="Payload" && typeof tmpValue == 'undefined'){
                                 out[arg]=src["payload"];
                         }
 
@@ -86,9 +91,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Name",params); 
+			copyArg(n,"Name",params,undefined,true); 
 			
-			copyArg(msg,"Name",params); 
+			copyArg(msg,"Name",params,undefined,true); 
 			
 
 			svc.deleteLexicon(params,cb);
@@ -100,8 +105,8 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"LanguageCode",params); 
-			copyArg(msg,"NextToken",params); 
+			copyArg(msg,"LanguageCode",params,undefined,false); 
+			copyArg(msg,"NextToken",params,undefined,false); 
 			
 
 			svc.describeVoices(params,cb);
@@ -112,9 +117,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Name",params); 
+			copyArg(n,"Name",params,undefined,true); 
 			
-			copyArg(msg,"Name",params); 
+			copyArg(msg,"Name",params,undefined,true); 
 			
 
 			svc.getLexicon(params,cb);
@@ -126,7 +131,7 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"NextToken",params); 
+			copyArg(msg,"NextToken",params,undefined,false); 
 			
 
 			svc.listLexicons(params,cb);
@@ -137,11 +142,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Name",params); 
-			copyArg(n,"Content",params); 
+			copyArg(n,"Name",params,undefined,true); 
+			copyArg(n,"Content",params,undefined,false); 
 			
-			copyArg(msg,"Name",params); 
-			copyArg(msg,"Content",params); 
+			copyArg(msg,"Name",params,undefined,true); 
+			copyArg(msg,"Content",params,undefined,false); 
 			
 
 			svc.putLexicon(params,cb);
@@ -152,17 +157,17 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"OutputFormat",params); 
-			copyArg(n,"Text",params); 
-			copyArg(n,"VoiceId",params); 
+			copyArg(n,"OutputFormat",params,undefined,false); 
+			copyArg(n,"Text",params,undefined,false); 
+			copyArg(n,"VoiceId",params,undefined,false); 
 			
-			copyArg(msg,"LexiconNames",params); 
-			copyArg(msg,"OutputFormat",params); 
-			copyArg(msg,"SampleRate",params); 
-			copyArg(msg,"SpeechMarkTypes",params); 
-			copyArg(msg,"Text",params); 
-			copyArg(msg,"TextType",params); 
-			copyArg(msg,"VoiceId",params); 
+			copyArg(msg,"LexiconNames",params,undefined,false); 
+			copyArg(msg,"OutputFormat",params,undefined,false); 
+			copyArg(msg,"SampleRate",params,undefined,false); 
+			copyArg(msg,"SpeechMarkTypes",params,undefined,false); 
+			copyArg(msg,"Text",params,undefined,false); 
+			copyArg(msg,"TextType",params,undefined,false); 
+			copyArg(msg,"VoiceId",params,undefined,false); 
 			
 
 			svc.synthesizeSpeech(params,cb);

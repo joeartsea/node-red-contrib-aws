@@ -67,13 +67,18 @@ module.exports = function(RED) {
 			}
 
 		});
-		var copyArg=function(src,arg,out,outArg){
+		var copyArg=function(src,arg,out,outArg,isObject){
+			var tmpValue=src[arg];
 			outArg = (typeof outArg !== 'undefined') ? outArg : arg;
+
 			if (typeof src[arg] !== 'undefined'){
-				out[outArg]=src[arg];
+				if (isObject && typeof src[arg]=="string" && src[arg] != "") { 
+					tmpValue=JSON.parse(src[arg]);
+				}
+				out[outArg]=tmpValue;
 			}
                         //AWS API takes 'Payload' not 'payload' (see Lambda)
-                        if (arg=="Payload" && typeof src[arg] == 'undefined'){
+                        if (arg=="Payload" && typeof tmpValue == 'undefined'){
                                 out[arg]=src["payload"];
                         }
 
@@ -86,19 +91,20 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"FunctionName",params); 
-			copyArg(n,"StatementId",params); 
-			copyArg(n,"Action",params); 
-			copyArg(n,"Principal",params); 
+			copyArg(n,"FunctionName",params,undefined,false); 
+			copyArg(n,"StatementId",params,undefined,false); 
+			copyArg(n,"Action",params,undefined,false); 
+			copyArg(n,"Principal",params,undefined,false); 
 			
-			copyArg(msg,"FunctionName",params); 
-			copyArg(msg,"StatementId",params); 
-			copyArg(msg,"Action",params); 
-			copyArg(msg,"Principal",params); 
-			copyArg(msg,"SourceArn",params); 
-			copyArg(msg,"SourceAccount",params); 
-			copyArg(msg,"EventSourceToken",params); 
-			copyArg(msg,"Qualifier",params); 
+			copyArg(msg,"FunctionName",params,undefined,false); 
+			copyArg(msg,"StatementId",params,undefined,false); 
+			copyArg(msg,"Action",params,undefined,false); 
+			copyArg(msg,"Principal",params,undefined,false); 
+			copyArg(msg,"SourceArn",params,undefined,false); 
+			copyArg(msg,"SourceAccount",params,undefined,false); 
+			copyArg(msg,"EventSourceToken",params,undefined,false); 
+			copyArg(msg,"Qualifier",params,undefined,false); 
+			copyArg(msg,"RevisionId",params,undefined,false); 
 			
 
 			svc.addPermission(params,cb);
@@ -109,15 +115,15 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"FunctionName",params); 
-			copyArg(n,"Name",params); 
-			copyArg(n,"FunctionVersion",params); 
+			copyArg(n,"FunctionName",params,undefined,false); 
+			copyArg(n,"Name",params,undefined,false); 
+			copyArg(n,"FunctionVersion",params,undefined,false); 
 			
-			copyArg(msg,"FunctionName",params); 
-			copyArg(msg,"Name",params); 
-			copyArg(msg,"FunctionVersion",params); 
-			copyArg(msg,"Description",params); 
-			copyArg(msg,"RoutingConfig",params); 
+			copyArg(msg,"FunctionName",params,undefined,false); 
+			copyArg(msg,"Name",params,undefined,false); 
+			copyArg(msg,"FunctionVersion",params,undefined,false); 
+			copyArg(msg,"Description",params,undefined,false); 
+			copyArg(msg,"RoutingConfig",params,undefined,true); 
 			
 
 			svc.createAlias(params,cb);
@@ -128,16 +134,16 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"EventSourceArn",params); 
-			copyArg(n,"FunctionName",params); 
-			copyArg(n,"StartingPosition",params); 
+			copyArg(n,"EventSourceArn",params,undefined,false); 
+			copyArg(n,"FunctionName",params,undefined,false); 
+			copyArg(n,"StartingPosition",params,undefined,false); 
 			
-			copyArg(msg,"EventSourceArn",params); 
-			copyArg(msg,"FunctionName",params); 
-			copyArg(msg,"Enabled",params); 
-			copyArg(msg,"BatchSize",params); 
-			copyArg(msg,"StartingPosition",params); 
-			copyArg(msg,"StartingPositionTimestamp",params); 
+			copyArg(msg,"EventSourceArn",params,undefined,false); 
+			copyArg(msg,"FunctionName",params,undefined,false); 
+			copyArg(msg,"Enabled",params,undefined,false); 
+			copyArg(msg,"BatchSize",params,undefined,false); 
+			copyArg(msg,"StartingPosition",params,undefined,false); 
+			copyArg(msg,"StartingPositionTimestamp",params,undefined,false); 
 			
 
 			svc.createEventSourceMapping(params,cb);
@@ -148,27 +154,27 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"FunctionName",params); 
-			copyArg(n,"Runtime",params); 
-			copyArg(n,"Role",params); 
-			copyArg(n,"Handler",params); 
-			copyArg(n,"Code",params); 
+			copyArg(n,"FunctionName",params,undefined,false); 
+			copyArg(n,"Runtime",params,undefined,false); 
+			copyArg(n,"Role",params,undefined,false); 
+			copyArg(n,"Handler",params,undefined,false); 
+			copyArg(n,"Code",params,undefined,false); 
 			
-			copyArg(msg,"FunctionName",params); 
-			copyArg(msg,"Runtime",params); 
-			copyArg(msg,"Role",params); 
-			copyArg(msg,"Handler",params); 
-			copyArg(msg,"Code",params); 
-			copyArg(msg,"Description",params); 
-			copyArg(msg,"Timeout",params); 
-			copyArg(msg,"MemorySize",params); 
-			copyArg(msg,"Publish",params); 
-			copyArg(msg,"VpcConfig",params); 
-			copyArg(msg,"DeadLetterConfig",params); 
-			copyArg(msg,"Environment",params); 
-			copyArg(msg,"KMSKeyArn",params); 
-			copyArg(msg,"TracingConfig",params); 
-			copyArg(msg,"Tags",params); 
+			copyArg(msg,"FunctionName",params,undefined,false); 
+			copyArg(msg,"Runtime",params,undefined,false); 
+			copyArg(msg,"Role",params,undefined,false); 
+			copyArg(msg,"Handler",params,undefined,false); 
+			copyArg(msg,"Code",params,undefined,false); 
+			copyArg(msg,"Description",params,undefined,false); 
+			copyArg(msg,"Timeout",params,undefined,false); 
+			copyArg(msg,"MemorySize",params,undefined,false); 
+			copyArg(msg,"Publish",params,undefined,false); 
+			copyArg(msg,"VpcConfig",params,undefined,true); 
+			copyArg(msg,"DeadLetterConfig",params,undefined,true); 
+			copyArg(msg,"Environment",params,undefined,true); 
+			copyArg(msg,"KMSKeyArn",params,undefined,false); 
+			copyArg(msg,"TracingConfig",params,undefined,true); 
+			copyArg(msg,"Tags",params,undefined,true); 
 			
 
 			svc.createFunction(params,cb);
@@ -179,11 +185,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"FunctionName",params); 
-			copyArg(n,"Name",params); 
+			copyArg(n,"FunctionName",params,undefined,false); 
+			copyArg(n,"Name",params,undefined,false); 
 			
-			copyArg(msg,"FunctionName",params); 
-			copyArg(msg,"Name",params); 
+			copyArg(msg,"FunctionName",params,undefined,false); 
+			copyArg(msg,"Name",params,undefined,false); 
 			
 
 			svc.deleteAlias(params,cb);
@@ -194,9 +200,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"UUID",params); 
+			copyArg(n,"UUID",params,undefined,false); 
 			
-			copyArg(msg,"UUID",params); 
+			copyArg(msg,"UUID",params,undefined,false); 
 			
 
 			svc.deleteEventSourceMapping(params,cb);
@@ -207,10 +213,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"FunctionName",params); 
+			copyArg(n,"FunctionName",params,undefined,false); 
 			
-			copyArg(msg,"FunctionName",params); 
-			copyArg(msg,"Qualifier",params); 
+			copyArg(msg,"FunctionName",params,undefined,false); 
+			copyArg(msg,"Qualifier",params,undefined,false); 
 			
 
 			svc.deleteFunction(params,cb);
@@ -221,9 +227,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"FunctionName",params); 
+			copyArg(n,"FunctionName",params,undefined,false); 
 			
-			copyArg(msg,"FunctionName",params); 
+			copyArg(msg,"FunctionName",params,undefined,false); 
 			
 
 			svc.deleteFunctionConcurrency(params,cb);
@@ -245,11 +251,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"FunctionName",params); 
-			copyArg(n,"Name",params); 
+			copyArg(n,"FunctionName",params,undefined,false); 
+			copyArg(n,"Name",params,undefined,false); 
 			
-			copyArg(msg,"FunctionName",params); 
-			copyArg(msg,"Name",params); 
+			copyArg(msg,"FunctionName",params,undefined,false); 
+			copyArg(msg,"Name",params,undefined,false); 
 			
 
 			svc.getAlias(params,cb);
@@ -260,9 +266,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"UUID",params); 
+			copyArg(n,"UUID",params,undefined,false); 
 			
-			copyArg(msg,"UUID",params); 
+			copyArg(msg,"UUID",params,undefined,false); 
 			
 
 			svc.getEventSourceMapping(params,cb);
@@ -273,10 +279,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"FunctionName",params); 
+			copyArg(n,"FunctionName",params,undefined,false); 
 			
-			copyArg(msg,"FunctionName",params); 
-			copyArg(msg,"Qualifier",params); 
+			copyArg(msg,"FunctionName",params,undefined,false); 
+			copyArg(msg,"Qualifier",params,undefined,false); 
 			
 
 			svc.getFunction(params,cb);
@@ -287,10 +293,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"FunctionName",params); 
+			copyArg(n,"FunctionName",params,undefined,false); 
 			
-			copyArg(msg,"FunctionName",params); 
-			copyArg(msg,"Qualifier",params); 
+			copyArg(msg,"FunctionName",params,undefined,false); 
+			copyArg(msg,"Qualifier",params,undefined,false); 
 			
 
 			svc.getFunctionConfiguration(params,cb);
@@ -301,10 +307,10 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"FunctionName",params); 
+			copyArg(n,"FunctionName",params,undefined,false); 
 			
-			copyArg(msg,"FunctionName",params); 
-			copyArg(msg,"Qualifier",params); 
+			copyArg(msg,"FunctionName",params,undefined,false); 
+			copyArg(msg,"Qualifier",params,undefined,false); 
 			
 
 			svc.getPolicy(params,cb);
@@ -315,14 +321,14 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"FunctionName",params); 
+			copyArg(n,"FunctionName",params,undefined,false); 
 			
-			copyArg(msg,"FunctionName",params); 
-			copyArg(msg,"InvocationType",params); 
-			copyArg(msg,"LogType",params); 
-			copyArg(msg,"ClientContext",params); 
-			copyArg(msg,"Payload",params); 
-			copyArg(msg,"Qualifier",params); 
+			copyArg(msg,"FunctionName",params,undefined,false); 
+			copyArg(msg,"InvocationType",params,undefined,false); 
+			copyArg(msg,"LogType",params,undefined,false); 
+			copyArg(msg,"ClientContext",params,undefined,false); 
+			copyArg(msg,"Payload",params,undefined,true); 
+			copyArg(msg,"Qualifier",params,undefined,false); 
 			
 
 			svc.invoke(params,cb);
@@ -333,11 +339,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"FunctionName",params); 
-			copyArg(n,"InvokeArgs",params); 
+			copyArg(n,"FunctionName",params,undefined,false); 
+			copyArg(n,"InvokeArgs",params,undefined,false); 
 			
-			copyArg(msg,"FunctionName",params); 
-			copyArg(msg,"InvokeArgs",params); 
+			copyArg(msg,"FunctionName",params,undefined,false); 
+			copyArg(msg,"InvokeArgs",params,undefined,false); 
 			
 
 			svc.invokeAsync(params,cb);
@@ -348,12 +354,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"FunctionName",params); 
+			copyArg(n,"FunctionName",params,undefined,false); 
 			
-			copyArg(msg,"FunctionName",params); 
-			copyArg(msg,"FunctionVersion",params); 
-			copyArg(msg,"Marker",params); 
-			copyArg(msg,"MaxItems",params); 
+			copyArg(msg,"FunctionName",params,undefined,false); 
+			copyArg(msg,"FunctionVersion",params,undefined,false); 
+			copyArg(msg,"Marker",params,undefined,false); 
+			copyArg(msg,"MaxItems",params,undefined,false); 
 			
 
 			svc.listAliases(params,cb);
@@ -365,10 +371,10 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"EventSourceArn",params); 
-			copyArg(msg,"FunctionName",params); 
-			copyArg(msg,"Marker",params); 
-			copyArg(msg,"MaxItems",params); 
+			copyArg(msg,"EventSourceArn",params,undefined,false); 
+			copyArg(msg,"FunctionName",params,undefined,false); 
+			copyArg(msg,"Marker",params,undefined,false); 
+			copyArg(msg,"MaxItems",params,undefined,false); 
 			
 
 			svc.listEventSourceMappings(params,cb);
@@ -380,10 +386,10 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
-			copyArg(msg,"MasterRegion",params); 
-			copyArg(msg,"FunctionVersion",params); 
-			copyArg(msg,"Marker",params); 
-			copyArg(msg,"MaxItems",params); 
+			copyArg(msg,"MasterRegion",params,undefined,false); 
+			copyArg(msg,"FunctionVersion",params,undefined,false); 
+			copyArg(msg,"Marker",params,undefined,false); 
+			copyArg(msg,"MaxItems",params,undefined,false); 
 			
 
 			svc.listFunctions(params,cb);
@@ -394,9 +400,9 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Resource",params); 
+			copyArg(n,"Resource",params,undefined,false); 
 			
-			copyArg(msg,"Resource",params); 
+			copyArg(msg,"Resource",params,undefined,false); 
 			
 
 			svc.listTags(params,cb);
@@ -407,11 +413,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"FunctionName",params); 
+			copyArg(n,"FunctionName",params,undefined,false); 
 			
-			copyArg(msg,"FunctionName",params); 
-			copyArg(msg,"Marker",params); 
-			copyArg(msg,"MaxItems",params); 
+			copyArg(msg,"FunctionName",params,undefined,false); 
+			copyArg(msg,"Marker",params,undefined,false); 
+			copyArg(msg,"MaxItems",params,undefined,false); 
 			
 
 			svc.listVersionsByFunction(params,cb);
@@ -422,11 +428,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"FunctionName",params); 
+			copyArg(n,"FunctionName",params,undefined,false); 
 			
-			copyArg(msg,"FunctionName",params); 
-			copyArg(msg,"CodeSha256",params); 
-			copyArg(msg,"Description",params); 
+			copyArg(msg,"FunctionName",params,undefined,false); 
+			copyArg(msg,"CodeSha256",params,undefined,false); 
+			copyArg(msg,"Description",params,undefined,false); 
+			copyArg(msg,"RevisionId",params,undefined,false); 
 			
 
 			svc.publishVersion(params,cb);
@@ -437,11 +444,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"FunctionName",params); 
-			copyArg(n,"ReservedConcurrentExecutions",params); 
+			copyArg(n,"FunctionName",params,undefined,false); 
+			copyArg(n,"ReservedConcurrentExecutions",params,undefined,false); 
 			
-			copyArg(msg,"FunctionName",params); 
-			copyArg(msg,"ReservedConcurrentExecutions",params); 
+			copyArg(msg,"FunctionName",params,undefined,false); 
+			copyArg(msg,"ReservedConcurrentExecutions",params,undefined,false); 
 			
 
 			svc.putFunctionConcurrency(params,cb);
@@ -452,12 +459,13 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"FunctionName",params); 
-			copyArg(n,"StatementId",params); 
+			copyArg(n,"FunctionName",params,undefined,false); 
+			copyArg(n,"StatementId",params,undefined,false); 
 			
-			copyArg(msg,"FunctionName",params); 
-			copyArg(msg,"StatementId",params); 
-			copyArg(msg,"Qualifier",params); 
+			copyArg(msg,"FunctionName",params,undefined,false); 
+			copyArg(msg,"StatementId",params,undefined,false); 
+			copyArg(msg,"Qualifier",params,undefined,false); 
+			copyArg(msg,"RevisionId",params,undefined,false); 
 			
 
 			svc.removePermission(params,cb);
@@ -468,11 +476,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Resource",params); 
-			copyArg(n,"Tags",params); 
+			copyArg(n,"Resource",params,undefined,false); 
+			copyArg(n,"Tags",params,undefined,true); 
 			
-			copyArg(msg,"Resource",params); 
-			copyArg(msg,"Tags",params); 
+			copyArg(msg,"Resource",params,undefined,false); 
+			copyArg(msg,"Tags",params,undefined,true); 
 			
 
 			svc.tagResource(params,cb);
@@ -483,11 +491,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"Resource",params); 
-			copyArg(n,"TagKeys",params); 
+			copyArg(n,"Resource",params,undefined,false); 
+			copyArg(n,"TagKeys",params,undefined,false); 
 			
-			copyArg(msg,"Resource",params); 
-			copyArg(msg,"TagKeys",params); 
+			copyArg(msg,"Resource",params,undefined,false); 
+			copyArg(msg,"TagKeys",params,undefined,false); 
 			
 
 			svc.untagResource(params,cb);
@@ -498,14 +506,15 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"FunctionName",params); 
-			copyArg(n,"Name",params); 
+			copyArg(n,"FunctionName",params,undefined,false); 
+			copyArg(n,"Name",params,undefined,false); 
 			
-			copyArg(msg,"FunctionName",params); 
-			copyArg(msg,"Name",params); 
-			copyArg(msg,"FunctionVersion",params); 
-			copyArg(msg,"Description",params); 
-			copyArg(msg,"RoutingConfig",params); 
+			copyArg(msg,"FunctionName",params,undefined,false); 
+			copyArg(msg,"Name",params,undefined,false); 
+			copyArg(msg,"FunctionVersion",params,undefined,false); 
+			copyArg(msg,"Description",params,undefined,false); 
+			copyArg(msg,"RoutingConfig",params,undefined,true); 
+			copyArg(msg,"RevisionId",params,undefined,false); 
 			
 
 			svc.updateAlias(params,cb);
@@ -516,12 +525,12 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"UUID",params); 
+			copyArg(n,"UUID",params,undefined,false); 
 			
-			copyArg(msg,"UUID",params); 
-			copyArg(msg,"FunctionName",params); 
-			copyArg(msg,"Enabled",params); 
-			copyArg(msg,"BatchSize",params); 
+			copyArg(msg,"UUID",params,undefined,false); 
+			copyArg(msg,"FunctionName",params,undefined,false); 
+			copyArg(msg,"Enabled",params,undefined,false); 
+			copyArg(msg,"BatchSize",params,undefined,false); 
 			
 
 			svc.updateEventSourceMapping(params,cb);
@@ -532,15 +541,16 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"FunctionName",params); 
+			copyArg(n,"FunctionName",params,undefined,false); 
 			
-			copyArg(msg,"FunctionName",params); 
-			copyArg(msg,"ZipFile",params); 
-			copyArg(msg,"S3Bucket",params); 
-			copyArg(msg,"S3Key",params); 
-			copyArg(msg,"S3ObjectVersion",params); 
-			copyArg(msg,"Publish",params); 
-			copyArg(msg,"DryRun",params); 
+			copyArg(msg,"FunctionName",params,undefined,false); 
+			copyArg(msg,"ZipFile",params,undefined,true); 
+			copyArg(msg,"S3Bucket",params,undefined,false); 
+			copyArg(msg,"S3Key",params,undefined,false); 
+			copyArg(msg,"S3ObjectVersion",params,undefined,false); 
+			copyArg(msg,"Publish",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"RevisionId",params,undefined,false); 
 			
 
 			svc.updateFunctionCode(params,cb);
@@ -551,20 +561,21 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"FunctionName",params); 
+			copyArg(n,"FunctionName",params,undefined,false); 
 			
-			copyArg(msg,"FunctionName",params); 
-			copyArg(msg,"Role",params); 
-			copyArg(msg,"Handler",params); 
-			copyArg(msg,"Description",params); 
-			copyArg(msg,"Timeout",params); 
-			copyArg(msg,"MemorySize",params); 
-			copyArg(msg,"VpcConfig",params); 
-			copyArg(msg,"Environment",params); 
-			copyArg(msg,"Runtime",params); 
-			copyArg(msg,"DeadLetterConfig",params); 
-			copyArg(msg,"KMSKeyArn",params); 
-			copyArg(msg,"TracingConfig",params); 
+			copyArg(msg,"FunctionName",params,undefined,false); 
+			copyArg(msg,"Role",params,undefined,false); 
+			copyArg(msg,"Handler",params,undefined,false); 
+			copyArg(msg,"Description",params,undefined,false); 
+			copyArg(msg,"Timeout",params,undefined,false); 
+			copyArg(msg,"MemorySize",params,undefined,false); 
+			copyArg(msg,"VpcConfig",params,undefined,true); 
+			copyArg(msg,"Environment",params,undefined,true); 
+			copyArg(msg,"Runtime",params,undefined,false); 
+			copyArg(msg,"DeadLetterConfig",params,undefined,true); 
+			copyArg(msg,"KMSKeyArn",params,undefined,false); 
+			copyArg(msg,"TracingConfig",params,undefined,true); 
+			copyArg(msg,"RevisionId",params,undefined,false); 
 			
 
 			svc.updateFunctionConfiguration(params,cb);
