@@ -234,13 +234,18 @@ module.exports = function(RED) {
 			}
 
 		});
-		var copyArg=function(src,arg,out,outArg){
+		var copyArg=function(src,arg,out,outArg,isObject){
+			var tmpValue=src[arg];
 			outArg = (typeof outArg !== 'undefined') ? outArg : arg;
+
 			if (typeof src[arg] !== 'undefined'){
-				out[outArg]=src[arg];
+				if (isObject && typeof src[arg]=="string" && src[arg] != "") { 
+					tmpValue=JSON.parse(src[arg]);
+				}
+				out[outArg]=tmpValue;
 			}
                         //AWS API takes 'Payload' not 'payload' (see Lambda)
-                        if (arg=="Payload" && typeof src[arg] == 'undefined'){
+                        if (arg=="Payload" && typeof tmpValue == 'undefined'){
                                 out[arg]=src["payload"];
                         }
 
@@ -253,11 +258,11 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			${(serviceDef.operations[op].input && serviceDef.operations[op].input.required)? mapKeys(serviceDef.operations[op].input.required, input => `
-			copyArg(n,"${serviceDef.operations[op].input.required[input]}",params); `): ''}
+			copyArg(n,"${serviceDef.operations[op].input.required[input]}",params,undefined,${typeof serviceDef.operations[op].input.members[serviceDef.operations[op].input.required[input]].shape !== "undefined"}); `): ''}
 			${(serviceDef.operations[op].input && serviceDef.operations[op].input.members)? mapKeys(serviceDef.operations[op].input.members, input => `
-			copyArg(msg,"${input}",params); `): ''}
+			copyArg(msg,"${input}",params,undefined,${typeof serviceDef.operations[op].input.members[input].shape !== "undefined"}); `): ''}
 			${(serviceDef.operations[op].input && serviceDef.operations[op].input.shape)? mapKeys(serviceDef.shapes[serviceDef.operations[op].input.shape].members, input => `
-			copyArg(msg,"${input}",params); `): ''}
+			copyArg(msg,"${input}",params,undefined,true); `): ''}
 
 			svc.${firstLetterLowercase(op)}(params,cb);
 		}
