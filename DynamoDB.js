@@ -40,7 +40,7 @@ module.exports = function(RED) {
 			return;
 		}
 
-		var awsService = new AWS.Dynamodb( { 'region': node.region } );
+		var awsService = new AWS.DynamoDB( { 'region': node.region } );
 
 		node.on("input", function(msg) {
 			node.sendMsg = function (err, data) {
@@ -569,6 +569,6 @@ module.exports = function(RED) {
 			
 
 	}
-	RED.nodes.registerType("AWS Dynamodb", AmazonAPINode);
+	RED.nodes.registerType("AWS DynamoDB", AmazonAPINode);
 
 };

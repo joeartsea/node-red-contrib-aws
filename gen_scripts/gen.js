@@ -19,7 +19,7 @@ function serviceNameMapper(name){
 		Rds:'RDS',
 		Kms:'KMS',
 		Es:'ES',
-		DynamoDB:'DynamoDB',
+		Dynamodb:'DynamoDB',
 		Ec2:'EC2'
 	};
 	//really special cases

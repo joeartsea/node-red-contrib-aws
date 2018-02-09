@@ -33,7 +33,7 @@
       "AWS Kinesis": "Kinesis.js",
       "AWS Lambda": "Lambda.js",
       "AWS S3": "S3.js",
-      "AWS DynamoDB": "Dynamodb.js",
+      "AWS DynamoDB": "DynamoDB.js",
       "AWS SNS": "SNS.js",
       "AWS SQS": "SQS.js",
       "AWS RDS": "RDS.js",

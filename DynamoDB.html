@@ -15,7 +15,7 @@
   limitations under the License.
 -->
 
-<script type="text/x-red" data-template-name="AWS Dynamodb">
+<script type="text/x-red" data-template-name="AWS DynamoDB">
 		<style scoped>
 				.hiddenAttrs {display:none;}
 				.visibleAttrs {display:block;}
@@ -265,7 +265,7 @@
 
 </script>
 
-<script type="text/x-red" data-help-name="amazon Dynamodb">
+<script type="text/x-red" data-help-name="amazon DynamoDB">
 <p>
 AWS Amazon DynamoDB
 </p>
@@ -279,7 +279,7 @@ NOTE: Parameters must be specified in the message, using the case specified in t
 </script>
 
 <script type="text/javascript">
-	RED.nodes.registerType('AWS Dynamodb',{
+	RED.nodes.registerType('AWS DynamoDB',{
 		category: 'AWS',
 		color:"#C0DEED",
 		defaults: {
@@ -310,7 +310,7 @@ NOTE: Parameters must be specified in the message, using the case specified in t
 		icon: "aws.png",
 		align: "right",
 		label: function() {
-			return this.name || "Dynamodb " + this.operation;
+			return this.name || "DynamoDB " + this.operation;
 		},
 		oneditprepare: function () {
 
