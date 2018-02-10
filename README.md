@@ -25,6 +25,12 @@ Make sure that the AWS IAM User you are using has sufficient permissions for the
 
 Feature requests are welcome, submit an issue at https://github.com/daniel-t/node-red-contrib-aws
 
+Usage
+---
+Almost all nodes are direct wrappers for the AWS Javascript API, so for information about available parameters consult the API docs https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS.html
+
+Parameters need to be specified as per the AWS API (typically LeadingUpperCase).
+
 WARNING
 ----
 Only cursory testing of nodes has occured at this stage, please test and report issues.
