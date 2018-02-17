@@ -1,6 +1,6 @@
 {
   "name": "node-red-contrib-aws",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "A collection of Node-RED nodes for AWS.  Includes nodes for DynamoDB, EC2, IoT, Kinesis, Lambda, SNS, SQS and S3.",
   "dependencies": {
     "aws-sdk": "2"
@@ -25,6 +25,7 @@
     "ecs",
     "polly",
     "rekognition",
+    "firehose"
     "rds"
   ],
   "node-red": {
@@ -37,6 +38,7 @@
       "AWS SNS": "SNS.js",
       "AWS SQS": "SQS.js",
       "AWS RDS": "RDS.js",
+      "AWS Firehose": "Firehose.js",
       "AWS Iot": "Iot.js",
       "AWS IotData": "IotData.js",
       "AWS KMS": "KMS.js",
