@@ -35,6 +35,7 @@
       "AWS Lambda": "Lambda.js",
       "AWS S3": "S3.js",
       "AWS DynamoDB": "DynamoDB.js",
+      "AWS DynamoDB Converter": "DynamoDBConvert.js",
       "AWS SNS": "SNS.js",
       "AWS SQS": "SQS.js",
       "AWS RDS": "RDS.js",

@@ -31,6 +31,7 @@ Almost all nodes are direct wrappers for the AWS Javascript API, so for informat
 
 Parameters need to be specified as per the AWS API (typically LeadingUpperCase).
 
+
 WARNING
 ----
 Only cursory testing of nodes has occured at this stage, please test and report issues.
@@ -52,8 +53,9 @@ Contributions
 
 If you want to add a new node to this library, here's some pointers.
 - I only accept nodes which are built from the run_build.js script without modification.   This is to ensure that I can keep things up to date as the AWS API changes.   If for some reason you cant do that (such as with the IOT node), please also supply a contextual Diff against the automatically built node and an explanation of why it has to be this way.   It's OK to propose changes to the gen scripts, but they need to be as generic as possible.
-- Please only submit changes to one node per pull request.  If there's a problem with a node, it will delay getting them all in.
-- If you update teh build scripts, please submit those in a seperate request to any new/modified nodes
+	- The exception to this are utility nodes, such as DynamoDBConvert
+- Please only submit changes to one node per pull request.  If there's a problem with one node, it will delay getting them all in.
+- If you update the build scripts, please submit those in a seperate request to any new/modified nodes
 - Dont submit a complete set of nodes which have only been updated due to a new version of the AWS API.  if you need to features, submit individual nodes or create an issue and I will raise the AWS API level across the board.
 
 How to build nodes:
