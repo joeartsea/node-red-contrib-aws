@@ -26,6 +26,7 @@
     "polly",
     "rekognition",
     "firehose",
+    "tagging",
     "rds"
   ],
   "node-red": {
@@ -44,6 +45,7 @@
       "AWS IotData": "IotData.js",
       "AWS KMS": "KMS.js",
       "AWS ES": "ES.js",
+      "AWS Tagging": "ResourceGroupsTaggingAPI.js",
       "Rekognition": "Rekognition.js",
       "Polly": "Polly.js",
       "AWS ECS": "Ecs.js",
