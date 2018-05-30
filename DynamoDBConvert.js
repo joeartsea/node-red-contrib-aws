@@ -86,8 +86,6 @@ module.exports = function(RED) {
             } else {
                 param = msg.payload;
             }
-            node.warn(JSON.stringify(param));
-            node.warn(JSON.stringify(options));
 
             cb(null,svc.input(param, options));
 		}
@@ -104,8 +102,6 @@ module.exports = function(RED) {
             } else {
                 param = msg.payload;
             }
-            node.warn(JSON.stringify(param));
-            node.warn(JSON.stringify(options));
 
             cb(null, svc.output(param, options));
         }
@@ -122,9 +118,6 @@ module.exports = function(RED) {
             } else {
                 param = msg.payload;
             }
-            node.warn(JSON.stringify(param));
-            node.warn(JSON.stringify(options));
-
             cb(null, svc.marshall(param, options));
         }
 
@@ -140,8 +133,6 @@ module.exports = function(RED) {
             } else {
                 param = msg.payload;
             }
-            node.warn(JSON.stringify(param));
-            node.warn(JSON.stringify(options));
 
             cb(null, svc.unmarshall(param, options));
         }
