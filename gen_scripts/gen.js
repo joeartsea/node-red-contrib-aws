@@ -208,6 +208,13 @@ module.exports = function(RED) {
 			return;
 		}
 
+        if (this.awsConfig.proxyRequired){
+            var proxy = require('proxy-agent');
+            AWS.config.update({
+                httpOptions: { agent: new proxy(this.awsConfig.proxy) }
+            });
+        }
+
 		var awsService = new AWS.${serviceDef.metadata.serviceName}( { 'region': node.region } );
 
 		node.on("input", function(msg) {

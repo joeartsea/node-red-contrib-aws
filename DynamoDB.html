@@ -50,6 +50,8 @@
 		
 			<option value="DescribeGlobalTable">DescribeGlobalTable</option>
 		
+			<option value="DescribeGlobalTableSettings">DescribeGlobalTableSettings</option>
+		
 			<option value="DescribeLimits">DescribeLimits</option>
 		
 			<option value="DescribeTable">DescribeTable</option>
@@ -72,13 +74,19 @@
 		
 			<option value="RestoreTableFromBackup">RestoreTableFromBackup</option>
 		
+			<option value="RestoreTableToPointInTime">RestoreTableToPointInTime</option>
+		
 			<option value="Scan">Scan</option>
 		
 			<option value="TagResource">TagResource</option>
 		
 			<option value="UntagResource">UntagResource</option>
 		
+			<option value="UpdateContinuousBackups">UpdateContinuousBackups</option>
+		
 			<option value="UpdateGlobalTable">UpdateGlobalTable</option>
+		
+			<option value="UpdateGlobalTableSettings">UpdateGlobalTableSettings</option>
 		
 			<option value="UpdateItem">UpdateItem</option>
 		
@@ -147,6 +155,10 @@
 		<label for="node-input-TargetTableName"><i class="fa fa-tag"></i>TargetTableName</label>
 		<input type="text" id="node-input-TargetTableName" placeholder="TargetTableName"></input>
 	</div> 
+	<div class="form-row" id='SourceTableNameAttr' class='hiddenAttrs'>
+		<label for="node-input-SourceTableName"><i class="fa fa-tag"></i>SourceTableName</label>
+		<input type="text" id="node-input-SourceTableName" placeholder="SourceTableName"></input>
+	</div> 
 	<div class="form-row" id='TagsAttr' class='hiddenAttrs'>
 		<label for="node-input-Tags"><i class="fa fa-tag"></i>Tags</label>
 		<input type="text" id="node-input-Tags" placeholder="Tags"></input>
@@ -154,6 +166,10 @@
 	<div class="form-row" id='TagKeysAttr' class='hiddenAttrs'>
 		<label for="node-input-TagKeys"><i class="fa fa-tag"></i>TagKeys</label>
 		<input type="text" id="node-input-TagKeys" placeholder="TagKeys"></input>
+	</div> 
+	<div class="form-row" id='PointInTimeRecoverySpecificationAttr' class='hiddenAttrs'>
+		<label for="node-input-PointInTimeRecoverySpecification"><i class="fa fa-tag"></i>PointInTimeRecoverySpecification</label>
+		<input type="text" id="node-input-PointInTimeRecoverySpecification" placeholder="PointInTimeRecoverySpecification"></input>
 	</div> 
 	<div class="form-row" id='ReplicaUpdatesAttr' class='hiddenAttrs'>
 		<label for="node-input-ReplicaUpdates"><i class="fa fa-tag"></i>ReplicaUpdates</label>
@@ -201,6 +217,9 @@
 				DescribeGlobalTable:[
 					'#GlobalTableNameAttr'
 					],
+				DescribeGlobalTableSettings:[
+					'#GlobalTableNameAttr'
+					],
 				DescribeLimits:[
 					
 					],
@@ -234,6 +253,9 @@
 				RestoreTableFromBackup:[
 					'#TargetTableNameAttr','#BackupArnAttr'
 					],
+				RestoreTableToPointInTime:[
+					'#SourceTableNameAttr','#TargetTableNameAttr'
+					],
 				Scan:[
 					'#TableNameAttr'
 					],
@@ -243,8 +265,14 @@
 				UntagResource:[
 					'#ResourceArnAttr','#TagKeysAttr'
 					],
+				UpdateContinuousBackups:[
+					'#TableNameAttr','#PointInTimeRecoverySpecificationAttr'
+					],
 				UpdateGlobalTable:[
 					'#GlobalTableNameAttr','#ReplicaUpdatesAttr'
+					],
+				UpdateGlobalTableSettings:[
+					'#GlobalTableNameAttr'
 					],
 				UpdateItem:[
 					'#TableNameAttr','#KeyAttr'
@@ -299,8 +327,10 @@ NOTE: Parameters must be specified in the message, using the case specified in t
 				ResourceArn: { value: ""} ,
 				Item: { value: ""} ,
 				TargetTableName: { value: ""} ,
+				SourceTableName: { value: ""} ,
 				Tags: { value: ""} ,
 				TagKeys: { value: ""} ,
+				PointInTimeRecoverySpecification: { value: ""} ,
 				ReplicaUpdates: { value: ""} ,
 				TimeToLiveSpecification: { value: ""} ,
 			name: { value: "" }

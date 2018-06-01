@@ -40,6 +40,13 @@ module.exports = function(RED) {
 			return;
 		}
 
+        if (this.awsConfig.proxyRequired){
+            var proxy = require('proxy-agent');
+            AWS.config.update({
+                httpOptions: { agent: new proxy(this.awsConfig.proxy) }
+            });
+        }
+
 		var awsService = new AWS.DynamoDB( { 'region': node.region } );
 
 		node.on("input", function(msg) {
@@ -162,6 +169,7 @@ module.exports = function(RED) {
 			copyArg(msg,"GlobalSecondaryIndexes",params,undefined,false); 
 			copyArg(msg,"ProvisionedThroughput",params,undefined,true); 
 			copyArg(msg,"StreamSpecification",params,undefined,true); 
+			copyArg(msg,"SSESpecification",params,undefined,false); 
 			
 
 			svc.createTable(params,cb);
@@ -253,6 +261,19 @@ module.exports = function(RED) {
 			
 
 			svc.describeGlobalTable(params,cb);
+		}
+
+		
+		service.DescribeGlobalTableSettings=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"GlobalTableName",params,undefined,false); 
+			
+			copyArg(msg,"GlobalTableName",params,undefined,false); 
+			
+
+			svc.describeGlobalTableSettings(params,cb);
 		}
 
 		
@@ -437,6 +458,23 @@ module.exports = function(RED) {
 		}
 
 		
+		service.RestoreTableToPointInTime=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"SourceTableName",params,undefined,false); 
+			copyArg(n,"TargetTableName",params,undefined,false); 
+			
+			copyArg(msg,"SourceTableName",params,undefined,false); 
+			copyArg(msg,"TargetTableName",params,undefined,false); 
+			copyArg(msg,"UseLatestRestorableTime",params,undefined,false); 
+			copyArg(msg,"RestoreDateTime",params,undefined,false); 
+			
+
+			svc.restoreTableToPointInTime(params,cb);
+		}
+
+		
 		service.Scan=function(svc,msg,cb){
 			var params={};
 			//copyArgs
@@ -495,6 +533,21 @@ module.exports = function(RED) {
 		}
 
 		
+		service.UpdateContinuousBackups=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"TableName",params,undefined,false); 
+			copyArg(n,"PointInTimeRecoverySpecification",params,undefined,false); 
+			
+			copyArg(msg,"TableName",params,undefined,false); 
+			copyArg(msg,"PointInTimeRecoverySpecification",params,undefined,false); 
+			
+
+			svc.updateContinuousBackups(params,cb);
+		}
+
+		
 		service.UpdateGlobalTable=function(svc,msg,cb){
 			var params={};
 			//copyArgs
@@ -507,6 +560,22 @@ module.exports = function(RED) {
 			
 
 			svc.updateGlobalTable(params,cb);
+		}
+
+		
+		service.UpdateGlobalTableSettings=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"GlobalTableName",params,undefined,false); 
+			
+			copyArg(msg,"GlobalTableName",params,undefined,false); 
+			copyArg(msg,"GlobalTableProvisionedWriteCapacityUnits",params,undefined,false); 
+			copyArg(msg,"GlobalTableGlobalSecondaryIndexSettingsUpdate",params,undefined,false); 
+			copyArg(msg,"ReplicaSettingsUpdate",params,undefined,false); 
+			
+
+			svc.updateGlobalTableSettings(params,cb);
 		}
 
 		

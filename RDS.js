@@ -40,6 +40,13 @@ module.exports = function(RED) {
 			return;
 		}
 
+        if (this.awsConfig.proxyRequired){
+            var proxy = require('proxy-agent');
+            AWS.config.update({
+                httpOptions: { agent: new proxy(this.awsConfig.proxy) }
+            });
+        }
+
 		var awsService = new AWS.RDS( { 'region': node.region } );
 
 		node.on("input", function(msg) {
@@ -163,6 +170,23 @@ module.exports = function(RED) {
 			
 
 			svc.authorizeDBSecurityGroupIngress(params,cb);
+		}
+
+		
+		service.BacktrackDBCluster=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"DBClusterIdentifier",params,undefined,false); 
+			copyArg(n,"BacktrackTo",params,undefined,false); 
+			
+			copyArg(msg,"DBClusterIdentifier",params,undefined,false); 
+			copyArg(msg,"BacktrackTo",params,undefined,false); 
+			copyArg(msg,"Force",params,undefined,false); 
+			copyArg(msg,"UseEarliestTimeOnPointInTimeUnavailable",params,undefined,false); 
+			
+
+			svc.backtrackDBCluster(params,cb);
 		}
 
 		
@@ -290,6 +314,8 @@ module.exports = function(RED) {
 			copyArg(msg,"KmsKeyId",params,undefined,false); 
 			copyArg(msg,"PreSignedUrl",params,undefined,false); 
 			copyArg(msg,"EnableIAMDatabaseAuthentication",params,undefined,false); 
+			copyArg(msg,"BacktrackWindow",params,undefined,false); 
+			copyArg(msg,"EnableCloudwatchLogsExports",params,undefined,true); 
 			copyArg(msg,"SourceRegion",params,undefined,false); 
 			
 
@@ -688,6 +714,23 @@ module.exports = function(RED) {
 			
 
 			svc.describeCertificates(params,cb);
+		}
+
+		
+		service.DescribeDBClusterBacktracks=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"DBClusterIdentifier",params,undefined,false); 
+			
+			copyArg(msg,"DBClusterIdentifier",params,undefined,false); 
+			copyArg(msg,"BacktrackIdentifier",params,undefined,false); 
+			copyArg(msg,"Filters",params,undefined,true); 
+			copyArg(msg,"MaxRecords",params,undefined,false); 
+			copyArg(msg,"Marker",params,undefined,false); 
+			
+
+			svc.describeDBClusterBacktracks(params,cb);
 		}
 
 		
@@ -1198,6 +1241,9 @@ module.exports = function(RED) {
 			copyArg(msg,"PreferredBackupWindow",params,undefined,false); 
 			copyArg(msg,"PreferredMaintenanceWindow",params,undefined,false); 
 			copyArg(msg,"EnableIAMDatabaseAuthentication",params,undefined,false); 
+			copyArg(msg,"BacktrackWindow",params,undefined,false); 
+			copyArg(msg,"CloudwatchLogsExportConfiguration",params,undefined,true); 
+			copyArg(msg,"EngineVersion",params,undefined,false); 
 			
 
 			svc.modifyDBCluster(params,cb);
@@ -1277,7 +1323,7 @@ module.exports = function(RED) {
 			copyArg(msg,"EnableIAMDatabaseAuthentication",params,undefined,false); 
 			copyArg(msg,"EnablePerformanceInsights",params,undefined,false); 
 			copyArg(msg,"PerformanceInsightsKMSKeyId",params,undefined,false); 
-			copyArg(msg,"CloudwatchLogsExportConfiguration",params,undefined,false); 
+			copyArg(msg,"CloudwatchLogsExportConfiguration",params,undefined,true); 
 			
 
 			svc.modifyDBInstance(params,cb);
@@ -1551,6 +1597,8 @@ module.exports = function(RED) {
 			copyArg(msg,"S3BucketName",params,undefined,false); 
 			copyArg(msg,"S3Prefix",params,undefined,false); 
 			copyArg(msg,"S3IngestionRoleArn",params,undefined,false); 
+			copyArg(msg,"BacktrackWindow",params,undefined,false); 
+			copyArg(msg,"EnableCloudwatchLogsExports",params,undefined,true); 
 			
 
 			svc.restoreDBClusterFromS3(params,cb);
@@ -1578,6 +1626,8 @@ module.exports = function(RED) {
 			copyArg(msg,"Tags",params,undefined,true); 
 			copyArg(msg,"KmsKeyId",params,undefined,false); 
 			copyArg(msg,"EnableIAMDatabaseAuthentication",params,undefined,false); 
+			copyArg(msg,"BacktrackWindow",params,undefined,false); 
+			copyArg(msg,"EnableCloudwatchLogsExports",params,undefined,true); 
 			
 
 			svc.restoreDBClusterFromSnapshot(params,cb);
@@ -1603,6 +1653,8 @@ module.exports = function(RED) {
 			copyArg(msg,"Tags",params,undefined,true); 
 			copyArg(msg,"KmsKeyId",params,undefined,false); 
 			copyArg(msg,"EnableIAMDatabaseAuthentication",params,undefined,false); 
+			copyArg(msg,"BacktrackWindow",params,undefined,false); 
+			copyArg(msg,"EnableCloudwatchLogsExports",params,undefined,true); 
 			
 
 			svc.restoreDBClusterToPointInTime(params,cb);

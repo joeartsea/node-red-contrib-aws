@@ -78,6 +78,10 @@
 		
 			<option value="DeleteCertificate">DeleteCertificate</option>
 		
+			<option value="DeleteJob">DeleteJob</option>
+		
+			<option value="DeleteJobExecution">DeleteJobExecution</option>
+		
 			<option value="DeleteOTAUpdate">DeleteOTAUpdate</option>
 		
 			<option value="DeletePolicy">DeletePolicy</option>
@@ -371,6 +375,10 @@
 		<label for="node-input-topicRulePayload"><i class="fa fa-tag"></i>topicRulePayload</label>
 		<input type="text" id="node-input-topicRulePayload" placeholder="topicRulePayload"></input>
 	</div> 
+	<div class="form-row" id='executionNumberAttr' class='hiddenAttrs'>
+		<label for="node-input-executionNumber"><i class="fa fa-tag"></i>executionNumber</label>
+		<input type="text" id="node-input-executionNumber" placeholder="executionNumber"></input>
+	</div> 
 	<div class="form-row" id='policyVersionIdAttr' class='hiddenAttrs'>
 		<label for="node-input-policyVersionId"><i class="fa fa-tag"></i>policyVersionId</label>
 		<input type="text" id="node-input-policyVersionId" placeholder="policyVersionId"></input>
@@ -542,6 +550,12 @@
 					],
 				DeleteCertificate:[
 					'#certificateIdAttr'
+					],
+				DeleteJob:[
+					'#jobIdAttr'
+					],
+				DeleteJobExecution:[
+					'#jobIdAttr','#thingNameAttr','#executionNumberAttr'
 					],
 				DeleteOTAUpdate:[
 					'#otaUpdateIdAttr'
@@ -890,6 +904,7 @@ NOTE: Parameters must be specified in the message, using the case specified in t
 				thingTypeName: { value: ""} ,
 				ruleName: { value: ""} ,
 				topicRulePayload: { value: ""} ,
+				executionNumber: { value: ""} ,
 				policyVersionId: { value: ""} ,
 				targetType: { value: ""} ,
 				targetName: { value: ""} ,

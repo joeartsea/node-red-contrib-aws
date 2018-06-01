@@ -40,7 +40,13 @@ module.exports = function(RED) {
 			return;
 		}
 
-		var awsService = new AWS.IotData( { 'region': node.region ,'endpoint':n.endPoint} );
+        if (this.awsConfig.proxyRequired) {
+            var proxy = require('proxy-agent');
+            AWS.config.update({
+                httpOptions: { agent: new proxy(this.awsConfig.proxy) }
+            });
+        }
+        var awsService = new AWS.IotData({ 'region': node.region, 'endpoint': n.endPoint } );
 
 		node.on("input", function(msg) {
 			node.sendMsg = function (err, data) {

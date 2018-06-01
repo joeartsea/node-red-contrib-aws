@@ -40,6 +40,13 @@ module.exports = function(RED) {
 			return;
 		}
 
+        if (this.awsConfig.proxyRequired){
+            var proxy = require('proxy-agent');
+            AWS.config.update({
+                httpOptions: { agent: new proxy(this.awsConfig.proxy) }
+            });
+        }
+
 		var awsService = new AWS.ES( { 'region': node.region } );
 
 		node.on("input", function(msg) {
@@ -115,6 +122,7 @@ module.exports = function(RED) {
 			copyArg(msg,"AccessPolicies",params,undefined,false); 
 			copyArg(msg,"SnapshotOptions",params,undefined,true); 
 			copyArg(msg,"VPCOptions",params,undefined,true); 
+			copyArg(msg,"CognitoOptions",params,undefined,true); 
 			copyArg(msg,"EncryptionAtRestOptions",params,undefined,true); 
 			copyArg(msg,"AdvancedOptions",params,undefined,true); 
 			copyArg(msg,"LogPublishingOptions",params,undefined,true); 
@@ -203,6 +211,34 @@ module.exports = function(RED) {
 		}
 
 		
+		service.DescribeReservedElasticsearchInstanceOfferings=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			
+			copyArg(msg,"ReservedElasticsearchInstanceOfferingId",params,undefined,false); 
+			copyArg(msg,"MaxResults",params,undefined,false); 
+			copyArg(msg,"NextToken",params,undefined,false); 
+			
+
+			svc.describeReservedElasticsearchInstanceOfferings(params,cb);
+		}
+
+		
+		service.DescribeReservedElasticsearchInstances=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			
+			copyArg(msg,"ReservedElasticsearchInstanceId",params,undefined,false); 
+			copyArg(msg,"MaxResults",params,undefined,false); 
+			copyArg(msg,"NextToken",params,undefined,false); 
+			
+
+			svc.describeReservedElasticsearchInstances(params,cb);
+		}
+
+		
 		service.ListDomainNames=function(svc,msg,cb){
 			var params={};
 			//copyArgs
@@ -256,6 +292,22 @@ module.exports = function(RED) {
 		}
 
 		
+		service.PurchaseReservedElasticsearchInstanceOffering=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"ReservedElasticsearchInstanceOfferingId",params,undefined,false); 
+			copyArg(n,"ReservationName",params,undefined,false); 
+			
+			copyArg(msg,"ReservedElasticsearchInstanceOfferingId",params,undefined,false); 
+			copyArg(msg,"ReservationName",params,undefined,false); 
+			copyArg(msg,"InstanceCount",params,undefined,false); 
+			
+
+			svc.purchaseReservedElasticsearchInstanceOffering(params,cb);
+		}
+
+		
 		service.RemoveTags=function(svc,msg,cb){
 			var params={};
 			//copyArgs
@@ -282,6 +334,7 @@ module.exports = function(RED) {
 			copyArg(msg,"EBSOptions",params,undefined,true); 
 			copyArg(msg,"SnapshotOptions",params,undefined,true); 
 			copyArg(msg,"VPCOptions",params,undefined,true); 
+			copyArg(msg,"CognitoOptions",params,undefined,true); 
 			copyArg(msg,"AdvancedOptions",params,undefined,true); 
 			copyArg(msg,"AccessPolicies",params,undefined,false); 
 			copyArg(msg,"LogPublishingOptions",params,undefined,true); 

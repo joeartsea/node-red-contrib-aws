@@ -40,6 +40,13 @@ module.exports = function(RED) {
 			return;
 		}
 
+        if (this.awsConfig.proxyRequired){
+            var proxy = require('proxy-agent');
+            AWS.config.update({
+                httpOptions: { agent: new proxy(this.awsConfig.proxy) }
+            });
+        }
+
 		var awsService = new AWS.Ecs( { 'region': node.region } );
 
 		node.on("input", function(msg) {
@@ -111,6 +118,7 @@ module.exports = function(RED) {
 			copyArg(msg,"serviceName",params,undefined,false); 
 			copyArg(msg,"taskDefinition",params,undefined,false); 
 			copyArg(msg,"loadBalancers",params,undefined,true); 
+			copyArg(msg,"serviceRegistries",params,undefined,true); 
 			copyArg(msg,"desiredCount",params,undefined,false); 
 			copyArg(msg,"clientToken",params,undefined,false); 
 			copyArg(msg,"launchType",params,undefined,false); 

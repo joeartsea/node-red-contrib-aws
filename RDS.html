@@ -38,6 +38,8 @@
 		
 			<option value="AuthorizeDBSecurityGroupIngress">AuthorizeDBSecurityGroupIngress</option>
 		
+			<option value="BacktrackDBCluster">BacktrackDBCluster</option>
+		
 			<option value="CopyDBClusterParameterGroup">CopyDBClusterParameterGroup</option>
 		
 			<option value="CopyDBClusterSnapshot">CopyDBClusterSnapshot</option>
@@ -93,6 +95,8 @@
 			<option value="DescribeAccountAttributes">DescribeAccountAttributes</option>
 		
 			<option value="DescribeCertificates">DescribeCertificates</option>
+		
+			<option value="DescribeDBClusterBacktracks">DescribeDBClusterBacktracks</option>
 		
 			<option value="DescribeDBClusterParameterGroups">DescribeDBClusterParameterGroups</option>
 		
@@ -258,6 +262,10 @@
 	<div class="form-row" id='DBSecurityGroupNameAttr' class='hiddenAttrs'>
 		<label for="node-input-DBSecurityGroupName"><i class="fa fa-tag"></i>DBSecurityGroupName</label>
 		<input type="text" id="node-input-DBSecurityGroupName" placeholder="DBSecurityGroupName"></input>
+	</div> 
+	<div class="form-row" id='BacktrackToAttr' class='hiddenAttrs'>
+		<label for="node-input-BacktrackTo"><i class="fa fa-tag"></i>BacktrackTo</label>
+		<input type="text" id="node-input-BacktrackTo" placeholder="BacktrackTo"></input>
 	</div> 
 	<div class="form-row" id='SourceDBClusterParameterGroupIdentifierAttr' class='hiddenAttrs'>
 		<label for="node-input-SourceDBClusterParameterGroupIdentifier"><i class="fa fa-tag"></i>SourceDBClusterParameterGroupIdentifier</label>
@@ -463,6 +471,9 @@
 				AuthorizeDBSecurityGroupIngress:[
 					'#DBSecurityGroupNameAttr'
 					],
+				BacktrackDBCluster:[
+					'#DBClusterIdentifierAttr','#BacktrackToAttr'
+					],
 				CopyDBClusterParameterGroup:[
 					'#SourceDBClusterParameterGroupIdentifierAttr','#TargetDBClusterParameterGroupIdentifierAttr','#TargetDBClusterParameterGroupDescriptionAttr'
 					],
@@ -546,6 +557,9 @@
 					],
 				DescribeCertificates:[
 					
+					],
+				DescribeDBClusterBacktracks:[
+					'#DBClusterIdentifierAttr'
 					],
 				DescribeDBClusterParameterGroups:[
 					
@@ -762,6 +776,7 @@ NOTE: Parameters must be specified in the message, using the case specified in t
 				ApplyAction: { value: ""} ,
 				OptInType: { value: ""} ,
 				DBSecurityGroupName: { value: ""} ,
+				BacktrackTo: { value: ""} ,
 				SourceDBClusterParameterGroupIdentifier: { value: ""} ,
 				TargetDBClusterParameterGroupIdentifier: { value: ""} ,
 				TargetDBClusterParameterGroupDescription: { value: ""} ,

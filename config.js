@@ -4,7 +4,9 @@ module.exports = function(RED) {
         this.accessKey = this.credentials.accessKey;
         this.secretKey = this.credentials.secretKey;
 	    this.region = n.region;
-	    this.name = n.name;
+        this.name = n.name;
+        this.proxyRequired = n.proxyRequired;
+        this.proxy = n.proxy;
     }
     RED.nodes.registerType("amazon config",RemoteServerNode,{credentials: {
          accessKey: {type:"text"},

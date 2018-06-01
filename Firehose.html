@@ -36,9 +36,15 @@
 		
 			<option value="ListDeliveryStreams">ListDeliveryStreams</option>
 		
+			<option value="ListTagsForDeliveryStream">ListTagsForDeliveryStream</option>
+		
 			<option value="PutRecord">PutRecord</option>
 		
 			<option value="PutRecordBatch">PutRecordBatch</option>
+		
+			<option value="TagDeliveryStream">TagDeliveryStream</option>
+		
+			<option value="UntagDeliveryStream">UntagDeliveryStream</option>
 		
 			<option value="UpdateDestination">UpdateDestination</option>
 		;
@@ -62,6 +68,14 @@
 	<div class="form-row" id='RecordsAttr' class='hiddenAttrs'>
 		<label for="node-input-Records"><i class="fa fa-tag"></i>Records</label>
 		<input type="text" id="node-input-Records" placeholder="Records"></input>
+	</div> 
+	<div class="form-row" id='TagsAttr' class='hiddenAttrs'>
+		<label for="node-input-Tags"><i class="fa fa-tag"></i>Tags</label>
+		<input type="text" id="node-input-Tags" placeholder="Tags"></input>
+	</div> 
+	<div class="form-row" id='TagKeysAttr' class='hiddenAttrs'>
+		<label for="node-input-TagKeys"><i class="fa fa-tag"></i>TagKeys</label>
+		<input type="text" id="node-input-TagKeys" placeholder="TagKeys"></input>
 	</div> 
 	<div class="form-row" id='CurrentDeliveryStreamVersionIdAttr' class='hiddenAttrs'>
 		<label for="node-input-CurrentDeliveryStreamVersionId"><i class="fa fa-tag"></i>CurrentDeliveryStreamVersionId</label>
@@ -88,11 +102,20 @@
 				ListDeliveryStreams:[
 					
 					],
+				ListTagsForDeliveryStream:[
+					'#DeliveryStreamNameAttr'
+					],
 				PutRecord:[
 					'#DeliveryStreamNameAttr','#RecordAttr'
 					],
 				PutRecordBatch:[
 					'#DeliveryStreamNameAttr','#RecordsAttr'
+					],
+				TagDeliveryStream:[
+					'#DeliveryStreamNameAttr','#TagsAttr'
+					],
+				UntagDeliveryStream:[
+					'#DeliveryStreamNameAttr','#TagKeysAttr'
 					],
 				UpdateDestination:[
 					'#DeliveryStreamNameAttr','#CurrentDeliveryStreamVersionIdAttr','#DestinationIdAttr'
@@ -131,6 +154,8 @@ NOTE: Parameters must be specified in the message, using the case specified in t
 				DeliveryStreamName: { value: ""} ,
 				Record: { value: ""} ,
 				Records: { value: ""} ,
+				Tags: { value: ""} ,
+				TagKeys: { value: ""} ,
 				CurrentDeliveryStreamVersionId: { value: ""} ,
 				DestinationId: { value: ""} ,
 			name: { value: "" }

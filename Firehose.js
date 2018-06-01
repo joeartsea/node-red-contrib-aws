@@ -40,6 +40,13 @@ module.exports = function(RED) {
 			return;
 		}
 
+        if (this.awsConfig.proxyRequired){
+            var proxy = require('proxy-agent');
+            AWS.config.update({
+                httpOptions: { agent: new proxy(this.awsConfig.proxy) }
+            });
+        }
+
 		var awsService = new AWS.Firehose( { 'region': node.region } );
 
 		node.on("input", function(msg) {
@@ -149,6 +156,21 @@ module.exports = function(RED) {
 		}
 
 		
+		service.ListTagsForDeliveryStream=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"DeliveryStreamName",params,undefined,false); 
+			
+			copyArg(msg,"DeliveryStreamName",params,undefined,false); 
+			copyArg(msg,"ExclusiveStartTagKey",params,undefined,false); 
+			copyArg(msg,"Limit",params,undefined,false); 
+			
+
+			svc.listTagsForDeliveryStream(params,cb);
+		}
+
+		
 		service.PutRecord=function(svc,msg,cb){
 			var params={};
 			//copyArgs
@@ -176,6 +198,36 @@ module.exports = function(RED) {
 			
 
 			svc.putRecordBatch(params,cb);
+		}
+
+		
+		service.TagDeliveryStream=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"DeliveryStreamName",params,undefined,false); 
+			copyArg(n,"Tags",params,undefined,false); 
+			
+			copyArg(msg,"DeliveryStreamName",params,undefined,false); 
+			copyArg(msg,"Tags",params,undefined,false); 
+			
+
+			svc.tagDeliveryStream(params,cb);
+		}
+
+		
+		service.UntagDeliveryStream=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"DeliveryStreamName",params,undefined,false); 
+			copyArg(n,"TagKeys",params,undefined,false); 
+			
+			copyArg(msg,"DeliveryStreamName",params,undefined,false); 
+			copyArg(msg,"TagKeys",params,undefined,false); 
+			
+
+			svc.untagDeliveryStream(params,cb);
 		}
 
 		

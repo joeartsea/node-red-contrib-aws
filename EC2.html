@@ -102,6 +102,8 @@
 		
 			<option value="CreateEgressOnlyInternetGateway">CreateEgressOnlyInternetGateway</option>
 		
+			<option value="CreateFleet">CreateFleet</option>
+		
 			<option value="CreateFlowLogs">CreateFlowLogs</option>
 		
 			<option value="CreateFpgaImage">CreateFpgaImage</option>
@@ -170,6 +172,8 @@
 		
 			<option value="DeleteEgressOnlyInternetGateway">DeleteEgressOnlyInternetGateway</option>
 		
+			<option value="DeleteFleets">DeleteFleets</option>
+		
 			<option value="DeleteFlowLogs">DeleteFlowLogs</option>
 		
 			<option value="DeleteFpgaImage">DeleteFpgaImage</option>
@@ -232,6 +236,8 @@
 		
 			<option value="DescribeAddresses">DescribeAddresses</option>
 		
+			<option value="DescribeAggregateIdFormat">DescribeAggregateIdFormat</option>
+		
 			<option value="DescribeAvailabilityZones">DescribeAvailabilityZones</option>
 		
 			<option value="DescribeBundleTasks">DescribeBundleTasks</option>
@@ -249,6 +255,12 @@
 			<option value="DescribeElasticGpus">DescribeElasticGpus</option>
 		
 			<option value="DescribeExportTasks">DescribeExportTasks</option>
+		
+			<option value="DescribeFleetHistory">DescribeFleetHistory</option>
+		
+			<option value="DescribeFleetInstances">DescribeFleetInstances</option>
+		
+			<option value="DescribeFleets">DescribeFleets</option>
 		
 			<option value="DescribeFlowLogs">DescribeFlowLogs</option>
 		
@@ -307,6 +319,8 @@
 			<option value="DescribePlacementGroups">DescribePlacementGroups</option>
 		
 			<option value="DescribePrefixLists">DescribePrefixLists</option>
+		
+			<option value="DescribePrincipalIdFormat">DescribePrincipalIdFormat</option>
 		
 			<option value="DescribeRegions">DescribeRegions</option>
 		
@@ -439,6 +453,8 @@
 			<option value="ImportSnapshot">ImportSnapshot</option>
 		
 			<option value="ImportVolume">ImportVolume</option>
+		
+			<option value="ModifyFleet">ModifyFleet</option>
 		
 			<option value="ModifyFpgaImageAttribute">ModifyFpgaImageAttribute</option>
 		
@@ -725,6 +741,14 @@
 		<label for="node-input-DhcpConfigurations"><i class="fa fa-tag"></i>DhcpConfigurations</label>
 		<input type="text" id="node-input-DhcpConfigurations" placeholder="DhcpConfigurations"></input>
 	</div> 
+	<div class="form-row" id='LaunchTemplateConfigsAttr' class='hiddenAttrs'>
+		<label for="node-input-LaunchTemplateConfigs"><i class="fa fa-tag"></i>LaunchTemplateConfigs</label>
+		<input type="text" id="node-input-LaunchTemplateConfigs" placeholder="LaunchTemplateConfigs"></input>
+	</div> 
+	<div class="form-row" id='TargetCapacitySpecificationAttr' class='hiddenAttrs'>
+		<label for="node-input-TargetCapacitySpecification"><i class="fa fa-tag"></i>TargetCapacitySpecification</label>
+		<input type="text" id="node-input-TargetCapacitySpecification" placeholder="TargetCapacitySpecification"></input>
+	</div> 
 	<div class="form-row" id='DeliverLogsPermissionArnAttr' class='hiddenAttrs'>
 		<label for="node-input-DeliverLogsPermissionArn"><i class="fa fa-tag"></i>DeliverLogsPermissionArn</label>
 		<input type="text" id="node-input-DeliverLogsPermissionArn" placeholder="DeliverLogsPermissionArn"></input>
@@ -865,6 +889,10 @@
 		<label for="node-input-EgressOnlyInternetGatewayId"><i class="fa fa-tag"></i>EgressOnlyInternetGatewayId</label>
 		<input type="text" id="node-input-EgressOnlyInternetGatewayId" placeholder="EgressOnlyInternetGatewayId"></input>
 	</div> 
+	<div class="form-row" id='FleetIdsAttr' class='hiddenAttrs'>
+		<label for="node-input-FleetIds"><i class="fa fa-tag"></i>FleetIds</label>
+		<input type="text" id="node-input-FleetIds" placeholder="FleetIds"></input>
+	</div> 
 	<div class="form-row" id='FlowLogIdsAttr' class='hiddenAttrs'>
 		<label for="node-input-FlowLogIds"><i class="fa fa-tag"></i>FlowLogIds</label>
 		<input type="text" id="node-input-FlowLogIds" placeholder="FlowLogIds"></input>
@@ -905,6 +933,14 @@
 		<label for="node-input-ImageId"><i class="fa fa-tag"></i>ImageId</label>
 		<input type="text" id="node-input-ImageId" placeholder="ImageId"></input>
 	</div> 
+	<div class="form-row" id='FleetIdAttr' class='hiddenAttrs'>
+		<label for="node-input-FleetId"><i class="fa fa-tag"></i>FleetId</label>
+		<input type="text" id="node-input-FleetId" placeholder="FleetId"></input>
+	</div> 
+	<div class="form-row" id='StartTimeAttr' class='hiddenAttrs'>
+		<label for="node-input-StartTime"><i class="fa fa-tag"></i>StartTime</label>
+		<input type="text" id="node-input-StartTime" placeholder="StartTime"></input>
+	</div> 
 	<div class="form-row" id='AttributeAttr' class='hiddenAttrs'>
 		<label for="node-input-Attribute"><i class="fa fa-tag"></i>Attribute</label>
 		<input type="text" id="node-input-Attribute" placeholder="Attribute"></input>
@@ -924,10 +960,6 @@
 	<div class="form-row" id='SpotFleetRequestIdAttr' class='hiddenAttrs'>
 		<label for="node-input-SpotFleetRequestId"><i class="fa fa-tag"></i>SpotFleetRequestId</label>
 		<input type="text" id="node-input-SpotFleetRequestId" placeholder="SpotFleetRequestId"></input>
-	</div> 
-	<div class="form-row" id='StartTimeAttr' class='hiddenAttrs'>
-		<label for="node-input-StartTime"><i class="fa fa-tag"></i>StartTime</label>
-		<input type="text" id="node-input-StartTime" placeholder="StartTime"></input>
 	</div> 
 	<div class="form-row" id='AttachmentIdAttr' class='hiddenAttrs'>
 		<label for="node-input-AttachmentId"><i class="fa fa-tag"></i>AttachmentId</label>
@@ -1177,6 +1209,9 @@
 				CreateEgressOnlyInternetGateway:[
 					'#VpcIdAttr'
 					],
+				CreateFleet:[
+					'#LaunchTemplateConfigsAttr','#TargetCapacitySpecificationAttr'
+					],
 				CreateFlowLogs:[
 					'#DeliverLogsPermissionArnAttr','#LogGroupNameAttr','#ResourceIdsAttr','#ResourceTypeAttr','#TrafficTypeAttr'
 					],
@@ -1279,6 +1314,9 @@
 				DeleteEgressOnlyInternetGateway:[
 					'#EgressOnlyInternetGatewayIdAttr'
 					],
+				DeleteFleets:[
+					'#FleetIdsAttr','#TerminateInstancesAttr'
+					],
 				DeleteFlowLogs:[
 					'#FlowLogIdsAttr'
 					],
@@ -1372,6 +1410,9 @@
 				DescribeAddresses:[
 					
 					],
+				DescribeAggregateIdFormat:[
+					
+					],
 				DescribeAvailabilityZones:[
 					
 					],
@@ -1397,6 +1438,15 @@
 					
 					],
 				DescribeExportTasks:[
+					
+					],
+				DescribeFleetHistory:[
+					'#FleetIdAttr','#StartTimeAttr'
+					],
+				DescribeFleetInstances:[
+					'#FleetIdAttr'
+					],
+				DescribeFleets:[
 					
 					],
 				DescribeFlowLogs:[
@@ -1484,6 +1534,9 @@
 					
 					],
 				DescribePrefixLists:[
+					
+					],
+				DescribePrincipalIdFormat:[
 					
 					],
 				DescribeRegions:[
@@ -1683,6 +1736,9 @@
 					],
 				ImportVolume:[
 					'#AvailabilityZoneAttr','#ImageAttr','#VolumeAttr'
+					],
+				ModifyFleet:[
+					'#FleetIdAttr','#TargetCapacitySpecificationAttr'
 					],
 				ModifyFpgaImageAttribute:[
 					'#FpgaImageIdAttr'
@@ -1934,6 +1990,8 @@ NOTE: Parameters must be specified in the message, using the case specified in t
 				PublicIp: { value: ""} ,
 				Type: { value: ""} ,
 				DhcpConfigurations: { value: ""} ,
+				LaunchTemplateConfigs: { value: ""} ,
+				TargetCapacitySpecification: { value: ""} ,
 				DeliverLogsPermissionArn: { value: ""} ,
 				LogGroupName: { value: ""} ,
 				ResourceIds: { value: ""} ,
@@ -1969,6 +2027,7 @@ NOTE: Parameters must be specified in the message, using the case specified in t
 				DestinationCidrBlock: { value: ""} ,
 				VpnConnectionId: { value: ""} ,
 				EgressOnlyInternetGatewayId: { value: ""} ,
+				FleetIds: { value: ""} ,
 				FlowLogIds: { value: ""} ,
 				FpgaImageId: { value: ""} ,
 				Versions: { value: ""} ,
@@ -1979,12 +2038,13 @@ NOTE: Parameters must be specified in the message, using the case specified in t
 				ServiceIds: { value: ""} ,
 				VpcPeeringConnectionId: { value: ""} ,
 				ImageId: { value: ""} ,
+				FleetId: { value: ""} ,
+				StartTime: { value: ""} ,
 				Attribute: { value: ""} ,
 				PrincipalArn: { value: ""} ,
 				FirstSlotStartTimeRange: { value: ""} ,
 				Recurrence: { value: ""} ,
 				SpotFleetRequestId: { value: ""} ,
-				StartTime: { value: ""} ,
 				AttachmentId: { value: ""} ,
 				GatewayId: { value: ""} ,
 				AssociationId: { value: ""} ,

@@ -3,7 +3,9 @@
         category: 'config',
         defaults: {
 		    name: {value:"AWS"},
-            region: {value:"us-east-1",required:true},
+            region: { value: "us-east-1", required: true },
+            proxyRequired: { value: false },
+            proxy: { value: "" }
         },
         credentials: {
             accessKey: {type:"text"},
@@ -18,18 +20,26 @@
 <script type="text/x-red" data-template-name="amazon config">
     <div class="form-row">
         <label for="node-config-input-name"><i class="fa fa-tag"></i> Name</label>
-	<input type="text" id="node-config-input-name">
+        <input type="text" id="node-config-input-name">
     </div>
     <div class="form-row">
         <label for="node-config-input-region"><i class="fa fa-wrench"></i> Region</label>
-	<input type="text" id="node-config-input-region">
+        <input type="text" id="node-config-input-region">
     </div>
-<div class="form-row">
+    <div class="form-row">
         <label for="node-config-input-accessKey"><i class="icon-bookmark"></i> Access Id</label>
         <input type="text" id="node-config-input-accessKey">
     </div>
-<div class="form-row">
+    <div class="form-row">
         <label for="node-config-input-secretKey"><i class="icon-bookmark"></i> Secret Key</label>
         <input type="password" id="node-config-input-secretKey">
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-proxyRequired"><i class="fa fa-wrench"></i> Proxy Required</label>
+        <input type="checkbox" id="node-config-input-proxyRequired">
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-proxy"><i class="fa fa-wrench"></i> Proxy Address</label>
+        <input type="text" id="node-config-input-proxy">
     </div>
 </script>

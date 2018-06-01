@@ -44,6 +44,10 @@
 		
 			<option value="DescribeElasticsearchInstanceTypeLimits">DescribeElasticsearchInstanceTypeLimits</option>
 		
+			<option value="DescribeReservedElasticsearchInstanceOfferings">DescribeReservedElasticsearchInstanceOfferings</option>
+		
+			<option value="DescribeReservedElasticsearchInstances">DescribeReservedElasticsearchInstances</option>
+		
 			<option value="ListDomainNames">ListDomainNames</option>
 		
 			<option value="ListElasticsearchInstanceTypes">ListElasticsearchInstanceTypes</option>
@@ -51,6 +55,8 @@
 			<option value="ListElasticsearchVersions">ListElasticsearchVersions</option>
 		
 			<option value="ListTags">ListTags</option>
+		
+			<option value="PurchaseReservedElasticsearchInstanceOffering">PurchaseReservedElasticsearchInstanceOffering</option>
 		
 			<option value="RemoveTags">RemoveTags</option>
 		
@@ -89,6 +95,14 @@
 		<label for="node-input-ElasticsearchVersion"><i class="fa fa-tag"></i>ElasticsearchVersion</label>
 		<input type="text" id="node-input-ElasticsearchVersion" placeholder="ElasticsearchVersion"></input>
 	</div> 
+	<div class="form-row" id='ReservedElasticsearchInstanceOfferingIdAttr' class='hiddenAttrs'>
+		<label for="node-input-ReservedElasticsearchInstanceOfferingId"><i class="fa fa-tag"></i>ReservedElasticsearchInstanceOfferingId</label>
+		<input type="text" id="node-input-ReservedElasticsearchInstanceOfferingId" placeholder="ReservedElasticsearchInstanceOfferingId"></input>
+	</div> 
+	<div class="form-row" id='ReservationNameAttr' class='hiddenAttrs'>
+		<label for="node-input-ReservationName"><i class="fa fa-tag"></i>ReservationName</label>
+		<input type="text" id="node-input-ReservationName" placeholder="ReservationName"></input>
+	</div> 
 	<div class="form-row" id='TagKeysAttr' class='hiddenAttrs'>
 		<label for="node-input-TagKeys"><i class="fa fa-tag"></i>TagKeys</label>
 		<input type="text" id="node-input-TagKeys" placeholder="TagKeys"></input>
@@ -122,6 +136,12 @@
 				DescribeElasticsearchInstanceTypeLimits:[
 					'#InstanceTypeAttr','#ElasticsearchVersionAttr'
 					],
+				DescribeReservedElasticsearchInstanceOfferings:[
+					
+					],
+				DescribeReservedElasticsearchInstances:[
+					
+					],
 				ListDomainNames:[
 					
 					],
@@ -133,6 +153,9 @@
 					],
 				ListTags:[
 					'#ARNAttr'
+					],
+				PurchaseReservedElasticsearchInstanceOffering:[
+					'#ReservedElasticsearchInstanceOfferingIdAttr','#ReservationNameAttr'
 					],
 				RemoveTags:[
 					'#ARNAttr','#TagKeysAttr'
@@ -177,6 +200,8 @@ NOTE: Parameters must be specified in the message, using the case specified in t
 				DomainNames: { value: ""} ,
 				InstanceType: { value: ""} ,
 				ElasticsearchVersion: { value: ""} ,
+				ReservedElasticsearchInstanceOfferingId: { value: ""} ,
+				ReservationName: { value: ""} ,
 				TagKeys: { value: ""} ,
 			name: { value: "" }
 		},

@@ -40,6 +40,13 @@ module.exports = function(RED) {
 			return;
 		}
 
+        if (this.awsConfig.proxyRequired){
+            var proxy = require('proxy-agent');
+            AWS.config.update({
+                httpOptions: { agent: new proxy(this.awsConfig.proxy) }
+            });
+        }
+
 		var awsService = new AWS.EC2( { 'region': node.region } );
 
 		node.on("input", function(msg) {
@@ -684,6 +691,31 @@ module.exports = function(RED) {
 		}
 
 		
+		service.CreateFleet=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"LaunchTemplateConfigs",params,undefined,false); 
+			copyArg(n,"TargetCapacitySpecification",params,undefined,true); 
+			
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"ClientToken",params,undefined,false); 
+			copyArg(msg,"SpotOptions",params,undefined,false); 
+			copyArg(msg,"ExcessCapacityTerminationPolicy",params,undefined,false); 
+			copyArg(msg,"LaunchTemplateConfigs",params,undefined,false); 
+			copyArg(msg,"TargetCapacitySpecification",params,undefined,true); 
+			copyArg(msg,"TerminateInstancesWithExpiration",params,undefined,false); 
+			copyArg(msg,"Type",params,undefined,false); 
+			copyArg(msg,"ValidFrom",params,undefined,false); 
+			copyArg(msg,"ValidUntil",params,undefined,false); 
+			copyArg(msg,"ReplaceUnhealthyInstances",params,undefined,false); 
+			copyArg(msg,"TagSpecifications",params,undefined,true); 
+			
+
+			svc.createFleet(params,cb);
+		}
+
+		
 		service.CreateFlowLogs=function(svc,msg,cb){
 			var params={};
 			//copyArgs
@@ -1013,6 +1045,7 @@ module.exports = function(RED) {
 			
 			copyArg(msg,"Description",params,undefined,false); 
 			copyArg(msg,"VolumeId",params,undefined,false); 
+			copyArg(msg,"TagSpecifications",params,undefined,true); 
 			copyArg(msg,"DryRun",params,undefined,false); 
 			
 
@@ -1269,6 +1302,22 @@ module.exports = function(RED) {
 			
 
 			svc.deleteEgressOnlyInternetGateway(params,cb);
+		}
+
+		
+		service.DeleteFleets=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"FleetIds",params,undefined,true); 
+			copyArg(n,"TerminateInstances",params,undefined,false); 
+			
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"FleetIds",params,undefined,true); 
+			copyArg(msg,"TerminateInstances",params,undefined,false); 
+			
+
+			svc.deleteFleets(params,cb);
 		}
 
 		
@@ -1713,6 +1762,18 @@ module.exports = function(RED) {
 		}
 
 		
+		service.DescribeAggregateIdFormat=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			
+			copyArg(msg,"DryRun",params,undefined,false); 
+			
+
+			svc.describeAggregateIdFormat(params,cb);
+		}
+
+		
 		service.DescribeAvailabilityZones=function(svc,msg,cb){
 			var params={};
 			//copyArgs
@@ -1838,6 +1899,58 @@ module.exports = function(RED) {
 			
 
 			svc.describeExportTasks(params,cb);
+		}
+
+		
+		service.DescribeFleetHistory=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"FleetId",params,undefined,false); 
+			copyArg(n,"StartTime",params,undefined,false); 
+			
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"EventType",params,undefined,false); 
+			copyArg(msg,"MaxResults",params,undefined,false); 
+			copyArg(msg,"NextToken",params,undefined,false); 
+			copyArg(msg,"FleetId",params,undefined,false); 
+			copyArg(msg,"StartTime",params,undefined,false); 
+			
+
+			svc.describeFleetHistory(params,cb);
+		}
+
+		
+		service.DescribeFleetInstances=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"FleetId",params,undefined,false); 
+			
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"MaxResults",params,undefined,false); 
+			copyArg(msg,"NextToken",params,undefined,false); 
+			copyArg(msg,"FleetId",params,undefined,false); 
+			copyArg(msg,"Filters",params,undefined,true); 
+			
+
+			svc.describeFleetInstances(params,cb);
+		}
+
+		
+		service.DescribeFleets=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"MaxResults",params,undefined,false); 
+			copyArg(msg,"NextToken",params,undefined,false); 
+			copyArg(msg,"FleetIds",params,undefined,true); 
+			copyArg(msg,"Filters",params,undefined,true); 
+			
+
+			svc.describeFleets(params,cb);
 		}
 
 		
@@ -2287,6 +2400,21 @@ module.exports = function(RED) {
 			
 
 			svc.describePrefixLists(params,cb);
+		}
+
+		
+		service.DescribePrincipalIdFormat=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"Resources",params,undefined,false); 
+			copyArg(msg,"MaxResults",params,undefined,false); 
+			copyArg(msg,"NextToken",params,undefined,false); 
+			
+
+			svc.describePrincipalIdFormat(params,cb);
 		}
 
 		
@@ -3142,6 +3270,7 @@ module.exports = function(RED) {
 			
 			copyArg(msg,"InstanceId",params,undefined,false); 
 			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"Latest",params,undefined,false); 
 			
 
 			svc.getConsoleOutput(params,cb);
@@ -3311,6 +3440,23 @@ module.exports = function(RED) {
 		}
 
 		
+		service.ModifyFleet=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"FleetId",params,undefined,false); 
+			copyArg(n,"TargetCapacitySpecification",params,undefined,true); 
+			
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"ExcessCapacityTerminationPolicy",params,undefined,false); 
+			copyArg(msg,"FleetId",params,undefined,false); 
+			copyArg(msg,"TargetCapacitySpecification",params,undefined,true); 
+			
+
+			svc.modifyFleet(params,cb);
+		}
+
+		
 		service.ModifyFpgaImageAttribute=function(svc,msg,cb){
 			var params={};
 			//copyArgs
@@ -3452,6 +3598,7 @@ module.exports = function(RED) {
 			copyArg(n,"InstanceId",params,undefined,false); 
 			
 			copyArg(msg,"Affinity",params,undefined,false); 
+			copyArg(msg,"GroupName",params,undefined,false); 
 			copyArg(msg,"HostId",params,undefined,false); 
 			copyArg(msg,"InstanceId",params,undefined,false); 
 			copyArg(msg,"Tenancy",params,undefined,false); 
@@ -4209,6 +4356,7 @@ module.exports = function(RED) {
 			copyArg(msg,"LaunchTemplate",params,undefined,false); 
 			copyArg(msg,"InstanceMarketOptions",params,undefined,false); 
 			copyArg(msg,"CreditSpecification",params,undefined,true); 
+			copyArg(msg,"CpuOptions",params,undefined,false); 
 			
 
 			svc.runInstances(params,cb);

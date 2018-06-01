@@ -40,6 +40,13 @@ module.exports = function(RED) {
 			return;
 		}
 
+        if (this.awsConfig.proxyRequired){
+            var proxy = require('proxy-agent');
+            AWS.config.update({
+                httpOptions: { agent: new proxy(this.awsConfig.proxy) }
+            });
+        }
+
 		var awsService = new AWS.Kinesis( { 'region': node.region } );
 
 		node.on("input", function(msg) {
@@ -259,6 +266,22 @@ module.exports = function(RED) {
 			
 
 			svc.increaseStreamRetentionPeriod(params,cb);
+		}
+
+		
+		service.ListShards=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			
+			copyArg(msg,"StreamName",params,undefined,false); 
+			copyArg(msg,"NextToken",params,undefined,false); 
+			copyArg(msg,"ExclusiveStartShardId",params,undefined,false); 
+			copyArg(msg,"MaxResults",params,undefined,false); 
+			copyArg(msg,"StreamCreationTimestamp",params,undefined,false); 
+			
+
+			svc.listShards(params,cb);
 		}
 
 		

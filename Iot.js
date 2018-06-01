@@ -40,6 +40,13 @@ module.exports = function(RED) {
 			return;
 		}
 
+        if (this.awsConfig.proxyRequired){
+            var proxy = require('proxy-agent');
+            AWS.config.update({
+                httpOptions: { agent: new proxy(this.awsConfig.proxy) }
+            });
+        }
+
 		var awsService = new AWS.Iot( { 'region': node.region } );
 
 		node.on("input", function(msg) {
@@ -466,6 +473,38 @@ module.exports = function(RED) {
 			
 
 			svc.deleteCertificate(params,cb);
+		}
+
+		
+		service.DeleteJob=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"jobId",params,undefined,false); 
+			
+			copyArg(msg,"jobId",params,undefined,false); 
+			copyArg(msg,"force",params,undefined,false); 
+			
+
+			svc.deleteJob(params,cb);
+		}
+
+		
+		service.DeleteJobExecution=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"jobId",params,undefined,false); 
+			copyArg(n,"thingName",params,undefined,false); 
+			copyArg(n,"executionNumber",params,undefined,false); 
+			
+			copyArg(msg,"jobId",params,undefined,false); 
+			copyArg(msg,"thingName",params,undefined,false); 
+			copyArg(msg,"executionNumber",params,undefined,false); 
+			copyArg(msg,"force",params,undefined,false); 
+			
+
+			svc.deleteJobExecution(params,cb);
 		}
 
 		
