@@ -15,7 +15,7 @@
   limitations under the License.
 -->
 
-<script type="text/x-red" data-template-name="AWS Ecs">
+<script type="text/x-red" data-template-name="AWS ECS">
 		<style scoped>
 				.hiddenAttrs {display:none;}
 				.visibleAttrs {display:block;}
@@ -267,7 +267,7 @@
 
 </script>
 
-<script type="text/x-red" data-help-name="amazon Ecs">
+<script type="text/x-red" data-help-name="AWS ECS">
 <p>
 AWS Amazon EC2 Container Service
 </p>
@@ -281,7 +281,7 @@ NOTE: Parameters must be specified in the message, using the case specified in t
 </script>
 
 <script type="text/javascript">
-	RED.nodes.registerType('AWS Ecs',{
+	RED.nodes.registerType('AWS ECS',{
 		category: 'AWS',
 		color:"#C0DEED",
 		defaults: {
@@ -310,7 +310,7 @@ NOTE: Parameters must be specified in the message, using the case specified in t
 		icon: "aws.png",
 		align: "right",
 		label: function() {
-			return this.name || "Ecs " + this.operation;
+			return this.name || "ECS " + this.operation;
 		},
 		oneditprepare: function () {
 

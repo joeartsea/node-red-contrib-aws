@@ -19,6 +19,7 @@ function serviceNameMapper(name){
 		Rds:'RDS',
 		Kms:'KMS',
         Es: 'ES',
+        Ecs: 'ECS',
         Tagging: 'ResourceGroupsTaggingAPI',
 		Dynamodb:'DynamoDB',
 		Ec2:'EC2'

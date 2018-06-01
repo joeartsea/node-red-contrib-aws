@@ -47,7 +47,7 @@ module.exports = function(RED) {
             });
         }
 
-		var awsService = new AWS.Ecs( { 'region': node.region } );
+		var awsService = new AWS.ECS( { 'region': node.region } );
 
 		node.on("input", function(msg) {
 			node.sendMsg = function (err, data) {
@@ -602,6 +602,6 @@ module.exports = function(RED) {
 			
 
 	}
-	RED.nodes.registerType("AWS Ecs", AmazonAPINode);
+	RED.nodes.registerType("AWS ECS", AmazonAPINode);
 
 };

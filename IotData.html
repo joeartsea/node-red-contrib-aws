@@ -16,76 +16,83 @@
 -->
 
 <script type="text/x-red" data-template-name="AWS IotData">
-		<style scoped>
-				.hiddenAttrs {display:none;}
-				.visibleAttrs {display:block;}
-		</style>
-	<div class="form-row">
-		<label for="node-input-aws"><i class="fa fa-user"></i> AWS</label>
-		<input type="text" id="node-input-aws">
-	</div>
-	<div class="form-row">
-		<label for="node-input-operation"><i class="fa fa-wrench"></i> Operation</label>
-		<select type="text" id="node-input-operation">
-		
-			<option value="DeleteThingShadow">DeleteThingShadow</option>
-		
-			<option value="GetThingShadow">GetThingShadow</option>
-		
-			<option value="Publish">Publish</option>
-		
-			<option value="UpdateThingShadow">UpdateThingShadow</option>
-		;
-		</select>
-	</div>
-	<div class="form-row">
-		<label for="node-input-name"><i class="fa fa-tag"></i>Name</label>
-		<input type="text" id="node-input-name" placeholder="Name"></input>
-	</div>
-	<hr/>	
-	<div id="AttrHolder">
-	      
-	<div class="form-row" id='thingNameAttr' class='hiddenAttrs'>
-		<label for="node-input-thingName"><i class="fa fa-tag"></i>thingName</label>
-		<input type="text" id="node-input-thingName" placeholder="thingName"></input>
-	</div> 
-	<div class="form-row" id='topicAttr' class='hiddenAttrs'>
-		<label for="node-input-topic"><i class="fa fa-tag"></i>topic</label>
-		<input type="text" id="node-input-topic" placeholder="topic"></input>
-	</div> 
-	<div class="form-row" id='payloadAttr' class='hiddenAttrs'>
-		<label for="node-input-payload"><i class="fa fa-tag"></i>payload</label>
-		<input type="text" id="node-input-payload" placeholder="payload"></input>
-	</div> 
-    <div class="form-row">
-          <label for="node-input-endPoint"><i class="fa fa-tag"></i>Endpoint (*)</label>
-          <input type="text" id="node-input-endPoint" placeholder="">
-          </input>
-         </div>
-	</div>
+    <style scoped>
+        .hiddenAttrs {
+            display: none;
+        }
 
- <script>
-	  var nodeOps={
-			
-				DeleteThingShadow:[
-					'#thingNameAttr'
-					],
-				GetThingShadow:[
-					'#thingNameAttr'
-					],
-				Publish:[
-					'#topicAttr'
-					],
-				UpdateThingShadow:[
-					'#thingNameAttr','#payloadAttr'
-					]
-		};
-		$('#node-input-operation').on('change',function(){
-			$('#AttrHolder').children().addClass('hiddenAttrs').removeClass('visibleAttrs');
-				if (nodeOps[this.value])
-					$(nodeOps[this.value].join()).addClass('visibleAttrs').removeClass('hiddenAttrs');
-		 });
- </script>
+        .visibleAttrs {
+            display: block;
+        }
+    </style>
+    <div class="form-row">
+        <label for="node-input-aws"><i class="fa fa-user"></i> AWS</label>
+        <input type="text" id="node-input-aws">
+    </div>
+    <div class="form-row">
+        <label for="node-input-operation"><i class="fa fa-wrench"></i> Operation</label>
+        <select type="text" id="node-input-operation">
+
+            <option value="DeleteThingShadow">DeleteThingShadow</option>
+
+            <option value="GetThingShadow">GetThingShadow</option>
+
+            <option value="Publish">Publish</option>
+
+            <option value="UpdateThingShadow">UpdateThingShadow</option>
+            ;
+        </select>
+    </div>
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i>Name</label>
+        <input type="text" id="node-input-name" placeholder="Name"></input>
+    </div>
+    
+    <div class="form-row">
+                  <label for="node-input-endPoint"><i class="fa fa-tag"></i>Endpoint (*)</label>
+                  <input type="text" id="node-input-endPoint" placeholder="">
+                  </input>
+        
+    </div>
+    <hr />
+    <div id="AttrHolder">
+
+        <div class="form-row" id='thingNameAttr' class='hiddenAttrs'>
+            <label for="node-input-thingName"><i class="fa fa-tag"></i>thingName</label>
+            <input type="text" id="node-input-thingName" placeholder="thingName"></input>
+        </div>
+        <div class="form-row" id='topicAttr' class='hiddenAttrs'>
+            <label for="node-input-topic"><i class="fa fa-tag"></i>topic</label>
+            <input type="text" id="node-input-topic" placeholder="topic"></input>
+        </div>
+        <div class="form-row" id='payloadAttr' class='hiddenAttrs'>
+            <label for="node-input-payload"><i class="fa fa-tag"></i>payload</label>
+            <input type="text" id="node-input-payload" placeholder="payload"></input>
+        </div>
+    </div>
+
+    <script>
+        var nodeOps = {
+
+            DeleteThingShadow: [
+                '#thingNameAttr'
+            ],
+            GetThingShadow: [
+                '#thingNameAttr'
+            ],
+            Publish: [
+                '#topicAttr'
+            ],
+            UpdateThingShadow: [
+                '#thingNameAttr', '#payloadAttr'
+            ]
+        };
+        $('#node-input-operation').on('change', function () {
+            $('#AttrHolder').children().addClass('hiddenAttrs').removeClass('visibleAttrs');
+            if (nodeOps[this.value])
+                $(nodeOps[this.value].join()).addClass('visibleAttrs').removeClass('hiddenAttrs');
+        });
+    </script>
 
 </script>
 

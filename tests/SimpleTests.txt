@@ -1,8 +1,8 @@
 [
     {
-        "id": "7e647540.3e951c",
+        "id": "606e30f5.d7d03",
         "type": "inject",
-        "z": "3bec2f85.f17ca",
+        "z": "f95fc314.4636b",
         "name": "",
         "topic": "",
         "payload": "",
@@ -11,33 +11,34 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "x": 120,
-        "y": 480,
+        "x": 140,
+        "y": 415,
         "wires": [
             [
-                "b5e7766e.0bbb18",
-                "b4a7d84f.61b6a8",
-                "5ed5120f.3d05ac",
-                "6ca196a3.07c868",
-                "824a85e9.0f7008",
-                "cb8d2edc.99d26",
-                "361b781e.1005c8",
-                "caad9c6b.ba664",
-                "22a1c5c.6910e3a",
-                "b2d7ee05.218c9",
-                "7d7e856b.81ad9c",
-                "df7d467e.04caf8",
-                "60540b40.b16874",
-                "3f385648.d218ca",
-                "c3666c04.fffd4"
+                "b9720fe.286d4f",
+                "89b22e33.f975",
+                "953e8a03.fc8158",
+                "fee84be7.b5ec08",
+                "2ce1f268.2c8a6e",
+                "1bd39b.903e2c65",
+                "78c4e4ac.1a6b6c",
+                "7688e9fc.b24418",
+                "e5a7d816.a06358",
+                "da3442d3.67bac",
+                "7a8ac6e8.811308",
+                "7181d2f1.dc45fc",
+                "13cf949b.7107bb",
+                "804ff88f.dde3c8",
+                "1dab2fd1.b3b04",
+                "218a29a7.026786"
             ]
         ]
     },
     {
-        "id": "b5e7766e.0bbb18",
+        "id": "b9720fe.286d4f",
         "type": "AWS EC2",
-        "z": "3bec2f85.f17ca",
-        "aws": "2c25ca24.67df66",
+        "z": "f95fc314.4636b",
+        "aws": "bec2452f.03a118",
         "operation": "DescribeInstances",
         "ReservedInstanceIds": "",
         "ServiceId": "",
@@ -78,6 +79,8 @@
         "PublicIp": "",
         "Type": "",
         "DhcpConfigurations": "",
+        "LaunchTemplateConfigs": "",
+        "TargetCapacitySpecification": "",
         "DeliverLogsPermissionArn": "",
         "LogGroupName": "",
         "ResourceIds": "",
@@ -113,6 +116,7 @@
         "DestinationCidrBlock": "",
         "VpnConnectionId": "",
         "EgressOnlyInternetGatewayId": "",
+        "FleetIds": "",
         "FlowLogIds": "",
         "FpgaImageId": "",
         "Versions": "",
@@ -123,12 +127,13 @@
         "ServiceIds": "",
         "VpcPeeringConnectionId": "",
         "ImageId": "",
+        "FleetId": "",
+        "StartTime": "",
         "Attribute": "",
         "PrincipalArn": "",
         "FirstSlotStartTimeRange": "",
         "Recurrence": "",
         "SpotFleetRequestId": "",
-        "StartTime": "",
         "AttachmentId": "",
         "GatewayId": "",
         "AssociationId": "",
@@ -163,19 +168,19 @@
         "PrivateIpAddresses": "",
         "IpPermissions": "",
         "name": "",
-        "x": 390,
-        "y": 120,
+        "x": 410,
+        "y": 55,
         "wires": [
             [
-                "dc87fb05.0ae058"
+                "d809bf2d.0ffc7"
             ]
         ]
     },
     {
-        "id": "b4a7d84f.61b6a8",
+        "id": "89b22e33.f975",
         "type": "AWS Kinesis",
-        "z": "3bec2f85.f17ca",
-        "aws": "2c25ca24.67df66",
+        "z": "f95fc314.4636b",
+        "aws": "d1cbc8ff.c2fcb8",
         "operation": "ListStreams",
         "StreamName": "",
         "Tags": "",
@@ -198,19 +203,19 @@
         "TargetShardCount": "",
         "ScalingType": "",
         "name": "",
-        "x": 370,
-        "y": 160,
+        "x": 390,
+        "y": 95,
         "wires": [
             [
-                "24e241c7.b72b5e"
+                "48e1c34c.1c1fbc"
             ]
         ]
     },
     {
-        "id": "5ed5120f.3d05ac",
+        "id": "953e8a03.fc8158",
         "type": "AWS Lambda",
-        "z": "3bec2f85.f17ca",
-        "aws": "2c25ca24.67df66",
+        "z": "f95fc314.4636b",
+        "aws": "d1cbc8ff.c2fcb8",
         "operation": "ListFunctions",
         "FunctionName": "",
         "StatementId": "",
@@ -231,19 +236,19 @@
         "Tags": "",
         "TagKeys": "",
         "name": "",
-        "x": 380,
-        "y": 200,
+        "x": 400,
+        "y": 135,
         "wires": [
             [
-                "4a51fd39.0baf64"
+                "85f8e747.cdb1f8"
             ]
         ]
     },
     {
-        "id": "6ca196a3.07c868",
+        "id": "fee84be7.b5ec08",
         "type": "AWS S3",
-        "z": "3bec2f85.f17ca",
-        "aws": "2c25ca24.67df66",
+        "z": "f95fc314.4636b",
+        "aws": "d1cbc8ff.c2fcb8",
         "operation": "ListBuckets",
         "Bucket": "",
         "Key": "",
@@ -267,19 +272,19 @@
         "WebsiteConfiguration": "",
         "PartNumber": "",
         "name": "",
-        "x": 360,
-        "y": 240,
+        "x": 380,
+        "y": 175,
         "wires": [
             [
-                "87aab718.2f3008"
+                "fc8c0fa6.c8526"
             ]
         ]
     },
     {
-        "id": "824a85e9.0f7008",
+        "id": "2ce1f268.2c8a6e",
         "type": "AWS DynamoDB",
-        "z": "3bec2f85.f17ca",
-        "aws": "2c25ca24.67df66",
+        "z": "f95fc314.4636b",
+        "aws": "d1cbc8ff.c2fcb8",
         "operation": "ListTables",
         "RequestItems": "",
         "TableName": "",
@@ -299,19 +304,19 @@
         "ReplicaUpdates": "",
         "TimeToLiveSpecification": "",
         "name": "",
-        "x": 380,
-        "y": 280,
+        "x": 400,
+        "y": 215,
         "wires": [
             [
-                "1a12ff21.0ca1a1"
+                "68e46321.24269c"
             ]
         ]
     },
     {
-        "id": "cb8d2edc.99d26",
+        "id": "1bd39b.903e2c65",
         "type": "AWS SNS",
-        "z": "3bec2f85.f17ca",
-        "aws": "2c25ca24.67df66",
+        "z": "f95fc314.4636b",
+        "aws": "d1cbc8ff.c2fcb8",
         "operation": "ListTopics",
         "TopicArn": "",
         "Label": "",
@@ -330,19 +335,19 @@
         "AttributeName": "",
         "Protocol": "",
         "name": "",
-        "x": 360,
-        "y": 320,
+        "x": 380,
+        "y": 255,
         "wires": [
             [
-                "fa128eb5.e9cb"
+                "7ee30819.8cf358"
             ]
         ]
     },
     {
-        "id": "361b781e.1005c8",
+        "id": "78c4e4ac.1a6b6c",
         "type": "AWS SQS",
-        "z": "3bec2f85.f17ca",
-        "aws": "2c25ca24.67df66",
+        "z": "f95fc314.4636b",
+        "aws": "d1cbc8ff.c2fcb8",
         "operation": "ListQueues",
         "QueueUrl": "",
         "Label": "",
@@ -357,19 +362,19 @@
         "Tags": "",
         "TagKeys": "",
         "name": "",
-        "x": 370,
-        "y": 360,
+        "x": 390,
+        "y": 295,
         "wires": [
             [
-                "31140357.554dec"
+                "7463c021.b422e"
             ]
         ]
     },
     {
-        "id": "caad9c6b.ba664",
+        "id": "7688e9fc.b24418",
         "type": "AWS RDS",
-        "z": "3bec2f85.f17ca",
-        "aws": "2c25ca24.67df66",
+        "z": "f95fc314.4636b",
+        "aws": "d1cbc8ff.c2fcb8",
         "operation": "DescribeDBClusters",
         "DBClusterIdentifier": "",
         "RoleArn": "",
@@ -428,19 +433,19 @@
         "SourceDBClusterIdentifier": "",
         "TargetDBInstanceIdentifier": "",
         "name": "",
-        "x": 390,
-        "y": 400,
+        "x": 410,
+        "y": 335,
         "wires": [
             [
-                "dd02ae56.d68ef"
+                "a64c2fe.95426d"
             ]
         ]
     },
     {
-        "id": "22a1c5c.6910e3a",
+        "id": "e5a7d816.a06358",
         "type": "AWS Firehose",
-        "z": "3bec2f85.f17ca",
-        "aws": "2c25ca24.67df66",
+        "z": "f95fc314.4636b",
+        "aws": "d1cbc8ff.c2fcb8",
         "operation": "ListDeliveryStreams",
         "DeliveryStreamName": "",
         "Record": "",
@@ -448,19 +453,19 @@
         "CurrentDeliveryStreamVersionId": "",
         "DestinationId": "",
         "name": "",
-        "x": 400,
-        "y": 440,
+        "x": 420,
+        "y": 375,
         "wires": [
             [
-                "1b9ebc5b.585494"
+                "88652970.dd7b18"
             ]
         ]
     },
     {
-        "id": "b2d7ee05.218c9",
+        "id": "da3442d3.67bac",
         "type": "AWS Iot",
-        "z": "3bec2f85.f17ca",
-        "aws": "2c25ca24.67df66",
+        "z": "f95fc314.4636b",
+        "aws": "d1cbc8ff.c2fcb8",
         "operation": "ListThings",
         "certificateId": "",
         "targets": "",
@@ -508,35 +513,35 @@
         "newStatus": "",
         "thingGroupProperties": "",
         "name": "",
-        "x": 350,
-        "y": 480,
+        "x": 370,
+        "y": 415,
         "wires": [
             [
-                "d66684a5.99fcd8"
+                "77fefb7a.a78884"
             ]
         ]
     },
     {
-        "id": "2ea6ed09.66c7f2",
+        "id": "c5e63362.33ab1",
         "type": "AWS IotData",
-        "z": "3bec2f85.f17ca",
-        "aws": "2c25ca24.67df66",
+        "z": "f95fc314.4636b",
+        "aws": "d1cbc8ff.c2fcb8",
         "operation": "UpdateThingShadow",
         "thingName": "",
         "topic": "",
         "payload": "",
         "name": "",
-        "x": 400,
-        "y": 520,
+        "x": 420,
+        "y": 455,
         "wires": [
             []
         ]
     },
     {
-        "id": "7d7e856b.81ad9c",
+        "id": "7a8ac6e8.811308",
         "type": "AWS KMS",
-        "z": "3bec2f85.f17ca",
-        "aws": "2c25ca24.67df66",
+        "z": "f95fc314.4636b",
+        "aws": "d1cbc8ff.c2fcb8",
         "operation": "ListKeys",
         "KeyId": "",
         "AliasName": "",
@@ -558,19 +563,19 @@
         "TagKeys": "",
         "Description": "",
         "name": "",
-        "x": 360,
-        "y": 560,
+        "x": 380,
+        "y": 495,
         "wires": [
             [
-                "3e78f833.85e6c8"
+                "2b457e5f.4a4332"
             ]
         ]
     },
     {
-        "id": "3f385648.d218ca",
+        "id": "804ff88f.dde3c8",
         "type": "AWS ES",
-        "z": "3bec2f85.f17ca",
-        "aws": "2c25ca24.67df66",
+        "z": "f95fc314.4636b",
+        "aws": "d1cbc8ff.c2fcb8",
         "operation": "ListDomainNames",
         "ARN": "",
         "TagList": "",
@@ -580,19 +585,19 @@
         "ElasticsearchVersion": "",
         "TagKeys": "",
         "name": "",
-        "x": 380,
-        "y": 680,
+        "x": 400,
+        "y": 615,
         "wires": [
             [
-                "fae024f9.826ac8"
+                "e4d80d59.3e75b"
             ]
         ]
     },
     {
-        "id": "c3666c04.fffd4",
+        "id": "1dab2fd1.b3b04",
         "type": "AWS Rekognition",
-        "z": "3bec2f85.f17ca",
-        "aws": "2c25ca24.67df66",
+        "z": "f95fc314.4636b",
+        "aws": "d1cbc8ff.c2fcb8",
         "operation": "ListCollections",
         "SourceImage": "",
         "TargetImage": "",
@@ -609,19 +614,19 @@
         "FaceId": "",
         "Video": "",
         "name": "",
-        "x": 400,
-        "y": 720,
+        "x": 420,
+        "y": 655,
         "wires": [
             [
-                "9bcc41d4.84c31"
+                "1e420d85.a82b92"
             ]
         ]
     },
     {
-        "id": "60540b40.b16874",
+        "id": "13cf949b.7107bb",
         "type": "AWS Polly",
-        "z": "3bec2f85.f17ca",
-        "aws": "2c25ca24.67df66",
+        "z": "f95fc314.4636b",
+        "aws": "d1cbc8ff.c2fcb8",
         "operation": "ListLexicons",
         "Name": "",
         "Content": "",
@@ -629,19 +634,19 @@
         "Text": "",
         "VoiceId": "",
         "name": "",
-        "x": 370,
-        "y": 640,
+        "x": 390,
+        "y": 575,
         "wires": [
             [
-                "97e3eb86.e07678"
+                "d0d9c7ec.4c9048"
             ]
         ]
     },
     {
-        "id": "df7d467e.04caf8",
+        "id": "7181d2f1.dc45fc",
         "type": "AWS Ecs",
-        "z": "3bec2f85.f17ca",
-        "aws": "2c25ca24.67df66",
+        "z": "f95fc314.4636b",
+        "aws": "d1cbc8ff.c2fcb8",
         "operation": "ListClusters",
         "serviceName": "",
         "taskDefinition": "",
@@ -659,246 +664,288 @@
         "task": "",
         "status": "",
         "name": "",
-        "x": 360,
-        "y": 600,
+        "x": 380,
+        "y": 535,
         "wires": [
             [
-                "8cef73d2.662c5"
+                "94135c9.1cb22a"
             ]
         ]
     },
     {
-        "id": "5eb87e3b.86de7",
+        "id": "e9fdb11e.be64a",
         "type": "comment",
-        "z": "3bec2f85.f17ca",
+        "z": "f95fc314.4636b",
         "name": "No Simple Test",
         "info": "",
-        "x": 580,
-        "y": 520,
+        "x": 632.0000095367432,
+        "y": 456.00000953674316,
         "wires": []
     },
     {
-        "id": "4a63a82e.077738",
+        "id": "c49ee7a3.c9fe78",
         "type": "comment",
-        "z": "3bec2f85.f17ca",
+        "z": "f95fc314.4636b",
         "name": "Simple Test Cases",
         "info": "Test Cases\n----\n\nThese are the simplest test cases possible, all nodes \nshould be represented, calling a function which does\nnot require any arguments.\n\n",
-        "x": 110,
-        "y": 300,
+        "x": 130,
+        "y": 235,
         "wires": []
     },
     {
-        "id": "24e241c7.b72b5e",
+        "id": "48e1c34c.1c1fbc",
         "type": "debug",
-        "z": "3bec2f85.f17ca",
+        "z": "f95fc314.4636b",
         "name": "",
         "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
         "complete": "true",
-        "x": 670,
-        "y": 160,
+        "x": 722.0000095367432,
+        "y": 96.00000953674316,
         "wires": []
     },
     {
-        "id": "dc87fb05.0ae058",
+        "id": "d809bf2d.0ffc7",
         "type": "debug",
-        "z": "3bec2f85.f17ca",
+        "z": "f95fc314.4636b",
         "name": "",
         "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
         "complete": "true",
-        "x": 670,
-        "y": 120,
+        "x": 722.0000095367432,
+        "y": 56.000009536743164,
         "wires": []
     },
     {
-        "id": "87aab718.2f3008",
+        "id": "fc8c0fa6.c8526",
         "type": "debug",
-        "z": "3bec2f85.f17ca",
+        "z": "f95fc314.4636b",
         "name": "",
         "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
         "complete": "true",
-        "x": 670,
-        "y": 240,
+        "x": 722.0000095367432,
+        "y": 176.00000953674316,
         "wires": []
     },
     {
-        "id": "4a51fd39.0baf64",
+        "id": "85f8e747.cdb1f8",
         "type": "debug",
-        "z": "3bec2f85.f17ca",
+        "z": "f95fc314.4636b",
         "name": "",
         "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
         "complete": "true",
-        "x": 670,
-        "y": 200,
+        "x": 722.0000095367432,
+        "y": 136.00000953674316,
         "wires": []
     },
     {
-        "id": "dd02ae56.d68ef",
+        "id": "a64c2fe.95426d",
         "type": "debug",
-        "z": "3bec2f85.f17ca",
+        "z": "f95fc314.4636b",
         "name": "",
         "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
         "complete": "true",
-        "x": 670,
-        "y": 400,
+        "x": 722.0000095367432,
+        "y": 336.00000953674316,
         "wires": []
     },
     {
-        "id": "31140357.554dec",
+        "id": "7463c021.b422e",
         "type": "debug",
-        "z": "3bec2f85.f17ca",
+        "z": "f95fc314.4636b",
         "name": "",
         "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
         "complete": "true",
-        "x": 670,
-        "y": 360,
+        "x": 722.0000095367432,
+        "y": 296.00000953674316,
         "wires": []
     },
     {
-        "id": "fa128eb5.e9cb",
+        "id": "7ee30819.8cf358",
         "type": "debug",
-        "z": "3bec2f85.f17ca",
+        "z": "f95fc314.4636b",
         "name": "",
         "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
         "complete": "true",
-        "x": 670,
-        "y": 320,
+        "x": 722.0000095367432,
+        "y": 256.00000953674316,
         "wires": []
     },
     {
-        "id": "1a12ff21.0ca1a1",
+        "id": "68e46321.24269c",
         "type": "debug",
-        "z": "3bec2f85.f17ca",
+        "z": "f95fc314.4636b",
         "name": "",
         "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
         "complete": "true",
-        "x": 670,
-        "y": 280,
+        "x": 721.000020980835,
+        "y": 215.00001335144043,
         "wires": []
     },
     {
-        "id": "3e78f833.85e6c8",
+        "id": "2b457e5f.4a4332",
         "type": "debug",
-        "z": "3bec2f85.f17ca",
+        "z": "f95fc314.4636b",
         "name": "",
         "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
         "complete": "true",
-        "x": 670,
-        "y": 560,
+        "x": 722.0000095367432,
+        "y": 496.00000953674316,
         "wires": []
     },
     {
-        "id": "d66684a5.99fcd8",
+        "id": "77fefb7a.a78884",
         "type": "debug",
-        "z": "3bec2f85.f17ca",
+        "z": "f95fc314.4636b",
         "name": "",
         "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
         "complete": "true",
-        "x": 670,
-        "y": 480,
+        "x": 722.0000095367432,
+        "y": 416.00000953674316,
         "wires": []
     },
     {
-        "id": "1b9ebc5b.585494",
+        "id": "88652970.dd7b18",
         "type": "debug",
-        "z": "3bec2f85.f17ca",
+        "z": "f95fc314.4636b",
         "name": "",
         "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
         "complete": "true",
-        "x": 670,
-        "y": 440,
+        "x": 722.0000095367432,
+        "y": 376.00000953674316,
         "wires": []
     },
     {
-        "id": "9bcc41d4.84c31",
+        "id": "1e420d85.a82b92",
         "type": "debug",
-        "z": "3bec2f85.f17ca",
+        "z": "f95fc314.4636b",
         "name": "",
         "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
         "complete": "true",
-        "x": 670,
-        "y": 720,
+        "x": 721.0000095367432,
+        "y": 656.0000095367432,
         "wires": []
     },
     {
-        "id": "fae024f9.826ac8",
+        "id": "e4d80d59.3e75b",
         "type": "debug",
-        "z": "3bec2f85.f17ca",
+        "z": "f95fc314.4636b",
         "name": "",
         "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
         "complete": "true",
-        "x": 670,
-        "y": 680,
+        "x": 722.0000095367432,
+        "y": 616.0000095367432,
         "wires": []
     },
     {
-        "id": "97e3eb86.e07678",
+        "id": "d0d9c7ec.4c9048",
         "type": "debug",
-        "z": "3bec2f85.f17ca",
+        "z": "f95fc314.4636b",
         "name": "",
         "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
         "complete": "true",
-        "x": 670,
-        "y": 640,
+        "x": 722.0000095367432,
+        "y": 576.0000095367432,
         "wires": []
     },
     {
-        "id": "8cef73d2.662c5",
+        "id": "94135c9.1cb22a",
         "type": "debug",
-        "z": "3bec2f85.f17ca",
+        "z": "f95fc314.4636b",
         "name": "",
         "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
         "complete": "true",
-        "x": 650,
-        "y": 600,
+        "x": 720.0000114440918,
+        "y": 536.0000076293945,
         "wires": []
     },
     {
-        "id": "2c25ca24.67df66",
+        "id": "218a29a7.026786",
+        "type": "AWS ResourceGroupsTaggingAPI",
+        "z": "f95fc314.4636b",
+        "aws": "bec2452f.03a118",
+        "operation": "GetResources",
+        "Key": "",
+        "ResourceARNList": "",
+        "Tags": "",
+        "TagKeys": "",
+        "name": "",
+        "x": 466.6999969482422,
+        "y": 697.0000104904175,
+        "wires": [
+            [
+                "3f6cfa1.0393206"
+            ]
+        ]
+    },
+    {
+        "id": "3f6cfa1.0393206",
+        "type": "debug",
+        "z": "f95fc314.4636b",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 722.0000095367432,
+        "y": 696.0000104904175,
+        "wires": []
+    },
+    {
+        "id": "bec2452f.03a118",
+        "type": "amazon config",
+        "z": "",
+        "name": "AWS",
+        "region": "us-east-1",
+        "proxyRequired": true,
+        "proxy": "http://172.17.0.1:3128"
+    },
+    {
+        "id": "d1cbc8ff.c2fcb8",
         "type": "amazon config",
         "z": "",
         "name": "AWS",
