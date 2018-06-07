@@ -3,7 +3,8 @@
   "version": "0.3.6",
   "description": "A collection of Node-RED nodes for AWS.  Includes nodes for DynamoDB, EC2, IoT, Kinesis, Lambda, SNS, SQS and S3.",
   "dependencies": {
-    "aws-sdk": "2"
+    "aws-sdk": "2",
+    "proxy-agent": "3.0.0"
   },
   "repository": {
     "type": "git",
