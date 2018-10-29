@@ -1,0 +1,26 @@
+*** build/IotData.html	Sun Nov  5 05:49:56 2017
+--- ../IotData.html	Sun Nov  5 05:35:31 2017
+***************
+*** 42,47 ****
+--- 42,52 ----
+  		<label for="node-input-name"><i class="fa fa-tag"></i>Name</label>
+  		<input type="text" id="node-input-name" placeholder="Name"></input>
+  	</div>
++ 	 <div class="form-row">
++          <label for="node-input-endPoint"><i class="fa fa-tag"></i>Endpoint (*)</label>
++          <input type="text" id="node-input-endPoint" placeholder="">
++          </input>
++         </div>
+  	<hr/>	
+  	<div id="AttrHolder">
+  	      
+***************
+*** 108,113 ****
+--- 113,119 ----
+  				thingName: { value: ""} ,
+  				topic: { value: ""} ,
+  				payload: { value: ""} ,
++ 			endPoint: { value: "" },
+  			name: { value: "" }
+  		},
+  		inputs:1,

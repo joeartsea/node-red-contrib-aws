@@ -125,10 +125,6 @@
 		<label for="node-input-EventSourceArn"><i class="fa fa-tag"></i>EventSourceArn</label>
 		<input type="text" id="node-input-EventSourceArn" placeholder="EventSourceArn"></input>
 	</div> 
-	<div class="form-row" id='StartingPositionAttr' class='hiddenAttrs'>
-		<label for="node-input-StartingPosition"><i class="fa fa-tag"></i>StartingPosition</label>
-		<input type="text" id="node-input-StartingPosition" placeholder="StartingPosition"></input>
-	</div> 
 	<div class="form-row" id='RuntimeAttr' class='hiddenAttrs'>
 		<label for="node-input-Runtime"><i class="fa fa-tag"></i>Runtime</label>
 		<input type="text" id="node-input-Runtime" placeholder="Runtime"></input>
@@ -181,7 +177,7 @@
 					'#FunctionNameAttr','#NameAttr','#FunctionVersionAttr'
 					],
 				CreateEventSourceMapping:[
-					'#EventSourceArnAttr','#FunctionNameAttr','#StartingPositionAttr'
+					'#EventSourceArnAttr','#FunctionNameAttr'
 					],
 				CreateFunction:[
 					'#FunctionNameAttr','#RuntimeAttr','#RoleAttr','#HandlerAttr','#CodeAttr'
@@ -302,7 +298,6 @@ NOTE: Parameters must be specified in the message, using the case specified in t
 				Name: { value: ""} ,
 				FunctionVersion: { value: ""} ,
 				EventSourceArn: { value: ""} ,
-				StartingPosition: { value: ""} ,
 				Runtime: { value: ""} ,
 				Role: { value: ""} ,
 				Handler: { value: ""} ,
@@ -316,7 +311,8 @@ NOTE: Parameters must be specified in the message, using the case specified in t
 			name: { value: "" }
 		},
 		inputs:1,
-		outputs:1,
+        outputs: 2,
+        outputLabels: ["data","err"],
 		icon: "aws.png",
 		align: "right",
 		label: function() {

@@ -30,6 +30,8 @@
 		
 			<option value="AddTags">AddTags</option>
 		
+			<option value="CancelElasticsearchServiceSoftwareUpdate">CancelElasticsearchServiceSoftwareUpdate</option>
+		
 			<option value="CreateElasticsearchDomain">CreateElasticsearchDomain</option>
 		
 			<option value="DeleteElasticsearchDomain">DeleteElasticsearchDomain</option>
@@ -48,6 +50,12 @@
 		
 			<option value="DescribeReservedElasticsearchInstances">DescribeReservedElasticsearchInstances</option>
 		
+			<option value="GetCompatibleElasticsearchVersions">GetCompatibleElasticsearchVersions</option>
+		
+			<option value="GetUpgradeHistory">GetUpgradeHistory</option>
+		
+			<option value="GetUpgradeStatus">GetUpgradeStatus</option>
+		
 			<option value="ListDomainNames">ListDomainNames</option>
 		
 			<option value="ListElasticsearchInstanceTypes">ListElasticsearchInstanceTypes</option>
@@ -60,7 +68,11 @@
 		
 			<option value="RemoveTags">RemoveTags</option>
 		
+			<option value="StartElasticsearchServiceSoftwareUpdate">StartElasticsearchServiceSoftwareUpdate</option>
+		
 			<option value="UpdateElasticsearchDomainConfig">UpdateElasticsearchDomainConfig</option>
+		
+			<option value="UpgradeElasticsearchDomain">UpgradeElasticsearchDomain</option>
 		;
 		</select>
 	</div>
@@ -107,6 +119,10 @@
 		<label for="node-input-TagKeys"><i class="fa fa-tag"></i>TagKeys</label>
 		<input type="text" id="node-input-TagKeys" placeholder="TagKeys"></input>
 	</div> 
+	<div class="form-row" id='TargetVersionAttr' class='hiddenAttrs'>
+		<label for="node-input-TargetVersion"><i class="fa fa-tag"></i>TargetVersion</label>
+		<input type="text" id="node-input-TargetVersion" placeholder="TargetVersion"></input>
+	</div> 
 	</div>
 
  <script>
@@ -114,6 +130,9 @@
 			
 				AddTags:[
 					'#ARNAttr','#TagListAttr'
+					],
+				CancelElasticsearchServiceSoftwareUpdate:[
+					'#DomainNameAttr'
 					],
 				CreateElasticsearchDomain:[
 					'#DomainNameAttr'
@@ -142,6 +161,15 @@
 				DescribeReservedElasticsearchInstances:[
 					
 					],
+				GetCompatibleElasticsearchVersions:[
+					
+					],
+				GetUpgradeHistory:[
+					'#DomainNameAttr'
+					],
+				GetUpgradeStatus:[
+					'#DomainNameAttr'
+					],
 				ListDomainNames:[
 					
 					],
@@ -160,8 +188,14 @@
 				RemoveTags:[
 					'#ARNAttr','#TagKeysAttr'
 					],
+				StartElasticsearchServiceSoftwareUpdate:[
+					'#DomainNameAttr'
+					],
 				UpdateElasticsearchDomainConfig:[
 					'#DomainNameAttr'
+					],
+				UpgradeElasticsearchDomain:[
+					'#DomainNameAttr','#TargetVersionAttr'
 					]
 		};
 		$('#node-input-operation').on('change',function(){
@@ -203,10 +237,12 @@ NOTE: Parameters must be specified in the message, using the case specified in t
 				ReservedElasticsearchInstanceOfferingId: { value: ""} ,
 				ReservationName: { value: ""} ,
 				TagKeys: { value: ""} ,
+				TargetVersion: { value: ""} ,
 			name: { value: "" }
 		},
 		inputs:1,
-		outputs:1,
+        outputs: 2,
+        outputLabels: ["data","err"],
 		icon: "aws.png",
 		align: "right",
 		label: function() {

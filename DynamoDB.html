@@ -48,6 +48,8 @@
 		
 			<option value="DescribeContinuousBackups">DescribeContinuousBackups</option>
 		
+			<option value="DescribeEndpoints">DescribeEndpoints</option>
+		
 			<option value="DescribeGlobalTable">DescribeGlobalTable</option>
 		
 			<option value="DescribeGlobalTableSettings">DescribeGlobalTableSettings</option>
@@ -214,6 +216,9 @@
 				DescribeContinuousBackups:[
 					'#TableNameAttr'
 					],
+				DescribeEndpoints:[
+					
+					],
 				DescribeGlobalTable:[
 					'#GlobalTableNameAttr'
 					],
@@ -336,7 +341,8 @@ NOTE: Parameters must be specified in the message, using the case specified in t
 			name: { value: "" }
 		},
 		inputs:1,
-		outputs:1,
+        outputs: 2,
+        outputLabels: ["data","err"],
 		icon: "aws.png",
 		align: "right",
 		label: function() {

@@ -158,6 +158,8 @@
 		
 			<option value="ListTagsForResource">ListTagsForResource</option>
 		
+			<option value="ModifyCurrentDBClusterCapacity">ModifyCurrentDBClusterCapacity</option>
+		
 			<option value="ModifyDBCluster">ModifyDBCluster</option>
 		
 			<option value="ModifyDBClusterParameterGroup">ModifyDBClusterParameterGroup</option>
@@ -210,7 +212,11 @@
 		
 			<option value="RevokeDBSecurityGroupIngress">RevokeDBSecurityGroupIngress</option>
 		
+			<option value="StartDBCluster">StartDBCluster</option>
+		
 			<option value="StartDBInstance">StartDBInstance</option>
+		
+			<option value="StopDBCluster">StopDBCluster</option>
 		
 			<option value="StopDBInstance">StopDBInstance</option>
 		;
@@ -651,6 +657,9 @@
 				ListTagsForResource:[
 					'#ResourceNameAttr'
 					],
+				ModifyCurrentDBClusterCapacity:[
+					'#DBClusterIdentifierAttr'
+					],
 				ModifyDBCluster:[
 					'#DBClusterIdentifierAttr'
 					],
@@ -729,8 +738,14 @@
 				RevokeDBSecurityGroupIngress:[
 					'#DBSecurityGroupNameAttr'
 					],
+				StartDBCluster:[
+					'#DBClusterIdentifierAttr'
+					],
 				StartDBInstance:[
 					'#DBInstanceIdentifierAttr'
+					],
+				StopDBCluster:[
+					'#DBClusterIdentifierAttr'
 					],
 				StopDBInstance:[
 					'#DBInstanceIdentifierAttr'
@@ -826,7 +841,8 @@ NOTE: Parameters must be specified in the message, using the case specified in t
 			name: { value: "" }
 		},
 		inputs:1,
-		outputs:1,
+        outputs: 2,
+        outputLabels: ["data","err"],
 		icon: "aws.png",
 		align: "right",
 		label: function() {

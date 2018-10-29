@@ -47,7 +47,7 @@ module.exports = function(RED) {
             });
         }
 
-		var awsService = new AWS.IotData( { 'region': node.region ,'endpoint':n.endPoint} );
+		var awsService = new AWS.IotData( { 'region': node.region } );
 
 		node.on("input", function(msg) {
 			node.sendMsg = function (err, data) {

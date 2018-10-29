@@ -52,14 +52,15 @@ module.exports = function(RED) {
 		node.on("input", function(msg) {
 			node.sendMsg = function (err, data) {
 				if (err) {
-				node.status({fill:"red",shape:"ring",text:"error"});
-				node.error("failed: " + err.toString(),msg);
-				return;
+				    node.status({fill:"red",shape:"ring",text:"error"});
+                    node.error("failed: " + err.toString(), msg);
+                    node.send([null, { err: err }]);
+    				return;
 				} else {
 				msg.payload = data;
 				node.status({});
 				}
-				node.send(msg);
+				node.send([msg,null]);
 			};
 		
 			var _cb=function(err,data){
@@ -146,9 +147,24 @@ module.exports = function(RED) {
 			copyArg(n,"StreamName",params,undefined,false); 
 			
 			copyArg(msg,"StreamName",params,undefined,false); 
+			copyArg(msg,"EnforceConsumerDeletion",params,undefined,false); 
 			
 
 			svc.deleteStream(params,cb);
+		}
+
+		
+		service.DeregisterStreamConsumer=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			
+			copyArg(msg,"StreamARN",params,undefined,false); 
+			copyArg(msg,"ConsumerName",params,undefined,false); 
+			copyArg(msg,"ConsumerARN",params,undefined,false); 
+			
+
+			svc.deregisterStreamConsumer(params,cb);
 		}
 
 		
@@ -175,6 +191,20 @@ module.exports = function(RED) {
 			
 
 			svc.describeStream(params,cb);
+		}
+
+		
+		service.DescribeStreamConsumer=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			
+			copyArg(msg,"StreamARN",params,undefined,false); 
+			copyArg(msg,"ConsumerName",params,undefined,false); 
+			copyArg(msg,"ConsumerARN",params,undefined,false); 
+			
+
+			svc.describeStreamConsumer(params,cb);
 		}
 
 		
@@ -285,6 +315,22 @@ module.exports = function(RED) {
 		}
 
 		
+		service.ListStreamConsumers=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"StreamARN",params,undefined,false); 
+			
+			copyArg(msg,"StreamARN",params,undefined,false); 
+			copyArg(msg,"NextToken",params,undefined,false); 
+			copyArg(msg,"MaxResults",params,undefined,false); 
+			copyArg(msg,"StreamCreationTimestamp",params,undefined,false); 
+			
+
+			svc.listStreamConsumers(params,cb);
+		}
+
+		
 		service.ListStreams=function(svc,msg,cb){
 			var params={};
 			//copyArgs
@@ -361,6 +407,21 @@ module.exports = function(RED) {
 			
 
 			svc.putRecords(params,cb);
+		}
+
+		
+		service.RegisterStreamConsumer=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"StreamARN",params,undefined,false); 
+			copyArg(n,"ConsumerName",params,undefined,false); 
+			
+			copyArg(msg,"StreamARN",params,undefined,false); 
+			copyArg(msg,"ConsumerName",params,undefined,false); 
+			
+
+			svc.registerStreamConsumer(params,cb);
 		}
 
 		

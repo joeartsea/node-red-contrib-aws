@@ -52,14 +52,15 @@ module.exports = function(RED) {
 		node.on("input", function(msg) {
 			node.sendMsg = function (err, data) {
 				if (err) {
-				node.status({fill:"red",shape:"ring",text:"error"});
-				node.error("failed: " + err.toString(),msg);
-				return;
+				    node.status({fill:"red",shape:"ring",text:"error"});
+                    node.error("failed: " + err.toString(), msg);
+                    node.send([null, { err: err }]);
+    				return;
 				} else {
 				msg.payload = data;
 				node.status({});
 				}
-				node.send(msg);
+				node.send([msg,null]);
 			};
 		
 			var _cb=function(err,data){
@@ -113,6 +114,7 @@ module.exports = function(RED) {
 			
 			
 			copyArg(msg,"LanguageCode",params,undefined,false); 
+			copyArg(msg,"IncludeAdditionalLanguageCodes",params,undefined,false); 
 			copyArg(msg,"NextToken",params,undefined,false); 
 			
 
@@ -133,6 +135,19 @@ module.exports = function(RED) {
 		}
 
 		
+		service.GetSpeechSynthesisTask=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"TaskId",params,undefined,false); 
+			
+			copyArg(msg,"TaskId",params,undefined,false); 
+			
+
+			svc.getSpeechSynthesisTask(params,cb);
+		}
+
+		
 		service.ListLexicons=function(svc,msg,cb){
 			var params={};
 			//copyArgs
@@ -142,6 +157,20 @@ module.exports = function(RED) {
 			
 
 			svc.listLexicons(params,cb);
+		}
+
+		
+		service.ListSpeechSynthesisTasks=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			
+			copyArg(msg,"MaxResults",params,undefined,false); 
+			copyArg(msg,"NextToken",params,undefined,false); 
+			copyArg(msg,"Status",params,undefined,false); 
+			
+
+			svc.listSpeechSynthesisTasks(params,cb);
 		}
 
 		
@@ -160,6 +189,32 @@ module.exports = function(RED) {
 		}
 
 		
+		service.StartSpeechSynthesisTask=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"OutputFormat",params,undefined,false); 
+			copyArg(n,"OutputS3BucketName",params,undefined,false); 
+			copyArg(n,"Text",params,undefined,false); 
+			copyArg(n,"VoiceId",params,undefined,false); 
+			
+			copyArg(msg,"LexiconNames",params,undefined,true); 
+			copyArg(msg,"OutputFormat",params,undefined,false); 
+			copyArg(msg,"OutputS3BucketName",params,undefined,false); 
+			copyArg(msg,"OutputS3KeyPrefix",params,undefined,false); 
+			copyArg(msg,"SampleRate",params,undefined,false); 
+			copyArg(msg,"SnsTopicArn",params,undefined,false); 
+			copyArg(msg,"SpeechMarkTypes",params,undefined,true); 
+			copyArg(msg,"Text",params,undefined,false); 
+			copyArg(msg,"TextType",params,undefined,false); 
+			copyArg(msg,"VoiceId",params,undefined,false); 
+			copyArg(msg,"LanguageCode",params,undefined,false); 
+			
+
+			svc.startSpeechSynthesisTask(params,cb);
+		}
+
+		
 		service.SynthesizeSpeech=function(svc,msg,cb){
 			var params={};
 			//copyArgs
@@ -168,13 +223,14 @@ module.exports = function(RED) {
 			copyArg(n,"Text",params,undefined,false); 
 			copyArg(n,"VoiceId",params,undefined,false); 
 			
-			copyArg(msg,"LexiconNames",params,undefined,false); 
+			copyArg(msg,"LexiconNames",params,undefined,true); 
 			copyArg(msg,"OutputFormat",params,undefined,false); 
 			copyArg(msg,"SampleRate",params,undefined,false); 
-			copyArg(msg,"SpeechMarkTypes",params,undefined,false); 
+			copyArg(msg,"SpeechMarkTypes",params,undefined,true); 
 			copyArg(msg,"Text",params,undefined,false); 
 			copyArg(msg,"TextType",params,undefined,false); 
 			copyArg(msg,"VoiceId",params,undefined,false); 
+			copyArg(msg,"LanguageCode",params,undefined,false); 
 			
 
 			svc.synthesizeSpeech(params,cb);

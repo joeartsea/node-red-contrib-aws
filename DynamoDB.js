@@ -52,14 +52,15 @@ module.exports = function(RED) {
 		node.on("input", function(msg) {
 			node.sendMsg = function (err, data) {
 				if (err) {
-				node.status({fill:"red",shape:"ring",text:"error"});
-				node.error("failed: " + err.toString(),msg);
-				return;
+				    node.status({fill:"red",shape:"ring",text:"error"});
+                    node.error("failed: " + err.toString(), msg);
+                    node.send([null, { err: err }]);
+    				return;
 				} else {
 				msg.payload = data;
 				node.status({});
 				}
-				node.send(msg);
+				node.send([msg,null]);
 			};
 		
 			var _cb=function(err,data){
@@ -169,7 +170,7 @@ module.exports = function(RED) {
 			copyArg(msg,"GlobalSecondaryIndexes",params,undefined,false); 
 			copyArg(msg,"ProvisionedThroughput",params,undefined,true); 
 			copyArg(msg,"StreamSpecification",params,undefined,true); 
-			copyArg(msg,"SSESpecification",params,undefined,false); 
+			copyArg(msg,"SSESpecification",params,undefined,true); 
 			
 
 			svc.createTable(params,cb);
@@ -248,6 +249,17 @@ module.exports = function(RED) {
 			
 
 			svc.describeContinuousBackups(params,cb);
+		}
+
+		
+		service.DescribeEndpoints=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			
+			
+
+			svc.describeEndpoints(params,cb);
 		}
 
 		
@@ -344,6 +356,7 @@ module.exports = function(RED) {
 			copyArg(msg,"TimeRangeLowerBound",params,undefined,false); 
 			copyArg(msg,"TimeRangeUpperBound",params,undefined,false); 
 			copyArg(msg,"ExclusiveStartBackupArn",params,undefined,false); 
+			copyArg(msg,"BackupType",params,undefined,false); 
 			
 
 			svc.listBackups(params,cb);
@@ -571,6 +584,7 @@ module.exports = function(RED) {
 			
 			copyArg(msg,"GlobalTableName",params,undefined,false); 
 			copyArg(msg,"GlobalTableProvisionedWriteCapacityUnits",params,undefined,false); 
+			copyArg(msg,"GlobalTableProvisionedWriteCapacityAutoScalingSettingsUpdate",params,undefined,true); 
 			copyArg(msg,"GlobalTableGlobalSecondaryIndexSettingsUpdate",params,undefined,false); 
 			copyArg(msg,"ReplicaSettingsUpdate",params,undefined,false); 
 			
@@ -615,6 +629,7 @@ module.exports = function(RED) {
 			copyArg(msg,"ProvisionedThroughput",params,undefined,true); 
 			copyArg(msg,"GlobalSecondaryIndexUpdates",params,undefined,false); 
 			copyArg(msg,"StreamSpecification",params,undefined,true); 
+			copyArg(msg,"SSESpecification",params,undefined,true); 
 			
 
 			svc.updateTable(params,cb);

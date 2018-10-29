@@ -52,14 +52,15 @@ module.exports = function(RED) {
 		node.on("input", function(msg) {
 			node.sendMsg = function (err, data) {
 				if (err) {
-				node.status({fill:"red",shape:"ring",text:"error"});
-				node.error("failed: " + err.toString(),msg);
-				return;
+				    node.status({fill:"red",shape:"ring",text:"error"});
+                    node.error("failed: " + err.toString(), msg);
+                    node.send([null, { err: err }]);
+    				return;
 				} else {
 				msg.payload = data;
 				node.status({});
 				}
-				node.send(msg);
+				node.send([msg,null]);
 			};
 		
 			var _cb=function(err,data){
@@ -109,6 +110,19 @@ module.exports = function(RED) {
 		}
 
 		
+		service.CancelElasticsearchServiceSoftwareUpdate=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"DomainName",params,undefined,false); 
+			
+			copyArg(msg,"DomainName",params,undefined,false); 
+			
+
+			svc.cancelElasticsearchServiceSoftwareUpdate(params,cb);
+		}
+
+		
 		service.CreateElasticsearchDomain=function(svc,msg,cb){
 			var params={};
 			//copyArgs
@@ -124,6 +138,7 @@ module.exports = function(RED) {
 			copyArg(msg,"VPCOptions",params,undefined,true); 
 			copyArg(msg,"CognitoOptions",params,undefined,true); 
 			copyArg(msg,"EncryptionAtRestOptions",params,undefined,true); 
+			copyArg(msg,"NodeToNodeEncryptionOptions",params,undefined,true); 
 			copyArg(msg,"AdvancedOptions",params,undefined,true); 
 			copyArg(msg,"LogPublishingOptions",params,undefined,true); 
 			
@@ -239,6 +254,46 @@ module.exports = function(RED) {
 		}
 
 		
+		service.GetCompatibleElasticsearchVersions=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			
+			copyArg(msg,"DomainName",params,undefined,false); 
+			
+
+			svc.getCompatibleElasticsearchVersions(params,cb);
+		}
+
+		
+		service.GetUpgradeHistory=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"DomainName",params,undefined,false); 
+			
+			copyArg(msg,"DomainName",params,undefined,false); 
+			copyArg(msg,"MaxResults",params,undefined,false); 
+			copyArg(msg,"NextToken",params,undefined,false); 
+			
+
+			svc.getUpgradeHistory(params,cb);
+		}
+
+		
+		service.GetUpgradeStatus=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"DomainName",params,undefined,false); 
+			
+			copyArg(msg,"DomainName",params,undefined,false); 
+			
+
+			svc.getUpgradeStatus(params,cb);
+		}
+
+		
 		service.ListDomainNames=function(svc,msg,cb){
 			var params={};
 			//copyArgs
@@ -323,6 +378,19 @@ module.exports = function(RED) {
 		}
 
 		
+		service.StartElasticsearchServiceSoftwareUpdate=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"DomainName",params,undefined,false); 
+			
+			copyArg(msg,"DomainName",params,undefined,false); 
+			
+
+			svc.startElasticsearchServiceSoftwareUpdate(params,cb);
+		}
+
+		
 		service.UpdateElasticsearchDomainConfig=function(svc,msg,cb){
 			var params={};
 			//copyArgs
@@ -341,6 +409,22 @@ module.exports = function(RED) {
 			
 
 			svc.updateElasticsearchDomainConfig(params,cb);
+		}
+
+		
+		service.UpgradeElasticsearchDomain=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"DomainName",params,undefined,false); 
+			copyArg(n,"TargetVersion",params,undefined,false); 
+			
+			copyArg(msg,"DomainName",params,undefined,false); 
+			copyArg(msg,"TargetVersion",params,undefined,false); 
+			copyArg(msg,"PerformCheckOnly",params,undefined,false); 
+			
+
+			svc.upgradeElasticsearchDomain(params,cb);
 		}
 
 			

@@ -34,6 +34,8 @@
 		
 			<option value="AcceptVpcPeeringConnection">AcceptVpcPeeringConnection</option>
 		
+			<option value="AdvertiseByoipCidr">AdvertiseByoipCidr</option>
+		
 			<option value="AllocateAddress">AllocateAddress</option>
 		
 			<option value="AllocateHosts">AllocateHosts</option>
@@ -72,6 +74,8 @@
 		
 			<option value="CancelBundleTask">CancelBundleTask</option>
 		
+			<option value="CancelCapacityReservation">CancelCapacityReservation</option>
+		
 			<option value="CancelConversionTask">CancelConversionTask</option>
 		
 			<option value="CancelExportTask">CancelExportTask</option>
@@ -91,6 +95,8 @@
 			<option value="CopyImage">CopyImage</option>
 		
 			<option value="CopySnapshot">CopySnapshot</option>
+		
+			<option value="CreateCapacityReservation">CreateCapacityReservation</option>
 		
 			<option value="CreateCustomerGateway">CreateCustomerGateway</option>
 		
@@ -230,6 +236,8 @@
 		
 			<option value="DeleteVpnGateway">DeleteVpnGateway</option>
 		
+			<option value="DeprovisionByoipCidr">DeprovisionByoipCidr</option>
+		
 			<option value="DeregisterImage">DeregisterImage</option>
 		
 			<option value="DescribeAccountAttributes">DescribeAccountAttributes</option>
@@ -241,6 +249,10 @@
 			<option value="DescribeAvailabilityZones">DescribeAvailabilityZones</option>
 		
 			<option value="DescribeBundleTasks">DescribeBundleTasks</option>
+		
+			<option value="DescribeByoipCidrs">DescribeByoipCidrs</option>
+		
+			<option value="DescribeCapacityReservations">DescribeCapacityReservations</option>
 		
 			<option value="DescribeClassicLinkInstances">DescribeClassicLinkInstances</option>
 		
@@ -321,6 +333,8 @@
 			<option value="DescribePrefixLists">DescribePrefixLists</option>
 		
 			<option value="DescribePrincipalIdFormat">DescribePrincipalIdFormat</option>
+		
+			<option value="DescribePublicIpv4Pools">DescribePublicIpv4Pools</option>
 		
 			<option value="DescribeRegions">DescribeRegions</option>
 		
@@ -454,6 +468,8 @@
 		
 			<option value="ImportVolume">ImportVolume</option>
 		
+			<option value="ModifyCapacityReservation">ModifyCapacityReservation</option>
+		
 			<option value="ModifyFleet">ModifyFleet</option>
 		
 			<option value="ModifyFpgaImageAttribute">ModifyFpgaImageAttribute</option>
@@ -467,6 +483,8 @@
 			<option value="ModifyImageAttribute">ModifyImageAttribute</option>
 		
 			<option value="ModifyInstanceAttribute">ModifyInstanceAttribute</option>
+		
+			<option value="ModifyInstanceCapacityReservationAttributes">ModifyInstanceCapacityReservationAttributes</option>
 		
 			<option value="ModifyInstanceCreditSpecification">ModifyInstanceCreditSpecification</option>
 		
@@ -505,6 +523,8 @@
 			<option value="MonitorInstances">MonitorInstances</option>
 		
 			<option value="MoveAddressToVpc">MoveAddressToVpc</option>
+		
+			<option value="ProvisionByoipCidr">ProvisionByoipCidr</option>
 		
 			<option value="PurchaseHostReservation">PurchaseHostReservation</option>
 		
@@ -575,6 +595,8 @@
 			<option value="UpdateSecurityGroupRuleDescriptionsEgress">UpdateSecurityGroupRuleDescriptionsEgress</option>
 		
 			<option value="UpdateSecurityGroupRuleDescriptionsIngress">UpdateSecurityGroupRuleDescriptionsIngress</option>
+		
+			<option value="WithdrawByoipCidr">WithdrawByoipCidr</option>
 		;
 		</select>
 	</div>
@@ -596,6 +618,10 @@
 	<div class="form-row" id='VpcEndpointIdsAttr' class='hiddenAttrs'>
 		<label for="node-input-VpcEndpointIds"><i class="fa fa-tag"></i>VpcEndpointIds</label>
 		<input type="text" id="node-input-VpcEndpointIds" placeholder="VpcEndpointIds"></input>
+	</div> 
+	<div class="form-row" id='CidrAttr' class='hiddenAttrs'>
+		<label for="node-input-Cidr"><i class="fa fa-tag"></i>Cidr</label>
+		<input type="text" id="node-input-Cidr" placeholder="Cidr"></input>
 	</div> 
 	<div class="form-row" id='AvailabilityZoneAttr' class='hiddenAttrs'>
 		<label for="node-input-AvailabilityZone"><i class="fa fa-tag"></i>AvailabilityZone</label>
@@ -677,6 +703,10 @@
 		<label for="node-input-BundleId"><i class="fa fa-tag"></i>BundleId</label>
 		<input type="text" id="node-input-BundleId" placeholder="BundleId"></input>
 	</div> 
+	<div class="form-row" id='CapacityReservationIdAttr' class='hiddenAttrs'>
+		<label for="node-input-CapacityReservationId"><i class="fa fa-tag"></i>CapacityReservationId</label>
+		<input type="text" id="node-input-CapacityReservationId" placeholder="CapacityReservationId"></input>
+	</div> 
 	<div class="form-row" id='ConversionTaskIdAttr' class='hiddenAttrs'>
 		<label for="node-input-ConversionTaskId"><i class="fa fa-tag"></i>ConversionTaskId</label>
 		<input type="text" id="node-input-ConversionTaskId" placeholder="ConversionTaskId"></input>
@@ -725,6 +755,14 @@
 		<label for="node-input-SourceSnapshotId"><i class="fa fa-tag"></i>SourceSnapshotId</label>
 		<input type="text" id="node-input-SourceSnapshotId" placeholder="SourceSnapshotId"></input>
 	</div> 
+	<div class="form-row" id='InstancePlatformAttr' class='hiddenAttrs'>
+		<label for="node-input-InstancePlatform"><i class="fa fa-tag"></i>InstancePlatform</label>
+		<input type="text" id="node-input-InstancePlatform" placeholder="InstancePlatform"></input>
+	</div> 
+	<div class="form-row" id='InstanceCountAttr' class='hiddenAttrs'>
+		<label for="node-input-InstanceCount"><i class="fa fa-tag"></i>InstanceCount</label>
+		<input type="text" id="node-input-InstanceCount" placeholder="InstanceCount"></input>
+	</div> 
 	<div class="form-row" id='BgpAsnAttr' class='hiddenAttrs'>
 		<label for="node-input-BgpAsn"><i class="fa fa-tag"></i>BgpAsn</label>
 		<input type="text" id="node-input-BgpAsn" placeholder="BgpAsn"></input>
@@ -748,14 +786,6 @@
 	<div class="form-row" id='TargetCapacitySpecificationAttr' class='hiddenAttrs'>
 		<label for="node-input-TargetCapacitySpecification"><i class="fa fa-tag"></i>TargetCapacitySpecification</label>
 		<input type="text" id="node-input-TargetCapacitySpecification" placeholder="TargetCapacitySpecification"></input>
-	</div> 
-	<div class="form-row" id='DeliverLogsPermissionArnAttr' class='hiddenAttrs'>
-		<label for="node-input-DeliverLogsPermissionArn"><i class="fa fa-tag"></i>DeliverLogsPermissionArn</label>
-		<input type="text" id="node-input-DeliverLogsPermissionArn" placeholder="DeliverLogsPermissionArn"></input>
-	</div> 
-	<div class="form-row" id='LogGroupNameAttr' class='hiddenAttrs'>
-		<label for="node-input-LogGroupName"><i class="fa fa-tag"></i>LogGroupName</label>
-		<input type="text" id="node-input-LogGroupName" placeholder="LogGroupName"></input>
 	</div> 
 	<div class="form-row" id='ResourceIdsAttr' class='hiddenAttrs'>
 		<label for="node-input-ResourceIds"><i class="fa fa-tag"></i>ResourceIds</label>
@@ -824,10 +854,6 @@
 	<div class="form-row" id='ClientTokenAttr' class='hiddenAttrs'>
 		<label for="node-input-ClientToken"><i class="fa fa-tag"></i>ClientToken</label>
 		<input type="text" id="node-input-ClientToken" placeholder="ClientToken"></input>
-	</div> 
-	<div class="form-row" id='InstanceCountAttr' class='hiddenAttrs'>
-		<label for="node-input-InstanceCount"><i class="fa fa-tag"></i>InstanceCount</label>
-		<input type="text" id="node-input-InstanceCount" placeholder="InstanceCount"></input>
 	</div> 
 	<div class="form-row" id='PriceSchedulesAttr' class='hiddenAttrs'>
 		<label for="node-input-PriceSchedules"><i class="fa fa-tag"></i>PriceSchedules</label>
@@ -933,6 +959,10 @@
 		<label for="node-input-ImageId"><i class="fa fa-tag"></i>ImageId</label>
 		<input type="text" id="node-input-ImageId" placeholder="ImageId"></input>
 	</div> 
+	<div class="form-row" id='MaxResultsAttr' class='hiddenAttrs'>
+		<label for="node-input-MaxResults"><i class="fa fa-tag"></i>MaxResults</label>
+		<input type="text" id="node-input-MaxResults" placeholder="MaxResults"></input>
+	</div> 
 	<div class="form-row" id='FleetIdAttr' class='hiddenAttrs'>
 		<label for="node-input-FleetId"><i class="fa fa-tag"></i>FleetId</label>
 		<input type="text" id="node-input-FleetId" placeholder="FleetId"></input>
@@ -1012,6 +1042,10 @@
 	<div class="form-row" id='UseLongIdsAttr' class='hiddenAttrs'>
 		<label for="node-input-UseLongIds"><i class="fa fa-tag"></i>UseLongIds</label>
 		<input type="text" id="node-input-UseLongIds" placeholder="UseLongIds"></input>
+	</div> 
+	<div class="form-row" id='CapacityReservationSpecificationAttr' class='hiddenAttrs'>
+		<label for="node-input-CapacityReservationSpecification"><i class="fa fa-tag"></i>CapacityReservationSpecification</label>
+		<input type="text" id="node-input-CapacityReservationSpecification" placeholder="CapacityReservationSpecification"></input>
 	</div> 
 	<div class="form-row" id='InstanceCreditSpecificationsAttr' class='hiddenAttrs'>
 		<label for="node-input-InstanceCreditSpecifications"><i class="fa fa-tag"></i>InstanceCreditSpecifications</label>
@@ -1107,6 +1141,9 @@
 				AcceptVpcPeeringConnection:[
 					
 					],
+				AdvertiseByoipCidr:[
+					'#CidrAttr'
+					],
 				AllocateAddress:[
 					
 					],
@@ -1164,6 +1201,9 @@
 				CancelBundleTask:[
 					'#BundleIdAttr'
 					],
+				CancelCapacityReservation:[
+					'#CapacityReservationIdAttr'
+					],
 				CancelConversionTask:[
 					'#ConversionTaskIdAttr'
 					],
@@ -1194,6 +1234,9 @@
 				CopySnapshot:[
 					'#SourceRegionAttr','#SourceSnapshotIdAttr'
 					],
+				CreateCapacityReservation:[
+					'#InstanceTypeAttr','#InstancePlatformAttr','#AvailabilityZoneAttr','#InstanceCountAttr'
+					],
 				CreateCustomerGateway:[
 					'#BgpAsnAttr','#PublicIpAttr','#TypeAttr'
 					],
@@ -1213,7 +1256,7 @@
 					'#LaunchTemplateConfigsAttr','#TargetCapacitySpecificationAttr'
 					],
 				CreateFlowLogs:[
-					'#DeliverLogsPermissionArnAttr','#LogGroupNameAttr','#ResourceIdsAttr','#ResourceTypeAttr','#TrafficTypeAttr'
+					'#ResourceIdsAttr','#ResourceTypeAttr','#TrafficTypeAttr'
 					],
 				CreateFpgaImage:[
 					'#InputStorageLocationAttr'
@@ -1401,6 +1444,9 @@
 				DeleteVpnGateway:[
 					'#VpnGatewayIdAttr'
 					],
+				DeprovisionByoipCidr:[
+					'#CidrAttr'
+					],
 				DeregisterImage:[
 					'#ImageIdAttr'
 					],
@@ -1417,6 +1463,12 @@
 					
 					],
 				DescribeBundleTasks:[
+					
+					],
+				DescribeByoipCidrs:[
+					'#MaxResultsAttr'
+					],
+				DescribeCapacityReservations:[
 					
 					],
 				DescribeClassicLinkInstances:[
@@ -1539,6 +1591,9 @@
 				DescribePrincipalIdFormat:[
 					
 					],
+				DescribePublicIpv4Pools:[
+					
+					],
 				DescribeRegions:[
 					
 					],
@@ -1603,7 +1658,7 @@
 					
 					],
 				DescribeVolumeAttribute:[
-					'#VolumeIdAttr'
+					'#AttributeAttr','#VolumeIdAttr'
 					],
 				DescribeVolumeStatus:[
 					
@@ -1737,6 +1792,9 @@
 				ImportVolume:[
 					'#AvailabilityZoneAttr','#ImageAttr','#VolumeAttr'
 					],
+				ModifyCapacityReservation:[
+					'#CapacityReservationIdAttr'
+					],
 				ModifyFleet:[
 					'#FleetIdAttr','#TargetCapacitySpecificationAttr'
 					],
@@ -1757,6 +1815,9 @@
 					],
 				ModifyInstanceAttribute:[
 					'#InstanceIdAttr'
+					],
+				ModifyInstanceCapacityReservationAttributes:[
+					'#InstanceIdAttr','#CapacityReservationSpecificationAttr'
 					],
 				ModifyInstanceCreditSpecification:[
 					'#InstanceCreditSpecificationsAttr'
@@ -1814,6 +1875,9 @@
 					],
 				MoveAddressToVpc:[
 					'#PublicIpAttr'
+					],
+				ProvisionByoipCidr:[
+					'#CidrAttr'
 					],
 				PurchaseHostReservation:[
 					'#HostIdSetAttr','#OfferingIdAttr'
@@ -1919,6 +1983,9 @@
 					],
 				UpdateSecurityGroupRuleDescriptionsIngress:[
 					'#IpPermissionsAttr'
+					],
+				WithdrawByoipCidr:[
+					'#CidrAttr'
 					]
 		};
 		$('#node-input-operation').on('change',function(){
@@ -1954,6 +2021,7 @@ NOTE: Parameters must be specified in the message, using the case specified in t
 				ReservedInstanceIds: { value: ""} ,
 				ServiceId: { value: ""} ,
 				VpcEndpointIds: { value: ""} ,
+				Cidr: { value: ""} ,
 				AvailabilityZone: { value: ""} ,
 				InstanceType: { value: ""} ,
 				Quantity: { value: ""} ,
@@ -1974,6 +2042,7 @@ NOTE: Parameters must be specified in the message, using the case specified in t
 				GroupId: { value: ""} ,
 				Storage: { value: ""} ,
 				BundleId: { value: ""} ,
+				CapacityReservationId: { value: ""} ,
 				ConversionTaskId: { value: ""} ,
 				ExportTaskId: { value: ""} ,
 				ReservedInstancesListingId: { value: ""} ,
@@ -1986,14 +2055,14 @@ NOTE: Parameters must be specified in the message, using the case specified in t
 				Name: { value: ""} ,
 				SourceImageId: { value: ""} ,
 				SourceSnapshotId: { value: ""} ,
+				InstancePlatform: { value: ""} ,
+				InstanceCount: { value: ""} ,
 				BgpAsn: { value: ""} ,
 				PublicIp: { value: ""} ,
 				Type: { value: ""} ,
 				DhcpConfigurations: { value: ""} ,
 				LaunchTemplateConfigs: { value: ""} ,
 				TargetCapacitySpecification: { value: ""} ,
-				DeliverLogsPermissionArn: { value: ""} ,
-				LogGroupName: { value: ""} ,
 				ResourceIds: { value: ""} ,
 				ResourceType: { value: ""} ,
 				TrafficType: { value: ""} ,
@@ -2011,7 +2080,6 @@ NOTE: Parameters must be specified in the message, using the case specified in t
 				GroupName: { value: ""} ,
 				Strategy: { value: ""} ,
 				ClientToken: { value: ""} ,
-				InstanceCount: { value: ""} ,
 				PriceSchedules: { value: ""} ,
 				ReservedInstancesId: { value: ""} ,
 				Description: { value: ""} ,
@@ -2038,6 +2106,7 @@ NOTE: Parameters must be specified in the message, using the case specified in t
 				ServiceIds: { value: ""} ,
 				VpcPeeringConnectionId: { value: ""} ,
 				ImageId: { value: ""} ,
+				MaxResults: { value: ""} ,
 				FleetId: { value: ""} ,
 				StartTime: { value: ""} ,
 				Attribute: { value: ""} ,
@@ -2058,6 +2127,7 @@ NOTE: Parameters must be specified in the message, using the case specified in t
 				HostIds: { value: ""} ,
 				Resource: { value: ""} ,
 				UseLongIds: { value: ""} ,
+				CapacityReservationSpecification: { value: ""} ,
 				InstanceCreditSpecifications: { value: ""} ,
 				ReservedInstancesIds: { value: ""} ,
 				TargetConfigurations: { value: ""} ,
@@ -2081,7 +2151,8 @@ NOTE: Parameters must be specified in the message, using the case specified in t
 			name: { value: "" }
 		},
 		inputs:1,
-		outputs:1,
+        outputs: 2,
+        outputLabels: ["data","err"],
 		icon: "aws.png",
 		align: "right",
 		label: function() {

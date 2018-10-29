@@ -52,14 +52,15 @@ module.exports = function(RED) {
 		node.on("input", function(msg) {
 			node.sendMsg = function (err, data) {
 				if (err) {
-				node.status({fill:"red",shape:"ring",text:"error"});
-				node.error("failed: " + err.toString(),msg);
-				return;
+				    node.status({fill:"red",shape:"ring",text:"error"});
+                    node.error("failed: " + err.toString(), msg);
+                    node.send([null, { err: err }]);
+    				return;
 				} else {
 				msg.payload = data;
 				node.status({});
 				}
-				node.send(msg);
+				node.send([msg,null]);
 			};
 		
 			var _cb=function(err,data){
@@ -316,6 +317,9 @@ module.exports = function(RED) {
 			copyArg(msg,"EnableIAMDatabaseAuthentication",params,undefined,false); 
 			copyArg(msg,"BacktrackWindow",params,undefined,false); 
 			copyArg(msg,"EnableCloudwatchLogsExports",params,undefined,true); 
+			copyArg(msg,"EngineMode",params,undefined,false); 
+			copyArg(msg,"ScalingConfiguration",params,undefined,true); 
+			copyArg(msg,"DeletionProtection",params,undefined,false); 
 			copyArg(msg,"SourceRegion",params,undefined,false); 
 			
 
@@ -406,7 +410,10 @@ module.exports = function(RED) {
 			copyArg(msg,"EnableIAMDatabaseAuthentication",params,undefined,false); 
 			copyArg(msg,"EnablePerformanceInsights",params,undefined,false); 
 			copyArg(msg,"PerformanceInsightsKMSKeyId",params,undefined,false); 
+			copyArg(msg,"PerformanceInsightsRetentionPeriod",params,undefined,false); 
 			copyArg(msg,"EnableCloudwatchLogsExports",params,undefined,true); 
+			copyArg(msg,"ProcessorFeatures",params,undefined,true); 
+			copyArg(msg,"DeletionProtection",params,undefined,false); 
 			
 
 			svc.createDBInstance(params,cb);
@@ -441,7 +448,11 @@ module.exports = function(RED) {
 			copyArg(msg,"EnableIAMDatabaseAuthentication",params,undefined,false); 
 			copyArg(msg,"EnablePerformanceInsights",params,undefined,false); 
 			copyArg(msg,"PerformanceInsightsKMSKeyId",params,undefined,false); 
+			copyArg(msg,"PerformanceInsightsRetentionPeriod",params,undefined,false); 
 			copyArg(msg,"EnableCloudwatchLogsExports",params,undefined,true); 
+			copyArg(msg,"ProcessorFeatures",params,undefined,true); 
+			copyArg(msg,"UseDefaultProcessorFeatures",params,undefined,false); 
+			copyArg(msg,"DeletionProtection",params,undefined,false); 
 			copyArg(msg,"SourceRegion",params,undefined,false); 
 			
 
@@ -1223,6 +1234,22 @@ module.exports = function(RED) {
 		}
 
 		
+		service.ModifyCurrentDBClusterCapacity=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"DBClusterIdentifier",params,undefined,false); 
+			
+			copyArg(msg,"DBClusterIdentifier",params,undefined,false); 
+			copyArg(msg,"Capacity",params,undefined,false); 
+			copyArg(msg,"SecondsBeforeTimeout",params,undefined,false); 
+			copyArg(msg,"TimeoutAction",params,undefined,false); 
+			
+
+			svc.modifyCurrentDBClusterCapacity(params,cb);
+		}
+
+		
 		service.ModifyDBCluster=function(svc,msg,cb){
 			var params={};
 			//copyArgs
@@ -1244,6 +1271,8 @@ module.exports = function(RED) {
 			copyArg(msg,"BacktrackWindow",params,undefined,false); 
 			copyArg(msg,"CloudwatchLogsExportConfiguration",params,undefined,true); 
 			copyArg(msg,"EngineVersion",params,undefined,false); 
+			copyArg(msg,"ScalingConfiguration",params,undefined,true); 
+			copyArg(msg,"DeletionProtection",params,undefined,false); 
 			
 
 			svc.modifyDBCluster(params,cb);
@@ -1323,7 +1352,11 @@ module.exports = function(RED) {
 			copyArg(msg,"EnableIAMDatabaseAuthentication",params,undefined,false); 
 			copyArg(msg,"EnablePerformanceInsights",params,undefined,false); 
 			copyArg(msg,"PerformanceInsightsKMSKeyId",params,undefined,false); 
+			copyArg(msg,"PerformanceInsightsRetentionPeriod",params,undefined,false); 
 			copyArg(msg,"CloudwatchLogsExportConfiguration",params,undefined,true); 
+			copyArg(msg,"ProcessorFeatures",params,undefined,true); 
+			copyArg(msg,"UseDefaultProcessorFeatures",params,undefined,false); 
+			copyArg(msg,"DeletionProtection",params,undefined,false); 
 			
 
 			svc.modifyDBInstance(params,cb);
@@ -1599,6 +1632,7 @@ module.exports = function(RED) {
 			copyArg(msg,"S3IngestionRoleArn",params,undefined,false); 
 			copyArg(msg,"BacktrackWindow",params,undefined,false); 
 			copyArg(msg,"EnableCloudwatchLogsExports",params,undefined,true); 
+			copyArg(msg,"DeletionProtection",params,undefined,false); 
 			
 
 			svc.restoreDBClusterFromS3(params,cb);
@@ -1628,6 +1662,10 @@ module.exports = function(RED) {
 			copyArg(msg,"EnableIAMDatabaseAuthentication",params,undefined,false); 
 			copyArg(msg,"BacktrackWindow",params,undefined,false); 
 			copyArg(msg,"EnableCloudwatchLogsExports",params,undefined,true); 
+			copyArg(msg,"EngineMode",params,undefined,false); 
+			copyArg(msg,"ScalingConfiguration",params,undefined,true); 
+			copyArg(msg,"DBClusterParameterGroupName",params,undefined,false); 
+			copyArg(msg,"DeletionProtection",params,undefined,false); 
 			
 
 			svc.restoreDBClusterFromSnapshot(params,cb);
@@ -1655,6 +1693,8 @@ module.exports = function(RED) {
 			copyArg(msg,"EnableIAMDatabaseAuthentication",params,undefined,false); 
 			copyArg(msg,"BacktrackWindow",params,undefined,false); 
 			copyArg(msg,"EnableCloudwatchLogsExports",params,undefined,true); 
+			copyArg(msg,"DBClusterParameterGroupName",params,undefined,false); 
+			copyArg(msg,"DeletionProtection",params,undefined,false); 
 			
 
 			svc.restoreDBClusterToPointInTime(params,cb);
@@ -1691,6 +1731,10 @@ module.exports = function(RED) {
 			copyArg(msg,"DomainIAMRoleName",params,undefined,false); 
 			copyArg(msg,"EnableIAMDatabaseAuthentication",params,undefined,false); 
 			copyArg(msg,"EnableCloudwatchLogsExports",params,undefined,true); 
+			copyArg(msg,"ProcessorFeatures",params,undefined,true); 
+			copyArg(msg,"UseDefaultProcessorFeatures",params,undefined,false); 
+			copyArg(msg,"DBParameterGroupName",params,undefined,false); 
+			copyArg(msg,"DeletionProtection",params,undefined,false); 
 			
 
 			svc.restoreDBInstanceFromDBSnapshot(params,cb);
@@ -1747,7 +1791,11 @@ module.exports = function(RED) {
 			copyArg(msg,"S3IngestionRoleArn",params,undefined,false); 
 			copyArg(msg,"EnablePerformanceInsights",params,undefined,false); 
 			copyArg(msg,"PerformanceInsightsKMSKeyId",params,undefined,false); 
+			copyArg(msg,"PerformanceInsightsRetentionPeriod",params,undefined,false); 
 			copyArg(msg,"EnableCloudwatchLogsExports",params,undefined,true); 
+			copyArg(msg,"ProcessorFeatures",params,undefined,true); 
+			copyArg(msg,"UseDefaultProcessorFeatures",params,undefined,false); 
+			copyArg(msg,"DeletionProtection",params,undefined,false); 
 			
 
 			svc.restoreDBInstanceFromS3(params,cb);
@@ -1786,6 +1834,10 @@ module.exports = function(RED) {
 			copyArg(msg,"DomainIAMRoleName",params,undefined,false); 
 			copyArg(msg,"EnableIAMDatabaseAuthentication",params,undefined,false); 
 			copyArg(msg,"EnableCloudwatchLogsExports",params,undefined,true); 
+			copyArg(msg,"ProcessorFeatures",params,undefined,true); 
+			copyArg(msg,"UseDefaultProcessorFeatures",params,undefined,false); 
+			copyArg(msg,"DBParameterGroupName",params,undefined,false); 
+			copyArg(msg,"DeletionProtection",params,undefined,false); 
 			
 
 			svc.restoreDBInstanceToPointInTime(params,cb);
@@ -1809,6 +1861,19 @@ module.exports = function(RED) {
 		}
 
 		
+		service.StartDBCluster=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"DBClusterIdentifier",params,undefined,false); 
+			
+			copyArg(msg,"DBClusterIdentifier",params,undefined,false); 
+			
+
+			svc.startDBCluster(params,cb);
+		}
+
+		
 		service.StartDBInstance=function(svc,msg,cb){
 			var params={};
 			//copyArgs
@@ -1819,6 +1884,19 @@ module.exports = function(RED) {
 			
 
 			svc.startDBInstance(params,cb);
+		}
+
+		
+		service.StopDBCluster=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"DBClusterIdentifier",params,undefined,false); 
+			
+			copyArg(msg,"DBClusterIdentifier",params,undefined,false); 
+			
+
+			svc.stopDBCluster(params,cb);
 		}
 
 		

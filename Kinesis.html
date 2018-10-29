@@ -36,9 +36,13 @@
 		
 			<option value="DeleteStream">DeleteStream</option>
 		
+			<option value="DeregisterStreamConsumer">DeregisterStreamConsumer</option>
+		
 			<option value="DescribeLimits">DescribeLimits</option>
 		
 			<option value="DescribeStream">DescribeStream</option>
+		
+			<option value="DescribeStreamConsumer">DescribeStreamConsumer</option>
 		
 			<option value="DescribeStreamSummary">DescribeStreamSummary</option>
 		
@@ -54,6 +58,8 @@
 		
 			<option value="ListShards">ListShards</option>
 		
+			<option value="ListStreamConsumers">ListStreamConsumers</option>
+		
 			<option value="ListStreams">ListStreams</option>
 		
 			<option value="ListTagsForStream">ListTagsForStream</option>
@@ -63,6 +69,8 @@
 			<option value="PutRecord">PutRecord</option>
 		
 			<option value="PutRecords">PutRecords</option>
+		
+			<option value="RegisterStreamConsumer">RegisterStreamConsumer</option>
 		
 			<option value="RemoveTagsFromStream">RemoveTagsFromStream</option>
 		
@@ -115,6 +123,10 @@
 		<label for="node-input-ShardIteratorType"><i class="fa fa-tag"></i>ShardIteratorType</label>
 		<input type="text" id="node-input-ShardIteratorType" placeholder="ShardIteratorType"></input>
 	</div> 
+	<div class="form-row" id='StreamARNAttr' class='hiddenAttrs'>
+		<label for="node-input-StreamARN"><i class="fa fa-tag"></i>StreamARN</label>
+		<input type="text" id="node-input-StreamARN" placeholder="StreamARN"></input>
+	</div> 
 	<div class="form-row" id='ShardToMergeAttr' class='hiddenAttrs'>
 		<label for="node-input-ShardToMerge"><i class="fa fa-tag"></i>ShardToMerge</label>
 		<input type="text" id="node-input-ShardToMerge" placeholder="ShardToMerge"></input>
@@ -134,6 +146,10 @@
 	<div class="form-row" id='RecordsAttr' class='hiddenAttrs'>
 		<label for="node-input-Records"><i class="fa fa-tag"></i>Records</label>
 		<input type="text" id="node-input-Records" placeholder="Records"></input>
+	</div> 
+	<div class="form-row" id='ConsumerNameAttr' class='hiddenAttrs'>
+		<label for="node-input-ConsumerName"><i class="fa fa-tag"></i>ConsumerName</label>
+		<input type="text" id="node-input-ConsumerName" placeholder="ConsumerName"></input>
 	</div> 
 	<div class="form-row" id='TagKeysAttr' class='hiddenAttrs'>
 		<label for="node-input-TagKeys"><i class="fa fa-tag"></i>TagKeys</label>
@@ -180,11 +196,17 @@
 				DeleteStream:[
 					'#StreamNameAttr'
 					],
+				DeregisterStreamConsumer:[
+					
+					],
 				DescribeLimits:[
 					
 					],
 				DescribeStream:[
 					'#StreamNameAttr'
+					],
+				DescribeStreamConsumer:[
+					
 					],
 				DescribeStreamSummary:[
 					'#StreamNameAttr'
@@ -207,6 +229,9 @@
 				ListShards:[
 					
 					],
+				ListStreamConsumers:[
+					'#StreamARNAttr'
+					],
 				ListStreams:[
 					
 					],
@@ -221,6 +246,9 @@
 					],
 				PutRecords:[
 					'#RecordsAttr','#StreamNameAttr'
+					],
+				RegisterStreamConsumer:[
+					'#StreamARNAttr','#ConsumerNameAttr'
 					],
 				RemoveTagsFromStream:[
 					'#StreamNameAttr','#TagKeysAttr'
@@ -276,11 +304,13 @@ NOTE: Parameters must be specified in the message, using the case specified in t
 				ShardIterator: { value: ""} ,
 				ShardId: { value: ""} ,
 				ShardIteratorType: { value: ""} ,
+				StreamARN: { value: ""} ,
 				ShardToMerge: { value: ""} ,
 				AdjacentShardToMerge: { value: ""} ,
 				Data: { value: ""} ,
 				PartitionKey: { value: ""} ,
 				Records: { value: ""} ,
+				ConsumerName: { value: ""} ,
 				TagKeys: { value: ""} ,
 				ShardToSplit: { value: ""} ,
 				NewStartingHashKey: { value: ""} ,
@@ -291,7 +321,8 @@ NOTE: Parameters must be specified in the message, using the case specified in t
 			name: { value: "" }
 		},
 		inputs:1,
-		outputs:1,
+        outputs: 2,
+        outputLabels: ["data","err"],
 		icon: "aws.png",
 		align: "right",
 		label: function() {

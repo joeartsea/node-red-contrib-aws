@@ -38,11 +38,17 @@
 		
 			<option value="AttachPrincipalPolicy">AttachPrincipalPolicy</option>
 		
+			<option value="AttachSecurityProfile">AttachSecurityProfile</option>
+		
 			<option value="AttachThingPrincipal">AttachThingPrincipal</option>
+		
+			<option value="CancelAuditTask">CancelAuditTask</option>
 		
 			<option value="CancelCertificateTransfer">CancelCertificateTransfer</option>
 		
 			<option value="CancelJob">CancelJob</option>
+		
+			<option value="CancelJobExecution">CancelJobExecution</option>
 		
 			<option value="ClearDefaultAuthorizer">ClearDefaultAuthorizer</option>
 		
@@ -62,6 +68,10 @@
 		
 			<option value="CreateRoleAlias">CreateRoleAlias</option>
 		
+			<option value="CreateScheduledAudit">CreateScheduledAudit</option>
+		
+			<option value="CreateSecurityProfile">CreateSecurityProfile</option>
+		
 			<option value="CreateStream">CreateStream</option>
 		
 			<option value="CreateThing">CreateThing</option>
@@ -71,6 +81,8 @@
 			<option value="CreateThingType">CreateThingType</option>
 		
 			<option value="CreateTopicRule">CreateTopicRule</option>
+		
+			<option value="DeleteAccountAuditConfiguration">DeleteAccountAuditConfiguration</option>
 		
 			<option value="DeleteAuthorizer">DeleteAuthorizer</option>
 		
@@ -92,6 +104,10 @@
 		
 			<option value="DeleteRoleAlias">DeleteRoleAlias</option>
 		
+			<option value="DeleteScheduledAudit">DeleteScheduledAudit</option>
+		
+			<option value="DeleteSecurityProfile">DeleteSecurityProfile</option>
+		
 			<option value="DeleteStream">DeleteStream</option>
 		
 			<option value="DeleteThing">DeleteThing</option>
@@ -105,6 +121,10 @@
 			<option value="DeleteV2LoggingLevel">DeleteV2LoggingLevel</option>
 		
 			<option value="DeprecateThingType">DeprecateThingType</option>
+		
+			<option value="DescribeAccountAuditConfiguration">DescribeAccountAuditConfiguration</option>
+		
+			<option value="DescribeAuditTask">DescribeAuditTask</option>
 		
 			<option value="DescribeAuthorizer">DescribeAuthorizer</option>
 		
@@ -126,6 +146,10 @@
 		
 			<option value="DescribeRoleAlias">DescribeRoleAlias</option>
 		
+			<option value="DescribeScheduledAudit">DescribeScheduledAudit</option>
+		
+			<option value="DescribeSecurityProfile">DescribeSecurityProfile</option>
+		
 			<option value="DescribeStream">DescribeStream</option>
 		
 			<option value="DescribeThing">DescribeThing</option>
@@ -139,6 +163,8 @@
 			<option value="DetachPolicy">DetachPolicy</option>
 		
 			<option value="DetachPrincipalPolicy">DetachPrincipalPolicy</option>
+		
+			<option value="DetachSecurityProfile">DetachSecurityProfile</option>
 		
 			<option value="DetachThingPrincipal">DetachThingPrincipal</option>
 		
@@ -166,7 +192,13 @@
 		
 			<option value="GetV2LoggingOptions">GetV2LoggingOptions</option>
 		
+			<option value="ListActiveViolations">ListActiveViolations</option>
+		
 			<option value="ListAttachedPolicies">ListAttachedPolicies</option>
+		
+			<option value="ListAuditFindings">ListAuditFindings</option>
+		
+			<option value="ListAuditTasks">ListAuditTasks</option>
 		
 			<option value="ListAuthorizers">ListAuthorizers</option>
 		
@@ -200,9 +232,17 @@
 		
 			<option value="ListRoleAliases">ListRoleAliases</option>
 		
+			<option value="ListScheduledAudits">ListScheduledAudits</option>
+		
+			<option value="ListSecurityProfiles">ListSecurityProfiles</option>
+		
+			<option value="ListSecurityProfilesForTarget">ListSecurityProfilesForTarget</option>
+		
 			<option value="ListStreams">ListStreams</option>
 		
 			<option value="ListTargetsForPolicy">ListTargetsForPolicy</option>
+		
+			<option value="ListTargetsForSecurityProfile">ListTargetsForSecurityProfile</option>
 		
 			<option value="ListThingGroups">ListThingGroups</option>
 		
@@ -223,6 +263,8 @@
 			<option value="ListTopicRules">ListTopicRules</option>
 		
 			<option value="ListV2LoggingLevels">ListV2LoggingLevels</option>
+		
+			<option value="ListViolationEvents">ListViolationEvents</option>
 		
 			<option value="RegisterCACertificate">RegisterCACertificate</option>
 		
@@ -248,6 +290,8 @@
 		
 			<option value="SetV2LoggingOptions">SetV2LoggingOptions</option>
 		
+			<option value="StartOnDemandAuditTask">StartOnDemandAuditTask</option>
+		
 			<option value="StartThingRegistrationTask">StartThingRegistrationTask</option>
 		
 			<option value="StopThingRegistrationTask">StopThingRegistrationTask</option>
@@ -257,6 +301,8 @@
 			<option value="TestInvokeAuthorizer">TestInvokeAuthorizer</option>
 		
 			<option value="TransferCertificate">TransferCertificate</option>
+		
+			<option value="UpdateAccountAuditConfiguration">UpdateAccountAuditConfiguration</option>
 		
 			<option value="UpdateAuthorizer">UpdateAuthorizer</option>
 		
@@ -270,6 +316,10 @@
 		
 			<option value="UpdateRoleAlias">UpdateRoleAlias</option>
 		
+			<option value="UpdateScheduledAudit">UpdateScheduledAudit</option>
+		
+			<option value="UpdateSecurityProfile">UpdateSecurityProfile</option>
+		
 			<option value="UpdateStream">UpdateStream</option>
 		
 			<option value="UpdateThing">UpdateThing</option>
@@ -277,6 +327,8 @@
 			<option value="UpdateThingGroup">UpdateThingGroup</option>
 		
 			<option value="UpdateThingGroupsForThing">UpdateThingGroupsForThing</option>
+		
+			<option value="ValidateSecurityProfileBehaviors">ValidateSecurityProfileBehaviors</option>
 		;
 		</select>
 	</div>
@@ -311,9 +363,21 @@
 		<label for="node-input-principal"><i class="fa fa-tag"></i>principal</label>
 		<input type="text" id="node-input-principal" placeholder="principal"></input>
 	</div> 
+	<div class="form-row" id='securityProfileNameAttr' class='hiddenAttrs'>
+		<label for="node-input-securityProfileName"><i class="fa fa-tag"></i>securityProfileName</label>
+		<input type="text" id="node-input-securityProfileName" placeholder="securityProfileName"></input>
+	</div> 
+	<div class="form-row" id='securityProfileTargetArnAttr' class='hiddenAttrs'>
+		<label for="node-input-securityProfileTargetArn"><i class="fa fa-tag"></i>securityProfileTargetArn</label>
+		<input type="text" id="node-input-securityProfileTargetArn" placeholder="securityProfileTargetArn"></input>
+	</div> 
 	<div class="form-row" id='thingNameAttr' class='hiddenAttrs'>
 		<label for="node-input-thingName"><i class="fa fa-tag"></i>thingName</label>
 		<input type="text" id="node-input-thingName" placeholder="thingName"></input>
+	</div> 
+	<div class="form-row" id='taskIdAttr' class='hiddenAttrs'>
+		<label for="node-input-taskId"><i class="fa fa-tag"></i>taskId</label>
+		<input type="text" id="node-input-taskId" placeholder="taskId"></input>
 	</div> 
 	<div class="form-row" id='authorizerNameAttr' class='hiddenAttrs'>
 		<label for="node-input-authorizerName"><i class="fa fa-tag"></i>authorizerName</label>
@@ -355,6 +419,22 @@
 		<label for="node-input-roleAlias"><i class="fa fa-tag"></i>roleAlias</label>
 		<input type="text" id="node-input-roleAlias" placeholder="roleAlias"></input>
 	</div> 
+	<div class="form-row" id='frequencyAttr' class='hiddenAttrs'>
+		<label for="node-input-frequency"><i class="fa fa-tag"></i>frequency</label>
+		<input type="text" id="node-input-frequency" placeholder="frequency"></input>
+	</div> 
+	<div class="form-row" id='targetCheckNamesAttr' class='hiddenAttrs'>
+		<label for="node-input-targetCheckNames"><i class="fa fa-tag"></i>targetCheckNames</label>
+		<input type="text" id="node-input-targetCheckNames" placeholder="targetCheckNames"></input>
+	</div> 
+	<div class="form-row" id='scheduledAuditNameAttr' class='hiddenAttrs'>
+		<label for="node-input-scheduledAuditName"><i class="fa fa-tag"></i>scheduledAuditName</label>
+		<input type="text" id="node-input-scheduledAuditName" placeholder="scheduledAuditName"></input>
+	</div> 
+	<div class="form-row" id='behaviorsAttr' class='hiddenAttrs'>
+		<label for="node-input-behaviors"><i class="fa fa-tag"></i>behaviors</label>
+		<input type="text" id="node-input-behaviors" placeholder="behaviors"></input>
+	</div> 
 	<div class="form-row" id='streamIdAttr' class='hiddenAttrs'>
 		<label for="node-input-streamId"><i class="fa fa-tag"></i>streamId</label>
 		<input type="text" id="node-input-streamId" placeholder="streamId"></input>
@@ -395,9 +475,13 @@
 		<label for="node-input-indexName"><i class="fa fa-tag"></i>indexName</label>
 		<input type="text" id="node-input-indexName" placeholder="indexName"></input>
 	</div> 
-	<div class="form-row" id='taskIdAttr' class='hiddenAttrs'>
-		<label for="node-input-taskId"><i class="fa fa-tag"></i>taskId</label>
-		<input type="text" id="node-input-taskId" placeholder="taskId"></input>
+	<div class="form-row" id='startTimeAttr' class='hiddenAttrs'>
+		<label for="node-input-startTime"><i class="fa fa-tag"></i>startTime</label>
+		<input type="text" id="node-input-startTime" placeholder="startTime"></input>
+	</div> 
+	<div class="form-row" id='endTimeAttr' class='hiddenAttrs'>
+		<label for="node-input-endTime"><i class="fa fa-tag"></i>endTime</label>
+		<input type="text" id="node-input-endTime" placeholder="endTime"></input>
 	</div> 
 	<div class="form-row" id='caCertificateIdAttr' class='hiddenAttrs'>
 		<label for="node-input-caCertificateId"><i class="fa fa-tag"></i>caCertificateId</label>
@@ -491,14 +575,23 @@
 				AttachPrincipalPolicy:[
 					'#policyNameAttr','#principalAttr'
 					],
+				AttachSecurityProfile:[
+					'#securityProfileNameAttr','#securityProfileTargetArnAttr'
+					],
 				AttachThingPrincipal:[
 					'#thingNameAttr','#principalAttr'
+					],
+				CancelAuditTask:[
+					'#taskIdAttr'
 					],
 				CancelCertificateTransfer:[
 					'#certificateIdAttr'
 					],
 				CancelJob:[
 					'#jobIdAttr'
+					],
+				CancelJobExecution:[
+					'#jobIdAttr','#thingNameAttr'
 					],
 				ClearDefaultAuthorizer:[
 					
@@ -527,6 +620,12 @@
 				CreateRoleAlias:[
 					'#roleAliasAttr','#roleArnAttr'
 					],
+				CreateScheduledAudit:[
+					'#frequencyAttr','#targetCheckNamesAttr','#scheduledAuditNameAttr'
+					],
+				CreateSecurityProfile:[
+					'#securityProfileNameAttr','#behaviorsAttr'
+					],
 				CreateStream:[
 					'#streamIdAttr','#filesAttr','#roleArnAttr'
 					],
@@ -541,6 +640,9 @@
 					],
 				CreateTopicRule:[
 					'#ruleNameAttr','#topicRulePayloadAttr'
+					],
+				DeleteAccountAuditConfiguration:[
+					
 					],
 				DeleteAuthorizer:[
 					'#authorizerNameAttr'
@@ -572,6 +674,12 @@
 				DeleteRoleAlias:[
 					'#roleAliasAttr'
 					],
+				DeleteScheduledAudit:[
+					'#scheduledAuditNameAttr'
+					],
+				DeleteSecurityProfile:[
+					'#securityProfileNameAttr'
+					],
 				DeleteStream:[
 					'#streamIdAttr'
 					],
@@ -592,6 +700,12 @@
 					],
 				DeprecateThingType:[
 					'#thingTypeNameAttr'
+					],
+				DescribeAccountAuditConfiguration:[
+					
+					],
+				DescribeAuditTask:[
+					'#taskIdAttr'
 					],
 				DescribeAuthorizer:[
 					'#authorizerNameAttr'
@@ -623,6 +737,12 @@
 				DescribeRoleAlias:[
 					'#roleAliasAttr'
 					],
+				DescribeScheduledAudit:[
+					'#scheduledAuditNameAttr'
+					],
+				DescribeSecurityProfile:[
+					'#securityProfileNameAttr'
+					],
 				DescribeStream:[
 					'#streamIdAttr'
 					],
@@ -643,6 +763,9 @@
 					],
 				DetachPrincipalPolicy:[
 					'#policyNameAttr','#principalAttr'
+					],
+				DetachSecurityProfile:[
+					'#securityProfileNameAttr','#securityProfileTargetArnAttr'
 					],
 				DetachThingPrincipal:[
 					'#thingNameAttr','#principalAttr'
@@ -683,8 +806,17 @@
 				GetV2LoggingOptions:[
 					
 					],
+				ListActiveViolations:[
+					
+					],
 				ListAttachedPolicies:[
 					'#targetAttr'
+					],
+				ListAuditFindings:[
+					
+					],
+				ListAuditTasks:[
+					'#startTimeAttr','#endTimeAttr'
 					],
 				ListAuthorizers:[
 					
@@ -734,11 +866,23 @@
 				ListRoleAliases:[
 					
 					],
+				ListScheduledAudits:[
+					
+					],
+				ListSecurityProfiles:[
+					
+					],
+				ListSecurityProfilesForTarget:[
+					'#securityProfileTargetArnAttr'
+					],
 				ListStreams:[
 					
 					],
 				ListTargetsForPolicy:[
 					'#policyNameAttr'
+					],
+				ListTargetsForSecurityProfile:[
+					'#securityProfileNameAttr'
 					],
 				ListThingGroups:[
 					
@@ -769,6 +913,9 @@
 					],
 				ListV2LoggingLevels:[
 					
+					],
+				ListViolationEvents:[
+					'#startTimeAttr','#endTimeAttr'
 					],
 				RegisterCACertificate:[
 					'#caCertificateAttr','#verificationCertificateAttr'
@@ -806,6 +953,9 @@
 				SetV2LoggingOptions:[
 					
 					],
+				StartOnDemandAuditTask:[
+					'#targetCheckNamesAttr'
+					],
 				StartThingRegistrationTask:[
 					'#templateBodyAttr','#inputFileBucketAttr','#inputFileKeyAttr','#roleArnAttr'
 					],
@@ -820,6 +970,9 @@
 					],
 				TransferCertificate:[
 					'#certificateIdAttr','#targetAwsAccountAttr'
+					],
+				UpdateAccountAuditConfiguration:[
+					
 					],
 				UpdateAuthorizer:[
 					'#authorizerNameAttr'
@@ -839,6 +992,12 @@
 				UpdateRoleAlias:[
 					'#roleAliasAttr'
 					],
+				UpdateScheduledAudit:[
+					'#scheduledAuditNameAttr'
+					],
+				UpdateSecurityProfile:[
+					'#securityProfileNameAttr'
+					],
 				UpdateStream:[
 					'#streamIdAttr'
 					],
@@ -850,6 +1009,9 @@
 					],
 				UpdateThingGroupsForThing:[
 					
+					],
+				ValidateSecurityProfileBehaviors:[
+					'#behaviorsAttr'
 					]
 		};
 		$('#node-input-operation').on('change',function(){
@@ -888,7 +1050,10 @@ NOTE: Parameters must be specified in the message, using the case specified in t
 				policyName: { value: ""} ,
 				target: { value: ""} ,
 				principal: { value: ""} ,
+				securityProfileName: { value: ""} ,
+				securityProfileTargetArn: { value: ""} ,
 				thingName: { value: ""} ,
+				taskId: { value: ""} ,
 				authorizerName: { value: ""} ,
 				authorizerFunctionArn: { value: ""} ,
 				tokenKeyName: { value: ""} ,
@@ -899,6 +1064,10 @@ NOTE: Parameters must be specified in the message, using the case specified in t
 				roleArn: { value: ""} ,
 				policyDocument: { value: ""} ,
 				roleAlias: { value: ""} ,
+				frequency: { value: ""} ,
+				targetCheckNames: { value: ""} ,
+				scheduledAuditName: { value: ""} ,
+				behaviors: { value: ""} ,
 				streamId: { value: ""} ,
 				thingGroupName: { value: ""} ,
 				thingTypeName: { value: ""} ,
@@ -909,7 +1078,8 @@ NOTE: Parameters must be specified in the message, using the case specified in t
 				targetType: { value: ""} ,
 				targetName: { value: ""} ,
 				indexName: { value: ""} ,
-				taskId: { value: ""} ,
+				startTime: { value: ""} ,
+				endTime: { value: ""} ,
 				caCertificateId: { value: ""} ,
 				reportType: { value: ""} ,
 				caCertificate: { value: ""} ,
@@ -931,7 +1101,8 @@ NOTE: Parameters must be specified in the message, using the case specified in t
 			name: { value: "" }
 		},
 		inputs:1,
-		outputs:1,
+        outputs: 2,
+        outputLabels: ["data","err"],
 		icon: "aws.png",
 		align: "right",
 		label: function() {

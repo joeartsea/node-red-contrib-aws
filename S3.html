@@ -178,6 +178,8 @@
 		
 			<option value="RestoreObject">RestoreObject</option>
 		
+			<option value="SelectObjectContent">SelectObjectContent</option>
+		
 			<option value="UploadPart">UploadPart</option>
 		
 			<option value="UploadPartCopy">UploadPartCopy</option>
@@ -270,6 +272,22 @@
 	<div class="form-row" id='WebsiteConfigurationAttr' class='hiddenAttrs'>
 		<label for="node-input-WebsiteConfiguration"><i class="fa fa-tag"></i>WebsiteConfiguration</label>
 		<input type="text" id="node-input-WebsiteConfiguration" placeholder="WebsiteConfiguration"></input>
+	</div> 
+	<div class="form-row" id='ExpressionAttr' class='hiddenAttrs'>
+		<label for="node-input-Expression"><i class="fa fa-tag"></i>Expression</label>
+		<input type="text" id="node-input-Expression" placeholder="Expression"></input>
+	</div> 
+	<div class="form-row" id='ExpressionTypeAttr' class='hiddenAttrs'>
+		<label for="node-input-ExpressionType"><i class="fa fa-tag"></i>ExpressionType</label>
+		<input type="text" id="node-input-ExpressionType" placeholder="ExpressionType"></input>
+	</div> 
+	<div class="form-row" id='InputSerializationAttr' class='hiddenAttrs'>
+		<label for="node-input-InputSerialization"><i class="fa fa-tag"></i>InputSerialization</label>
+		<input type="text" id="node-input-InputSerialization" placeholder="InputSerialization"></input>
+	</div> 
+	<div class="form-row" id='OutputSerializationAttr' class='hiddenAttrs'>
+		<label for="node-input-OutputSerialization"><i class="fa fa-tag"></i>OutputSerialization</label>
+		<input type="text" id="node-input-OutputSerialization" placeholder="OutputSerialization"></input>
 	</div> 
 	<div class="form-row" id='PartNumberAttr' class='hiddenAttrs'>
 		<label for="node-input-PartNumber"><i class="fa fa-tag"></i>PartNumber</label>
@@ -505,6 +523,9 @@
 				RestoreObject:[
 					'#BucketAttr','#KeyAttr'
 					],
+				SelectObjectContent:[
+					'#BucketAttr','#KeyAttr','#ExpressionAttr','#ExpressionTypeAttr','#InputSerializationAttr','#OutputSerializationAttr'
+					],
 				UploadPart:[
 					'#BucketAttr','#KeyAttr','#PartNumberAttr','#UploadIdAttr'
 					],
@@ -562,11 +583,16 @@ NOTE: Parameters must be specified in the message, using the case specified in t
 				Tagging: { value: ""} ,
 				VersioningConfiguration: { value: ""} ,
 				WebsiteConfiguration: { value: ""} ,
+				Expression: { value: ""} ,
+				ExpressionType: { value: ""} ,
+				InputSerialization: { value: ""} ,
+				OutputSerialization: { value: ""} ,
 				PartNumber: { value: ""} ,
 			name: { value: "" }
 		},
 		inputs:1,
-		outputs:1,
+        outputs: 2,
+        outputLabels: ["data","err"],
 		icon: "aws.png",
 		align: "right",
 		label: function() {

@@ -40,6 +40,8 @@
 		
 			<option value="DeleteStreamProcessor">DeleteStreamProcessor</option>
 		
+			<option value="DescribeCollection">DescribeCollection</option>
+		
 			<option value="DescribeStreamProcessor">DescribeStreamProcessor</option>
 		
 			<option value="DetectFaces">DetectFaces</option>
@@ -182,6 +184,9 @@
 				DeleteStreamProcessor:[
 					'#NameAttr'
 					],
+				DescribeCollection:[
+					'#CollectionIdAttr'
+					],
 				DescribeStreamProcessor:[
 					'#NameAttr'
 					],
@@ -311,7 +316,8 @@ NOTE: Parameters must be specified in the message, using the case specified in t
 			name: { value: "" }
 		},
 		inputs:1,
-		outputs:1,
+        outputs: 2,
+        outputLabels: ["data","err"],
 		icon: "aws.png",
 		align: "right",
 		label: function() {

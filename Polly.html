@@ -34,9 +34,15 @@
 		
 			<option value="GetLexicon">GetLexicon</option>
 		
+			<option value="GetSpeechSynthesisTask">GetSpeechSynthesisTask</option>
+		
 			<option value="ListLexicons">ListLexicons</option>
 		
+			<option value="ListSpeechSynthesisTasks">ListSpeechSynthesisTasks</option>
+		
 			<option value="PutLexicon">PutLexicon</option>
+		
+			<option value="StartSpeechSynthesisTask">StartSpeechSynthesisTask</option>
 		
 			<option value="SynthesizeSpeech">SynthesizeSpeech</option>
 		;
@@ -53,6 +59,10 @@
 		<label for="node-input-Name"><i class="fa fa-tag"></i>Name</label>
 		<input type="text" id="node-input-Name" placeholder="Name"></input>
 	</div> 
+	<div class="form-row" id='TaskIdAttr' class='hiddenAttrs'>
+		<label for="node-input-TaskId"><i class="fa fa-tag"></i>TaskId</label>
+		<input type="text" id="node-input-TaskId" placeholder="TaskId"></input>
+	</div> 
 	<div class="form-row" id='ContentAttr' class='hiddenAttrs'>
 		<label for="node-input-Content"><i class="fa fa-tag"></i>Content</label>
 		<input type="text" id="node-input-Content" placeholder="Content"></input>
@@ -60,6 +70,10 @@
 	<div class="form-row" id='OutputFormatAttr' class='hiddenAttrs'>
 		<label for="node-input-OutputFormat"><i class="fa fa-tag"></i>OutputFormat</label>
 		<input type="text" id="node-input-OutputFormat" placeholder="OutputFormat"></input>
+	</div> 
+	<div class="form-row" id='OutputS3BucketNameAttr' class='hiddenAttrs'>
+		<label for="node-input-OutputS3BucketName"><i class="fa fa-tag"></i>OutputS3BucketName</label>
+		<input type="text" id="node-input-OutputS3BucketName" placeholder="OutputS3BucketName"></input>
 	</div> 
 	<div class="form-row" id='TextAttr' class='hiddenAttrs'>
 		<label for="node-input-Text"><i class="fa fa-tag"></i>Text</label>
@@ -83,11 +97,20 @@
 				GetLexicon:[
 					'#NameAttr'
 					],
+				GetSpeechSynthesisTask:[
+					'#TaskIdAttr'
+					],
 				ListLexicons:[
+					
+					],
+				ListSpeechSynthesisTasks:[
 					
 					],
 				PutLexicon:[
 					'#NameAttr','#ContentAttr'
+					],
+				StartSpeechSynthesisTask:[
+					'#OutputFormatAttr','#OutputS3BucketNameAttr','#TextAttr','#VoiceIdAttr'
 					],
 				SynthesizeSpeech:[
 					'#OutputFormatAttr','#TextAttr','#VoiceIdAttr'
@@ -124,14 +147,17 @@ NOTE: Parameters must be specified in the message, using the case specified in t
 			operation: { value: 'DeleteLexicon' },
 			
 				Name: { value: ""} ,
+				TaskId: { value: ""} ,
 				Content: { value: ""} ,
 				OutputFormat: { value: ""} ,
+				OutputS3BucketName: { value: ""} ,
 				Text: { value: ""} ,
 				VoiceId: { value: ""} ,
 			name: { value: "" }
 		},
 		inputs:1,
-		outputs:1,
+        outputs: 2,
+        outputLabels: ["data","err"],
 		icon: "aws.png",
 		align: "right",
 		label: function() {

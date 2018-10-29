@@ -107,10 +107,6 @@
 		<label for="node-input-taskDefinition"><i class="fa fa-tag"></i>taskDefinition</label>
 		<input type="text" id="node-input-taskDefinition" placeholder="taskDefinition"></input>
 	</div> 
-	<div class="form-row" id='desiredCountAttr' class='hiddenAttrs'>
-		<label for="node-input-desiredCount"><i class="fa fa-tag"></i>desiredCount</label>
-		<input type="text" id="node-input-desiredCount" placeholder="desiredCount"></input>
-	</div> 
 	<div class="form-row" id='attributesAttr' class='hiddenAttrs'>
 		<label for="node-input-attributes"><i class="fa fa-tag"></i>attributes</label>
 		<input type="text" id="node-input-attributes" placeholder="attributes"></input>
@@ -168,7 +164,7 @@
 					
 					],
 				CreateService:[
-					'#serviceNameAttr','#taskDefinitionAttr','#desiredCountAttr'
+					'#serviceNameAttr','#taskDefinitionAttr'
 					],
 				DeleteAttributes:[
 					'#attributesAttr'
@@ -267,7 +263,7 @@
 
 </script>
 
-<script type="text/x-red" data-help-name="AWS ECS">
+<script type="text/x-red" data-help-name="amazon ECS">
 <p>
 AWS Amazon EC2 Container Service
 </p>
@@ -290,7 +286,6 @@ NOTE: Parameters must be specified in the message, using the case specified in t
 			
 				serviceName: { value: ""} ,
 				taskDefinition: { value: ""} ,
-				desiredCount: { value: ""} ,
 				attributes: { value: ""} ,
 				cluster: { value: ""} ,
 				service: { value: ""} ,
@@ -306,7 +301,8 @@ NOTE: Parameters must be specified in the message, using the case specified in t
 			name: { value: "" }
 		},
 		inputs:1,
-		outputs:1,
+        outputs: 2,
+        outputLabels: ["data","err"],
 		icon: "aws.png",
 		align: "right",
 		label: function() {

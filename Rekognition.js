@@ -52,14 +52,15 @@ module.exports = function(RED) {
 		node.on("input", function(msg) {
 			node.sendMsg = function (err, data) {
 				if (err) {
-				node.status({fill:"red",shape:"ring",text:"error"});
-				node.error("failed: " + err.toString(),msg);
-				return;
+				    node.status({fill:"red",shape:"ring",text:"error"});
+                    node.error("failed: " + err.toString(), msg);
+                    node.send([null, { err: err }]);
+    				return;
 				} else {
 				msg.payload = data;
 				node.status({});
 				}
-				node.send(msg);
+				node.send([msg,null]);
 			};
 		
 			var _cb=function(err,data){
@@ -182,6 +183,19 @@ module.exports = function(RED) {
 			
 
 			svc.deleteStreamProcessor(params,cb);
+		}
+
+		
+		service.DescribeCollection=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"CollectionId",params,undefined,false); 
+			
+			copyArg(msg,"CollectionId",params,undefined,false); 
+			
+
+			svc.describeCollection(params,cb);
 		}
 
 		
@@ -373,6 +387,8 @@ module.exports = function(RED) {
 			copyArg(msg,"Image",params,undefined,true); 
 			copyArg(msg,"ExternalImageId",params,undefined,false); 
 			copyArg(msg,"DetectionAttributes",params,undefined,true); 
+			copyArg(msg,"MaxFaces",params,undefined,false); 
+			copyArg(msg,"QualityFilter",params,undefined,false); 
 			
 
 			svc.indexFaces(params,cb);

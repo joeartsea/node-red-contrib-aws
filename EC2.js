@@ -52,14 +52,15 @@ module.exports = function(RED) {
 		node.on("input", function(msg) {
 			node.sendMsg = function (err, data) {
 				if (err) {
-				node.status({fill:"red",shape:"ring",text:"error"});
-				node.error("failed: " + err.toString(),msg);
-				return;
+				    node.status({fill:"red",shape:"ring",text:"error"});
+                    node.error("failed: " + err.toString(), msg);
+                    node.send([null, { err: err }]);
+    				return;
 				} else {
 				msg.payload = data;
 				node.status({});
 				}
-				node.send(msg);
+				node.send([msg,null]);
 			};
 		
 			var _cb=function(err,data){
@@ -138,6 +139,20 @@ module.exports = function(RED) {
 		}
 
 		
+		service.AdvertiseByoipCidr=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"Cidr",params,undefined,false); 
+			
+			copyArg(msg,"Cidr",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			
+
+			svc.advertiseByoipCidr(params,cb);
+		}
+
+		
 		service.AllocateAddress=function(svc,msg,cb){
 			var params={};
 			//copyArgs
@@ -145,6 +160,7 @@ module.exports = function(RED) {
 			
 			copyArg(msg,"Domain",params,undefined,false); 
 			copyArg(msg,"Address",params,undefined,false); 
+			copyArg(msg,"PublicIpv4Pool",params,undefined,false); 
 			copyArg(msg,"DryRun",params,undefined,false); 
 			
 
@@ -165,6 +181,7 @@ module.exports = function(RED) {
 			copyArg(msg,"ClientToken",params,undefined,false); 
 			copyArg(msg,"InstanceType",params,undefined,false); 
 			copyArg(msg,"Quantity",params,undefined,false); 
+			copyArg(msg,"TagSpecifications",params,undefined,true); 
 			
 
 			svc.allocateHosts(params,cb);
@@ -455,6 +472,20 @@ module.exports = function(RED) {
 		}
 
 		
+		service.CancelCapacityReservation=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"CapacityReservationId",params,undefined,false); 
+			
+			copyArg(msg,"CapacityReservationId",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			
+
+			svc.cancelCapacityReservation(params,cb);
+		}
+
+		
 		service.CancelConversionTask=function(svc,msg,cb){
 			var params={};
 			//copyArgs
@@ -618,6 +649,34 @@ module.exports = function(RED) {
 		}
 
 		
+		service.CreateCapacityReservation=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"InstanceType",params,undefined,false); 
+			copyArg(n,"InstancePlatform",params,undefined,false); 
+			copyArg(n,"AvailabilityZone",params,undefined,false); 
+			copyArg(n,"InstanceCount",params,undefined,false); 
+			
+			copyArg(msg,"ClientToken",params,undefined,false); 
+			copyArg(msg,"InstanceType",params,undefined,false); 
+			copyArg(msg,"InstancePlatform",params,undefined,false); 
+			copyArg(msg,"AvailabilityZone",params,undefined,false); 
+			copyArg(msg,"Tenancy",params,undefined,false); 
+			copyArg(msg,"InstanceCount",params,undefined,false); 
+			copyArg(msg,"EbsOptimized",params,undefined,false); 
+			copyArg(msg,"EphemeralStorage",params,undefined,false); 
+			copyArg(msg,"EndDate",params,undefined,false); 
+			copyArg(msg,"EndDateType",params,undefined,false); 
+			copyArg(msg,"InstanceMatchCriteria",params,undefined,false); 
+			copyArg(msg,"TagSpecifications",params,undefined,true); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			
+
+			svc.createCapacityReservation(params,cb);
+		}
+
+		
 		service.CreateCustomerGateway=function(svc,msg,cb){
 			var params={};
 			//copyArgs
@@ -701,6 +760,7 @@ module.exports = function(RED) {
 			copyArg(msg,"DryRun",params,undefined,false); 
 			copyArg(msg,"ClientToken",params,undefined,false); 
 			copyArg(msg,"SpotOptions",params,undefined,false); 
+			copyArg(msg,"OnDemandOptions",params,undefined,false); 
 			copyArg(msg,"ExcessCapacityTerminationPolicy",params,undefined,false); 
 			copyArg(msg,"LaunchTemplateConfigs",params,undefined,false); 
 			copyArg(msg,"TargetCapacitySpecification",params,undefined,true); 
@@ -720,18 +780,19 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
-			copyArg(n,"DeliverLogsPermissionArn",params,undefined,false); 
-			copyArg(n,"LogGroupName",params,undefined,false); 
 			copyArg(n,"ResourceIds",params,undefined,true); 
 			copyArg(n,"ResourceType",params,undefined,false); 
 			copyArg(n,"TrafficType",params,undefined,false); 
 			
+			copyArg(msg,"DryRun",params,undefined,false); 
 			copyArg(msg,"ClientToken",params,undefined,false); 
 			copyArg(msg,"DeliverLogsPermissionArn",params,undefined,false); 
 			copyArg(msg,"LogGroupName",params,undefined,false); 
 			copyArg(msg,"ResourceIds",params,undefined,true); 
 			copyArg(msg,"ResourceType",params,undefined,false); 
 			copyArg(msg,"TrafficType",params,undefined,false); 
+			copyArg(msg,"LogDestinationType",params,undefined,false); 
+			copyArg(msg,"LogDestination",params,undefined,false); 
 			
 
 			svc.createFlowLogs(params,cb);
@@ -1327,6 +1388,7 @@ module.exports = function(RED) {
 			
 			copyArg(n,"FlowLogIds",params,undefined,true); 
 			
+			copyArg(msg,"DryRun",params,undefined,false); 
 			copyArg(msg,"FlowLogIds",params,undefined,true); 
 			
 
@@ -1720,6 +1782,20 @@ module.exports = function(RED) {
 		}
 
 		
+		service.DeprovisionByoipCidr=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"Cidr",params,undefined,false); 
+			
+			copyArg(msg,"Cidr",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			
+
+			svc.deprovisionByoipCidr(params,cb);
+		}
+
+		
 		service.DeregisterImage=function(svc,msg,cb){
 			var params={};
 			//copyArgs
@@ -1799,6 +1875,37 @@ module.exports = function(RED) {
 			
 
 			svc.describeBundleTasks(params,cb);
+		}
+
+		
+		service.DescribeByoipCidrs=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"MaxResults",params,undefined,false); 
+			
+			copyArg(msg,"DryRun",params,undefined,false); 
+			copyArg(msg,"MaxResults",params,undefined,false); 
+			copyArg(msg,"NextToken",params,undefined,false); 
+			
+
+			svc.describeByoipCidrs(params,cb);
+		}
+
+		
+		service.DescribeCapacityReservations=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			
+			copyArg(msg,"CapacityReservationIds",params,undefined,false); 
+			copyArg(msg,"NextToken",params,undefined,false); 
+			copyArg(msg,"MaxResults",params,undefined,false); 
+			copyArg(msg,"Filters",params,undefined,true); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			
+
+			svc.describeCapacityReservations(params,cb);
 		}
 
 		
@@ -1959,6 +2066,7 @@ module.exports = function(RED) {
 			//copyArgs
 			
 			
+			copyArg(msg,"DryRun",params,undefined,false); 
 			copyArg(msg,"Filter",params,undefined,true); 
 			copyArg(msg,"FlowLogIds",params,undefined,true); 
 			copyArg(msg,"MaxResults",params,undefined,false); 
@@ -2367,6 +2475,8 @@ module.exports = function(RED) {
 			copyArg(msg,"Filters",params,undefined,true); 
 			copyArg(msg,"DryRun",params,undefined,false); 
 			copyArg(msg,"NetworkInterfaceIds",params,undefined,false); 
+			copyArg(msg,"NextToken",params,undefined,false); 
+			copyArg(msg,"MaxResults",params,undefined,false); 
 			
 
 			svc.describeNetworkInterfaces(params,cb);
@@ -2415,6 +2525,20 @@ module.exports = function(RED) {
 			
 
 			svc.describePrincipalIdFormat(params,cb);
+		}
+
+		
+		service.DescribePublicIpv4Pools=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			
+			copyArg(msg,"PoolIds",params,undefined,true); 
+			copyArg(msg,"NextToken",params,undefined,false); 
+			copyArg(msg,"MaxResults",params,undefined,false); 
+			
+
+			svc.describePublicIpv4Pools(params,cb);
 		}
 
 		
@@ -2510,6 +2634,8 @@ module.exports = function(RED) {
 			copyArg(msg,"Filters",params,undefined,true); 
 			copyArg(msg,"DryRun",params,undefined,false); 
 			copyArg(msg,"RouteTableIds",params,undefined,true); 
+			copyArg(msg,"NextToken",params,undefined,false); 
+			copyArg(msg,"MaxResults",params,undefined,false); 
 			
 
 			svc.describeRouteTables(params,cb);
@@ -2764,6 +2890,7 @@ module.exports = function(RED) {
 			var params={};
 			//copyArgs
 			
+			copyArg(n,"Attribute",params,undefined,false); 
 			copyArg(n,"VolumeId",params,undefined,false); 
 			
 			copyArg(msg,"Attribute",params,undefined,false); 
@@ -3440,6 +3567,23 @@ module.exports = function(RED) {
 		}
 
 		
+		service.ModifyCapacityReservation=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"CapacityReservationId",params,undefined,false); 
+			
+			copyArg(msg,"CapacityReservationId",params,undefined,false); 
+			copyArg(msg,"InstanceCount",params,undefined,false); 
+			copyArg(msg,"EndDate",params,undefined,false); 
+			copyArg(msg,"EndDateType",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			
+
+			svc.modifyCapacityReservation(params,cb);
+		}
+
+		
 		service.ModifyFleet=function(svc,msg,cb){
 			var params={};
 			//copyArgs
@@ -3573,6 +3717,22 @@ module.exports = function(RED) {
 			
 
 			svc.modifyInstanceAttribute(params,cb);
+		}
+
+		
+		service.ModifyInstanceCapacityReservationAttributes=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"InstanceId",params,undefined,false); 
+			copyArg(n,"CapacityReservationSpecification",params,undefined,true); 
+			
+			copyArg(msg,"InstanceId",params,undefined,false); 
+			copyArg(msg,"CapacityReservationSpecification",params,undefined,true); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			
+
+			svc.modifyInstanceCapacityReservationAttributes(params,cb);
 		}
 
 		
@@ -3883,6 +4043,22 @@ module.exports = function(RED) {
 			
 
 			svc.moveAddressToVpc(params,cb);
+		}
+
+		
+		service.ProvisionByoipCidr=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"Cidr",params,undefined,false); 
+			
+			copyArg(msg,"Cidr",params,undefined,false); 
+			copyArg(msg,"CidrAuthorizationContext",params,undefined,false); 
+			copyArg(msg,"Description",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			
+
+			svc.provisionByoipCidr(params,cb);
 		}
 
 		
@@ -4357,6 +4533,7 @@ module.exports = function(RED) {
 			copyArg(msg,"InstanceMarketOptions",params,undefined,false); 
 			copyArg(msg,"CreditSpecification",params,undefined,true); 
 			copyArg(msg,"CpuOptions",params,undefined,false); 
+			copyArg(msg,"CapacityReservationSpecification",params,undefined,true); 
 			
 
 			svc.runInstances(params,cb);
@@ -4498,6 +4675,20 @@ module.exports = function(RED) {
 			
 
 			svc.updateSecurityGroupRuleDescriptionsIngress(params,cb);
+		}
+
+		
+		service.WithdrawByoipCidr=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"Cidr",params,undefined,false); 
+			
+			copyArg(msg,"Cidr",params,undefined,false); 
+			copyArg(msg,"DryRun",params,undefined,false); 
+			
+
+			svc.withdrawByoipCidr(params,cb);
 		}
 
 			

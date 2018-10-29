@@ -52,14 +52,15 @@ module.exports = function(RED) {
 		node.on("input", function(msg) {
 			node.sendMsg = function (err, data) {
 				if (err) {
-				node.status({fill:"red",shape:"ring",text:"error"});
-				node.error("failed: " + err.toString(),msg);
-				return;
+				    node.status({fill:"red",shape:"ring",text:"error"});
+                    node.error("failed: " + err.toString(), msg);
+                    node.send([null, { err: err }]);
+    				return;
 				} else {
 				msg.payload = data;
 				node.status({});
 				}
-				node.send(msg);
+				node.send([msg,null]);
 			};
 		
 			var _cb=function(err,data){
@@ -112,7 +113,6 @@ module.exports = function(RED) {
 			
 			copyArg(n,"serviceName",params,undefined,false); 
 			copyArg(n,"taskDefinition",params,undefined,false); 
-			copyArg(n,"desiredCount",params,undefined,false); 
 			
 			copyArg(msg,"cluster",params,undefined,false); 
 			copyArg(msg,"serviceName",params,undefined,false); 
@@ -129,6 +129,7 @@ module.exports = function(RED) {
 			copyArg(msg,"placementStrategy",params,undefined,true); 
 			copyArg(msg,"networkConfiguration",params,undefined,true); 
 			copyArg(msg,"healthCheckGracePeriodSeconds",params,undefined,false); 
+			copyArg(msg,"schedulingStrategy",params,undefined,false); 
 			
 
 			svc.createService(params,cb);
@@ -170,6 +171,7 @@ module.exports = function(RED) {
 			
 			copyArg(msg,"cluster",params,undefined,false); 
 			copyArg(msg,"service",params,undefined,false); 
+			copyArg(msg,"force",params,undefined,false); 
 			
 
 			svc.deleteService(params,cb);
@@ -341,6 +343,7 @@ module.exports = function(RED) {
 			copyArg(msg,"nextToken",params,undefined,false); 
 			copyArg(msg,"maxResults",params,undefined,false); 
 			copyArg(msg,"launchType",params,undefined,false); 
+			copyArg(msg,"schedulingStrategy",params,undefined,false); 
 			
 
 			svc.listServices(params,cb);

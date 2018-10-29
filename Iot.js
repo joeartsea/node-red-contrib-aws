@@ -52,14 +52,15 @@ module.exports = function(RED) {
 		node.on("input", function(msg) {
 			node.sendMsg = function (err, data) {
 				if (err) {
-				node.status({fill:"red",shape:"ring",text:"error"});
-				node.error("failed: " + err.toString(),msg);
-				return;
+				    node.status({fill:"red",shape:"ring",text:"error"});
+                    node.error("failed: " + err.toString(), msg);
+                    node.send([null, { err: err }]);
+    				return;
 				} else {
 				msg.payload = data;
 				node.status({});
 				}
-				node.send(msg);
+				node.send([msg,null]);
 			};
 		
 			var _cb=function(err,data){
@@ -169,6 +170,21 @@ module.exports = function(RED) {
 		}
 
 		
+		service.AttachSecurityProfile=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"securityProfileName",params,undefined,false); 
+			copyArg(n,"securityProfileTargetArn",params,undefined,false); 
+			
+			copyArg(msg,"securityProfileName",params,undefined,false); 
+			copyArg(msg,"securityProfileTargetArn",params,undefined,false); 
+			
+
+			svc.attachSecurityProfile(params,cb);
+		}
+
+		
 		service.AttachThingPrincipal=function(svc,msg,cb){
 			var params={};
 			//copyArgs
@@ -181,6 +197,19 @@ module.exports = function(RED) {
 			
 
 			svc.attachThingPrincipal(params,cb);
+		}
+
+		
+		service.CancelAuditTask=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"taskId",params,undefined,false); 
+			
+			copyArg(msg,"taskId",params,undefined,false); 
+			
+
+			svc.cancelAuditTask(params,cb);
 		}
 
 		
@@ -205,9 +234,28 @@ module.exports = function(RED) {
 			
 			copyArg(msg,"jobId",params,undefined,false); 
 			copyArg(msg,"comment",params,undefined,false); 
+			copyArg(msg,"force",params,undefined,false); 
 			
 
 			svc.cancelJob(params,cb);
+		}
+
+		
+		service.CancelJobExecution=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"jobId",params,undefined,false); 
+			copyArg(n,"thingName",params,undefined,false); 
+			
+			copyArg(msg,"jobId",params,undefined,false); 
+			copyArg(msg,"thingName",params,undefined,false); 
+			copyArg(msg,"force",params,undefined,false); 
+			copyArg(msg,"expectedVersion",params,undefined,false); 
+			copyArg(msg,"statusDetails",params,undefined,true); 
+			
+
+			svc.cancelJobExecution(params,cb);
 		}
 
 		
@@ -271,7 +319,7 @@ module.exports = function(RED) {
 			copyArg(msg,"presignedUrlConfig",params,undefined,true); 
 			copyArg(msg,"targetSelection",params,undefined,false); 
 			copyArg(msg,"jobExecutionsRolloutConfig",params,undefined,true); 
-			copyArg(msg,"documentParameters",params,undefined,true); 
+			copyArg(msg,"timeoutConfig",params,undefined,true); 
 			
 
 			svc.createJob(params,cb);
@@ -303,6 +351,7 @@ module.exports = function(RED) {
 			copyArg(msg,"description",params,undefined,false); 
 			copyArg(msg,"targets",params,undefined,true); 
 			copyArg(msg,"targetSelection",params,undefined,false); 
+			copyArg(msg,"awsJobExecutionsRolloutConfig",params,undefined,true); 
 			copyArg(msg,"files",params,undefined,true); 
 			copyArg(msg,"roleArn",params,undefined,false); 
 			copyArg(msg,"additionalParameters",params,undefined,true); 
@@ -356,6 +405,42 @@ module.exports = function(RED) {
 			
 
 			svc.createRoleAlias(params,cb);
+		}
+
+		
+		service.CreateScheduledAudit=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"frequency",params,undefined,false); 
+			copyArg(n,"targetCheckNames",params,undefined,true); 
+			copyArg(n,"scheduledAuditName",params,undefined,false); 
+			
+			copyArg(msg,"frequency",params,undefined,false); 
+			copyArg(msg,"dayOfMonth",params,undefined,false); 
+			copyArg(msg,"dayOfWeek",params,undefined,false); 
+			copyArg(msg,"targetCheckNames",params,undefined,true); 
+			copyArg(msg,"scheduledAuditName",params,undefined,false); 
+			
+
+			svc.createScheduledAudit(params,cb);
+		}
+
+		
+		service.CreateSecurityProfile=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"securityProfileName",params,undefined,false); 
+			copyArg(n,"behaviors",params,undefined,true); 
+			
+			copyArg(msg,"securityProfileName",params,undefined,false); 
+			copyArg(msg,"securityProfileDescription",params,undefined,false); 
+			copyArg(msg,"behaviors",params,undefined,true); 
+			copyArg(msg,"alertTargets",params,undefined,true); 
+			
+
+			svc.createSecurityProfile(params,cb);
 		}
 
 		
@@ -433,6 +518,18 @@ module.exports = function(RED) {
 			
 
 			svc.createTopicRule(params,cb);
+		}
+
+		
+		service.DeleteAccountAuditConfiguration=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			
+			copyArg(msg,"deleteScheduledAudits",params,undefined,false); 
+			
+
+			svc.deleteAccountAuditConfiguration(params,cb);
 		}
 
 		
@@ -515,6 +612,8 @@ module.exports = function(RED) {
 			copyArg(n,"otaUpdateId",params,undefined,false); 
 			
 			copyArg(msg,"otaUpdateId",params,undefined,false); 
+			copyArg(msg,"deleteStream",params,undefined,false); 
+			copyArg(msg,"forceDeleteAWSJob",params,undefined,false); 
 			
 
 			svc.deleteOTAUpdate(params,cb);
@@ -570,6 +669,33 @@ module.exports = function(RED) {
 			
 
 			svc.deleteRoleAlias(params,cb);
+		}
+
+		
+		service.DeleteScheduledAudit=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"scheduledAuditName",params,undefined,false); 
+			
+			copyArg(msg,"scheduledAuditName",params,undefined,false); 
+			
+
+			svc.deleteScheduledAudit(params,cb);
+		}
+
+		
+		service.DeleteSecurityProfile=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"securityProfileName",params,undefined,false); 
+			
+			copyArg(msg,"securityProfileName",params,undefined,false); 
+			copyArg(msg,"expectedVersion",params,undefined,false); 
+			
+
+			svc.deleteSecurityProfile(params,cb);
 		}
 
 		
@@ -666,6 +792,30 @@ module.exports = function(RED) {
 			
 
 			svc.deprecateThingType(params,cb);
+		}
+
+		
+		service.DescribeAccountAuditConfiguration=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			
+			
+
+			svc.describeAccountAuditConfiguration(params,cb);
+		}
+
+		
+		service.DescribeAuditTask=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"taskId",params,undefined,false); 
+			
+			copyArg(msg,"taskId",params,undefined,false); 
+			
+
+			svc.describeAuditTask(params,cb);
 		}
 
 		
@@ -797,6 +947,32 @@ module.exports = function(RED) {
 		}
 
 		
+		service.DescribeScheduledAudit=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"scheduledAuditName",params,undefined,false); 
+			
+			copyArg(msg,"scheduledAuditName",params,undefined,false); 
+			
+
+			svc.describeScheduledAudit(params,cb);
+		}
+
+		
+		service.DescribeSecurityProfile=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"securityProfileName",params,undefined,false); 
+			
+			copyArg(msg,"securityProfileName",params,undefined,false); 
+			
+
+			svc.describeSecurityProfile(params,cb);
+		}
+
+		
 		service.DescribeStream=function(svc,msg,cb){
 			var params={};
 			//copyArgs
@@ -889,6 +1065,21 @@ module.exports = function(RED) {
 			
 
 			svc.detachPrincipalPolicy(params,cb);
+		}
+
+		
+		service.DetachSecurityProfile=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"securityProfileName",params,undefined,false); 
+			copyArg(n,"securityProfileTargetArn",params,undefined,false); 
+			
+			copyArg(msg,"securityProfileName",params,undefined,false); 
+			copyArg(msg,"securityProfileTargetArn",params,undefined,false); 
+			
+
+			svc.detachSecurityProfile(params,cb);
 		}
 
 		
@@ -1058,6 +1249,21 @@ module.exports = function(RED) {
 		}
 
 		
+		service.ListActiveViolations=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			
+			copyArg(msg,"thingName",params,undefined,false); 
+			copyArg(msg,"securityProfileName",params,undefined,false); 
+			copyArg(msg,"nextToken",params,undefined,false); 
+			copyArg(msg,"maxResults",params,undefined,false); 
+			
+
+			svc.listActiveViolations(params,cb);
+		}
+
+		
 		service.ListAttachedPolicies=function(svc,msg,cb){
 			var params={};
 			//copyArgs
@@ -1071,6 +1277,43 @@ module.exports = function(RED) {
 			
 
 			svc.listAttachedPolicies(params,cb);
+		}
+
+		
+		service.ListAuditFindings=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			
+			copyArg(msg,"taskId",params,undefined,false); 
+			copyArg(msg,"checkName",params,undefined,false); 
+			copyArg(msg,"resourceIdentifier",params,undefined,true); 
+			copyArg(msg,"maxResults",params,undefined,false); 
+			copyArg(msg,"nextToken",params,undefined,false); 
+			copyArg(msg,"startTime",params,undefined,false); 
+			copyArg(msg,"endTime",params,undefined,false); 
+			
+
+			svc.listAuditFindings(params,cb);
+		}
+
+		
+		service.ListAuditTasks=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"startTime",params,undefined,false); 
+			copyArg(n,"endTime",params,undefined,false); 
+			
+			copyArg(msg,"startTime",params,undefined,false); 
+			copyArg(msg,"endTime",params,undefined,false); 
+			copyArg(msg,"taskType",params,undefined,false); 
+			copyArg(msg,"taskStatus",params,undefined,false); 
+			copyArg(msg,"nextToken",params,undefined,false); 
+			copyArg(msg,"maxResults",params,undefined,false); 
+			
+
+			svc.listAuditTasks(params,cb);
 		}
 
 		
@@ -1311,6 +1554,48 @@ module.exports = function(RED) {
 		}
 
 		
+		service.ListScheduledAudits=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			
+			copyArg(msg,"nextToken",params,undefined,false); 
+			copyArg(msg,"maxResults",params,undefined,false); 
+			
+
+			svc.listScheduledAudits(params,cb);
+		}
+
+		
+		service.ListSecurityProfiles=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			
+			copyArg(msg,"nextToken",params,undefined,false); 
+			copyArg(msg,"maxResults",params,undefined,false); 
+			
+
+			svc.listSecurityProfiles(params,cb);
+		}
+
+		
+		service.ListSecurityProfilesForTarget=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"securityProfileTargetArn",params,undefined,false); 
+			
+			copyArg(msg,"nextToken",params,undefined,false); 
+			copyArg(msg,"maxResults",params,undefined,false); 
+			copyArg(msg,"recursive",params,undefined,false); 
+			copyArg(msg,"securityProfileTargetArn",params,undefined,false); 
+			
+
+			svc.listSecurityProfilesForTarget(params,cb);
+		}
+
+		
 		service.ListStreams=function(svc,msg,cb){
 			var params={};
 			//copyArgs
@@ -1337,6 +1622,21 @@ module.exports = function(RED) {
 			
 
 			svc.listTargetsForPolicy(params,cb);
+		}
+
+		
+		service.ListTargetsForSecurityProfile=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"securityProfileName",params,undefined,false); 
+			
+			copyArg(msg,"securityProfileName",params,undefined,false); 
+			copyArg(msg,"nextToken",params,undefined,false); 
+			copyArg(msg,"maxResults",params,undefined,false); 
+			
+
+			svc.listTargetsForSecurityProfile(params,cb);
 		}
 
 		
@@ -1487,6 +1787,25 @@ module.exports = function(RED) {
 			
 
 			svc.listV2LoggingLevels(params,cb);
+		}
+
+		
+		service.ListViolationEvents=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"startTime",params,undefined,false); 
+			copyArg(n,"endTime",params,undefined,false); 
+			
+			copyArg(msg,"startTime",params,undefined,false); 
+			copyArg(msg,"endTime",params,undefined,false); 
+			copyArg(msg,"thingName",params,undefined,false); 
+			copyArg(msg,"securityProfileName",params,undefined,false); 
+			copyArg(msg,"nextToken",params,undefined,false); 
+			copyArg(msg,"maxResults",params,undefined,false); 
+			
+
+			svc.listViolationEvents(params,cb);
 		}
 
 		
@@ -1669,6 +1988,19 @@ module.exports = function(RED) {
 		}
 
 		
+		service.StartOnDemandAuditTask=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"targetCheckNames",params,undefined,true); 
+			
+			copyArg(msg,"targetCheckNames",params,undefined,true); 
+			
+
+			svc.startOnDemandAuditTask(params,cb);
+		}
+
+		
 		service.StartThingRegistrationTask=function(svc,msg,cb){
 			var params={};
 			//copyArgs
@@ -1752,6 +2084,20 @@ module.exports = function(RED) {
 		}
 
 		
+		service.UpdateAccountAuditConfiguration=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			
+			copyArg(msg,"roleArn",params,undefined,false); 
+			copyArg(msg,"auditNotificationTargetConfigurations",params,undefined,true); 
+			copyArg(msg,"auditCheckConfigurations",params,undefined,true); 
+			
+
+			svc.updateAccountAuditConfiguration(params,cb);
+		}
+
+		
 		service.UpdateAuthorizer=function(svc,msg,cb){
 			var params={};
 			//copyArgs
@@ -1819,6 +2165,7 @@ module.exports = function(RED) {
 			
 			
 			copyArg(msg,"thingIndexingConfiguration",params,undefined,true); 
+			copyArg(msg,"thingGroupIndexingConfiguration",params,undefined,true); 
 			
 
 			svc.updateIndexingConfiguration(params,cb);
@@ -1837,6 +2184,40 @@ module.exports = function(RED) {
 			
 
 			svc.updateRoleAlias(params,cb);
+		}
+
+		
+		service.UpdateScheduledAudit=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"scheduledAuditName",params,undefined,false); 
+			
+			copyArg(msg,"frequency",params,undefined,false); 
+			copyArg(msg,"dayOfMonth",params,undefined,false); 
+			copyArg(msg,"dayOfWeek",params,undefined,false); 
+			copyArg(msg,"targetCheckNames",params,undefined,true); 
+			copyArg(msg,"scheduledAuditName",params,undefined,false); 
+			
+
+			svc.updateScheduledAudit(params,cb);
+		}
+
+		
+		service.UpdateSecurityProfile=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"securityProfileName",params,undefined,false); 
+			
+			copyArg(msg,"securityProfileName",params,undefined,false); 
+			copyArg(msg,"securityProfileDescription",params,undefined,false); 
+			copyArg(msg,"behaviors",params,undefined,true); 
+			copyArg(msg,"alertTargets",params,undefined,true); 
+			copyArg(msg,"expectedVersion",params,undefined,false); 
+			
+
+			svc.updateSecurityProfile(params,cb);
 		}
 
 		
@@ -1900,6 +2281,19 @@ module.exports = function(RED) {
 			
 
 			svc.updateThingGroupsForThing(params,cb);
+		}
+
+		
+		service.ValidateSecurityProfileBehaviors=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"behaviors",params,undefined,true); 
+			
+			copyArg(msg,"behaviors",params,undefined,true); 
+			
+
+			svc.validateSecurityProfileBehaviors(params,cb);
 		}
 
 			

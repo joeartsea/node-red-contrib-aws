@@ -1,0 +1,19 @@
+*** build/IotData.js	Sun Nov  5 05:49:56 2017
+--- ../IotData.js	Sun Nov  5 05:47:20 2017
+***************
+*** 40,46 ****
+  			return;
+  		}
+  
+! 		var awsService = new AWS.IotData( { 'region': node.region } );
+  
+  		node.on("input", function(msg) {
+  			node.sendMsg = function (err, data) {
+--- 40,46 ----
+  			return;
+  		}
+  
+! 		var awsService = new AWS.IotData( { 'region': node.region ,'endpoint':n.endPoint} );
+  
+  		node.on("input", function(msg) {
+  			node.sendMsg = function (err, data) {

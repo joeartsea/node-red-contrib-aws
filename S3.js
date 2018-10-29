@@ -52,14 +52,15 @@ module.exports = function(RED) {
 		node.on("input", function(msg) {
 			node.sendMsg = function (err, data) {
 				if (err) {
-				node.status({fill:"red",shape:"ring",text:"error"});
-				node.error("failed: " + err.toString(),msg);
-				return;
+				    node.status({fill:"red",shape:"ring",text:"error"});
+                    node.error("failed: " + err.toString(), msg);
+                    node.send([null, { err: err }]);
+    				return;
 				} else {
 				msg.payload = data;
 				node.status({});
 				}
-				node.send(msg);
+				node.send([msg,null]);
 			};
 		
 			var _cb=function(err,data){
@@ -1347,6 +1348,33 @@ module.exports = function(RED) {
 			
 
 			svc.restoreObject(params,cb);
+		}
+
+		
+		service.SelectObjectContent=function(svc,msg,cb){
+			var params={};
+			//copyArgs
+			
+			copyArg(n,"Bucket",params,undefined,false); 
+			copyArg(n,"Key",params,undefined,false); 
+			copyArg(n,"Expression",params,undefined,false); 
+			copyArg(n,"ExpressionType",params,undefined,false); 
+			copyArg(n,"InputSerialization",params,undefined,true); 
+			copyArg(n,"OutputSerialization",params,undefined,true); 
+			
+			copyArg(msg,"Bucket",params,undefined,false); 
+			copyArg(msg,"Key",params,undefined,false); 
+			copyArg(msg,"SSECustomerAlgorithm",params,undefined,false); 
+			copyArg(msg,"SSECustomerKey",params,undefined,true); 
+			copyArg(msg,"SSECustomerKeyMD5",params,undefined,false); 
+			copyArg(msg,"Expression",params,undefined,false); 
+			copyArg(msg,"ExpressionType",params,undefined,false); 
+			copyArg(msg,"RequestProgress",params,undefined,false); 
+			copyArg(msg,"InputSerialization",params,undefined,true); 
+			copyArg(msg,"OutputSerialization",params,undefined,true); 
+			
+
+			svc.selectObjectContent(params,cb);
 		}
 
 		
