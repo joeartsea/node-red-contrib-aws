@@ -1,0 +1,631 @@
+
+<!--
+  Copyright 2017 Daniel Thomas.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+<script type="text/x-red" data-template-name="AWS Redshift">
+		<style scoped>
+				.hiddenAttrs {display:none;}
+				.visibleAttrs {display:block;}
+		</style>
+	<div class="form-row">
+		<label for="node-input-aws"><i class="fa fa-user"></i> AWS</label>
+		<input type="text" id="node-input-aws">
+	</div>
+	<div class="form-row">
+		<label for="node-input-operation"><i class="fa fa-wrench"></i> Operation</label>
+		<select type="text" id="node-input-operation">
+		
+			<option value="AcceptReservedNodeExchange">AcceptReservedNodeExchange</option>
+		
+			<option value="AuthorizeClusterSecurityGroupIngress">AuthorizeClusterSecurityGroupIngress</option>
+		
+			<option value="AuthorizeSnapshotAccess">AuthorizeSnapshotAccess</option>
+		
+			<option value="CopyClusterSnapshot">CopyClusterSnapshot</option>
+		
+			<option value="CreateCluster">CreateCluster</option>
+		
+			<option value="CreateClusterParameterGroup">CreateClusterParameterGroup</option>
+		
+			<option value="CreateClusterSecurityGroup">CreateClusterSecurityGroup</option>
+		
+			<option value="CreateClusterSnapshot">CreateClusterSnapshot</option>
+		
+			<option value="CreateClusterSubnetGroup">CreateClusterSubnetGroup</option>
+		
+			<option value="CreateEventSubscription">CreateEventSubscription</option>
+		
+			<option value="CreateHsmClientCertificate">CreateHsmClientCertificate</option>
+		
+			<option value="CreateHsmConfiguration">CreateHsmConfiguration</option>
+		
+			<option value="CreateSnapshotCopyGrant">CreateSnapshotCopyGrant</option>
+		
+			<option value="CreateTags">CreateTags</option>
+		
+			<option value="DeleteCluster">DeleteCluster</option>
+		
+			<option value="DeleteClusterParameterGroup">DeleteClusterParameterGroup</option>
+		
+			<option value="DeleteClusterSecurityGroup">DeleteClusterSecurityGroup</option>
+		
+			<option value="DeleteClusterSnapshot">DeleteClusterSnapshot</option>
+		
+			<option value="DeleteClusterSubnetGroup">DeleteClusterSubnetGroup</option>
+		
+			<option value="DeleteEventSubscription">DeleteEventSubscription</option>
+		
+			<option value="DeleteHsmClientCertificate">DeleteHsmClientCertificate</option>
+		
+			<option value="DeleteHsmConfiguration">DeleteHsmConfiguration</option>
+		
+			<option value="DeleteSnapshotCopyGrant">DeleteSnapshotCopyGrant</option>
+		
+			<option value="DeleteTags">DeleteTags</option>
+		
+			<option value="DescribeClusterDbRevisions">DescribeClusterDbRevisions</option>
+		
+			<option value="DescribeClusterParameterGroups">DescribeClusterParameterGroups</option>
+		
+			<option value="DescribeClusterParameters">DescribeClusterParameters</option>
+		
+			<option value="DescribeClusterSecurityGroups">DescribeClusterSecurityGroups</option>
+		
+			<option value="DescribeClusterSnapshots">DescribeClusterSnapshots</option>
+		
+			<option value="DescribeClusterSubnetGroups">DescribeClusterSubnetGroups</option>
+		
+			<option value="DescribeClusterTracks">DescribeClusterTracks</option>
+		
+			<option value="DescribeClusterVersions">DescribeClusterVersions</option>
+		
+			<option value="DescribeClusters">DescribeClusters</option>
+		
+			<option value="DescribeDefaultClusterParameters">DescribeDefaultClusterParameters</option>
+		
+			<option value="DescribeEventCategories">DescribeEventCategories</option>
+		
+			<option value="DescribeEventSubscriptions">DescribeEventSubscriptions</option>
+		
+			<option value="DescribeEvents">DescribeEvents</option>
+		
+			<option value="DescribeHsmClientCertificates">DescribeHsmClientCertificates</option>
+		
+			<option value="DescribeHsmConfigurations">DescribeHsmConfigurations</option>
+		
+			<option value="DescribeLoggingStatus">DescribeLoggingStatus</option>
+		
+			<option value="DescribeOrderableClusterOptions">DescribeOrderableClusterOptions</option>
+		
+			<option value="DescribeReservedNodeOfferings">DescribeReservedNodeOfferings</option>
+		
+			<option value="DescribeReservedNodes">DescribeReservedNodes</option>
+		
+			<option value="DescribeResize">DescribeResize</option>
+		
+			<option value="DescribeSnapshotCopyGrants">DescribeSnapshotCopyGrants</option>
+		
+			<option value="DescribeTableRestoreStatus">DescribeTableRestoreStatus</option>
+		
+			<option value="DescribeTags">DescribeTags</option>
+		
+			<option value="DisableLogging">DisableLogging</option>
+		
+			<option value="DisableSnapshotCopy">DisableSnapshotCopy</option>
+		
+			<option value="EnableLogging">EnableLogging</option>
+		
+			<option value="EnableSnapshotCopy">EnableSnapshotCopy</option>
+		
+			<option value="GetClusterCredentials">GetClusterCredentials</option>
+		
+			<option value="GetReservedNodeExchangeOfferings">GetReservedNodeExchangeOfferings</option>
+		
+			<option value="ModifyCluster">ModifyCluster</option>
+		
+			<option value="ModifyClusterDbRevision">ModifyClusterDbRevision</option>
+		
+			<option value="ModifyClusterIamRoles">ModifyClusterIamRoles</option>
+		
+			<option value="ModifyClusterParameterGroup">ModifyClusterParameterGroup</option>
+		
+			<option value="ModifyClusterSubnetGroup">ModifyClusterSubnetGroup</option>
+		
+			<option value="ModifyEventSubscription">ModifyEventSubscription</option>
+		
+			<option value="ModifySnapshotCopyRetentionPeriod">ModifySnapshotCopyRetentionPeriod</option>
+		
+			<option value="PurchaseReservedNodeOffering">PurchaseReservedNodeOffering</option>
+		
+			<option value="RebootCluster">RebootCluster</option>
+		
+			<option value="ResetClusterParameterGroup">ResetClusterParameterGroup</option>
+		
+			<option value="ResizeCluster">ResizeCluster</option>
+		
+			<option value="RestoreFromClusterSnapshot">RestoreFromClusterSnapshot</option>
+		
+			<option value="RestoreTableFromClusterSnapshot">RestoreTableFromClusterSnapshot</option>
+		
+			<option value="RevokeClusterSecurityGroupIngress">RevokeClusterSecurityGroupIngress</option>
+		
+			<option value="RevokeSnapshotAccess">RevokeSnapshotAccess</option>
+		
+			<option value="RotateEncryptionKey">RotateEncryptionKey</option>
+		;
+		</select>
+	</div>
+	<div class="form-row">
+		<label for="node-input-name"><i class="fa fa-tag"></i>Name</label>
+		<input type="text" id="node-input-name" placeholder="Name"></input>
+	</div>
+	<hr/>	
+	<div id="AttrHolder">
+	      
+	<div class="form-row" id='ReservedNodeIdAttr' class='hiddenAttrs'>
+		<label for="node-input-ReservedNodeId"><i class="fa fa-tag"></i>ReservedNodeId</label>
+		<input type="text" id="node-input-ReservedNodeId" placeholder="ReservedNodeId"></input>
+	</div> 
+	<div class="form-row" id='TargetReservedNodeOfferingIdAttr' class='hiddenAttrs'>
+		<label for="node-input-TargetReservedNodeOfferingId"><i class="fa fa-tag"></i>TargetReservedNodeOfferingId</label>
+		<input type="text" id="node-input-TargetReservedNodeOfferingId" placeholder="TargetReservedNodeOfferingId"></input>
+	</div> 
+	<div class="form-row" id='ClusterSecurityGroupNameAttr' class='hiddenAttrs'>
+		<label for="node-input-ClusterSecurityGroupName"><i class="fa fa-tag"></i>ClusterSecurityGroupName</label>
+		<input type="text" id="node-input-ClusterSecurityGroupName" placeholder="ClusterSecurityGroupName"></input>
+	</div> 
+	<div class="form-row" id='SnapshotIdentifierAttr' class='hiddenAttrs'>
+		<label for="node-input-SnapshotIdentifier"><i class="fa fa-tag"></i>SnapshotIdentifier</label>
+		<input type="text" id="node-input-SnapshotIdentifier" placeholder="SnapshotIdentifier"></input>
+	</div> 
+	<div class="form-row" id='AccountWithRestoreAccessAttr' class='hiddenAttrs'>
+		<label for="node-input-AccountWithRestoreAccess"><i class="fa fa-tag"></i>AccountWithRestoreAccess</label>
+		<input type="text" id="node-input-AccountWithRestoreAccess" placeholder="AccountWithRestoreAccess"></input>
+	</div> 
+	<div class="form-row" id='SourceSnapshotIdentifierAttr' class='hiddenAttrs'>
+		<label for="node-input-SourceSnapshotIdentifier"><i class="fa fa-tag"></i>SourceSnapshotIdentifier</label>
+		<input type="text" id="node-input-SourceSnapshotIdentifier" placeholder="SourceSnapshotIdentifier"></input>
+	</div> 
+	<div class="form-row" id='TargetSnapshotIdentifierAttr' class='hiddenAttrs'>
+		<label for="node-input-TargetSnapshotIdentifier"><i class="fa fa-tag"></i>TargetSnapshotIdentifier</label>
+		<input type="text" id="node-input-TargetSnapshotIdentifier" placeholder="TargetSnapshotIdentifier"></input>
+	</div> 
+	<div class="form-row" id='ClusterIdentifierAttr' class='hiddenAttrs'>
+		<label for="node-input-ClusterIdentifier"><i class="fa fa-tag"></i>ClusterIdentifier</label>
+		<input type="text" id="node-input-ClusterIdentifier" placeholder="ClusterIdentifier"></input>
+	</div> 
+	<div class="form-row" id='NodeTypeAttr' class='hiddenAttrs'>
+		<label for="node-input-NodeType"><i class="fa fa-tag"></i>NodeType</label>
+		<input type="text" id="node-input-NodeType" placeholder="NodeType"></input>
+	</div> 
+	<div class="form-row" id='MasterUsernameAttr' class='hiddenAttrs'>
+		<label for="node-input-MasterUsername"><i class="fa fa-tag"></i>MasterUsername</label>
+		<input type="text" id="node-input-MasterUsername" placeholder="MasterUsername"></input>
+	</div> 
+	<div class="form-row" id='MasterUserPasswordAttr' class='hiddenAttrs'>
+		<label for="node-input-MasterUserPassword"><i class="fa fa-tag"></i>MasterUserPassword</label>
+		<input type="text" id="node-input-MasterUserPassword" placeholder="MasterUserPassword"></input>
+	</div> 
+	<div class="form-row" id='ParameterGroupNameAttr' class='hiddenAttrs'>
+		<label for="node-input-ParameterGroupName"><i class="fa fa-tag"></i>ParameterGroupName</label>
+		<input type="text" id="node-input-ParameterGroupName" placeholder="ParameterGroupName"></input>
+	</div> 
+	<div class="form-row" id='ParameterGroupFamilyAttr' class='hiddenAttrs'>
+		<label for="node-input-ParameterGroupFamily"><i class="fa fa-tag"></i>ParameterGroupFamily</label>
+		<input type="text" id="node-input-ParameterGroupFamily" placeholder="ParameterGroupFamily"></input>
+	</div> 
+	<div class="form-row" id='DescriptionAttr' class='hiddenAttrs'>
+		<label for="node-input-Description"><i class="fa fa-tag"></i>Description</label>
+		<input type="text" id="node-input-Description" placeholder="Description"></input>
+	</div> 
+	<div class="form-row" id='ClusterSubnetGroupNameAttr' class='hiddenAttrs'>
+		<label for="node-input-ClusterSubnetGroupName"><i class="fa fa-tag"></i>ClusterSubnetGroupName</label>
+		<input type="text" id="node-input-ClusterSubnetGroupName" placeholder="ClusterSubnetGroupName"></input>
+	</div> 
+	<div class="form-row" id='SubnetIdsAttr' class='hiddenAttrs'>
+		<label for="node-input-SubnetIds"><i class="fa fa-tag"></i>SubnetIds</label>
+		<input type="text" id="node-input-SubnetIds" placeholder="SubnetIds"></input>
+	</div> 
+	<div class="form-row" id='SubscriptionNameAttr' class='hiddenAttrs'>
+		<label for="node-input-SubscriptionName"><i class="fa fa-tag"></i>SubscriptionName</label>
+		<input type="text" id="node-input-SubscriptionName" placeholder="SubscriptionName"></input>
+	</div> 
+	<div class="form-row" id='SnsTopicArnAttr' class='hiddenAttrs'>
+		<label for="node-input-SnsTopicArn"><i class="fa fa-tag"></i>SnsTopicArn</label>
+		<input type="text" id="node-input-SnsTopicArn" placeholder="SnsTopicArn"></input>
+	</div> 
+	<div class="form-row" id='HsmClientCertificateIdentifierAttr' class='hiddenAttrs'>
+		<label for="node-input-HsmClientCertificateIdentifier"><i class="fa fa-tag"></i>HsmClientCertificateIdentifier</label>
+		<input type="text" id="node-input-HsmClientCertificateIdentifier" placeholder="HsmClientCertificateIdentifier"></input>
+	</div> 
+	<div class="form-row" id='HsmConfigurationIdentifierAttr' class='hiddenAttrs'>
+		<label for="node-input-HsmConfigurationIdentifier"><i class="fa fa-tag"></i>HsmConfigurationIdentifier</label>
+		<input type="text" id="node-input-HsmConfigurationIdentifier" placeholder="HsmConfigurationIdentifier"></input>
+	</div> 
+	<div class="form-row" id='HsmIpAddressAttr' class='hiddenAttrs'>
+		<label for="node-input-HsmIpAddress"><i class="fa fa-tag"></i>HsmIpAddress</label>
+		<input type="text" id="node-input-HsmIpAddress" placeholder="HsmIpAddress"></input>
+	</div> 
+	<div class="form-row" id='HsmPartitionNameAttr' class='hiddenAttrs'>
+		<label for="node-input-HsmPartitionName"><i class="fa fa-tag"></i>HsmPartitionName</label>
+		<input type="text" id="node-input-HsmPartitionName" placeholder="HsmPartitionName"></input>
+	</div> 
+	<div class="form-row" id='HsmPartitionPasswordAttr' class='hiddenAttrs'>
+		<label for="node-input-HsmPartitionPassword"><i class="fa fa-tag"></i>HsmPartitionPassword</label>
+		<input type="text" id="node-input-HsmPartitionPassword" placeholder="HsmPartitionPassword"></input>
+	</div> 
+	<div class="form-row" id='HsmServerPublicCertificateAttr' class='hiddenAttrs'>
+		<label for="node-input-HsmServerPublicCertificate"><i class="fa fa-tag"></i>HsmServerPublicCertificate</label>
+		<input type="text" id="node-input-HsmServerPublicCertificate" placeholder="HsmServerPublicCertificate"></input>
+	</div> 
+	<div class="form-row" id='SnapshotCopyGrantNameAttr' class='hiddenAttrs'>
+		<label for="node-input-SnapshotCopyGrantName"><i class="fa fa-tag"></i>SnapshotCopyGrantName</label>
+		<input type="text" id="node-input-SnapshotCopyGrantName" placeholder="SnapshotCopyGrantName"></input>
+	</div> 
+	<div class="form-row" id='ResourceNameAttr' class='hiddenAttrs'>
+		<label for="node-input-ResourceName"><i class="fa fa-tag"></i>ResourceName</label>
+		<input type="text" id="node-input-ResourceName" placeholder="ResourceName"></input>
+	</div> 
+	<div class="form-row" id='TagsAttr' class='hiddenAttrs'>
+		<label for="node-input-Tags"><i class="fa fa-tag"></i>Tags</label>
+		<input type="text" id="node-input-Tags" placeholder="Tags"></input>
+	</div> 
+	<div class="form-row" id='TagKeysAttr' class='hiddenAttrs'>
+		<label for="node-input-TagKeys"><i class="fa fa-tag"></i>TagKeys</label>
+		<input type="text" id="node-input-TagKeys" placeholder="TagKeys"></input>
+	</div> 
+	<div class="form-row" id='BucketNameAttr' class='hiddenAttrs'>
+		<label for="node-input-BucketName"><i class="fa fa-tag"></i>BucketName</label>
+		<input type="text" id="node-input-BucketName" placeholder="BucketName"></input>
+	</div> 
+	<div class="form-row" id='DestinationRegionAttr' class='hiddenAttrs'>
+		<label for="node-input-DestinationRegion"><i class="fa fa-tag"></i>DestinationRegion</label>
+		<input type="text" id="node-input-DestinationRegion" placeholder="DestinationRegion"></input>
+	</div> 
+	<div class="form-row" id='DbUserAttr' class='hiddenAttrs'>
+		<label for="node-input-DbUser"><i class="fa fa-tag"></i>DbUser</label>
+		<input type="text" id="node-input-DbUser" placeholder="DbUser"></input>
+	</div> 
+	<div class="form-row" id='RevisionTargetAttr' class='hiddenAttrs'>
+		<label for="node-input-RevisionTarget"><i class="fa fa-tag"></i>RevisionTarget</label>
+		<input type="text" id="node-input-RevisionTarget" placeholder="RevisionTarget"></input>
+	</div> 
+	<div class="form-row" id='ParametersAttr' class='hiddenAttrs'>
+		<label for="node-input-Parameters"><i class="fa fa-tag"></i>Parameters</label>
+		<input type="text" id="node-input-Parameters" placeholder="Parameters"></input>
+	</div> 
+	<div class="form-row" id='RetentionPeriodAttr' class='hiddenAttrs'>
+		<label for="node-input-RetentionPeriod"><i class="fa fa-tag"></i>RetentionPeriod</label>
+		<input type="text" id="node-input-RetentionPeriod" placeholder="RetentionPeriod"></input>
+	</div> 
+	<div class="form-row" id='ReservedNodeOfferingIdAttr' class='hiddenAttrs'>
+		<label for="node-input-ReservedNodeOfferingId"><i class="fa fa-tag"></i>ReservedNodeOfferingId</label>
+		<input type="text" id="node-input-ReservedNodeOfferingId" placeholder="ReservedNodeOfferingId"></input>
+	</div> 
+	<div class="form-row" id='NumberOfNodesAttr' class='hiddenAttrs'>
+		<label for="node-input-NumberOfNodes"><i class="fa fa-tag"></i>NumberOfNodes</label>
+		<input type="text" id="node-input-NumberOfNodes" placeholder="NumberOfNodes"></input>
+	</div> 
+	<div class="form-row" id='SourceDatabaseNameAttr' class='hiddenAttrs'>
+		<label for="node-input-SourceDatabaseName"><i class="fa fa-tag"></i>SourceDatabaseName</label>
+		<input type="text" id="node-input-SourceDatabaseName" placeholder="SourceDatabaseName"></input>
+	</div> 
+	<div class="form-row" id='SourceTableNameAttr' class='hiddenAttrs'>
+		<label for="node-input-SourceTableName"><i class="fa fa-tag"></i>SourceTableName</label>
+		<input type="text" id="node-input-SourceTableName" placeholder="SourceTableName"></input>
+	</div> 
+	<div class="form-row" id='NewTableNameAttr' class='hiddenAttrs'>
+		<label for="node-input-NewTableName"><i class="fa fa-tag"></i>NewTableName</label>
+		<input type="text" id="node-input-NewTableName" placeholder="NewTableName"></input>
+	</div> 
+	</div>
+
+ <script>
+	  var nodeOps={
+			
+				AcceptReservedNodeExchange:[
+					'#ReservedNodeIdAttr','#TargetReservedNodeOfferingIdAttr'
+					],
+				AuthorizeClusterSecurityGroupIngress:[
+					'#ClusterSecurityGroupNameAttr'
+					],
+				AuthorizeSnapshotAccess:[
+					'#SnapshotIdentifierAttr','#AccountWithRestoreAccessAttr'
+					],
+				CopyClusterSnapshot:[
+					'#SourceSnapshotIdentifierAttr','#TargetSnapshotIdentifierAttr'
+					],
+				CreateCluster:[
+					'#ClusterIdentifierAttr','#NodeTypeAttr','#MasterUsernameAttr','#MasterUserPasswordAttr'
+					],
+				CreateClusterParameterGroup:[
+					'#ParameterGroupNameAttr','#ParameterGroupFamilyAttr','#DescriptionAttr'
+					],
+				CreateClusterSecurityGroup:[
+					'#ClusterSecurityGroupNameAttr','#DescriptionAttr'
+					],
+				CreateClusterSnapshot:[
+					'#SnapshotIdentifierAttr','#ClusterIdentifierAttr'
+					],
+				CreateClusterSubnetGroup:[
+					'#ClusterSubnetGroupNameAttr','#DescriptionAttr','#SubnetIdsAttr'
+					],
+				CreateEventSubscription:[
+					'#SubscriptionNameAttr','#SnsTopicArnAttr'
+					],
+				CreateHsmClientCertificate:[
+					'#HsmClientCertificateIdentifierAttr'
+					],
+				CreateHsmConfiguration:[
+					'#HsmConfigurationIdentifierAttr','#DescriptionAttr','#HsmIpAddressAttr','#HsmPartitionNameAttr','#HsmPartitionPasswordAttr','#HsmServerPublicCertificateAttr'
+					],
+				CreateSnapshotCopyGrant:[
+					'#SnapshotCopyGrantNameAttr'
+					],
+				CreateTags:[
+					'#ResourceNameAttr','#TagsAttr'
+					],
+				DeleteCluster:[
+					'#ClusterIdentifierAttr'
+					],
+				DeleteClusterParameterGroup:[
+					'#ParameterGroupNameAttr'
+					],
+				DeleteClusterSecurityGroup:[
+					'#ClusterSecurityGroupNameAttr'
+					],
+				DeleteClusterSnapshot:[
+					'#SnapshotIdentifierAttr'
+					],
+				DeleteClusterSubnetGroup:[
+					'#ClusterSubnetGroupNameAttr'
+					],
+				DeleteEventSubscription:[
+					'#SubscriptionNameAttr'
+					],
+				DeleteHsmClientCertificate:[
+					'#HsmClientCertificateIdentifierAttr'
+					],
+				DeleteHsmConfiguration:[
+					'#HsmConfigurationIdentifierAttr'
+					],
+				DeleteSnapshotCopyGrant:[
+					'#SnapshotCopyGrantNameAttr'
+					],
+				DeleteTags:[
+					'#ResourceNameAttr','#TagKeysAttr'
+					],
+				DescribeClusterDbRevisions:[
+					
+					],
+				DescribeClusterParameterGroups:[
+					
+					],
+				DescribeClusterParameters:[
+					'#ParameterGroupNameAttr'
+					],
+				DescribeClusterSecurityGroups:[
+					
+					],
+				DescribeClusterSnapshots:[
+					
+					],
+				DescribeClusterSubnetGroups:[
+					
+					],
+				DescribeClusterTracks:[
+					
+					],
+				DescribeClusterVersions:[
+					
+					],
+				DescribeClusters:[
+					
+					],
+				DescribeDefaultClusterParameters:[
+					'#ParameterGroupFamilyAttr'
+					],
+				DescribeEventCategories:[
+					
+					],
+				DescribeEventSubscriptions:[
+					
+					],
+				DescribeEvents:[
+					
+					],
+				DescribeHsmClientCertificates:[
+					
+					],
+				DescribeHsmConfigurations:[
+					
+					],
+				DescribeLoggingStatus:[
+					'#ClusterIdentifierAttr'
+					],
+				DescribeOrderableClusterOptions:[
+					
+					],
+				DescribeReservedNodeOfferings:[
+					
+					],
+				DescribeReservedNodes:[
+					
+					],
+				DescribeResize:[
+					'#ClusterIdentifierAttr'
+					],
+				DescribeSnapshotCopyGrants:[
+					
+					],
+				DescribeTableRestoreStatus:[
+					
+					],
+				DescribeTags:[
+					
+					],
+				DisableLogging:[
+					'#ClusterIdentifierAttr'
+					],
+				DisableSnapshotCopy:[
+					'#ClusterIdentifierAttr'
+					],
+				EnableLogging:[
+					'#ClusterIdentifierAttr','#BucketNameAttr'
+					],
+				EnableSnapshotCopy:[
+					'#ClusterIdentifierAttr','#DestinationRegionAttr'
+					],
+				GetClusterCredentials:[
+					'#DbUserAttr','#ClusterIdentifierAttr'
+					],
+				GetReservedNodeExchangeOfferings:[
+					'#ReservedNodeIdAttr'
+					],
+				ModifyCluster:[
+					'#ClusterIdentifierAttr'
+					],
+				ModifyClusterDbRevision:[
+					'#ClusterIdentifierAttr','#RevisionTargetAttr'
+					],
+				ModifyClusterIamRoles:[
+					'#ClusterIdentifierAttr'
+					],
+				ModifyClusterParameterGroup:[
+					'#ParameterGroupNameAttr','#ParametersAttr'
+					],
+				ModifyClusterSubnetGroup:[
+					'#ClusterSubnetGroupNameAttr','#SubnetIdsAttr'
+					],
+				ModifyEventSubscription:[
+					'#SubscriptionNameAttr'
+					],
+				ModifySnapshotCopyRetentionPeriod:[
+					'#ClusterIdentifierAttr','#RetentionPeriodAttr'
+					],
+				PurchaseReservedNodeOffering:[
+					'#ReservedNodeOfferingIdAttr'
+					],
+				RebootCluster:[
+					'#ClusterIdentifierAttr'
+					],
+				ResetClusterParameterGroup:[
+					'#ParameterGroupNameAttr'
+					],
+				ResizeCluster:[
+					'#ClusterIdentifierAttr','#NumberOfNodesAttr'
+					],
+				RestoreFromClusterSnapshot:[
+					'#ClusterIdentifierAttr','#SnapshotIdentifierAttr'
+					],
+				RestoreTableFromClusterSnapshot:[
+					'#ClusterIdentifierAttr','#SnapshotIdentifierAttr','#SourceDatabaseNameAttr','#SourceTableNameAttr','#NewTableNameAttr'
+					],
+				RevokeClusterSecurityGroupIngress:[
+					'#ClusterSecurityGroupNameAttr'
+					],
+				RevokeSnapshotAccess:[
+					'#SnapshotIdentifierAttr','#AccountWithRestoreAccessAttr'
+					],
+				RotateEncryptionKey:[
+					'#ClusterIdentifierAttr'
+					]
+		};
+		$('#node-input-operation').on('change',function(){
+			$('#AttrHolder').children().addClass('hiddenAttrs').removeClass('visibleAttrs');
+				if (nodeOps[this.value])
+					$(nodeOps[this.value].join()).addClass('visibleAttrs').removeClass('hiddenAttrs');
+		 });
+ </script>
+
+</script>
+
+<script type="text/x-red" data-help-name="amazon Redshift">
+<p>
+AWS Amazon Redshift
+</p>
+<p>
+<b>Descriptions to be added</b<
+</p>
+<p>
+NOTE: Parameters must be specified in the message, using the case specified in the AWS API documentation (normally UpperCaseLeading)..
+</p>
+
+</script>
+
+<script type="text/javascript">
+	RED.nodes.registerType('AWS Redshift',{
+		category: 'AWS',
+		color:"#C0DEED",
+		defaults: {
+			aws: {type:"amazon config",required:true},
+			operation: { value: 'AcceptReservedNodeExchange' },
+			
+				ReservedNodeId: { value: ""} ,
+				TargetReservedNodeOfferingId: { value: ""} ,
+				ClusterSecurityGroupName: { value: ""} ,
+				SnapshotIdentifier: { value: ""} ,
+				AccountWithRestoreAccess: { value: ""} ,
+				SourceSnapshotIdentifier: { value: ""} ,
+				TargetSnapshotIdentifier: { value: ""} ,
+				ClusterIdentifier: { value: ""} ,
+				NodeType: { value: ""} ,
+				MasterUsername: { value: ""} ,
+				MasterUserPassword: { value: ""} ,
+				ParameterGroupName: { value: ""} ,
+				ParameterGroupFamily: { value: ""} ,
+				Description: { value: ""} ,
+				ClusterSubnetGroupName: { value: ""} ,
+				SubnetIds: { value: ""} ,
+				SubscriptionName: { value: ""} ,
+				SnsTopicArn: { value: ""} ,
+				HsmClientCertificateIdentifier: { value: ""} ,
+				HsmConfigurationIdentifier: { value: ""} ,
+				HsmIpAddress: { value: ""} ,
+				HsmPartitionName: { value: ""} ,
+				HsmPartitionPassword: { value: ""} ,
+				HsmServerPublicCertificate: { value: ""} ,
+				SnapshotCopyGrantName: { value: ""} ,
+				ResourceName: { value: ""} ,
+				Tags: { value: ""} ,
+				TagKeys: { value: ""} ,
+				BucketName: { value: ""} ,
+				DestinationRegion: { value: ""} ,
+				DbUser: { value: ""} ,
+				RevisionTarget: { value: ""} ,
+				Parameters: { value: ""} ,
+				RetentionPeriod: { value: ""} ,
+				ReservedNodeOfferingId: { value: ""} ,
+				NumberOfNodes: { value: ""} ,
+				SourceDatabaseName: { value: ""} ,
+				SourceTableName: { value: ""} ,
+				NewTableName: { value: ""} ,
+			name: { value: "" }
+		},
+		inputs:1,
+        outputs: 2,
+        outputLabels: ["data","err"],
+		icon: "aws.png",
+		align: "right",
+		label: function() {
+			return this.name || "Redshift " + this.operation;
+		},
+		oneditprepare: function () {
+
+		}
+	});
+</script>
+

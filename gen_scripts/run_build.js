@@ -16,6 +16,7 @@ var files = [
 '../node_modules/aws-sdk/apis/resourcegroupstaggingapi-2017-01-26.min.json',
 '../node_modules/aws-sdk/apis/s3-2006-03-01.min.json',
 '../node_modules/aws-sdk/apis/sns-2010-03-31.min.json',
-'../node_modules/aws-sdk/apis/sqs-2012-11-05.min.json'];
+    '../node_modules/aws-sdk/apis/sqs-2012-11-05.min.json',
+'../node_modules/aws-sdk/apis/redshift-2012-12-01.min.json'];
 
 files.map(tools.buildService);
