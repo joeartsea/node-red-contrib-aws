@@ -152,7 +152,8 @@ NOTE: Parameters must be specified in the message, using the case specified in t
 			name: { value: "" }
 		},
 		inputs:1,
-		outputs:1,
+        outputs: 2,
+        outputLabels: ["data","err"],
 		icon: "aws.png",
 		align: "right",
 		label: function() {
@@ -221,14 +222,15 @@ module.exports = function(RED) {
 		node.on("input", function(msg) {
 			node.sendMsg = function (err, data) {
 				if (err) {
-				node.status({fill:"red",shape:"ring",text:"error"});
-				node.error("failed: " + err.toString(),msg);
-				return;
+				    node.status({fill:"red",shape:"ring",text:"error"});
+                    node.error("failed: " + err.toString(), msg);
+                    node.send([null, { err: err }]);
+    				return;
 				} else {
 				msg.payload = data;
 				node.status({});
 				}
-				node.send(msg);
+				node.send([msg,null]);
 			};
 		
 			var _cb=function(err,data){
