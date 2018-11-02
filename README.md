@@ -17,9 +17,12 @@ Nodes (All AWS API functions are available)
 * RDS
 * Firehose
 * KMS
+* Redshift
 * AWS config
 
 Payload returned from the AWS SDK is sometimes (particularly S3.Get) encoded in a BUFFER.  To parse this to a string pass the output into a function with msg.payload=Buffer.from(msg.payload.Body).toString("utf-8") or similar to decode strings.
+
+All nodes (as of v0.5) have two output points, the top outputs data from successful calls, the botton outputs errors, so you dont need a branching node to sepererate successful or failure calls.
 
 Make sure that the AWS IAM User you are using has sufficient permissions for the function you are using.  If you dont you will get an error message.
 
